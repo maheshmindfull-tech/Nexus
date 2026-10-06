@@ -52,13 +52,10 @@ const FAQS = [
 ];
 
 export default function FaqSection() {
-  const [openItems, setOpenItems] = useState({ 0: true });
+  const [openIndex, setOpenIndex] = useState(0);
 
   const toggle = (idx) => {
-    setOpenItems((prev) => ({
-      ...prev,
-      [idx]: !prev[idx],
-    }));
+    setOpenIndex((prev) => (prev === idx ? null : idx));
   };
 
   const firstCol = FAQS.slice(0, 4);
@@ -76,7 +73,7 @@ export default function FaqSection() {
             {firstCol.map((item) => (
               <div
                 key={item.id}
-                className={`fq ${openItems[item.id] ? 'open' : ''}`}
+                className={`fq ${openIndex === item.id ? 'open' : ''}`}
               >
                 <button type="button" onClick={() => toggle(item.id)}>
                   <span>{item.question}</span>
@@ -90,7 +87,7 @@ export default function FaqSection() {
             {secondCol.map((item) => (
               <div
                 key={item.id}
-                className={`fq ${openItems[item.id] ? 'open' : ''}`}
+                className={`fq ${openIndex === item.id ? 'open' : ''}`}
               >
                 <button type="button" onClick={() => toggle(item.id)}>
                   <span>{item.question}</span>
