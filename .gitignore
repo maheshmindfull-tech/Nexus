@@ -6,3 +6,14 @@ dist-ssr
 .env.*
 .DS_Store
 Thumbs.db
+.vite
+
+# Large media files (exceeds GitHub 100MB limit)
+*.mp4
+
+# Raw extraction and temporary folders
+/*.jpeg
+/Images/
+/Information pdfs/
+/extracted_assets/
+/pdf_extracted_images/
