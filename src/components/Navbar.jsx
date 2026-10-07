@@ -4,15 +4,23 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(currentPage === 'about' ? 'about' : 'home');
+  const [activeTab, setActiveTab] = useState(
+    currentPage === 'about'
+      ? 'about'
+      : currentPage === 'projects'
+      ? 'projects'
+      : currentPage === 'careers'
+      ? 'careers'
+      : 'home'
+  );
   const headerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
-      if (currentPage === 'about') {
-        setActiveTab('about');
+      if (currentPage === 'about' || currentPage === 'projects' || currentPage === 'careers' || currentPage === 'cp-inquiry') {
+        setActiveTab(currentPage);
         return;
       }
 
@@ -39,6 +47,8 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
     { id: 'home', label: 'Home', href: '#' },
     { id: 'about', label: 'About Us', href: '#about' },
     { id: 'projects', label: 'Projects', href: '#projects' },
+    { id: 'careers', label: 'Careers', href: '#careers' },
+    { id: 'cp-inquiry', label: 'CP Inquiry', href: '#cp-inquiry' },
   ];
 
   const handleNavClick = (e, tabId) => {
@@ -64,11 +74,28 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
     }
 
     if (tabId === 'projects') {
-      if (currentPage !== 'home') {
-        if (onNavigate) onNavigate('home', 'projects');
+      if (currentPage !== 'projects') {
+        if (onNavigate) onNavigate('projects');
       } else {
-        const el = document.getElementById('projects');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (tabId === 'careers') {
+      if (currentPage !== 'careers') {
+        if (onNavigate) onNavigate('careers');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (tabId === 'cp-inquiry') {
+      if (currentPage !== 'cp-inquiry') {
+        if (onNavigate) onNavigate('cp-inquiry');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       return;
     }
@@ -77,7 +104,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
   const handleContactClick = (e) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    if (currentPage === 'home') {
+    if (currentPage === 'home' || currentPage === 'projects' || currentPage === 'about') {
       const el = document.getElementById('contact');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
@@ -143,7 +170,6 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
               width: 'auto',
               objectFit: 'contain',
               transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))',
             }}
           />
         </a>
@@ -194,7 +220,6 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
                       height: '4px',
                       borderRadius: '50%',
                       backgroundColor: '#00e5ff',
-                      boxShadow: '0 0 8px rgba(0, 229, 255, 0.6)',
                     }}
                   />
                 )}
@@ -231,9 +256,6 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
               cursor: 'pointer',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
               textDecoration: 'none',
-              boxShadow: isScrolled
-                ? '0 2px 12px rgba(0,0,0,0.15)'
-                : '0 2px 12px rgba(0,0,0,0.1)',
             }}
           >
             Contact Us
@@ -324,7 +346,6 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
                         height: '6px',
                         borderRadius: '50%',
                         backgroundColor: '#00e5ff',
-                        boxShadow: '0 0 8px rgba(0,229,255,0.5)',
                       }}
                     />
                   )}

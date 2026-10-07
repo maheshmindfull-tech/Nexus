@@ -1,40 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const PRINCIPLES = [
+const PRINCIPLES_DATA = [
   {
-    title: 'TRANSPARENCY',
+    id: 'transparency',
+    name: 'Transparency',
+    tag: '01 — TRANSPARENCY',
+    headline: 'Clarity That Builds Confidence',
+    lead: 'Clear communication, honest commitments and straightforward processes at every step.',
+    story: [
+      'At Nexus Group, we believe trust begins with transparency. From the first conversation to the final handover, we keep every process clear, every commitment honest, and every detail accounted for.',
+      'With a straightforward approach to planning and execution, our customers enjoy complete clarity at every step of their journey.',
+    ],
     image: '/images/principles/1.jpg',
+    alt: 'Transparency - Nexus Group',
   },
   {
-    title: 'INTEGRITY',
+    id: 'integrity',
+    name: 'Integrity',
+    tag: '02 — INTEGRITY',
+    headline: 'Built on What We Believe In',
+    lead: 'Doing the right thing, consistently, responsibly and with commitment.',
+    story: [
+      'Integrity is the bedrock of our legacy. Every material chosen, every structural pillar set, and every promise made is grounded in unwavering ethical practice.',
+      'We hold ourselves accountable to benchmarks higher than compliance—ensuring lasting quality that endures across generations.',
+    ],
     image: '/images/principles/2.jpg',
+    alt: 'Integrity - Nexus Group',
   },
   {
-    title: 'RESPONSIBILITY',
+    id: 'responsibility',
+    name: 'Responsibility',
+    nameFormatted: 'RESPONSIBILITY',
+    tag: '03 — RESPONSIBILITY',
+    headline: 'Building Responsibly. Preserving Naturally.',
+    lead: 'Thoughtful development that respects people, communities and the environment.',
+    story: [
+      'True development moves hand in hand with environmental mindfulness. We integrate sustainable energy, rainwater management, and climate-responsive architecture into our master plans.',
+      'Our developments prioritize open green spaces, native flora, and eco-friendly construction practices that protect the ecological balance.',
+    ],
     image: '/images/principles/3.jpg',
+    alt: 'Responsibility - Nexus Group',
   },
   {
-    title: 'PLANNING',
+    id: 'planning',
+    name: 'Planning',
+    tag: '04 — PLANNING',
+    headline: 'Every Landmark Begins With a Plan.',
+    lead: 'Every detail considered with purpose—from the larger vision to the smallest decision.',
+    story: [
+      'Excellence is never an accident; it is the outcome of meticulous forward-thinking. From spatial geometry to ventilation and access, we scrutinize every blueprint.',
+      'Every square foot is engineered for everyday efficiency, modern ergonomics, and long-term peace of mind.',
+    ],
     image: '/images/principles/4.jpg',
-  },
-  {
-    title: 'TRUST',
-    image: '/images/principles/trust_clean.jpg?v=3',
+    alt: 'Planning - Nexus Group',
   },
 ];
 
 export default function Principles() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const current = PRINCIPLES_DATA[activeIdx];
+
   return (
-    <section className="princ py-16 lg:py-24 bg-white" id="principles">
-      <div className="wrap max-w-[1360px] mx-auto px-5 sm:px-8">
-        {/* Section Header */}
-        <div className="eyebrow flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1f1f1f] mb-3">
-          Nexus principles
+    <section className="princ" id="principles">
+      <div className="wrap max-w-[1320px] mx-auto px-5 sm:px-8">
+        {/* Section Eyebrow & Title */}
+        <div className="eyebrow flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0097a7] mb-2">
+          Nexus Principles
         </div>
-        <div className="mb-14 sm:mb-20">
-          <h2 className="big text-3xl sm:text-4xl lg:text-[48px] font-semibold leading-[1.18] tracking-tight text-[#1f1f1f] max-w-4xl">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="big text-2xl sm:text-3xl lg:text-[34px] font-semibold leading-[1.22] tracking-tight text-[#1a1e24] max-w-3xl">
             Driven by{' '}
-            <span className="text-[#8a8a8a] font-normal">
+            <span className="text-[#64748b] font-normal">
               trust, quality, innovation, and a commitment
             </span>{' '}
             to excellence.
@@ -42,29 +78,68 @@ export default function Principles() {
           <br />
         </div>
 
-        {/* 5 Principles Cards Grid - Clean Images & Centered Bottom Heading Only */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-          {PRINCIPLES.map((item) => (
-            <div
-              key={item.title}
-              className="group relative w-full aspect-[1/1.45] rounded-2xl overflow-hidden bg-[#0c081e] shadow-[0_12px_28px_rgba(12,8,30,0.18)] hover:shadow-[0_22px_45px_rgba(0,151,167,0.25)] hover:border-[#0097a7]/40 border border-white/10 transition-all duration-500 hover:-translate-y-2 select-none"
-            >
-              {/* Full Card Image */}
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
+        {/* Interactive Principles Showcase: 4 Image Strips on Left + Content on Right */}
+        <div className="princ-showcase">
+          {/* Left Column: 4 Continuous Vertical Strips with gap 0 and NO numbers */}
+          <div className="princ-strips" role="tablist" aria-label="Nexus Principles">
+            {PRINCIPLES_DATA.map((item, idx) => {
+              const isActive = activeIdx === idx;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  id={`princ-tab-${item.id}`}
+                  aria-controls={`princ-panel-${item.id}`}
+                  aria-selected={isActive}
+                  tabIndex={0}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`princ-strip ${isActive ? 'active' : ''}`}
+                  title={item.name}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className="princ-strip-img"
+                    loading="eager"
+                    decoding="async"
+                    width="640"
+                    height="880"
+                  />
+                  <div className="princ-strip-overlay" />
+                </button>
+              );
+            })}
+          </div>
 
-              {/* Bottom Gradient Fade with Centered Heading */}
-              <div className="absolute inset-x-0 bottom-0 pt-20 pb-6 px-4 bg-gradient-to-t from-[#0c081e] via-[#0c081e]/75 to-transparent flex items-end justify-center">
-                <div className="text-[15px] sm:text-[16px] lg:text-[17px] font-black uppercase tracking-[0.15em] principle-gradient-title text-center">
-                  {item.title}
-                </div>
-              </div>
+          {/* Right Column: Clean Standard Professional Typography Top-Anchored */}
+          <div
+            className="princ-detail-panel"
+            key={current.id}
+            role="tabpanel"
+            id={`princ-panel-${current.id}`}
+            aria-labelledby={`princ-tab-${current.id}`}
+          >
+            {/* Standard Title */}
+            <h3 className="princ-brand-title">
+              {current.name}
+            </h3>
+
+            {/* Headline */}
+            <h4 className="princ-headline">{current.headline}</h4>
+
+            {/* Lead Statement */}
+            <p className="princ-lead">{current.lead}</p>
+
+            {/* Editorial Story Paragraphs */}
+            <div className="princ-story-wrap">
+              {current.story.map((para, i) => (
+                <p key={i} className="princ-story-p">
+                  {para}
+                </p>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

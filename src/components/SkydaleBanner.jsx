@@ -5,7 +5,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
   return (
     <section id="featured" className="py-12 sm:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-slate-950 aspect-[16/9] sm:aspect-[21/9] min-h-[380px] sm:min-h-[460px] flex items-center">
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 aspect-[16/9] sm:aspect-[21/9] min-h-[380px] sm:min-h-[460px] flex items-center">
           {/* Master high-resolution render image */}
           <img
             src="/images/skydale_full_render.jpg"
@@ -27,7 +27,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
               </div>
 
               {/* MahaRERA QR Code & Badge matching the mockup */}
-              <div className="flex items-center gap-3 bg-black/60 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-white/20 shadow-xl">
+              <div className="flex items-center gap-3 bg-black/60 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-white/20">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white p-1 rounded-lg flex items-center justify-center">
                   {/* High quality clean QR code SVG */}
                   <svg
@@ -50,7 +50,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-end mt-auto pt-6">
               <div className="sm:col-span-8 space-y-3">
                 <div className="space-y-1">
-                  <h3 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-widest text-white uppercase font-serif-luxury drop-shadow-lg">
+                  <h3 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-widest text-white uppercase font-serif-luxury">
                     Skydale
                   </h3>
                   <p className="text-xs sm:text-sm tracking-[0.3em] font-medium text-slate-300 uppercase">
@@ -60,7 +60,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
 
                 {/* E WING Stylized Badge matching the design screenshot */}
                 <div className="inline-flex items-center gap-4 mt-2">
-                  <div className="w-16 h-20 sm:w-20 sm:h-24 border-2 border-white/90 rounded-lg flex flex-col items-center justify-center bg-black/30 backdrop-blur-sm shadow-xl">
+                  <div className="w-16 h-20 sm:w-20 sm:h-24 border-2 border-white/90 rounded-lg flex flex-col items-center justify-center bg-black/30 backdrop-blur-sm">
                     <span className="text-3xl sm:text-4xl font-serif font-bold text-white leading-none">
                       E
                     </span>
@@ -69,7 +69,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
                     </span>
                   </div>
 
-                  <div className="space-y-1 text-white/90 drop-shadow-sm">
+                  <div className="space-y-1 text-white/90">
                     <p className="text-sm sm:text-base font-bold text-white">
                       2 & 3 BHK Luxury Residences
                     </p>
@@ -84,7 +84,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
               <div className="sm:col-span-4 flex sm:justify-end">
                 <button
                   onClick={onOpenEnquire}
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-[#009bb0] hover:bg-[#00879a] text-white font-semibold text-sm rounded-full shadow-lg shadow-[#009bb0]/40 flex items-center justify-center gap-2 hover:gap-3 transition-all cursor-pointer"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-[#009bb0] hover:bg-[#00879a] text-white font-semibold text-sm rounded-full flex items-center justify-center gap-2 hover:gap-3 transition-all cursor-pointer"
                 >
                   <span>Download Brochure</span>
                   <ArrowRight className="w-4 h-4" />

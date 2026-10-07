@@ -1,0 +1,372 @@
+/* ============================================================
+   Nexus Skydale Landing Page Styling
+   Zero shadow, premium luxury aesthetic
+   ============================================================ */
+
+.skydale-page-wrap {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0c0f14;
+  color: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---------------- Top Sticky Bar ---------------- */
+.skydale-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(12, 15, 20, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 24px;
+}
+
+.skydale-topbar-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.skydale-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.skydale-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.skydale-back-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.skydale-badge-tag {
+  color: #d6b36a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skydale-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skydale-call-link {
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.skydale-call-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.skydale-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #c5a059;
+  color: #0e1b2e;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.skydale-topbar-cta:hover {
+  background-color: #d6b36a;
+  color: #000;
+}
+
+/* ---------------- Container ---------------- */
+.skydale-container {
+  max-width: 980px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border-left: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+}
+
+.skydale-img-block {
+  width: 100%;
+  display: block;
+}
+
+.skydale-img-block img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------------- Download Brochure Section ---------------- */
+.skydale-download-section {
+  background: #ffffff;
+  padding: 44px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.skydale-main-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #4a2810;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 18px 48px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.skydale-main-download-btn:hover {
+  background: #633615;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.skydale-download-subtext {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ---------------- Interactive Contact / Inquiry Section ---------------- */
+.skydale-form-container {
+  background: #000000;
+  padding: 48px 32px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.skydale-form-logo-wrap {
+  flex: 0 0 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.skydale-logo-circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #8b5a36;
+  background: radial-gradient(circle, #a16b43 0%, #6d4123 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 16px;
+  text-align: center;
+}
+
+.skydale-logo-icon {
+  width: 44px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.skydale-logo-text {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.skydale-logo-sub {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  opacity: 0.85;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.skydale-form-card {
+  flex: 1 1 360px;
+  max-width: 480px;
+  background: #462615;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 32px 28px;
+}
+
+.skydale-form-field {
+  margin-bottom: 18px;
+}
+
+.skydale-form-input,
+.skydale-form-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 4px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.skydale-form-input::placeholder,
+.skydale-form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13.5px;
+}
+
+.skydale-form-input:focus,
+.skydale-form-textarea:focus {
+  border-bottom-color: #d6b36a;
+}
+
+.skydale-form-textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.skydale-form-submit-btn {
+  background: #f1ebd8;
+  color: #2b170c;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.skydale-form-submit-btn:hover {
+  background: #ffffff;
+  color: #000;
+}
+
+.skydale-form-success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #86efac;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+/* ---------------- Interactive Footer Bar ---------------- */
+.skydale-interactive-footer {
+  background: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 24px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.skydale-footer-contact-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.skydale-footer-contact-link {
+  color: #f1f5f9;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.skydale-footer-contact-link:hover {
+  color: #d6b36a;
+}
+
+.skydale-footer-brand {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .skydale-topbar {
+    padding: 10px 14px;
+  }
+  .skydale-main-download-btn {
+    width: 100%;
+    max-width: 340px;
+    padding: 16px 24px;
+    font-size: 14.5px;
+  }
+  .skydale-form-container {
+    padding: 32px 18px 40px;
+    gap: 24px;
+  }
+}

@@ -1,10 +1,18 @@
 import React from 'react';
 
-export default function Footer({ onNavigateAbout, onNavigateHome, onOpenEnquire }) {
+export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProjects, onNavigateCareers, onNavigateCPInquiry, onOpenEnquire }) {
   const handleLinkClick = (e, target) => {
     e.preventDefault();
     if (target === 'about' && onNavigateAbout) {
       onNavigateAbout();
+      return;
+    }
+    if (target === 'careers' && onNavigateCareers) {
+      onNavigateCareers();
+      return;
+    }
+    if (target === 'cp-inquiry' && onNavigateCPInquiry) {
+      onNavigateCPInquiry();
       return;
     }
     if (target === 'home' && onNavigateHome) {
@@ -13,6 +21,10 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onOpenEnquire 
     }
     if (target === 'enquire' && onOpenEnquire) {
       onOpenEnquire();
+      return;
+    }
+    if (target === '#projects' && onNavigateProjects) {
+      onNavigateProjects();
       return;
     }
     if (target.startsWith('#')) {
@@ -62,8 +74,13 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onOpenEnquire 
                 </a>
               </li>
               <li>
-                <a href="#enquire" onClick={(e) => handleLinkClick(e, 'enquire')}>
-                  Channel Partner
+                <a href="#careers" onClick={(e) => handleLinkClick(e, 'careers')}>
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#cp-inquiry" onClick={(e) => handleLinkClick(e, 'cp-inquiry')}>
+                  Channel Partner (CP) Inquiry
                 </a>
               </li>
               <li>

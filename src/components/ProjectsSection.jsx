@@ -1,35 +1,35 @@
 import React, { useState } from 'react';
 
-export default function ProjectsSection() {
-  const initialProjects = [
-    { id: '1', name: 'Nexus Kinara', loc: 'Jadhavwadi, Chikhali.', img: '/assets/projects/nexus-kinara.jpg' },
-    { id: '2', name: 'Nexus Skydale', loc: 'Tajanewasti, Punawale.', img: '/assets/projects/nexus-skydale.jpg' },
-    { id: '3', name: 'Nexus Westia', loc: 'Punawale, Pune.', img: '/assets/projects/nexus-westia.jpg' },
-    { id: '4', name: 'Nexus Square', loc: 'Punawale, Pune', img: '/assets/projects/nexus-square.jpg' },
-    { id: '5', name: 'Nexus Atrium', loc: 'Borhadewadi, Moshi.', img: '/assets/projects/nexus-atrium.jpg' },
-    { id: '6', name: 'Nexus Imperia', loc: 'Borhadewadi, Moshi.', img: '/assets/projects/nexus-imperia.jpg' },
-    { id: '7', name: 'Nexus Genesis', loc: 'Kiwale, Pune.', img: '/assets/projects/nexus-genesis.jpg' },
+export default function ProjectsSection({ onViewAll }) {
+  const projects = [
+    {
+      id: '1',
+      name: 'Nexus Kinara',
+      loc: 'Jadhavwadi, Chikhali',
+      img: '/assets/projects/nexus-kinara.jpg',
+      link: '/pdfs/nexus-kinara-brochure.pdf',
+      badge: 'Brochure ↗',
+      title: 'View Nexus Kinara Brochure (PDF)',
+    },
+    {
+      id: '2',
+      name: 'Nexus Skydale',
+      loc: 'Tajanewasti, Punawale',
+      img: '/assets/projects/nexus-skydale.jpg',
+      link: '/#skydale',
+      badge: 'Landing Page ↗',
+      title: 'Open Nexus Skydale Landing Page',
+    },
+    {
+      id: '3',
+      name: 'Nexus Westia',
+      loc: 'Punawale, Pune',
+      img: '/assets/projects/nexus-westia.jpg',
+      link: '/pdfs/nexus-westia-brochure.pdf',
+      badge: 'Brochure ↗',
+      title: 'View Nexus Westia Brochure (PDF)',
+    },
   ];
-
-  const [projects, setProjects] = useState(initialProjects);
-
-  const handleNext = () => {
-    setProjects((prev) => {
-      const copy = [...prev];
-      const first = copy.shift();
-      copy.push(first);
-      return copy;
-    });
-  };
-
-  const handlePrev = () => {
-    setProjects((prev) => {
-      const copy = [...prev];
-      const last = copy.pop();
-      copy.unshift(last);
-      return copy;
-    });
-  };
 
   return (
     <section className="projects" id="projects">
@@ -41,29 +41,57 @@ export default function ProjectsSection() {
               Thoughtfully Designed for <span>Modern Living</span>
             </h2>
           </div>
-          <span className="pill">Ongoing</span>
+          <button
+            type="button"
+            className="pill"
+            onClick={onViewAll}
+            style={{ border: 0, cursor: 'pointer', font: 'inherit', fontWeight: 700, fontSize: 13 }}
+          >
+            View All Projects
+          </button>
         </div>
 
         <div className="pc">
-          {projects.slice(0, 4).map((p) => (
-            <a key={p.id} className="pcard" href="#projects">
-              <img src={p.img} alt={p.name} />
+          {projects.map((p) => (
+            <a
+              key={p.id}
+              className="pcard"
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={p.title}
+            >
+              <img src={p.img} alt={p.name} loading="lazy" />
               <div>
-                {p.name}
-                <br />
-                {p.loc}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                  <strong style={{ display: 'block', fontSize: '14px', letterSpacing: '0.04em' }}>
+                    {p.name}
+                  </strong>
+                  <span
+                    style={{
+                      background: 'rgba(197, 160, 89, 0.95)',
+                      color: '#0e1b2e',
+                      fontSize: '10.5px',
+                      fontWeight: 700,
+                      letterSpacing: '0.05em',
+                      textTransform: 'uppercase',
+                      padding: '3px 8px',
+                      borderRadius: '4px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '3px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {p.badge}
+                  </span>
+                </div>
+                <span style={{ opacity: 0.88, fontSize: '11.5px', letterSpacing: '0.02em', display: 'block', marginTop: '4px' }}>
+                  {p.loc} • Built by NEXUS
+                </span>
               </div>
             </a>
           ))}
-        </div>
-
-        <div className="arrows">
-          <button data-d="p" aria-label="Previous" onClick={handlePrev}>
-            ‹
-          </button>
-          <button className="p" data-d="n" aria-label="Next" onClick={handleNext}>
-            ›
-          </button>
         </div>
       </div>
     </section>
