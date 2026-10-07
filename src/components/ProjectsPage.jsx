@@ -20,6 +20,7 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2 & 3 BHK Residences',
     image: '/assets/projects/nexus-kinara.jpg',
+    landing: '/pdfs/nexus-kinara-brochure.pdf',
     pdf: '/pdfs/nexus-kinara-brochure.pdf',
   },
   {
@@ -41,6 +42,7 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '1, 2 & 3 BHK Residences',
     image: '/assets/projects/nexus-westia.jpg',
+    landing: '/pdfs/nexus-westia-brochure.pdf',
     pdf: '/pdfs/nexus-westia-brochure.pdf',
   },
   {
@@ -179,54 +181,27 @@ export default function ProjectsPage({
                     </div>
                     <div className="pj-card-foot">
                       <span className="pj-card-config">{p.config}</span>
-                      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                        {p.landing ? (
+                      <div className="pj-card-actions">
+                        {p.landing || p.pdf ? (
                           <a
-                            href={p.landing}
+                            href={p.landing || p.pdf}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="pj-brochure-btn"
                             title={`Open ${p.name} Landing Page`}
-                            style={{
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              fontSize: '12px',
-                              fontWeight: 600,
-                              color: '#c5a059',
-                              textDecoration: 'none',
-                              padding: '6px 10px',
-                              borderRadius: '4px',
-                              border: '1px solid rgba(197, 160, 89, 0.4)',
-                              background: 'transparent',
-                            }}
                           >
                             Landing Page ↗
                           </a>
-                        ) : p.pdf ? (
-                          <a
-                            href={p.pdf}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        ) : (
+                          <button
+                            type="button"
                             className="pj-brochure-btn"
-                            title={`View ${p.name} Brochure`}
-                            style={{
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              fontSize: '12px',
-                              fontWeight: 600,
-                              color: '#c5a059',
-                              textDecoration: 'none',
-                              padding: '6px 10px',
-                              borderRadius: '4px',
-                              border: '1px solid rgba(197, 160, 89, 0.4)',
-                              background: 'transparent',
-                            }}
+                            onClick={onOpenEnquire}
+                            title={`Inquire about ${p.name}`}
                           >
-                            Brochure ↗
-                          </a>
-                        ) : null}
+                            Landing Page ↗
+                          </button>
+                        )}
                         <button type="button" className="pj-card-cta" onClick={onOpenEnquire}>
                           Enquire <ArrowUpRight size={15} strokeWidth={2.2} />
                         </button>

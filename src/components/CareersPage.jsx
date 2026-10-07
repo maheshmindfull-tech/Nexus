@@ -197,8 +197,12 @@ export default function CareersPage({
     <div className="careers-page">
       {/* 1. HERO SECTION */}
       <section className="car-hero">
-        <div className="car-hero-backdrop" />
-        <div className="car-hero-glow" />
+        <img
+          src="/assets/careers/team-collaboration.jpg"
+          alt="Nexus architectural and engineering leadership team"
+          className="car-hero-bg"
+        />
+        <div className="car-hero-overlay" />
 
         <div className="wrap car-hero-inner">
           <div className="car-hero-copy">
@@ -225,17 +229,6 @@ export default function CareersPage({
               <a href="#apply-form" className="car-btn-secondary">
                 <span>Submit Direct CV</span>
               </a>
-            </div>
-          </div>
-
-          <div className="car-hero-media">
-            <img
-              src="/assets/careers/team-collaboration.jpg"
-              alt="Nexus architectural and engineering leadership team"
-            />
-            <div className="car-hero-media-badge">
-              <span>Engineering & Design Hub • Pune HQ</span>
-              <small>Nexus Group</small>
             </div>
           </div>
         </div>

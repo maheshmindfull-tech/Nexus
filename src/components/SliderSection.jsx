@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 export default function SliderSection() {
   const slides = [
-    '/assets/home/skaydale.jpeg',
-    '/assets/home/westia.jpeg',
-    '/assets/home/prime-square.jpeg',
+    '/assets/home/slide-01.png',
+    '/assets/home/slide-02.png',
+    '/assets/home/slide-03.png',
   ];
 
   const [current, setCurrent] = useState(0);

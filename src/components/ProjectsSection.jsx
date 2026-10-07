@@ -8,8 +8,8 @@ export default function ProjectsSection({ onViewAll }) {
       loc: 'Jadhavwadi, Chikhali',
       img: '/assets/projects/nexus-kinara.jpg',
       link: '/pdfs/nexus-kinara-brochure.pdf',
-      badge: 'Brochure ↗',
-      title: 'View Nexus Kinara Brochure (PDF)',
+      badge: 'Landing Page ↗',
+      title: 'Open Nexus Kinara Landing Page',
     },
     {
       id: '2',
@@ -26,8 +26,8 @@ export default function ProjectsSection({ onViewAll }) {
       loc: 'Punawale, Pune',
       img: '/assets/projects/nexus-westia.jpg',
       link: '/pdfs/nexus-westia-brochure.pdf',
-      badge: 'Brochure ↗',
-      title: 'View Nexus Westia Brochure (PDF)',
+      badge: 'Landing Page ↗',
+      title: 'Open Nexus Westia Landing Page',
     },
   ];
 

@@ -18,40 +18,48 @@
    ------------------------------------------------------------------- */
 .car-hero {
   position: relative;
-  background: linear-gradient(135deg, #092126 0%, #143135 60%, #0c272c 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1e202c 0%, #2a2538 35%, #3a2e38 70%, #463738 100%);
   color: #ffffff;
-  padding: clamp(120px, 14vw, 170px) 0 clamp(60px, 8vw, 100px);
+  padding: 130px 0 70px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-.car-hero-backdrop {
+.car-hero-bg {
   position: absolute;
   inset: 0;
-  opacity: 0.08;
-  background-image: radial-gradient(#00e5ff 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  opacity: 0.45;
+  filter: brightness(0.88) contrast(1.05);
 }
 
-.car-hero-glow {
+.car-hero-overlay {
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 151, 167, 0.25) 0%, transparent 70%);
-  pointer-events: none;
-  filter: blur(60px);
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 22, 34, 0.8) 0%,
+    rgba(38, 33, 48, 0.68) 45%,
+    rgba(56, 43, 48, 0.58) 100%
+  );
+  z-index: 2;
 }
 
 .car-hero-inner {
   position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(36px, 5vw, 64px);
-  align-items: center;
+  z-index: 3;
+  width: 100%;
+}
+
+.car-hero-copy {
+  max-width: 760px;
 }
 
 .car-hero-pill {
@@ -60,9 +68,10 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: 100px;
-  background: rgba(0, 229, 255, 0.12);
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  color: #00e5ff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -75,7 +84,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #00e5ff;
+  background-color: #c5a059;
 }
 
 .car-hero-title {
@@ -90,19 +99,20 @@
 }
 
 .car-hero-title span {
-  color: #b38b59;
+  color: #dfc08a;
 }
 
 .car-hero-title .tw-caret {
-  background: #00e5ff;
+  background: #c5a059;
 }
 
 .car-hero-desc {
   font-size: clamp(15px, 1.2vw, 17px);
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 560px;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 580px;
   margin-bottom: 32px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .car-hero-actions {
@@ -116,11 +126,11 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #0097a7;
-  color: #ffffff;
+  background: #c5a059;
+  color: #0e1b2e;
   font-family: 'Montserrat', sans-serif;
   font-size: 13.5px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.03em;
   padding: 13px 26px;
   border-radius: 6px;
@@ -131,7 +141,7 @@
 }
 
 .car-btn-primary:hover {
-  background: #00838f;
+  background: #d6b36a;
   transform: translateY(-2px);
 }
 
@@ -139,7 +149,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   color: #ffffff;
   font-family: 'Montserrat', sans-serif;
   font-size: 13.5px;
@@ -154,7 +165,7 @@
 }
 
 .car-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.45);
 }
 
@@ -241,10 +252,10 @@
 .car-metric-num {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(38px, 4vw, 54px);
-  font-weight: 700;
+  font-weight: 400 !important;
   color: #b38b59;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: normal;
   margin-bottom: 8px;
 }
 

@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
 import Footer from './Footer';
+import Typewriter from './Typewriter';
 import '../cp-inquiry.css';
+
+const CP_HERO_PHRASES = [
+  'Unlock Unlimited Earnings. Scale Your Real Estate Business.',
+  'Accelerate High-Ticket Closures Across Pune & PCMC.',
+  'Maximize Partner Revenue With Prime Landmark Projects.',
+  'Partner With 30 Years of Uncompromised Trust & Delivery.',
+];
 
 export default function CPInquiryPage({
   onNavigateHome,
@@ -55,33 +63,29 @@ export default function CPInquiryPage({
 
   return (
     <div className="cp-page">
-      {/* Split Hero Header with Left Opportunity & Right Deal Image */}
+      {/* Full-Screen Hero Header with Deal Done Handshake Background */}
       <section className="cp-hero">
+        <img
+          src="/assets/cp/deal-done.avif"
+          alt="Deal Done Handshake - Nexus Channel Partner"
+          className="cp-hero-bg"
+        />
+        <div className="cp-hero-overlay" />
+
         <div className="cp-hero-wrap">
-          <div className="cp-hero-grid">
-            {/* Left: Tagline & Growth/Income Opportunity */}
-            <div className="cp-hero-left">
-              <h1 className="cp-title">
-                Unlock Unlimited Earnings.<br />
-                <span>Scale Your Real Estate Business.</span>
-              </h1>
-              <p className="cp-subtitle">
-                Partner with Nexus Group to accelerate your deal closures. Access prime
-                residential and commercial landmarks across Pune & PCMC (₹70 L to ₹1.5 Cr+),
-                enjoy industry-best incentive slabs, transparent payouts, and full CRM support.
-              </p>
+          <div className="cp-hero-content">
+            <div className="cp-eyebrow">
+              <span className="cp-eyebrow-dot" />
+              Channel Partner Network
             </div>
-
-            {/* Right: Deal Done Handshake Image */}
-            <div className="cp-hero-right">
-              <div className="cp-hero-media">
-                <img
-                  src="/assets/cp/deal-done.avif"
-                  alt="Deal Done Handshake - Nexus Channel Partner"
-                />
-
-              </div>
-            </div>
+            <h1 className="cp-title">
+              <Typewriter phrases={CP_HERO_PHRASES} />
+            </h1>
+            <p className="cp-subtitle">
+              Partner with Nexus Group to accelerate your deal closures. Access prime
+              residential and commercial landmarks across Pune & PCMC (₹70 L to ₹1.5 Cr+),
+              enjoy industry-best incentive slabs, transparent payouts, and full CRM support.
+            </p>
           </div>
         </div>
       </section>

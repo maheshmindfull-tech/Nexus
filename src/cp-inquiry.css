@@ -9,34 +9,55 @@
   flex-direction: column;
 }
 
-/* Full-Screen Hero Header with Left Opportunity Copy & Right Deal Image */
+/* Full-Screen Hero Header with Deal Done Handshake Background */
 .cp-hero {
-  background: #002228;
-  color: #ffffff;
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 110px 48px 48px;
+  justify-content: flex-start;
+  padding: 130px 48px 60px;
   box-sizing: border-box;
-  position: relative;
+  background: linear-gradient(135deg, #1e202c 0%, #2a2538 35%, #3a2e38 70%, #463738 100%);
+  color: #ffffff;
+  overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.cp-hero-wrap {
+.cp-hero-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 1360px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  opacity: 0.45;
+  filter: brightness(0.85) contrast(1.05);
+}
+
+.cp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 22, 34, 0.8) 0%,
+    rgba(38, 33, 48, 0.7) 45%,
+    rgba(56, 43, 48, 0.58) 100%
+  );
+  z-index: 2;
+}
+
+.cp-hero-wrap {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.cp-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 5vw, 72px);
-  align-items: center;
-}
-
-.cp-hero-left {
+.cp-hero-content {
+  max-width: 800px;
   text-align: left;
 }
 
@@ -49,11 +70,12 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #00e5ff;
-  background: rgba(0, 229, 255, 0.1);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
   padding: 6px 14px;
   border-radius: 100px;
-  border: 1px solid rgba(0, 229, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   margin-bottom: 18px;
 }
 
@@ -61,53 +83,36 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #00e5ff;
+  background: #c5a059;
 }
 
 .cp-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(28px, 3.4vw, 44px);
+  font-size: clamp(28px, 3.6vw, 48px);
   font-weight: 700;
   line-height: 1.18;
   color: #ffffff;
   letter-spacing: -0.01em;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   text-transform: uppercase;
+  min-height: 2.4em;
 }
 
 .cp-title span {
-  color: #b38b59;
+  color: #dfc08a;
+}
+
+.cp-title .tw-caret {
+  background: #c5a059;
 }
 
 .cp-subtitle {
-  font-size: clamp(14px, 1.1vw, 15.5px);
+  font-size: clamp(15px, 1.15vw, 17px);
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.82);
-  margin-bottom: 22px;
-  max-width: 620px;
-}
-
-/* Right Media (Deal Done Handshake) */
-.cp-hero-right {
-  position: relative;
-}
-
-.cp-hero-media {
-  position: relative;
-  border-radius: 0 !important;
-  overflow: visible;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-  width: 100%;
-}
-
-.cp-hero-media img {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  display: block;
-  border-radius: 0 !important;
-  object-fit: contain;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 24px;
+  max-width: 680px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Simple Form Container */
