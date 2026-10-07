@@ -9,7 +9,7 @@ Thumbs.db
 .vite
 
 # Large media files (exceeds GitHub 100MB limit)
-*.mp4
+# *.mp4
 
 # Raw extraction and temporary folders
 /*.jpeg

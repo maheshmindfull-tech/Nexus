@@ -11,13 +11,13 @@ export default function Hero({ onOpenEnquire }) {
         playsInline
         disablePictureInPicture
         controls={false}
-        poster="/assets/home/hero-nexus-building.jpg"
+        poster="/assets/home/slide-01.png"
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
       >
         <source src="/assets/home/hero-video.mp4" type="video/mp4" />
         {/* Fallback image */}
         <img
-          src="/assets/home/hero-nexus-building.jpg"
+          src="/assets/home/slide-01.png"
           alt="Nexus Pune Luxury Living"
           className="w-full h-full object-cover"
         />

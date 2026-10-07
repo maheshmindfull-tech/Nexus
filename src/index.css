@@ -157,7 +157,7 @@ h2.big span {
   position: relative;
   height: 100vh;
   min-height: 560px;
-  background: #334 url(/assets/home/hero-nexus-building.jpg) center/cover no-repeat;
+  background: #111 url(/assets/home/slide-01.png) center/cover no-repeat;
 }
 
 .hero:after {
