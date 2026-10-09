@@ -44,14 +44,15 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
   }, [currentPage]);
 
   const navLinks = [
-    { id: 'home', label: 'Home', href: '#' },
-    { id: 'about', label: 'About Us', href: '#about' },
-    { id: 'projects', label: 'Projects', href: '#projects' },
-    { id: 'careers', label: 'Careers', href: '#careers' },
-    { id: 'cp-inquiry', label: 'CP Inquiry', href: '#cp-inquiry' },
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About Us', href: '/about' },
+    { id: 'projects', label: 'Projects', href: '/projects' },
+    { id: 'careers', label: 'Careers', href: '/careers' },
+    { id: 'cp-inquiry', label: 'CP Inquiry', href: '/cp-inquiry' },
   ];
 
   const handleNavClick = (e, tabId) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
     setMobileMenuOpen(false);
 
@@ -119,7 +120,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
   return (
     <header
       ref={headerRef}
-      className="navbar-root"
+      className={`navbar-root ${isScrolled ? 'is-scrolled' : ''}`}
       style={{
         position: 'fixed',
         top: 0,
@@ -141,19 +142,18 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
     >
       {/* Main Navbar Row */}
       <div
+        className="navbar-inner"
         style={{
           maxWidth: '1400px',
           margin: '0 auto',
-          padding: isScrolled ? '14px 48px' : '22px 48px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          transition: 'padding 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
         {/* Logo */}
-        <a
-          href="#"
+          <a
+          href="/"
           onClick={(e) => handleNavClick(e, 'home')}
           style={{
             display: 'flex',
@@ -165,6 +165,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
           <img
             src="/assets/logo/nexus-logo-white.png"
             alt="Nexus Pune"
+            className="navbar-logo-img"
             style={{
               height: isScrolled ? '40px' : '48px',
               width: 'auto',
@@ -177,7 +178,6 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
         {/* Desktop Navigation */}
         <nav
           style={{
-            display: 'flex',
             alignItems: 'center',
             gap: '4px',
           }}
@@ -229,14 +229,13 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
         </nav>
 
         {/* Right Side: Contact Button + Mobile Hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
           {/* Contact Us Button — Desktop */}
           <a
             href="#contact"
             onClick={handleContactClick}
             className="navbar-contact-btn"
             style={{
-              display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               padding: '10px 28px',
@@ -263,18 +262,16 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
 
           {/* Mobile Hamburger Button */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
             className="navbar-mobile-toggle"
             style={{
-              display: 'none',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '42px',
-              height: '42px',
               borderRadius: '10px',
-              border: '1px solid rgba(255,255,255,0.2)',
-              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.25)',
+              background: 'rgba(255,255,255,0.12)',
               color: '#ffffff',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
@@ -283,9 +280,9 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
             }}
           >
             {mobileMenuOpen ? (
-              <X style={{ width: '20px', height: '20px', strokeWidth: 2.2 }} />
+              <X style={{ width: '22px', height: '22px', strokeWidth: 2.2 }} />
             ) : (
-              <Menu style={{ width: '20px', height: '20px', strokeWidth: 2.2 }} />
+              <Menu style={{ width: '22px', height: '22px', strokeWidth: 2.2 }} />
             )}
           </button>
         </div>

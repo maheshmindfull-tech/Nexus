@@ -146,6 +146,7 @@ export default function CareersPage({
   onNavigateProjects,
   onNavigateCareers,
   onNavigateCPInquiry,
+  onNavigateSkydale,
   onOpenEnquire,
 }) {
   const [selectedCategory, setSelectedCategory] = useState('All Roles');
@@ -703,6 +704,7 @@ export default function CareersPage({
         onNavigateProjects={onNavigateProjects}
         onNavigateCareers={onNavigateCareers}
         onNavigateCPInquiry={onNavigateCPInquiry}
+        onNavigateSkydale={onNavigateSkydale}
         onOpenEnquire={onOpenEnquire}
       />
     </div>

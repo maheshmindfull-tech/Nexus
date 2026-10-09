@@ -14,102 +14,50 @@ import ProjectsPage from './components/ProjectsPage';
 import CareersPage from './components/CareersPage';
 import CPInquiryPage from './components/CPInquiryPage';
 import SkydaleLandingPage from './components/SkydaleLandingPage';
+import { applyPageSeo, pageFromLocation, pathForPage } from './seo';
 
 export default function App() {
   const [enquireOpen, setEnquireOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const hash = window.location.hash.toLowerCase();
-      if (hash === '#all-projects') return 'projects';
-      if (hash === '#careers' || hash === '#career') return 'careers';
-      if (hash === '#cp-inquiry' || hash === '#channel-partner') return 'cp-inquiry';
-      if (
-        hash === '#skydale' ||
-        hash === '#skydel' ||
-        hash === '#nexus-skydale' ||
-        hash === '#skydale-landing'
-      ) {
-        return 'skydale';
-      }
-      if (
-        hash === '#about' ||
-        hash === '#about-us' ||
-        hash === '#about-page' ||
-        window.location.pathname.endsWith('about.html')
-      ) {
-        return 'about';
-      }
-    }
-    return 'home';
-  });
+  const [currentPage, setCurrentPage] = useState(() =>
+    typeof window !== 'undefined' ? pageFromLocation() : 'home'
+  );
 
-  // Sync hash changes with page view
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.toLowerCase();
-      if (hash === '#all-projects') {
-        setCurrentPage('projects');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#careers' || hash === '#career') {
-        setCurrentPage('careers');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#cp-inquiry' || hash === '#channel-partner') {
-        setCurrentPage('cp-inquiry');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (
-        hash === '#skydale' ||
-        hash === '#skydel' ||
-        hash === '#nexus-skydale' ||
-        hash === '#skydale-landing'
-      ) {
-        setCurrentPage('skydale');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#about' || hash === '#about-us' || hash === '#about-page') {
-        setCurrentPage('about');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#home' || hash === '') {
-        setCurrentPage('home');
-      }
+    const page = pageFromLocation();
+    const clean = pathForPage(page);
+    const path = window.location.pathname.replace(/\/+$/, '') || '/';
+    if (path !== clean || window.location.hash) {
+      window.history.replaceState({ page }, '', clean);
+    }
+    applyPageSeo(page);
+
+    const onPop = () => {
+      const next = pageFromLocation();
+      setCurrentPage(next);
+      applyPageSeo(next);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
   }, []);
 
   const handleNavigate = (page, section) => {
-    if (page === 'projects') {
-      setCurrentPage('projects');
-      window.location.hash = '#all-projects';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (page === 'skydale') {
-      setCurrentPage('skydale');
-      window.location.hash = '#skydale';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (page === 'careers') {
-      setCurrentPage('careers');
-      window.location.hash = '#careers';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (page === 'cp-inquiry') {
-      setCurrentPage('cp-inquiry');
-      window.location.hash = '#cp-inquiry';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (page === 'about') {
-      setCurrentPage('about');
-      window.location.hash = '#about';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      setCurrentPage('home');
-      if (section) {
-        window.location.hash = `#${section}`;
-        setTimeout(() => {
-          const el = document.getElementById(section);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 120);
-      } else {
-        window.location.hash = '';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    const next = pathForPage(page) ? page : 'home';
+    const clean = pathForPage(next);
+    window.history.pushState({ page: next }, '', clean);
+    setCurrentPage(next);
+    applyPageSeo(next);
+
+    if (next === 'home' && section) {
+      setTimeout(() => {
+        const el = document.getElementById(section);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+      return;
     }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -134,6 +82,7 @@ export default function App() {
           onNavigateProjects={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
+          onNavigateSkydale={() => handleNavigate('skydale')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'about' ? (
@@ -143,6 +92,7 @@ export default function App() {
           onNavigateProjects={() => handleNavigate('projects')}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
+          onNavigateSkydale={() => handleNavigate('skydale')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'careers' ? (
@@ -153,6 +103,7 @@ export default function App() {
           onNavigateProjects={() => handleNavigate('projects')}
           onNavigateCareers={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
+          onNavigateSkydale={() => handleNavigate('skydale')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'cp-inquiry' ? (
@@ -162,6 +113,7 @@ export default function App() {
           onNavigateAbout={() => handleNavigate('about')}
           onNavigateProjects={() => handleNavigate('projects')}
           onNavigateCareers={() => handleNavigate('careers')}
+          onNavigateSkydale={() => handleNavigate('skydale')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : (
@@ -169,7 +121,10 @@ export default function App() {
         <>
           <main className="flex-1">
             {/* 1. Hero */}
-            <Hero onOpenEnquire={() => setEnquireOpen(true)} />
+            <Hero
+              onOpenEnquire={() => setEnquireOpen(true)}
+              onViewProjects={() => handleNavigate('projects')}
+            />
 
             {/* 2. About us & 30 Years Stats with link to full About Us page */}
             <AboutStats onNavigateAbout={() => handleNavigate('about')} />
@@ -196,6 +151,7 @@ export default function App() {
             onNavigateProjects={() => handleNavigate('projects')}
             onNavigateCareers={() => handleNavigate('careers')}
             onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
+            onNavigateSkydale={() => handleNavigate('skydale')}
             onNavigateHome={(sec) => handleNavigate('home', sec)}
             onOpenEnquire={() => setEnquireOpen(true)}
           />

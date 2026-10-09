@@ -185,6 +185,7 @@ export default function AboutPage({
   onNavigateProjects,
   onNavigateCareers,
   onNavigateCPInquiry,
+  onNavigateSkydale,
   onOpenEnquire,
 }) {
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -489,6 +490,7 @@ export default function AboutPage({
         onNavigateProjects={onNavigateProjects}
         onNavigateCareers={onNavigateCareers}
         onNavigateCPInquiry={onNavigateCPInquiry}
+        onNavigateSkydale={onNavigateSkydale}
         onOpenEnquire={onOpenEnquire}
       />
     </>

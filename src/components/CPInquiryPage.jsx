@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
 import Footer from './Footer';
 import Typewriter from './Typewriter';
+import { submitLeadToGoogleSheet } from '../services/leadService';
 import '../cp-inquiry.css';
 
 const CP_HERO_PHRASES = [
@@ -16,6 +17,7 @@ export default function CPInquiryPage({
   onNavigateAbout,
   onNavigateProjects,
   onNavigateCareers,
+  onNavigateSkydale,
   onOpenEnquire,
 }) {
   const [formData, setFormData] = useState({
@@ -37,14 +39,22 @@ export default function CPInquiryPage({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate simple network request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 700);
+    await submitLeadToGoogleSheet({
+      formType: 'Channel Partner Registration & Inquiry',
+      name: formData.fullName,
+      company: formData.companyName,
+      phone: formData.mobile,
+      email: formData.email,
+      reraNumber: formData.reraNumber || 'N/A',
+      project: formData.projectInterest || 'All Projects',
+      budgetCategory: formData.priceCategory || 'All Price Ranges',
+      message: formData.message || '',
+    });
+    setIsSubmitting(false);
+    setIsSubmitted(true);
   };
 
   const handleReset = () => {
@@ -301,6 +311,7 @@ export default function CPInquiryPage({
         onNavigateProjects={onNavigateProjects}
         onNavigateCareers={onNavigateCareers}
         onNavigateHome={onNavigateHome}
+        onNavigateSkydale={onNavigateSkydale}
         onOpenEnquire={onOpenEnquire}
       />
     </div>

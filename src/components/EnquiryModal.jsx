@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CheckCircle2, Send, X } from 'lucide-react';
+import { CheckCircle2, Send, X, Loader2 } from 'lucide-react';
+import { submitLeadToGoogleSheet } from '../services/leadService';
 
 export default function EnquiryModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -11,11 +12,22 @@ export default function EnquiryModal({ isOpen, onClose }) {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    await submitLeadToGoogleSheet({
+      formType: 'Website Contact / Enquiry Modal',
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      project: formData.project || 'Nexus Skydale (Punawale)',
+      message: formData.message || '',
+    });
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -135,9 +147,18 @@ export default function EnquiryModal({ isOpen, onClose }) {
               </div>
 
               {/* Submit Button */}
-              <button type="submit" className="modal-submit-btn">
-                <Send className="w-3.5 h-3.5" />
-                <span>Submit Enquiry</span>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="modal-submit-btn"
+                style={isSubmitting ? { opacity: 0.75, cursor: 'not-allowed' } : undefined}
+              >
+                {isSubmitting ? (
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                ) : (
+                  <Send className="w-3.5 h-3.5" />
+                )}
+                <span>{isSubmitting ? 'Submitting...' : 'Submit Enquiry'}</span>
               </button>
 
               <p className="modal-privacy-note">

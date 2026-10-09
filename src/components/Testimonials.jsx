@@ -93,7 +93,7 @@ export default function Testimonials() {
         <div className="testi-header">
           <div className="eyebrow">Resident Stories & Reviews</div>
           <h2 className="big">
-            Everything You <span>Need to Know</span>
+            Words from the <span>people who live here</span>
           </h2>
         </div>
 

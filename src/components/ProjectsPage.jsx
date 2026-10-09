@@ -31,7 +31,7 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2 & 3 BHK Residences',
     image: '/assets/projects/nexus-skydale.jpg',
-    landing: '/#skydale',
+    landing: '/skydale',
     pdf: '/pdfs/skydale-brouchure.pdf',
   },
   {
@@ -126,6 +126,7 @@ export default function ProjectsPage({
   onNavigateProjects,
   onNavigateCareers,
   onNavigateCPInquiry,
+  onNavigateSkydale,
   onOpenEnquire,
 }) {
   const [status, setStatus] = useState('Ongoing');
@@ -145,7 +146,6 @@ export default function ProjectsPage({
   return (
     <>
       <header className="pj-hero" aria-label="Nexus Projects Showcase">
-        <h1 className="sr-only">Nexus Pune Projects</h1>
         {Object.entries(HERO_BACKGROUNDS).map(([key, bg]) => (
           <div
             key={key}
@@ -229,6 +229,7 @@ export default function ProjectsPage({
         onNavigateProjects={onNavigateProjects}
         onNavigateCareers={onNavigateCareers}
         onNavigateCPInquiry={onNavigateCPInquiry}
+        onNavigateSkydale={onNavigateSkydale}
         onOpenEnquire={onOpenEnquire}
       />
     </>

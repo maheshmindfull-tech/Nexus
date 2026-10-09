@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
 import '../skydale-landing.css';
+import { submitLeadToGoogleSheet } from '../services/leadService';
 
 export default function SkydaleLandingPage({ onNavigateHome }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email) return;
+    setIsSubmitting(true);
+    await submitLeadToGoogleSheet({
+      formType: 'Skydale Landing Page Lead',
+      project: 'Nexus Skydale (Punawale)',
+      name: formData.name,
+      email: formData.email,
+      message: formData.message || '',
+    });
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -56,6 +67,7 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
 
       {/* ---------------- Main Landing Container ---------------- */}
       <main className="skydale-container">
+        <h1 className="skydale-page-title">Nexus Skydale, Punawale — 2, 3 and 4 BHK homes</h1>
         {/* Section 1: Hero Elevation Building */}
         <section className="skydale-img-block" aria-label="Nexus Skydale Elevation">
           <img
@@ -203,8 +215,13 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />
                 </div>
-                <button type="submit" className="skydale-form-submit-btn">
-                  SUBMIT
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="skydale-form-submit-btn"
+                  style={isSubmitting ? { opacity: 0.75, cursor: 'not-allowed' } : undefined}
+                >
+                  {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
                 </button>
               </form>
             )}

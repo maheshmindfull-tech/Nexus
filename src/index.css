@@ -30,6 +30,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -39,6 +41,8 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1212,7 +1216,7 @@ hr.teal {
 
 /* Single Line Continuous Text Testimonial Card */
 .t-single-card {
-  width: 350px;
+  width: min(350px, calc(100vw - 56px));
   flex-shrink: 0;
   background: #ffffff;
   border: 1px solid #e1e9e9;
@@ -1452,11 +1456,14 @@ footer .cols {
   flex-wrap: wrap;
 }
 
+footer h2,
 footer h5 {
   font-size: 12px;
   margin-bottom: 14px;
   font-weight: 700;
   color: #fff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 footer ul {
@@ -1480,13 +1487,13 @@ footer li a:hover {
 }
 
 .soc a {
-  width: 24px;
-  height: 24px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   background: var(--teal);
   display: grid;
   place-items: center;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   color: #fff;
   text-decoration: none;
@@ -1763,6 +1770,27 @@ footer .bot {
   display: none !important;
 }
 
+.navbar-inner {
+  padding: 22px 48px;
+  transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-root.is-scrolled .navbar-inner {
+  padding: 14px 48px;
+}
+
+.navbar-desktop-nav {
+  display: flex !important;
+}
+
+.navbar-contact-btn {
+  display: inline-flex !important;
+}
+
+.navbar-mobile-toggle {
+  display: none !important;
+}
+
 /* Desktop nav link hover */
 .navbar-link:hover {
   opacity: 1 !important;
@@ -1777,6 +1805,14 @@ footer .bot {
 
 /* Mobile breakpoint */
 @media (max-width: 768px) {
+  .navbar-inner {
+    padding: max(12px, env(safe-area-inset-top)) 18px 12px !important;
+  }
+
+  .navbar-root.is-scrolled .navbar-inner {
+    padding: 10px 18px !important;
+  }
+
   .navbar-desktop-nav {
     display: none !important;
   }
@@ -1786,7 +1822,26 @@ footer .bot {
   }
 
   .navbar-mobile-toggle {
-    display: flex !important;
+    display: inline-flex !important;
+  }
+
+  .navbar-logo-img {
+    height: 38px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar-inner {
+    padding: 10px 14px !important;
+  }
+
+  .navbar-logo-img {
+    height: 34px !important;
+  }
+
+  .navbar-mobile-toggle {
+    width: 38px !important;
+    height: 38px !important;
   }
 }
 
@@ -2576,7 +2631,13 @@ footer .bot {
   }
 
   .about-hero-title {
-    max-width: 16ch;
+    max-width: none;
+  }
+
+  .about-hero {
+    height: auto;
+    min-height: 0;
+    padding-bottom: 48px;
   }
 }
 
@@ -2665,8 +2726,8 @@ h2.big span {
 }
 
 .hero {
-  height: min(900px, 100svh);
-  min-height: 620px;
+  height: auto;
+  min-height: min(900px, 100svh);
   background: #17343a;
 }
 
@@ -2675,6 +2736,12 @@ h2.big span {
 }
 
 .hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
   padding-top: 140px;
   padding-bottom: clamp(54px, 9vh, 100px);
 }
@@ -3116,7 +3183,7 @@ footer .brand {
 footer .cols {
   display: grid;
   flex: 1;
-  grid-template-columns: repeat(4, minmax(110px, 1fr));
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
   gap: 28px;
 }
 
@@ -3194,7 +3261,8 @@ footer .bot {
 
 @media (max-width: 900px) {
   .hero {
-    min-height: 600px;
+    min-height: 0;
+    min-height: 100svh;
   }
 
   .hero-content {
@@ -3211,7 +3279,7 @@ footer .bot {
   }
 
   footer .cols {
-    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
   }
 }
 
@@ -3226,8 +3294,8 @@ footer .bot {
   }
 
   .hero {
-    height: min(820px, 100svh);
-    min-height: 620px;
+    height: auto;
+    min-height: 100svh;
   }
 
   .hero-image {
@@ -3304,9 +3372,9 @@ footer .bot {
   }
 
   .slider-arrow {
-    width: 34px;
-    height: 34px;
-    opacity: 0.75;
+    width: 44px;
+    height: 44px;
+    opacity: 0.9;
   }
 
   .slider-arrow.prev {
@@ -3389,7 +3457,14 @@ footer .bot {
 
   footer .cols {
     width: 100%;
-    gap: 24px 16px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  footer li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
   }
 
   .form-row {
@@ -3404,6 +3479,14 @@ footer .bot {
   .modal-header,
   .modal-form {
     padding-inline: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
   }
 }
 

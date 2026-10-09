@@ -16,7 +16,7 @@ export default function ProjectsSection({ onViewAll }) {
       name: 'Nexus Skydale',
       loc: 'Tajanewasti, Punawale',
       img: '/assets/projects/nexus-skydale.jpg',
-      link: '/#skydale',
+      link: '/skydale',
       badge: 'Landing Page ↗',
       title: 'Open Nexus Skydale Landing Page',
     },

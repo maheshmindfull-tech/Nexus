@@ -364,6 +364,17 @@
 }
 
 @media (max-width: 680px) {
+  .cp-hero {
+    min-height: 0;
+    align-items: flex-end;
+    padding: 112px 20px 48px;
+  }
+
+  .cp-title {
+    font-size: clamp(26px, 7.4vw, 36px);
+    min-height: 0;
+  }
+
   .cp-grid {
     grid-template-columns: 1fr;
   }

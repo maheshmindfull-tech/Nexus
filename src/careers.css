@@ -859,6 +859,16 @@
 }
 
 @media (max-width: 640px) {
+  .car-hero {
+    min-height: 0;
+    align-items: flex-end;
+    padding: 112px 0 48px;
+  }
+
+  .car-hero-title {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
   .car-pillars-grid {
     grid-template-columns: 1fr;
   }
