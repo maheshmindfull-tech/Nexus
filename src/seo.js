@@ -1,4 +1,4 @@
-const ORIGIN = 'https://nexuspune.com';
+const ORIGIN = 'https://nexuspune.in';
 
 export const PAGE_SEO = {
   home: {

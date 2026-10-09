@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://nexuspune.com/sitemap.xml
+Sitemap: https://nexuspune.in/sitemap.xml
