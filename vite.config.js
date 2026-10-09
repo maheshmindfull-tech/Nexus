@@ -20,6 +20,7 @@ const NOSCRIPT = `
         <li><a href="/projects">Projects in Pune</a></li>
         <li><a href="/skydale">Nexus Skydale, Punawale</a></li>
         <li><a href="/careers">Careers</a></li>
+        <li><a href="/contact">Contact Us</a></li>
         <li><a href="/cp-inquiry">Channel Partner Inquiry</a></li>
       </ul>
       <p>Sales: sales@nexuspune.com | +91 20 6789 9900 | Bund Garden Road, Pune 411001</p>

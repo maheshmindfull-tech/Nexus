@@ -19,13 +19,19 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
-      if (currentPage === 'about' || currentPage === 'projects' || currentPage === 'careers' || currentPage === 'cp-inquiry') {
+      if (
+        currentPage === 'about' ||
+        currentPage === 'projects' ||
+        currentPage === 'careers' ||
+        currentPage === 'cp-inquiry' ||
+        currentPage === 'contact'
+      ) {
         setActiveTab(currentPage);
         return;
       }
 
       // Determine active section based on scroll position
-      const sections = ['contact', 'projects', 'about'];
+      const sections = ['projects', 'about'];
       const scrollPos = window.scrollY + 200;
 
       for (const sec of sections) {
@@ -103,14 +109,17 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
   };
 
   const handleContactClick = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
     setMobileMenuOpen(false);
-    if (currentPage === 'home' || currentPage === 'projects' || currentPage === 'about') {
-      const el = document.getElementById('contact');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
+
+    if (currentPage === 'contact') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (onNavigate) {
+      onNavigate('contact');
+      return;
     }
     if (onOpenEnquire) {
       onOpenEnquire();
@@ -232,7 +241,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
           {/* Contact Us Button — Desktop */}
           <a
-            href="#contact"
+            href="/contact"
             onClick={handleContactClick}
             className="navbar-contact-btn"
             style={{
@@ -353,7 +362,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
             );
           })}
           <a
-            href="#contact"
+            href="/contact"
             onClick={handleContactClick}
             style={{
               marginTop: '8px',

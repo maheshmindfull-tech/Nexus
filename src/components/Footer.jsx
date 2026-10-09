@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProjects, onNavigateCareers, onNavigateCPInquiry, onNavigateSkydale, onOpenEnquire }) {
+export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProjects, onNavigateCareers, onNavigateCPInquiry, onNavigateSkydale, onNavigateContact, onOpenEnquire }) {
   const handleLinkClick = (e, target) => {
     e.preventDefault();
     if (target === 'about' && onNavigateAbout) {
@@ -13,6 +13,10 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
     }
     if (target === 'cp-inquiry' && onNavigateCPInquiry) {
       onNavigateCPInquiry();
+      return;
+    }
+    if (target === 'contact' && onNavigateContact) {
+      onNavigateContact();
       return;
     }
     if (target === 'skydale' && onNavigateSkydale) {
@@ -83,12 +87,12 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   </a>
                 </li>
                 <li>
-                  <a href="/#contact" onClick={(e) => handleLinkClick(e, 'enquire')}>
+                  <a href="/contact" onClick={(e) => handleLinkClick(e, 'enquire')}>
                     Vendor enquiry
                   </a>
                 </li>
                 <li>
-                  <a href="/#contact" onClick={(e) => handleLinkClick(e, '#contact')}>
+                  <a href="/contact" onClick={(e) => handleLinkClick(e, 'contact')}>
                     Contact
                   </a>
                 </li>

@@ -14,6 +14,7 @@ import ProjectsPage from './components/ProjectsPage';
 import CareersPage from './components/CareersPage';
 import CPInquiryPage from './components/CPInquiryPage';
 import SkydaleLandingPage from './components/SkydaleLandingPage';
+import ContactPage from './components/ContactPage';
 import { applyPageSeo, pageFromLocation, pathForPage } from './seo';
 
 export default function App() {
@@ -83,6 +84,7 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => handleNavigate('contact')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'about' ? (
@@ -93,6 +95,7 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => handleNavigate('contact')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'careers' ? (
@@ -104,6 +107,7 @@ export default function App() {
           onNavigateCareers={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => handleNavigate('contact')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'cp-inquiry' ? (
@@ -114,6 +118,19 @@ export default function App() {
           onNavigateProjects={() => handleNavigate('projects')}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => handleNavigate('contact')}
+          onOpenEnquire={() => setEnquireOpen(true)}
+        />
+      ) : currentPage === 'contact' ? (
+        /* DEDICATED CONTACT PAGE */
+        <ContactPage
+          onNavigateHome={(sec) => handleNavigate('home', sec)}
+          onNavigateAbout={() => handleNavigate('about')}
+          onNavigateProjects={() => handleNavigate('projects')}
+          onNavigateCareers={() => handleNavigate('careers')}
+          onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
+          onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : (
@@ -152,6 +169,7 @@ export default function App() {
             onNavigateCareers={() => handleNavigate('careers')}
             onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
             onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => handleNavigate('contact')}
             onNavigateHome={(sec) => handleNavigate('home', sec)}
             onOpenEnquire={() => setEnquireOpen(true)}
           />

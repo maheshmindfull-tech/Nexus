@@ -104,6 +104,19 @@ export const PAGE_SEO = {
       description: 'Channel partner registration for Nexus Group projects in Pune.',
     },
   },
+  contact: {
+    path: '/contact',
+    title: 'Contact Nexus Pune | Enquire About Homes and Site Visits',
+    description:
+      'Contact Nexus Group in Pune for project details, pricing, and site visits. Call +91 20 6789 9900 or send an enquiry about homes in Punawale, Chikhali, Moshi, and Kiwale.',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact Nexus Group Pune',
+      url: `${ORIGIN}/contact`,
+      mainEntity: { '@id': `${ORIGIN}/#organization` },
+    },
+  },
   skydale: {
     path: '/skydale',
     title: 'Nexus Skydale Punawale | 2, 3 & 4 BHK Homes in Pune',
@@ -183,6 +196,8 @@ const HASH_TO_PAGE = {
   '#skydel': 'skydale',
   '#nexus-skydale': 'skydale',
   '#skydale-landing': 'skydale',
+  '#contact': 'contact',
+  '#contact-us': 'contact',
   '#about': 'about',
   '#about-us': 'about',
   '#about-page': 'about',

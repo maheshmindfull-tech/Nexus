@@ -1,0 +1,351 @@
+/* ============================================================
+   CONTACT PAGE - same simple form standard as the CP Inquiry page
+   ============================================================ */
+
+.ct-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+}
+
+/* Header band (same dark gradient as the other page heroes) */
+.ct-hero {
+  padding: 140px 20px 56px;
+  background: linear-gradient(135deg, #1e202c 0%, #2a2538 35%, #3a2e38 70%, #463738 100%);
+  color: #ffffff;
+}
+
+.ct-hero-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ct-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  margin-bottom: 18px;
+}
+
+.ct-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 3.6vw, 44px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.ct-subtitle {
+  max-width: 600px;
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Layout */
+.ct-section {
+  flex: 1;
+  padding: 48px 20px 80px;
+}
+
+.ct-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Form card */
+.ct-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.ct-form-header {
+  margin-bottom: 26px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ct-form-header h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #14343b;
+  margin-bottom: 6px;
+}
+
+.ct-form-header p {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ct-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.ct-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ct-field-full {
+  grid-column: 1 / -1;
+}
+
+.ct-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: 0.01em;
+}
+
+.ct-label span {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.ct-input,
+.ct-select,
+.ct-textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #1e293b;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.ct-input:focus,
+.ct-select:focus,
+.ct-textarea:focus {
+  border-color: #0097a7;
+}
+
+.ct-input::placeholder,
+.ct-textarea::placeholder {
+  color: #94a3b8;
+}
+
+.ct-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.ct-error {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ct-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 6px;
+  padding-top: 20px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.ct-note {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.ct-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  background: #0097a7;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ct-submit-btn:hover {
+  background: #00838f;
+}
+
+.ct-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Contact details */
+.ct-info {
+  display: grid;
+  gap: 16px;
+}
+
+.ct-info-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+.ct-info-box small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.ct-info-box a,
+.ct-info-box address {
+  display: block;
+  font-size: 13.5px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #14343b;
+  overflow-wrap: anywhere;
+}
+
+.ct-info-box a:hover {
+  color: #0097a7;
+}
+
+/* Success state */
+.ct-success {
+  text-align: center;
+  padding: 36px 12px;
+}
+
+.ct-success-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e6f6f8;
+  color: #0097a7;
+}
+
+.ct-success h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #14343b;
+  margin-bottom: 10px;
+}
+
+.ct-success p {
+  max-width: 460px;
+  margin: 0 auto 24px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.ct-reset-btn {
+  min-height: 44px;
+  padding: 10px 22px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ct-reset-btn:hover {
+  background: #e2e8f0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ct-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .ct-info {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .ct-hero {
+    padding: 112px 20px 40px;
+  }
+
+  .ct-section {
+    padding: 28px 16px 56px;
+  }
+
+  .ct-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .ct-info {
+    grid-template-columns: 1fr;
+  }
+
+  .ct-input,
+  .ct-select,
+  .ct-textarea {
+    font-size: 16px;
+  }
+
+  .ct-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ct-submit-btn {
+    justify-content: center;
+  }
+}

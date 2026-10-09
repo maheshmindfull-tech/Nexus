@@ -127,6 +127,7 @@ export default function ProjectsPage({
   onNavigateCareers,
   onNavigateCPInquiry,
   onNavigateSkydale,
+  onNavigateContact,
   onOpenEnquire,
 }) {
   const [status, setStatus] = useState('Ongoing');
@@ -230,6 +231,7 @@ export default function ProjectsPage({
         onNavigateCareers={onNavigateCareers}
         onNavigateCPInquiry={onNavigateCPInquiry}
         onNavigateSkydale={onNavigateSkydale}
+        onNavigateContact={onNavigateContact}
         onOpenEnquire={onOpenEnquire}
       />
     </>

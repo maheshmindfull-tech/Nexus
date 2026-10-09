@@ -3,10 +3,10 @@
  * Connects directly to Google Sheets via Google Apps Script Web App
  */
 
-// Paste your Google Apps Script Web App URL here or in .env (VITE_GOOGLE_SHEETS_URL)
+// Configured Google Apps Script Web App URL
 export const GOOGLE_SHEETS_SCRIPT_URL =
   import.meta.env.VITE_GOOGLE_SHEETS_URL ||
-  'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
+  'https://script.google.com/macros/s/AKfycbxZE9c3QuJnTPRSG_7xABrElKGo-bhj-qmrLXBfwtyKeL91nT-KXIVW3y3dkilz-2Pn/exec';
 
 /**
  * Submits form data to Google Sheet
