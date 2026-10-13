@@ -6,10 +6,10 @@ const PRINCIPLES_DATA = [
     name: 'Transparency',
     tag: '01 — TRANSPARENCY',
     headline: 'Clarity That Builds Confidence',
-    lead: 'Clear communication, honest commitments and straightforward processes at every step.',
     story: [
-      'At Nexus Group, we believe trust begins with transparency. From the first conversation to the final handover, we keep every process clear, every commitment honest, and every detail accounted for.',
-      'With a straightforward approach to planning and execution, our customers enjoy complete clarity at every step of their journey.',
+      'At Nexus Group, we believe trust begins with transparency. From the first conversation to the final handover, we believe in keeping every process clear, every commitment honest and every detail accounted for.',
+      'With a straightforward approach to planning, communication and execution, we ensure that our customers have clarity at every step of their journey with us.',
+      'Because a home is one of life’s biggest decisions, and confidence should never come with conditions.',
     ],
     image: '/images/principles/1.jpg',
     alt: 'Transparency - Nexus Group',
@@ -18,11 +18,11 @@ const PRINCIPLES_DATA = [
     id: 'integrity',
     name: 'Integrity',
     tag: '02 — INTEGRITY',
-    headline: 'Built on What We Believe In',
-    lead: 'Doing the right thing, consistently, responsibly and with commitment.',
+    headline: 'Built on What We Believe In.',
     story: [
-      'Integrity is the bedrock of our legacy. Every material chosen, every structural pillar set, and every promise made is grounded in unwavering ethical practice.',
-      'We hold ourselves accountable to benchmarks higher than compliance—ensuring lasting quality that endures across generations.',
+      'For Nexus Group, integrity means doing the right thing - consistently, responsibly and with the same commitment behind every project.',
+      'For over three decades, we have believed that the strength of a home goes beyond its structure. It lies in the quality of what goes into it, the promises behind it and the relationships that continue long after possession.',
+      'Our commitment to quality, clear processes and responsible practices is what allows us to build with confidence - and earn it in return.',
     ],
     image: '/images/principles/2.jpg',
     alt: 'Integrity - Nexus Group',
@@ -30,13 +30,12 @@ const PRINCIPLES_DATA = [
   {
     id: 'responsibility',
     name: 'Responsibility',
-    nameFormatted: 'RESPONSIBILITY',
     tag: '03 — RESPONSIBILITY',
     headline: 'Building Responsibly. Preserving Naturally.',
-    lead: 'Thoughtful development that respects people, communities and the environment.',
     story: [
-      'True development moves hand in hand with environmental mindfulness. We integrate sustainable energy, rainwater management, and climate-responsive architecture into our master plans.',
-      'Our developments prioritize open green spaces, native flora, and eco-friendly construction practices that protect the ecological balance.',
+      'Every space we create becomes a part of the larger environment around it. That makes responsible development more than a choice — it is a responsibility we carry with every project.',
+      'At Nexus Group, we strive to bring this thinking into the way we plan and develop our spaces - with thoughtful design, eco-friendly practices, green landscapes and communities that are designed to remain relevant for generations.',
+      'Because building for the future also means being mindful of the world we leave behind.',
     ],
     image: '/images/principles/3.jpg',
     alt: 'Responsibility - Nexus Group',
@@ -46,10 +45,10 @@ const PRINCIPLES_DATA = [
     name: 'Planning',
     tag: '04 — PLANNING',
     headline: 'Every Landmark Begins With a Plan.',
-    lead: 'Every detail considered with purpose—from the larger vision to the smallest decision.',
     story: [
-      'Excellence is never an accident; it is the outcome of meticulous forward-thinking. From spatial geometry to ventilation and access, we scrutinize every blueprint.',
-      'Every square foot is engineered for everyday efficiency, modern ergonomics, and long-term peace of mind.',
+      'At Nexus Group, we believe good spaces begin long before the first brick is laid. They begin with thoughtful planning.',
+      'Our architects, engineers and expert teams bring together design, functionality, structure and sustainability to create spaces that are considered from every angle.',
+      'From the larger vision to the smallest detail, every decision is planned with purpose - because when every element works together, a space becomes more than a structure. It becomes a place to belong.',
     ],
     image: '/images/principles/4.jpg',
     alt: 'Planning - Nexus Group',
@@ -128,8 +127,8 @@ export default function Principles() {
             {/* Headline */}
             <h4 className="princ-headline">{current.headline}</h4>
 
-            {/* Lead Statement */}
-            <p className="princ-lead">{current.lead}</p>
+            {/* Lead Statement (if provided) */}
+            {current.lead && <p className="princ-lead">{current.lead}</p>}
 
             {/* Editorial Story Paragraphs */}
             <div className="princ-story-wrap">

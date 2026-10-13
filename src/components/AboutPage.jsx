@@ -78,8 +78,12 @@ function Eyebrow({ children, light }) {
 const VALUES = [
   {
     title: 'Vision',
-    detail:
-      'We are passionate about people, nature and aim to serve them with the best. It is our constant endeavor to bring about the human element in everything we do in an ecofriendly manner to make your life even better by pushing our own boundaries.',
+    subtitle: 'That Shapes Tomorrow',
+    detail: [
+      'At Nexus Group, we envision spaces where people, progress and nature grow together. Our vision is to create thoughtfully planned homes and communities that make everyday living better, while respecting the environment they are a part of.',
+      'We believe in bringing the human element into everything we build - from sustainable landscapes and eco-friendly design to spaces that are planned with purpose and built for the future.',
+      'As we continue to grow, we remain committed to pushing our own boundaries, building responsibly and creating spaces that enrich lives for generations to come.',
+    ],
     image: '/assets/about/value-vision.jpg',
     alt: 'Nexus Vision - The eye of foresight and human connection',
   },
@@ -253,30 +257,19 @@ export default function AboutPage({
             </div>
 
             <div className="about-intro-copy">
-              <Eyebrow>About Nexus Group</Eyebrow>
-              <h2 className="big tracking-wider uppercase about-intro-title">
-                PASSION AT WORK
+              <Eyebrow>About us</Eyebrow>
+              <h2 className="big about-intro-title">
+                Building with purpose. <span>Growing with trust.</span>
               </h2>
               <p className="about-body">
-                Nexus Group&apos;s penchant for perfection is reflected in every project,
-                every decision and every innovation. This underlies our quest to deliver
-                world-class quality and impeccable craftsmanship.
+                Nexus Group is a construction company which is independently owned and
+                operated by family with ages of experience in building dream homes since
+                30 years, and have established in the business.
               </p>
               <p className="about-body">
-                Our founders instilled in us this passion that transcends generations
-                and boundaries. Our commitment to never compromise on quality has
-                revolutionized the way the world perceives luxury and comfort in real estate.
-              </p>
-              <p className="about-body">
-                Our evolving portfolio speaks volumes—award-winning, iconic
-                developments that have redefined skylines across{' '}
-                <a href="#projects" className="text-link">Pune</a>,{' '}
-                <a href="#projects" className="text-link">Punawale</a>,{' '}
-                <a href="#projects" className="text-link">Chikhali</a>,{' '}
-                <a href="#projects" className="text-link">Moshi</a>,{' '}
-                <a href="#projects" className="text-link">Kiwale</a>, and{' '}
-                <a href="#projects" className="text-link">Nashik</a>, with many more landmarks on the
-                horizon.
+                Nexus, started by the seniors in the year 1996 on the grounds of quality,
+                integrity &amp; a vision to give our society a futuristic and well planned
+                eco-friendly township. With 10 projects completed in Nashik. And 25+ in Pune.
               </p>
             </div>
           </div>
@@ -362,7 +355,14 @@ export default function AboutPage({
 
                       {isOpen && (
                         <div className="about-values-body">
-                          <p>{val.detail}</p>
+                          {val.subtitle && (
+                            <h4 className="about-values-subtitle">{val.subtitle}</h4>
+                          )}
+                          {Array.isArray(val.detail) ? (
+                            val.detail.map((p, i) => <p key={i}>{p}</p>)
+                          ) : (
+                            <p>{val.detail}</p>
+                          )}
                         </div>
                       )}
                     </div>
@@ -387,7 +387,7 @@ export default function AboutPage({
                       />
                       <div className="arch-caption-scrim" />
                       <div className="arch-caption">
-                        {val.title} — Built with Passion by NEXUS
+                        {val.title} - Built with Passion by NEXUS
                       </div>
                     </div>
                   );

@@ -29,31 +29,19 @@ export default function AboutStats({ onNavigateAbout }) {
           </div>
 
           <div className="ah-copy">
-            <div className="eyebrow">About Nexus Group</div>
-            <h2 className="big tracking-wider uppercase">
-              PASSION AT WORK
+            <div className="eyebrow">About us</div>
+            <h2 className="big">
+              Building with purpose. <span>Growing with trust.</span>
             </h2>
             <p className="ah-text">
-              Nexus Group&apos;s penchant for perfection is reflected in every project, every
-              decision and every innovation. This underlies our quest to deliver
-              world-class quality and impeccable craftsmanship.
+              Nexus Group is a construction company which is independently owned and
+              operated by family with ages of experience in building dream homes since
+              30 years, and have established in the business.
             </p>
             <p className="ah-text">
-              Founded in 1996, our leadership instilled in us this passion that
-              transcends generations and boundaries. Our commitment to never compromise on
-              quality has revolutionized the way homeowners perceive comfort and luxury in
-              real estate.
-            </p>
-            <p className="ah-text">
-              Our evolving portfolio speaks volumes—award-winning, iconic
-              developments that have redefined skylines across{' '}
-              <a href="#projects" className="text-link">Pune</a>,{' '}
-              <a href="#projects" className="text-link">Punawale</a>,{' '}
-              <a href="#projects" className="text-link">Chikhali</a>,{' '}
-              <a href="#projects" className="text-link">Moshi</a>,{' '}
-              <a href="#projects" className="text-link">Kiwale</a>, and{' '}
-              <a href="#projects" className="text-link">Nashik</a>, with many more landmarks on the
-              horizon.
+              Nexus, started by the seniors in the year 1996 on the grounds of quality,
+              integrity &amp; a vision to give our society a futuristic and well planned
+              eco-friendly township. With 10 projects completed in Nashik. And 25+ in Pune.
             </p>
             {onNavigateAbout && (
               <button type="button" className="ah-link" onClick={onNavigateAbout}>

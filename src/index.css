@@ -2224,7 +2224,7 @@ footer .bot {
   display: grid;
   grid-template-columns: 1.12fr 0.98fr;
   gap: clamp(36px, 5vw, 68px);
-  align-items: center;
+  align-items: flex-start;
 }
 
 .about-values-heading {
@@ -2283,6 +2283,16 @@ footer .bot {
   animation: valuesFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.about-values-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.2vw, 19px);
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 10px 0;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
 .about-values-body p {
   font-family: var(--font-primary);
   font-size: clamp(14px, 1.05vw, 15px);
@@ -2291,6 +2301,10 @@ footer .bot {
   margin: 0;
   font-weight: 400;
   max-width: 56ch;
+}
+
+.about-values-body p + p {
+  margin-top: 10px;
 }
 
 @keyframes valuesFadeIn {
