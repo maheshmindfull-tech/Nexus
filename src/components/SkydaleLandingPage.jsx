@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import '../skydale-landing.css';
 import { submitLeadToGoogleSheet } from '../services/leadService';
+import AmenitySpread from './AmenitySpread';
+
+const SKYDALE_AMENITIES = [
+  { src: '/assets/skydale-landing/v2/am-gym.jpg', label: 'Gym' },
+  { src: '/assets/skydale-landing/v2/am-clubhouse.jpg', label: 'Clubhouse' },
+  { src: '/assets/skydale-landing/v2/am-community-hall.jpg', label: 'Community Hall' },
+];
 
 export default function SkydaleLandingPage({ onNavigateHome }) {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
+    if (!formData.name || !formData.email || !formData.phone) return;
     setIsSubmitting(true);
     await submitLeadToGoogleSheet({
       formType: 'Skydale Landing Page Lead',
       project: 'Nexus Skydale (Punawale)',
       name: formData.name,
       email: formData.email,
+      phone: formData.phone,
       message: formData.message || '',
     });
     setIsSubmitting(false);
@@ -40,13 +48,6 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
           </div>
 
           <div className="skydale-topbar-right">
-            <a href="tel:+919960967070" className="skydale-call-link">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              <span>+91 99609 67070</span>
-            </a>
-
             <a
               href="/pdfs/skydale-brouchure.pdf"
               download="Nexus Skydale Brochure.pdf"
@@ -67,7 +68,7 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
 
       {/* ---------------- Main Landing Container ---------------- */}
       <main className="skydale-container">
-        <h1 className="skydale-page-title">Nexus Skydale, Punawale — 2, 3 and 4 BHK homes</h1>
+        <h1 className="skydale-page-title">Nexus Skydale, Punawale — 2, 3 and 4 BHK homes and Commercial Space</h1>
         {/* Section 1: Hero Elevation Building */}
         <section className="skydale-img-block" aria-label="Nexus Skydale Elevation">
           <img
@@ -89,8 +90,8 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
         {/* Section 3: Seamless Connections & Modern Living */}
         <section className="skydale-img-block" aria-label="Seamless Connections">
           <img
-            src="/assets/skydale-landing/03_connections_banner.jpg"
-            alt="Seamless Connections 4, 3 and 2 BHK Modern Living"
+            src="/assets/skydale-landing/03_connections_banner_234.jpg"
+            alt="Seamless Connections 2, 3 and 4 BHK Modern Living"
             loading="lazy"
           />
         </section>
@@ -113,12 +114,17 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
           />
         </section>
 
+        <AmenitySpread
+          theme="light"
+          items={SKYDALE_AMENITIES}
+          subtitle="A fully equipped gym, a resort-style clubhouse and a spacious community hall for every celebration."
+        />
 
         {/* Section 7: Floor Plans */}
         <section className="skydale-img-block" aria-label="Floor Plans">
           <img
-            src="/assets/skydale-landing/07_floor_plans.jpg"
-            alt="4 BHK, 3 BHK and 2 BHK Floor Plans"
+            src="/assets/skydale-landing/07_floor_plans_234.jpg"
+            alt="2 BHK, 3 BHK and 4 BHK Floor Plans"
             loading="lazy"
           />
         </section>
@@ -199,6 +205,19 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
                   />
                 </div>
                 <div className="skydale-form-field">
+                  <input
+                    type="tel"
+                    required
+                    inputMode="tel"
+                    minLength={10}
+                    maxLength={15}
+                    className="skydale-form-input"
+                    placeholder="Enter your Mobile Number"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
+                <div className="skydale-form-field">
                   <textarea
                     rows={2}
                     className="skydale-form-textarea"
@@ -232,8 +251,8 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
         {/* Section 12: Footer */}
         <section className="skydale-img-block" aria-label="Project Address and RERA Details">
           <img
-            src="/assets/skydale-landing/12_footer.jpg"
-            alt="Contact +91 99609 67070 | +91 98602 17070, skydale@nexuspune.in, MahaRERA P52100050149"
+            src="/assets/skydale-landing/12_footer_nophone.jpg"
+            alt="Contact skydale@nexuspune.in, MahaRERA P52100050149"
             loading="lazy"
           />
         </section>
@@ -241,12 +260,6 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
         {/* Interactive Quick Links Footer */}
         <footer className="skydale-interactive-footer">
           <div className="skydale-footer-contact-links">
-            <a href="tel:+919960967070" className="skydale-footer-contact-link">
-              📞 +91 99609 67070
-            </a>
-            <a href="tel:+919860217070" className="skydale-footer-contact-link">
-              📞 +91 98602 17070
-            </a>
             <a href="mailto:skydale@nexuspune.in" className="skydale-footer-contact-link">
               ✉️ skydale@nexuspune.in
             </a>

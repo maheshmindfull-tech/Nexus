@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import '../skydale-landing.css';
 import { submitLeadToGoogleSheet } from '../services/leadService';
-
-const PHONES = [
-  { tel: '+919960967070', label: '+91 99609 67070' },
-  { tel: '+919860217070', label: '+91 98602 17070' },
-];
+import AmenitySpread from './AmenitySpread';
 
 const OFFICE_ADDRESS =
   'Plot No. P87, D-Block, MIDC, Pimpri Industrial Area, Near Wonder Cars Showroom, Chinchwad, Pune 411019.';
@@ -15,12 +11,21 @@ export const LANDING_PROJECTS = {
     name: 'Nexus Kinaara',
     shortName: 'KINAARA',
     location: 'Chikhali',
-    heading: 'Nexus Kinaara, Chikhali — 2 and 3 BHK riverside homes',
+    heading: 'Nexus Kinaara, Chikhali — 3 BHK riverside homes',
     sections: 4,
     brochure: '/pdfs/nexus-kinara-brochure.pdf',
     brochureName: 'Nexus Kinaara Brochure.pdf',
     email: 'kinaara@nexuspune.in',
     address: 'Gat No. 79, Behind River Residency, Chikhali, Pimpri Chinchwad, Pune, Maharashtra 412 114.',
+    amenities: {
+      afterSection: 2,
+      subtitle: 'A fully equipped gym, a riverside clubhouse and a spacious community hall for every celebration.',
+      items: [
+        { src: '/assets/kinara-landing/amenities/gym.jpg', label: 'Gym' },
+        { src: '/assets/kinara-landing/amenities/clubhouse.jpg', label: 'Clubhouse' },
+        { src: '/assets/kinara-landing/amenities/community-hall.jpg', label: 'Community Hall' },
+      ],
+    },
   },
   westia: {
     name: 'Nexus Westia',
@@ -103,13 +108,18 @@ export default function ProjectLandingPage({ project, onNavigateHome }) {
         {Array.from({ length: p.sections }, (_, i) => {
           const n = String(i + 1).padStart(2, '0');
           return (
-            <section key={n} className="skydale-img-block" aria-label={`${p.name} section ${i + 1}`}>
-              <img
-                src={`${assetDir}/${n}.jpg`}
-                alt={`${p.name}, ${p.location} — highlights, floor plans and gallery`}
-                loading={i === 0 ? 'eager' : 'lazy'}
-              />
-            </section>
+            <React.Fragment key={n}>
+              <section className="skydale-img-block" aria-label={`${p.name} section ${i + 1}`}>
+                <img
+                  src={`${assetDir}/${n}.jpg`}
+                  alt={`${p.name}, ${p.location} — highlights, floor plans and gallery`}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </section>
+              {p.amenities?.afterSection === i + 1 && (
+                <AmenitySpread theme="navy" items={p.amenities.items} subtitle={p.amenities.subtitle} />
+              )}
+            </React.Fragment>
           );
         })}
 

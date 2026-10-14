@@ -18,39 +18,18 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
   const headerRef = useRef(null);
 
   useEffect(() => {
+    setActiveTab(currentPage);
+  }, [currentPage]);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
-
-      if (
-        currentPage === 'about' ||
-        currentPage === 'projects' ||
-        currentPage === 'careers' ||
-        currentPage === 'cp-inquiry' ||
-        currentPage === 'contact' ||
-        currentPage === 'blogs'
-      ) {
-        setActiveTab(currentPage);
-        return;
-      }
-
-      // Determine active section based on scroll position
-      const sections = ['projects', 'about'];
-      const scrollPos = window.scrollY + 200;
-
-      for (const sec of sections) {
-        const el = document.getElementById(sec);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveTab(sec);
-          return;
-        }
-      }
-      setActiveTab('home');
     };
 
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage]);
+  }, []);
 
   const navLinks = [
     { id: 'home', label: 'Home', href: '/' },

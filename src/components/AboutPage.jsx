@@ -81,21 +81,21 @@ const VALUES = [
     subtitle: 'That Shapes Tomorrow',
     detail:
       'At Nexus Group, we envision spaces where people, progress and nature grow together. Our vision is to create thoughtfully planned homes and communities that make everyday living better, while respecting the environment they are a part of.',
-    image: '/assets/about/value-vision.jpg',
+    image: '/assets/about/value-vision.jpg?v=2',
     alt: 'Nexus Vision - The eye of foresight and human connection',
   },
   {
     title: 'Innovation',
     detail:
       'We embrace better ideas and smarter solutions to create spaces for evolving ways of living. Thoughtful architectural design, smart space planning, and modern construction practices shape every Nexus home.',
-    image: '/assets/about/value-innovation.jpg',
-    alt: 'Nexus Innovation - Modern architectural engineering',
+    image: '/assets/about/value-innovation.jpg?v=2',
+    alt: 'Nexus Innovation - An engineer envisioning construction in progress',
   },
   {
     title: 'Integrity',
     detail:
       'We keep our commitments, act responsibly and do the right thing at every step. From the first customer conversation to the final title handover, we uphold the highest benchmarks of corporate governance, honest pricing, and ethical business practices.',
-    image: '/assets/about/value-integrity.jpg',
+    image: '/assets/about/value-integrity.jpg?v=2',
     alt: 'Nexus Integrity - The golden key of trust and excellence',
   },
 ];

@@ -2557,7 +2557,7 @@ footer .bot {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: #0c081e;
@@ -2567,6 +2567,7 @@ footer .bot {
   position: relative;
   aspect-ratio: 1 / 1.25;
   overflow: hidden;
+  border-radius: 0 !important;
 }
 
 .about-pillar-strip-item img {
