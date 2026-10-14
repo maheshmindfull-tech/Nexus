@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 
 const STATS_LEFT = [
   { value: '30+', label: 'Years of Trust', sub: 'Excellence since 1996' },
-  { value: '55 L+', label: 'Sq. Ft. Built', sub: 'Across Pune & Nashik' },
+  { value: '55 L+', label: 'Sq. Ft. Built', sub: 'Pimpri-Chinchwad, Pune and Nashik' },
 ];
 
 const STATS_RIGHT = [

@@ -1,7 +1,4 @@
 /* ===== Projects Page ===== */
-.pj-status.coming-soon {
-  background: #0097a7;
-}
 
 .pj-hero {
   position: relative;
@@ -176,7 +173,7 @@
 .pj-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 24px;
 }
 
 .pj-card {
@@ -195,59 +192,132 @@
 
 .pj-card-media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1108 / 606;
   overflow: hidden;
-  background: #0f172a;
+  background: #fff;
 }
 
-.pj-card-media img {
+.pj-card-photo {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  object-fit: contain;
 }
 
-.pj-card:hover .pj-card-media img {
-  transform: scale(1.04);
+.pj-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.pj-status {
+.pj-card-copy {
+  min-width: 0;
+}
+
+.pj-card-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 96px;
+  max-width: 38%;
+}
+
+.pj-card-logo img {
+  display: block;
+  width: 100%;
+  height: 40px;
+  object-fit: contain;
+  object-position: right center;
+}
+
+/* Card Status Badge - Small transparent rectangular box with live status dot */
+.pj-status-badge {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  padding: 5px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  top: 9px;
+  left: 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4.5px;
+  padding: 2.5px 7px 2.5px 5.5px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #fff;
+  color: #ffffff;
+  background: rgba(14, 27, 46, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: 2px;
-  background: rgba(0, 68, 76, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.pj-status.completed {
-  background: rgba(31, 36, 46, 0.9);
+.pj-card:hover .pj-status-badge {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.pj-status-dot {
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Ongoing - energetic emerald green dot with soft breathing glow */
+.pj-status-badge.ongoing .pj-status-dot {
+  background: #16a34a;
+  box-shadow: 0 0 0 1.5px rgba(22, 163, 74, 0.25), 0 0 6px rgba(22, 163, 74, 0.6);
+  animation: pj-dot-pulse 2s infinite ease-in-out;
+}
+
+/* Completed - refined deep sky / navy dot */
+.pj-status-badge.completed .pj-status-dot {
+  background: #0284c7;
+  box-shadow: 0 0 0 1.5px rgba(2, 132, 199, 0.2), 0 0 5px rgba(2, 132, 199, 0.5);
+}
+
+/* Coming Soon - warm amber gold dot */
+.pj-status-badge.coming-soon .pj-status-dot {
+  background: #d97706;
+  box-shadow: 0 0 0 1.5px rgba(217, 119, 6, 0.2), 0 0 5px rgba(217, 119, 6, 0.5);
+}
+
+@keyframes pj-dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.75;
+  }
 }
 
 .pj-card-body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 20px 22px 18px;
+  padding: 14px 18px 12px;
 }
 
 .pj-card-type {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--teal);
-  margin-bottom: 6px;
+  margin-bottom: 3px;
 }
 
 .pj-card-name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+  line-height: 1.3;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
@@ -256,8 +326,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 8px;
-  font-size: 13.5px;
+  margin-top: 4px;
+  font-size: 13px;
   color: var(--mute);
 }
 
@@ -266,10 +336,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: auto;
-  padding-top: 18px;
+  padding-top: 11px;
   border-top: 1px solid var(--line);
-  margin-top: 18px;
+  margin-top: 12px;
 }
 
 .pj-card-config {

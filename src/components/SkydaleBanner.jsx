@@ -71,7 +71,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
 
                   <div className="space-y-1 text-white/90">
                     <p className="text-sm sm:text-base font-bold text-white">
-                      2 & 3 BHK Luxury Residences
+                      2, 3 and 4 BHK Luxury Residences
                     </p>
                     <p className="text-xs sm:text-sm text-slate-300">
                       Scenic Riverside Living with 35+ Lifestyle Amenities

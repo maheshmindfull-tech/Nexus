@@ -11,6 +11,8 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
       ? 'projects'
       : currentPage === 'careers'
       ? 'careers'
+      : currentPage === 'blogs'
+      ? 'blogs'
       : 'home'
   );
   const headerRef = useRef(null);
@@ -24,7 +26,8 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
         currentPage === 'projects' ||
         currentPage === 'careers' ||
         currentPage === 'cp-inquiry' ||
-        currentPage === 'contact'
+        currentPage === 'contact' ||
+        currentPage === 'blogs'
       ) {
         setActiveTab(currentPage);
         return;
@@ -55,6 +58,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
     { id: 'projects', label: 'Projects', href: '/projects' },
     { id: 'careers', label: 'Careers', href: '/careers' },
     { id: 'cp-inquiry', label: 'CP Inquiry', href: '/cp-inquiry' },
+    { id: 'blogs', label: 'Blogs', href: '/blogs' },
   ];
 
   const handleNavClick = (e, tabId) => {
@@ -105,6 +109,14 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       return;
+    }
+
+    if (tabId === 'blogs') {
+      if (currentPage !== 'blogs' || window.location.search) {
+        if (onNavigate) onNavigate('blogs');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   };
 
@@ -301,7 +313,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
       <div
         className="navbar-mobile-dropdown"
         style={{
-          maxHeight: mobileMenuOpen ? '400px' : '0',
+          maxHeight: mobileMenuOpen ? '560px' : '0',
           overflow: 'hidden',
           transition: 'max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease',
           opacity: mobileMenuOpen ? 1 : 0,

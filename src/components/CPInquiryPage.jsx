@@ -19,6 +19,7 @@ export default function CPInquiryPage({
   onNavigateCareers,
   onNavigateSkydale,
   onNavigateContact,
+  onNavigateBlogs,
   onOpenEnquire,
 }) {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ export default function CPInquiryPage({
     email: '',
     reraNumber: '',
     projectInterest: 'All Projects',
-    priceCategory: 'All Price Ranges',
+    nationality: '',
     message: '',
   });
 
@@ -51,7 +52,7 @@ export default function CPInquiryPage({
       email: formData.email,
       reraNumber: formData.reraNumber || 'N/A',
       project: formData.projectInterest || 'All Projects',
-      budgetCategory: formData.priceCategory || 'All Price Ranges',
+      nationality: formData.nationality,
       message: formData.message || '',
     });
     setIsSubmitting(false);
@@ -66,7 +67,7 @@ export default function CPInquiryPage({
       email: '',
       reraNumber: '',
       projectInterest: 'All Projects',
-      priceCategory: 'All Price Ranges',
+      nationality: '',
       message: '',
     });
     setIsSubmitted(false);
@@ -94,8 +95,8 @@ export default function CPInquiryPage({
             </h1>
             <p className="cp-subtitle">
               Partner with Nexus Group to accelerate your deal closures. Access prime
-              residential and commercial landmarks across Pune & PCMC (₹70 L to ₹1.5 Cr+),
-              enjoy industry-best incentive slabs, transparent payouts, and full CRM support.
+              residential and commercial landmarks across Pune and PCMC, enjoy
+              industry-best incentive slabs, transparent payouts, and full CRM support.
             </p>
           </div>
         </div>
@@ -226,27 +227,31 @@ export default function CPInquiryPage({
                       <option value="Nexus Kinara">Nexus Kinara (Chikhali)</option>
                       <option value="Nexus Westia">Nexus Westia (Punawale)</option>
                       <option value="Nexus Crown">Nexus Crown (Ravet / Kiwale)</option>
-                      <option value="Nexus Square">Nexus Square (Commercial)</option>
+                      <option value="Nexus Prime Square">Nexus Prime Square (Moshi)</option>
                       <option value="Nexus Atrium">Nexus Atrium (Commercial)</option>
                       <option value="Nexus Genesis">Nexus Genesis (Kiwale)</option>
                       <option value="Nexus Imperia">Nexus Imperia (Moshi)</option>
                     </select>
                   </div>
 
-                  {/* Price Category */}
-                  <div className="cp-field cp-field-full">
-                    <label className="cp-label">Price Category</label>
+                  <div className="cp-field">
+                    <label className="cp-label">
+                      Nationality <span>*</span>
+                    </label>
                     <select
-                      name="priceCategory"
-                      value={formData.priceCategory}
+                      name="nationality"
+                      required
+                      value={formData.nationality}
                       onChange={handleChange}
                       className="cp-select"
                     >
-                      <option value="All Price Ranges">All Price Ranges (₹70 L – ₹1.5 Cr+)</option>
-                      <option value="₹70 Lakh – ₹90 Lakh">₹70 Lakh – ₹90 Lakh</option>
-                      <option value="₹90 Lakh – ₹1.20 Crore">₹90 Lakh – ₹1.20 Crore</option>
-                      <option value="₹1.20 Crore – ₹1.50 Crore">₹1.20 Crore – ₹1.50 Crore</option>
-                      <option value="Above ₹1.50 Crore">Above ₹1.50 Crore</option>
+                      <option value="" disabled>
+                        Select nationality
+                      </option>
+                      <option value="Indian">Indian</option>
+                      <option value="NRI">NRI</option>
+                      <option value="OCI">OCI</option>
+                      <option value="Foreign National">Foreign National</option>
                     </select>
                   </div>
 
@@ -314,6 +319,7 @@ export default function CPInquiryPage({
         onNavigateHome={onNavigateHome}
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
+        onNavigateBlogs={onNavigateBlogs}
         onOpenEnquire={onOpenEnquire}
       />
     </div>

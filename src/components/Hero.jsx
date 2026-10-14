@@ -36,8 +36,8 @@ export default function Hero({ onOpenEnquire, onViewProjects }) {
             <span>with purpose.</span>
           </h1>
           <p className="hero-description">
-            Luxury 2 and 3 BHK homes and commercial landmarks across Punawale, Moshi,
-            Kiwale, and Chikhali. Three decades of planning, quality, and trust.
+            Luxury homes and commercial landmarks across Pimpri Chinchwad,
+            Pune, and Nashik. Three decades of planning, quality, and trust.
           </p>
           <div className="hero-actions">
             <button type="button" className="hero-primary" onClick={onOpenEnquire}>

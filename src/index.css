@@ -2245,16 +2245,17 @@ footer .bot {
   font-weight: 500;
 }
 
-/* Values Accordion */
+/* Values Accordion - 3 lines layout with smooth, stabilized transition */
 .about-values-acc {
   display: flex;
   flex-direction: column;
+  min-height: 380px;
 }
 
 .about-values-item {
   border-bottom: 2px solid #0097a7;
-  padding: 18px 0 20px 0;
-  transition: all 0.25s ease;
+  padding: 0;
+  transition: border-color 0.25s ease;
 }
 
 .about-values-btn {
@@ -2266,7 +2267,8 @@ footer .bot {
   font-size: clamp(22px, 2.2vw, 28px);
   font-weight: 700;
   color: #111827;
-  transition: color 0.2s ease;
+  padding: 18px 0;
+  transition: color 0.25s ease;
 }
 
 .about-values-btn:hover {
@@ -2277,10 +2279,31 @@ footer .bot {
   color: #0097a7;
 }
 
+/* Smooth fluid height collapse without jerky jumps */
+.about-values-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.about-values-collapse.open {
+  grid-template-rows: 1fr;
+}
+
+.about-values-collapse-inner {
+  overflow: hidden;
+}
+
 .about-values-body {
-  padding-top: 14px;
-  padding-bottom: 4px;
-  animation: valuesFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-bottom: 22px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+}
+
+.about-values-collapse.open .about-values-body {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .about-values-subtitle {
@@ -2389,6 +2412,8 @@ footer .bot {
   gap: 24px;
   margin-top: clamp(40px, 6vw, 60px);
 }
+
+
 
 .about-leader-card {
   position: relative;
@@ -2582,6 +2607,8 @@ footer .bot {
     grid-template-columns: repeat(5, 1fr);
   }
 }
+
+
 
 @media (max-width: 768px) {
   .about-pillars-cards {

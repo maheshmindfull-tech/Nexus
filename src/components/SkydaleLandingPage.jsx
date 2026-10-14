@@ -113,14 +113,6 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
           />
         </section>
 
-        {/* Section 6: Specifications */}
-        <section className="skydale-img-block" aria-label="Specifications">
-          <img
-            src="/assets/skydale-landing/06_specifications.jpg"
-            alt="Nexus Skydale Specifications and Construction Quality"
-            loading="lazy"
-          />
-        </section>
 
         {/* Section 7: Floor Plans */}
         <section className="skydale-img-block" aria-label="Floor Plans">

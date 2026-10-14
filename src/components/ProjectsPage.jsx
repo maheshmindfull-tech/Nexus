@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { ArrowUpRight, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import Footer from './Footer';
 import Typewriter from './Typewriter';
+import { LANDING_PROJECTS } from './ProjectLandingPage';
 import '../projects.css';
 
 const PROJECT_HERO_PHRASES = [
@@ -16,70 +17,241 @@ const PROJECTS = [
     id: 'kinara',
     name: 'Nexus Kinara',
     location: 'Jadhavwadi, Chikhali',
-    type: 'Residential',
+    type: 'Residential & Commercial',
     status: 'Ongoing',
-    config: '2 & 3 BHK Residences',
-    image: '/assets/projects/nexus-kinara.jpg',
+    config: '2 & 3 BHK | 620 Flats | 3 Shops',
+    image: '/assets/projects/profile/kinara.jpg',
     landing: '/pdfs/nexus-kinara-brochure.pdf',
     pdf: '/pdfs/nexus-kinara-brochure.pdf',
   },
   {
     id: 'skydale',
     name: 'Nexus Skydale',
-    location: 'Tajanewasti, Punawale',
-    type: 'Residential',
+    location: 'Kate Wasti, Punawale',
+    type: 'Residential & Commercial',
     status: 'Ongoing',
-    config: '2 & 3 BHK Residences',
-    image: '/assets/projects/nexus-skydale.jpg',
+    config: '2, 3 & 4 BHK | 581 Flats | 62 Shops',
+    image: '/assets/projects/profile/skydale.jpg',
     landing: '/skydale',
     pdf: '/pdfs/skydale-brouchure.pdf',
   },
   {
     id: 'westia',
     name: 'Nexus Westia',
-    location: 'Punawale, Pune',
-    type: 'Residential',
+    location: 'Jamhe Road, Punawale',
+    type: 'Residential & Commercial',
     status: 'Ongoing',
-    config: '1, 2 & 3 BHK Residences',
-    image: '/assets/projects/nexus-westia.jpg',
+    config: '2 & 3 BHK | 86 Flats | 17 Shops',
+    image: '/assets/projects/profile/westia.jpg',
     landing: '/pdfs/nexus-westia-brochure.pdf',
     pdf: '/pdfs/nexus-westia-brochure.pdf',
   },
   {
     id: 'square',
-    name: 'Nexus Square',
-    location: 'Punawale, Pune',
-    type: 'Commercial',
+    name: 'Nexus Prime Square',
+    location: 'Borhadewadi, Moshi',
+    type: 'Residential & Commercial',
     status: 'Ongoing',
-    config: 'Shops & Offices',
-    image: '/assets/projects/nexus-square.jpg',
+    config: '2 & 3 BHK | 268 Flats | 56 Shops',
+    image: '/assets/projects/profile/square.jpg',
   },
   {
-    id: 'atrium',
-    name: 'Nexus Atrium',
-    location: 'Borhadewadi, Moshi',
-    type: 'Commercial',
-    status: 'Completed',
-    config: 'Shops & Offices',
-    image: '/assets/projects/nexus-atrium.jpg',
+    id: 'genesis',
+    name: 'Nexus Genesis',
+    location: 'Kiwale, Pune',
+    type: 'Residential & Commercial',
+    status: 'Ongoing',
+    config: '2, 3 & 4 BHK | 550 Flats | 5 Shops',
+    image: '/assets/projects/profile/genesis.jpg',
   },
   {
     id: 'imperia',
     name: 'Nexus Imperia',
     location: 'Borhadewadi, Moshi',
     type: 'Residential',
-    status: 'Completed',
-    config: '1 & 2 BHK Residences',
-    image: '/assets/projects/nexus-imperia.jpg',
+    status: 'Ongoing',
+    config: '2 & 3 BHK | 84 Flats',
+    image: '/assets/projects/profile/imperia.jpg',
   },
   {
-    id: 'genesis',
-    name: 'Nexus Genesis',
-    location: 'Kiwale, Pune',
+    id: 'atrium',
+    name: 'Nexus Atrium',
+    location: 'Borhadewadi, Moshi',
+    type: 'Residential',
+    status: 'Ongoing',
+    config: '2 & 3 BHK | 147 Flats',
+    image: '/assets/projects/profile/atrium.jpg',
+  },
+  {
+    id: 'gulmohar',
+    name: 'Nexus Gulmohar',
+    location: 'Charholi Budruk, Pune',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '840 Flats | 18 Shops',
+    image: '/assets/projects/nexus-gulmohar.jpg',
+  },
+  {
+    id: 'emerald',
+    name: 'Nexus Emerald',
+    location: 'Borhadewadi, Moshi, Pune',
     type: 'Residential',
     status: 'Completed',
-    config: '1 & 2 BHK Residences',
-    image: '/assets/projects/nexus-genesis.jpg',
+    config: '112 Flats',
+    image: '/assets/projects/nexus-emerald.jpg',
+  },
+  {
+    id: 'shree-residency',
+    name: 'Nexus Shree Residency',
+    location: 'Jadhavwadi, Chikhali',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '382 Flats | 4 Shops',
+    image: '/assets/projects/nexus-shree-residency.jpg',
+  },
+  {
+    id: 'west-pride',
+    name: 'Nexus West Pride',
+    location: 'Tajanewasti, Punawale',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '186 Flats | 20 Shops',
+    image: '/assets/projects/nexus-west-pride.jpg',
+  },
+  {
+    id: 'shivom',
+    name: 'Nexus Shivom',
+    location: 'Mukai Chowk, Kiwale',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '166 Flats | 31 Shops',
+    image: '/assets/projects/nexus-shivom.jpg',
+  },
+  {
+    id: 'ultra-residency',
+    name: 'Nexus Ultra Residency',
+    location: 'Pradhikaran Annexe, Moshi',
+    type: 'Residential',
+    status: 'Completed',
+    config: '110 Flats',
+    image: '/assets/projects/nexus-ultra-residency.jpg',
+  },
+  {
+    id: 'carnation',
+    name: 'Nexus Carnation',
+    location: 'Kalewadi, Pune',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '25 Flats | 25 Shops',
+    image: '/assets/projects/nexus-carnation.jpg',
+  },
+  {
+    id: 'nirvana-beyond',
+    name: 'Nexus Nirvana Beyond',
+    location: 'Ravet - Kiwale, Pune',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '450 Flats | 5 Shops',
+    image: '/assets/projects/nexus-nirvana-beyond.jpg',
+  },
+  {
+    id: 'shubhkalash',
+    name: 'Nexus Shubhkalash',
+    location: 'Chikhali, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '332 Flats',
+    image: '/assets/projects/nexus-shubhkalash.jpg',
+  },
+  {
+    id: 'meridian',
+    name: 'Nexus Meridian',
+    location: 'Punawale, Pune',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '106 Flats | 15 Shops',
+    image: '/assets/projects/nexus-meridian.jpg',
+  },
+  {
+    id: 'glorious',
+    name: 'Nexus Glorious',
+    location: 'Sus Road, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '56 Flats',
+    image: '/assets/projects/nexus-glorious.jpg',
+  },
+  {
+    id: 'paradise',
+    name: 'Nexus Paradise',
+    location: 'Dhanori, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '107 Flats',
+    image: '/assets/projects/nexus-paradise.jpg',
+  },
+  {
+    id: 'panorama',
+    name: 'Nexus Panorama',
+    location: 'Datt Nagar, Dighi',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '280 Flats | 4 Shops',
+    image: '/assets/projects/nexus-panorama.jpg',
+  },
+  {
+    id: 'castellum',
+    name: 'Nexus Castellum',
+    location: 'Dighi, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '71 Flats',
+    image: '/assets/projects/nexus-castellum.jpg',
+  },
+  {
+    id: 'govind-darshan',
+    name: 'Nexus Govind Darshan',
+    location: 'Sector 29, Ravet, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '186 Flats',
+    image: '/assets/projects/nexus-govind-darshan.jpg',
+  },
+  {
+    id: 'bhalchandra-nagari',
+    name: 'Nexus Bhalchandra Nagari',
+    location: 'Ravet, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '186 Flats',
+    image: '/assets/projects/nexus-bhalchandra-nagari.jpg',
+  },
+  {
+    id: 'indradhanu',
+    name: 'Nexus Indradhanu',
+    location: 'Jadhavwadi, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '382 Flats',
+    image: '/assets/projects/nexus-indradhanu.jpg',
+  },
+  {
+    id: 'residency',
+    name: 'Nexus Residency',
+    location: 'Sector 20, Moshi, Pune',
+    type: 'Residential',
+    status: 'Completed',
+    config: '78 Flats',
+    image: '/assets/projects/nexus-residency.jpg',
+  },
+  {
+    id: 'hermitage',
+    name: 'Nexus Hermitage',
+    location: 'Sector 18, Moshi, Pune',
+    type: 'Residential & Commercial',
+    status: 'Completed',
+    config: '132 Flats | 20 Shops',
+    image: '/assets/projects/nexus-hermitage.jpg',
   },
   {
     id: 'crown',
@@ -91,6 +263,35 @@ const PROJECTS = [
     image: '/assets/projects/coming-soon-project.png',
   },
 ];
+
+const PROJECT_LOGOS = {
+  skydale: '/assets/projects/logos/skydale.png',
+  kinara: '/assets/projects/logos/kinara.png',
+  square: '/assets/projects/logos/square.png',
+  atrium: '/assets/projects/logos/atrium.png',
+  imperia: '/assets/projects/logos/imperia.png',
+  genesis: '/assets/projects/logos/genesis.png',
+  westia: '/assets/projects/logos/westia.png',
+  gulmohar: '/assets/projects/logos/gulmohar.png',
+  emerald: '/assets/projects/logos/emerald.png',
+  'shree-residency': '/assets/projects/logos/shree-residency.png',
+  'west-pride': '/assets/projects/logos/west-pride.png',
+  shivom: '/assets/projects/logos/shivom.png',
+  'ultra-residency': '/assets/projects/logos/ultra-residency.png',
+  carnation: '/assets/projects/logos/carnation.png',
+  'nirvana-beyond': '/assets/projects/logos/nirvana-beyond.png',
+  shubhkalash: '/assets/projects/logos/shubhkalash.png',
+  meridian: '/assets/projects/logos/meridian.png',
+  glorious: '/assets/projects/logos/glorious.png',
+  paradise: '/assets/projects/logos/paradise.png',
+  panorama: '/assets/projects/logos/panorama.png',
+  castellum: '/assets/projects/logos/castellum.png',
+  'govind-darshan': '/assets/projects/logos/govind-darshan.png',
+  'bhalchandra-nagari': '/assets/projects/logos/bhalchandra-nagari.png',
+  indradhanu: '/assets/projects/logos/indradhanu.png',
+  residency: '/assets/projects/logos/residency.png',
+  hermitage: '/assets/projects/logos/hermitage.png',
+};
 
 const STATUS_OPTIONS = ['Ongoing', 'Completed', 'Coming Soon'];
 
@@ -127,7 +328,9 @@ export default function ProjectsPage({
   onNavigateCareers,
   onNavigateCPInquiry,
   onNavigateSkydale,
+  onNavigateLanding,
   onNavigateContact,
+  onNavigateBlogs,
   onOpenEnquire,
 }) {
   const [status, setStatus] = useState('Ongoing');
@@ -170,41 +373,47 @@ export default function ProjectsPage({
               {filtered.map((p) => (
                 <article className="pj-card" key={p.id}>
                   <div className="pj-card-media">
-                    <img src={p.image} alt={p.name} loading="lazy" />
-                    <span className={`pj-status ${p.status.toLowerCase().replace(/\s+/g, '-')}`}>{p.status}</span>
+                    <img className="pj-card-photo" src={p.image} alt={p.name} loading="lazy" />
+                    <span className={`pj-status-badge ${p.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                      <span className="pj-status-dot" aria-hidden="true" />
+                      <span>{p.status}</span>
+                    </span>
                   </div>
                   <div className="pj-card-body">
-                    <div className="pj-card-type">{p.type}</div>
-                    <h2 className="pj-card-name">{p.name}</h2>
-                    <div className="pj-card-loc">
-                      <MapPin size={14} strokeWidth={2} />
-                      <span>{p.location}</span>
+                    <div className="pj-card-head">
+                      <div className="pj-card-copy">
+                        <div className="pj-card-type">{p.type}</div>
+                        <h2 className="pj-card-name">{p.name}</h2>
+                        <div className="pj-card-loc">
+                          <MapPin size={14} strokeWidth={2} />
+                          <span>{p.location}</span>
+                        </div>
+                      </div>
+                      {PROJECT_LOGOS[p.id] && (
+                        <span className="pj-card-logo">
+                          <img src={PROJECT_LOGOS[p.id]} alt={`${p.name} logo`} />
+                        </span>
+                      )}
                     </div>
                     <div className="pj-card-foot">
                       <span className="pj-card-config">{p.config}</span>
                       <div className="pj-card-actions">
-                        {p.landing || p.pdf ? (
-                          <a
-                            href={p.landing || p.pdf}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="pj-brochure-btn"
-                            title={`Open ${p.name} Landing Page`}
-                          >
-                            Landing Page ↗
-                          </a>
-                        ) : (
-                          <button
-                            type="button"
-                            className="pj-brochure-btn"
-                            onClick={onOpenEnquire}
-                            title={`Inquire about ${p.name}`}
-                          >
-                            Landing Page ↗
-                          </button>
-                        )}
+                        <button
+                          type="button"
+                          className="pj-brochure-btn"
+                          onClick={
+                            p.id === 'skydale'
+                              ? onNavigateSkydale
+                              : LANDING_PROJECTS[p.id] && onNavigateLanding
+                                ? () => onNavigateLanding(p.id)
+                                : onOpenEnquire
+                          }
+                          title={`Learn more about ${p.name}`}
+                        >
+                          Learn more
+                        </button>
                         <button type="button" className="pj-card-cta" onClick={onOpenEnquire}>
-                          Enquire <ArrowUpRight size={15} strokeWidth={2.2} />
+                          Enquire
                         </button>
                       </div>
                     </div>
@@ -232,6 +441,7 @@ export default function ProjectsPage({
         onNavigateCPInquiry={onNavigateCPInquiry}
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
+        onNavigateBlogs={onNavigateBlogs}
         onOpenEnquire={onOpenEnquire}
       />
     </>

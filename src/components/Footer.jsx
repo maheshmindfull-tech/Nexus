@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProjects, onNavigateCareers, onNavigateCPInquiry, onNavigateSkydale, onNavigateContact, onOpenEnquire }) {
+export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProjects, onNavigateCareers, onNavigateCPInquiry, onNavigateSkydale, onNavigateContact, onNavigateBlogs, onOpenEnquire }) {
   const handleLinkClick = (e, target) => {
     e.preventDefault();
     if (target === 'about' && onNavigateAbout) {
@@ -17,6 +17,10 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
     }
     if (target === 'contact' && onNavigateContact) {
       onNavigateContact();
+      return;
+    }
+    if (target === 'blogs' && onNavigateBlogs) {
+      onNavigateBlogs();
       return;
     }
     if (target === 'skydale' && onNavigateSkydale) {
@@ -92,6 +96,11 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   </a>
                 </li>
                 <li>
+                  <a href="/blogs" onClick={(e) => handleLinkClick(e, 'blogs')}>
+                    Blogs
+                  </a>
+                </li>
+                <li>
                   <a href="/contact" onClick={(e) => handleLinkClick(e, 'contact')}>
                     Contact
                   </a>
@@ -104,17 +113,17 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
               <ul>
                 <li>
                   <a href="/skydale" onClick={(e) => handleLinkClick(e, 'skydale')}>
-                    Skydale, Punawale
+                    Skydale, Kate Wasti
                   </a>
                 </li>
                 <li>
-                  <a href="/projects" onClick={(e) => handleLinkClick(e, '#projects')}>
+                  <a href="/kinara">
                     Kinara, Chikhali
                   </a>
                 </li>
                 <li>
                   <a href="/projects" onClick={(e) => handleLinkClick(e, '#projects')}>
-                    Westia, Punawale
+                    Prime Square, Moshi
                   </a>
                 </li>
                 <li>
@@ -135,9 +144,11 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   <a href="tel:+912067899900">+91 20 6789 9900</a>
                 </li>
                 <li>
-                  Bund Garden Road, Pune,
+                  Plot No.P-087, D-II Block, MIDC,
                   <br />
-                  Maharashtra 411001
+                  Pimpari Industrial Area, near Wonder Cars Showroom,
+                  <br />
+                  Chinchwad, Pune, Maharashtra 411019
                 </li>
               </ul>
             </div>

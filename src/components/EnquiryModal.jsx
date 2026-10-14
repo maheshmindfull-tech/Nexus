@@ -128,7 +128,7 @@ export default function EnquiryModal({ isOpen, onClose }) {
                   <option value="Nexus Skydale (Punawale)">Nexus Skydale (Punawale)</option>
                   <option value="Nexus Kinara (Chikhali)">Nexus Kinara (Chikhali)</option>
                   <option value="Nexus Westia (Punawale)">Nexus Westia (Punawale)</option>
-                  <option value="Nexus Square (Punawale)">Nexus Square (Punawale)</option>
+                  <option value="Nexus Prime Square (Moshi)">Nexus Prime Square (Moshi)</option>
                   <option value="Nexus Genesis (Kiwale)">Nexus Genesis (Kiwale)</option>
                   <option value="General Enquiry">General Enquiry</option>
                 </select>

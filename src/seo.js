@@ -5,7 +5,7 @@ export const PAGE_SEO = {
     path: '/',
     title: 'Nexus Pune – Luxury Real Estate Developers & Property Advisors | Premium Homes',
     description:
-      'Nexus Group is a premier real estate developer and property advisor in Pune. Discover luxury 2 & 3 BHK homes, apartments, and commercial projects across Punawale, Moshi, Kiwale, and Chikhali. 30+ years of legacy.',
+      'Nexus Group is a premier real estate developer and property advisor in Pune. Discover luxury 2 & 3 BHK homes, apartments, and commercial projects across Pimpri Chinchwad, Pune, and Nashik. 30+ years of legacy.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -48,9 +48,9 @@ export const PAGE_SEO = {
       name: 'Nexus Pune Projects',
       itemListElement: [
         ['Nexus Kinara', 'Jadhavwadi, Chikhali'],
-        ['Nexus Skydale', 'Tajanewasti, Punawale'],
+        ['Nexus Skydale', 'Kate Wasti, Punawale'],
         ['Nexus Westia', 'Punawale, Pune'],
-        ['Nexus Square', 'Punawale, Pune'],
+        ['Nexus Prime Square', 'Borhadewadi, Moshi'],
         ['Nexus Atrium', 'Borhadewadi, Moshi'],
         ['Nexus Imperia', 'Borhadewadi, Moshi'],
         ['Nexus Genesis', 'Kiwale, Pune'],
@@ -104,6 +104,20 @@ export const PAGE_SEO = {
       description: 'Channel partner registration for Nexus Group projects in Pune.',
     },
   },
+  blogs: {
+    path: '/blogs',
+    title: 'Nexus Journal | Homebuying Guides, Pune Locality Insights and Project Updates',
+    description:
+      'Practical homebuying guides, MahaRERA tips, home loan basics, Punawale and Moshi locality insights, and project updates from Nexus Group, Pune.',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Nexus Journal',
+      url: `${ORIGIN}/blogs`,
+      description: 'Homebuying guides, locality insights and project updates from Nexus Group Pune.',
+      publisher: { '@id': `${ORIGIN}/#organization` },
+    },
+  },
   contact: {
     path: '/contact',
     title: 'Contact Nexus Pune | Enquire About Homes and Site Visits',
@@ -121,7 +135,7 @@ export const PAGE_SEO = {
     path: '/skydale',
     title: 'Nexus Skydale Punawale | 2, 3 & 4 BHK Homes in Pune',
     description:
-      'Nexus Skydale in Tajanewasti, Punawale offers 2, 3 and 4 BHK homes with a prime Pune location, smart-home planning, and premium amenities. MahaRERA P52100050149.',
+      'Nexus Skydale in Kate Wasti, Punawale offers 2, 3 and 4 BHK homes with a prime Pune location, smart-home planning, and premium amenities. MahaRERA P52100050149.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ApartmentComplex',
@@ -131,6 +145,50 @@ export const PAGE_SEO = {
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Punawale',
+        addressRegion: 'Maharashtra',
+        addressCountry: 'IN',
+      },
+      brand: { '@id': `${ORIGIN}/#organization` },
+    },
+  },
+  kinara: {
+    path: '/kinara',
+    title: 'Nexus Kinaara Chikhali | 2 & 3 BHK Riverside Homes in Pune',
+    description:
+      'Nexus Kinaara in Chikhali, Pune offers 2 and 3 BHK riverside homes with landscaped amenities. View highlights, floor plans and download the brochure.',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'ApartmentComplex',
+      name: 'Nexus Kinaara',
+      url: `${ORIGIN}/kinara`,
+      description: '2 and 3 BHK riverside residences by Nexus Group in Chikhali, Pune.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Gat No. 79, Behind River Residency',
+        addressLocality: 'Chikhali',
+        postalCode: '412114',
+        addressRegion: 'Maharashtra',
+        addressCountry: 'IN',
+      },
+      brand: { '@id': `${ORIGIN}/#organization` },
+    },
+  },
+  westia: {
+    path: '/westia',
+    title: 'Nexus Westia Punawale | 2 & 3 BHK Homes in Pune',
+    description:
+      'Nexus Westia in Punawale, Pune offers 2 and 3 BHK homes close to top work destinations. View highlights, floor plans and download the brochure.',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'ApartmentComplex',
+      name: 'Nexus Westia',
+      url: `${ORIGIN}/westia`,
+      description: '2 and 3 BHK residences by Nexus Group in Punawale, Pune.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Sr. No. 41/48, Near Savata Mali Mandir, Malwadi',
+        addressLocality: 'Punawale',
+        postalCode: '411033',
         addressRegion: 'Maharashtra',
         addressCountry: 'IN',
       },
@@ -196,11 +254,17 @@ const HASH_TO_PAGE = {
   '#skydel': 'skydale',
   '#nexus-skydale': 'skydale',
   '#skydale-landing': 'skydale',
+  '#kinara': 'kinara',
+  '#kinaara': 'kinara',
+  '#westia': 'westia',
   '#contact': 'contact',
   '#contact-us': 'contact',
   '#about': 'about',
   '#about-us': 'about',
   '#about-page': 'about',
+  '#blogs': 'blogs',
+  '#blog': 'blogs',
+  '#journal': 'blogs',
 };
 
 export function pageFromLocation() {

@@ -1,35 +1,62 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function ProjectsSection({ onViewAll }) {
+export default function ProjectsSection({ onViewAll, onOpenProject }) {
   const projects = [
     {
-      id: '1',
+      id: 'skydale',
+      name: 'Nexus Skydale',
+      loc: 'Kate Wasti, Punawale',
+      img: '/assets/projects/nexus-skydale.jpg',
+      page: 'skydale',
+      href: '/skydale',
+    },
+    {
+      id: 'kinara',
       name: 'Nexus Kinara',
       loc: 'Jadhavwadi, Chikhali',
       img: '/assets/projects/nexus-kinara.jpg',
-      link: '/pdfs/nexus-kinara-brochure.pdf',
-      badge: 'Landing Page ↗',
-      title: 'Open Nexus Kinara Landing Page',
+      page: 'kinara',
+      href: '/kinara',
     },
     {
-      id: '2',
-      name: 'Nexus Skydale',
-      loc: 'Tajanewasti, Punawale',
-      img: '/assets/projects/nexus-skydale.jpg',
-      link: '/skydale',
-      badge: 'Landing Page ↗',
-      title: 'Open Nexus Skydale Landing Page',
+      id: 'square',
+      name: 'Nexus Prime Square',
+      loc: 'Borhadewadi, Moshi',
+      img: '/assets/projects/nexus-square.jpg',
+      page: 'projects',
+      href: '/projects',
     },
     {
-      id: '3',
-      name: 'Nexus Westia',
-      loc: 'Punawale, Pune',
-      img: '/assets/projects/nexus-westia.jpg',
-      link: '/pdfs/nexus-westia-brochure.pdf',
-      badge: 'Landing Page ↗',
-      title: 'Open Nexus Westia Landing Page',
+      id: 'genesis',
+      name: 'Nexus Genesis',
+      loc: 'Kiwale, Pune',
+      img: '/assets/projects/nexus-genesis.jpg',
+      page: 'projects',
+      href: '/projects',
+    },
+    {
+      id: 'imperia',
+      name: 'Nexus Imperia',
+      loc: 'Borhadewadi, Moshi',
+      img: '/assets/projects/nexus-imperia.jpg',
+      page: 'projects',
+      href: '/projects',
+    },
+    {
+      id: 'atrium',
+      name: 'Nexus Atrium',
+      loc: 'Borhadewadi, Moshi',
+      img: '/assets/projects/nexus-atrium.jpg',
+      page: 'projects',
+      href: '/projects',
     },
   ];
+
+  const openProject = (event, project) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
+    if (onOpenProject) onOpenProject(project.page);
+  };
 
   return (
     <section className="projects" id="projects">
@@ -56,10 +83,9 @@ export default function ProjectsSection({ onViewAll }) {
             <a
               key={p.id}
               className="pcard"
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={p.title}
+              href={p.href}
+              title={`Learn more about ${p.name}`}
+              onClick={(event) => openProject(event, p)}
             >
               <img src={p.img} alt={p.name} loading="lazy" />
               <div>
@@ -77,13 +103,10 @@ export default function ProjectsSection({ onViewAll }) {
                       textTransform: 'uppercase',
                       padding: '3px 8px',
                       borderRadius: '4px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '3px',
                       whiteSpace: 'nowrap',
                     }}
                   >
-                    {p.badge}
+                    Learn more
                   </span>
                 </div>
                 <span style={{ opacity: 0.88, fontSize: '11.5px', letterSpacing: '0.02em', display: 'block', marginTop: '4px' }}>

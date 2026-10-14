@@ -79,11 +79,8 @@ const VALUES = [
   {
     title: 'Vision',
     subtitle: 'That Shapes Tomorrow',
-    detail: [
+    detail:
       'At Nexus Group, we envision spaces where people, progress and nature grow together. Our vision is to create thoughtfully planned homes and communities that make everyday living better, while respecting the environment they are a part of.',
-      'We believe in bringing the human element into everything we build - from sustainable landscapes and eco-friendly design to spaces that are planned with purpose and built for the future.',
-      'As we continue to grow, we remain committed to pushing our own boundaries, building responsibly and creating spaces that enrich lives for generations to come.',
-    ],
     image: '/assets/about/value-vision.jpg',
     alt: 'Nexus Vision - The eye of foresight and human connection',
   },
@@ -113,7 +110,7 @@ const LEADERS = [
   {
     name: 'Amit R. Patil',
     role: 'Managing Director',
-    desc: 'Drives strategic expansion, modern architectural philosophies, and eco-friendly master planning, establishing Nexus as a benchmark brand across Pune and Nashik.',
+    desc: 'Drives strategic expansion, modern architectural philosophies, and eco-friendly master planning, establishing Nexus as a benchmark brand across Pimpri-Chinchwad, Pune and Nashik.',
     image: '/assets/about/leader-02.jpg',
   },
   {
@@ -167,7 +164,7 @@ const STATS = [
   {
     value: '55 L+',
     label: 'Sq. Ft. Built',
-    sub: 'Across Pune & Nashik',
+    sub: 'Pimpri-Chinchwad, Pune and Nashik',
   },
   {
     value: '55+',
@@ -191,6 +188,7 @@ export default function AboutPage({
   onNavigateCPInquiry,
   onNavigateSkydale,
   onNavigateContact,
+  onNavigateBlogs,
   onOpenEnquire,
 }) {
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -231,7 +229,7 @@ export default function AboutPage({
                   <line x1="16" y1="17" x2="8" y2="17" />
                   <polyline points="10 9 9 9 8 9" />
                 </svg>
-                <span>Nexus Corporate Profile (PDF) ↗</span>
+                <span>Nexus Corporate Profile (PDF)</span>
               </a>
             </div>
           </div>
@@ -269,7 +267,7 @@ export default function AboutPage({
               <p className="about-body">
                 Nexus, started by the seniors in the year 1996 on the grounds of quality,
                 integrity &amp; a vision to give our society a futuristic and well planned
-                eco-friendly township. With 10 projects completed in Nashik. And 25+ in Pune.
+                eco-friendly township, with work across Pimpri-Chinchwad, Pune and Nashik.
               </p>
             </div>
           </div>
@@ -287,7 +285,7 @@ export default function AboutPage({
                 <span>from the first plan to the final detail.</span>
               </h2>
               <p className="about-body">
-                Across Pune and Nashik, Nexus develops residential and
+                Across Pimpri-Chinchwad, Pune and Nashik, Nexus develops residential and
                 commercial spaces shaped by thoughtful planning, quality
                 construction and responsible design.
               </p>
@@ -343,7 +341,7 @@ export default function AboutPage({
                 {VALUES.map((val, idx) => {
                   const isOpen = openAccordion === idx;
                   return (
-                    <div key={val.title} className="about-values-item">
+                    <div key={val.title} className={`about-values-item ${isOpen ? 'open' : ''}`}>
                       <button
                         type="button"
                         className={`about-values-btn ${isOpen ? 'active' : ''}`}
@@ -353,18 +351,20 @@ export default function AboutPage({
                         {val.title}
                       </button>
 
-                      {isOpen && (
-                        <div className="about-values-body">
-                          {val.subtitle && (
-                            <h4 className="about-values-subtitle">{val.subtitle}</h4>
-                          )}
-                          {Array.isArray(val.detail) ? (
-                            val.detail.map((p, i) => <p key={i}>{p}</p>)
-                          ) : (
-                            <p>{val.detail}</p>
-                          )}
+                      <div className={`about-values-collapse ${isOpen ? 'open' : ''}`}>
+                        <div className="about-values-collapse-inner">
+                          <div className="about-values-body">
+                            {val.subtitle && (
+                              <h4 className="about-values-subtitle">{val.subtitle}</h4>
+                            )}
+                            {Array.isArray(val.detail) ? (
+                              val.detail.map((p, i) => <p key={i}>{p}</p>)
+                            ) : (
+                              <p>{val.detail}</p>
+                            )}
+                          </div>
                         </div>
-                      )}
+                      </div>
                     </div>
                   );
                 })}
@@ -435,6 +435,8 @@ export default function AboutPage({
           </div>
         </section>
 
+
+
         {/* ============================================================
             6. WHY CHOOSE NEXUS
             ============================================================ */}
@@ -493,6 +495,7 @@ export default function AboutPage({
         onNavigateCPInquiry={onNavigateCPInquiry}
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
+        onNavigateBlogs={onNavigateBlogs}
         onOpenEnquire={onOpenEnquire}
       />
     </>

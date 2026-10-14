@@ -9,7 +9,7 @@ const PROJECT_OPTIONS = [
   'Nexus Skydale (Punawale)',
   'Nexus Kinara (Chikhali)',
   'Nexus Westia (Punawale)',
-  'Nexus Square (Punawale)',
+  'Nexus Prime Square (Moshi)',
   'Nexus Genesis (Kiwale)',
 ];
 
@@ -29,6 +29,7 @@ export default function ContactPage({
   onNavigateCPInquiry,
   onNavigateSkydale,
   onNavigateContact,
+  onNavigateBlogs,
   onOpenEnquire,
 }) {
   const [formData, setFormData] = useState(EMPTY_FORM);
@@ -233,9 +234,11 @@ export default function ContactPage({
             <div className="ct-info-box">
               <small>Office</small>
               <address>
-                Bund Garden Road, Pune,
+                Plot No.P-087, D-II Block, MIDC,
                 <br />
-                Maharashtra 411001
+                Pimpari Industrial Area, near Wonder Cars Showroom,
+                <br />
+                Chinchwad, Pune, Maharashtra 411019
               </address>
             </div>
           </aside>
@@ -249,6 +252,7 @@ export default function ContactPage({
         onNavigateCPInquiry={onNavigateCPInquiry}
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
+        onNavigateBlogs={onNavigateBlogs}
         onNavigateHome={onNavigateHome}
         onOpenEnquire={onOpenEnquire}
       />

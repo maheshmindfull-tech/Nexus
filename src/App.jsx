@@ -14,11 +14,14 @@ import ProjectsPage from './components/ProjectsPage';
 import CareersPage from './components/CareersPage';
 import CPInquiryPage from './components/CPInquiryPage';
 import SkydaleLandingPage from './components/SkydaleLandingPage';
+import ProjectLandingPage, { LANDING_PROJECTS } from './components/ProjectLandingPage';
 import ContactPage from './components/ContactPage';
+import BlogsPage from './components/BlogsPage';
 import { applyPageSeo, pageFromLocation, pathForPage } from './seo';
 
 export default function App() {
   const [enquireOpen, setEnquireOpen] = useState(false);
+  const [navCount, setNavCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(() =>
     typeof window !== 'undefined' ? pageFromLocation() : 'home'
   );
@@ -64,7 +67,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-[#1f1f1f] flex flex-col font-sans selection:bg-[#0097a7] selection:text-white">
       {/* Universal Fixed Navigation Bar across all pages except custom landing page */}
-      {currentPage !== 'skydale' && (
+      {currentPage !== 'skydale' && !LANDING_PROJECTS[currentPage] && (
         <Navbar
           currentPage={currentPage}
           onNavigate={handleNavigate}
@@ -75,6 +78,12 @@ export default function App() {
       {currentPage === 'skydale' ? (
         /* DEDICATED SKYDALE LANDING PAGE */
         <SkydaleLandingPage onNavigateHome={() => handleNavigate('home')} />
+      ) : LANDING_PROJECTS[currentPage] ? (
+        <ProjectLandingPage
+          key={currentPage}
+          project={currentPage}
+          onNavigateHome={() => handleNavigate('home')}
+        />
       ) : currentPage === 'projects' ? (
         /* DEDICATED PROJECTS PAGE */
         <ProjectsPage
@@ -84,7 +93,21 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateLanding={(page) => handleNavigate(page)}
           onNavigateContact={() => handleNavigate('contact')}
+          onNavigateBlogs={() => handleNavigate('blogs')}
+          onOpenEnquire={() => setEnquireOpen(true)}
+        />
+      ) : currentPage === 'blogs' ? (
+        <BlogsPage
+          onNavigateHome={(sec) => handleNavigate('home', sec)}
+          onNavigateAbout={() => handleNavigate('about')}
+          onNavigateProjects={() => handleNavigate('projects')}
+          onNavigateCareers={() => handleNavigate('careers')}
+          onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
+          onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => handleNavigate('contact')}
+          onNavigateBlogs={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'about' ? (
@@ -96,6 +119,7 @@ export default function App() {
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleNavigate('contact')}
+          onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'careers' ? (
@@ -108,6 +132,7 @@ export default function App() {
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleNavigate('contact')}
+          onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'cp-inquiry' ? (
@@ -119,6 +144,7 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleNavigate('contact')}
+          onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'contact' ? (
@@ -131,6 +157,7 @@ export default function App() {
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : (
@@ -149,11 +176,14 @@ export default function App() {
             {/* 3. Nexus Principles */}
             <Principles />
 
-            {/* 4. Interactive Slider: Skydale, Kinara, Prime Square, Westia, Genesis */}
+            {/* 4. Interactive Slider */}
             <SliderSection />
 
             {/* 5. Our Projects */}
-            <ProjectsSection onViewAll={() => handleNavigate('projects')} />
+            <ProjectsSection
+              onViewAll={() => handleNavigate('projects')}
+              onOpenProject={(page) => handleNavigate(page)}
+            />
 
             {/* 6. Testimonials */}
             <Testimonials />
@@ -169,7 +199,8 @@ export default function App() {
             onNavigateCareers={() => handleNavigate('careers')}
             onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
             onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => handleNavigate('contact')}
+            onNavigateContact={() => handleNavigate('contact')}
+            onNavigateBlogs={() => handleNavigate('blogs')}
             onNavigateHome={(sec) => handleNavigate('home', sec)}
             onOpenEnquire={() => setEnquireOpen(true)}
           />
