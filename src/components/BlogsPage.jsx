@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, Calendar, Clock, Link2, Search } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, ChevronDown, Clock, Link2, Search } from 'lucide-react';
 import Footer from './Footer';
-import { BLOG_CATEGORIES, BLOG_POSTS, readMinutes } from '../data/blogPosts';
+import { BLOG_POSTS, readMinutes, slugify } from '../data/blogPosts';
 import { applyPageSeo } from '../seo';
 import '../blogs.css';
 
@@ -20,14 +20,104 @@ function PostMeta({ post }) {
   );
 }
 
-function Block({ block }) {
-  if (typeof block === 'string') return <p>{block}</p>;
-  if (block.h) return <h2>{block.h}</h2>;
-  if (block.ul) return <ul>{block.ul.map((li) => <li key={li}>{li}</li>)}</ul>;
-  if (block.ol) return <ol>{block.ol.map((li) => <li key={li}>{li}</li>)}</ol>;
+const PAGE_SIZE = 9;
+const INLINE_RE = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
+
+const plainText = (text) => text.replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+
+function Rich({ text, onOpenPost }) {
+  const parts = [];
+  let last = 0;
+  let m;
+  INLINE_RE.lastIndex = 0;
+  while ((m = INLINE_RE.exec(text))) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    if (m[1]) {
+      parts.push(<strong key={m.index}>{m[1]}</strong>);
+    } else {
+      const href = m[3];
+      const postId = href.startsWith('/blogs?post=') ? href.slice(12) : null;
+      const external = /^https?:/i.test(href);
+      parts.push(
+        <a
+          key={m.index}
+          href={href}
+          {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          onClick={postId ? (e) => { e.preventDefault(); onOpenPost(postId); } : undefined}
+        >
+          {m[2]}
+        </a>,
+      );
+    }
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
+function Block({ block, onOpenPost }) {
+  const rich = (t) => <Rich text={t} onOpenPost={onOpenPost} />;
+  if (typeof block === 'string') return <p>{rich(block)}</p>;
+  if (block.h) return <h2 id={slugify(block.h)}>{block.h}</h2>;
+  if (block.h3) return <h3>{block.h3}</h3>;
+  if (block.ul) return <ul>{block.ul.map((li, i) => <li key={i}>{rich(li)}</li>)}</ul>;
+  if (block.ol) return <ol>{block.ol.map((li, i) => <li key={i}>{rich(li)}</li>)}</ol>;
   if (block.quote) return <blockquote>{block.quote}</blockquote>;
   if (block.tip) return <aside className="blog-tip"><strong>Good to know</strong>{block.tip}</aside>;
+  if (block.table) {
+    return (
+      <div className="blog-table-wrap">
+        <table className="blog-table">
+          <thead>
+            <tr>{block.table.head.map((c, i) => <th key={i}>{c}</th>)}</tr>
+          </thead>
+          <tbody>
+            {block.table.rows.map((row, r) => (
+              <tr key={r}>{row.map((c, i) => <td key={i}>{c}</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+  if (block.faq) {
+    return (
+      <div className="blog-faq">
+        {block.faq.map((item, i) => (
+          <details key={i} className="blog-faq-item" open={i === 0}>
+            <summary>
+              <span>{item.q}</span>
+              <ChevronDown size={18} />
+            </summary>
+            <div className="blog-faq-answer">
+              {item.a.map((a, j) => <p key={j}>{rich(a)}</p>)}
+            </div>
+          </details>
+        ))}
+      </div>
+    );
+  }
   return null;
+}
+
+function Contents({ headings }) {
+  const jump = (e, id) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
+  };
+  return (
+    <nav className="blog-toc" aria-label="In this article">
+      <span className="blog-toc-title">In this article</span>
+      <ol>
+        {headings.map((h) => (
+          <li key={h}>
+            <a href={`#${slugify(h)}`} onClick={(e) => jump(e, slugify(h))}>{h}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
 }
 
 function PostCard({ post, onOpen }) {
@@ -35,7 +125,6 @@ function PostCard({ post, onOpen }) {
     <button type="button" className="blog-card" onClick={() => onOpen(post.id)}>
       <div className="blog-card-media">
         <img src={post.image} alt="" loading="lazy" />
-        <span className="blog-chip">{post.category}</span>
       </div>
       <div className="blog-card-body">
         <PostMeta post={post} />
@@ -59,12 +148,20 @@ export default function BlogsPage({
   onOpenEnquire,
 }) {
   const [activeId, setActiveId] = useState(postFromUrl);
-  const [category, setCategory] = useState('All');
   const [query, setQuery] = useState('');
   const [copied, setCopied] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [visible, setVisible] = useState(PAGE_SIZE);
 
   const active = BLOG_POSTS.find((post) => post.id === activeId) || null;
+  const headings = active ? active.body.filter((b) => b && b.h).map((b) => b.h) : [];
+  const showLede = active
+    ? !(typeof active.body[0] === 'string' && plainText(active.body[0]).startsWith(active.excerpt))
+    : false;
+
+  useEffect(() => {
+    setVisible(PAGE_SIZE);
+  }, [query]);
 
   useEffect(() => {
     const onPop = () => setActiveId(postFromUrl());
@@ -103,23 +200,15 @@ export default function BlogsPage({
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return BLOG_POSTS.filter((p) => {
-      if (category !== 'All' && p.category !== category) return false;
-      if (!q) return true;
-      return `${p.title} ${p.excerpt} ${p.category}`.toLowerCase().includes(q);
-    });
-  }, [category, query]);
+    if (!q) return BLOG_POSTS;
+    return BLOG_POSTS.filter((p) => `${p.title} ${p.excerpt}`.toLowerCase().includes(q));
+  }, [query]);
 
-  const showFeatured = category === 'All' && !query.trim();
-  const featured = showFeatured ? BLOG_POSTS.find((p) => p.featured) : null;
+  const featured = query.trim() ? null : BLOG_POSTS.find((p) => p.featured);
   const gridPosts = featured ? filtered.filter((p) => p.id !== featured.id) : filtered;
+  const shownPosts = gridPosts.slice(0, visible);
 
-  const related = active
-    ? [
-        ...BLOG_POSTS.filter((p) => p.id !== active.id && p.category === active.category),
-        ...BLOG_POSTS.filter((p) => p.id !== active.id && p.category !== active.category),
-      ].slice(0, 3)
-    : [];
+  const related = active ? BLOG_POSTS.filter((p) => p.id !== active.id).slice(0, 3) : [];
 
   const shareUrl = active ? `${window.location.origin}/blogs?post=${active.id}` : '';
 
@@ -138,14 +227,13 @@ export default function BlogsPage({
       {active ? (
         <>
           <div className="blog-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
-          <header className="blog-article-hero">
+          <header className={`blog-article-hero${headings.length > 2 ? ' has-toc' : ''}`}>
             <div className="blog-article-head">
               <button type="button" className="blog-back" onClick={() => openPost(null)}>
                 <ArrowLeft size={15} /> All articles
               </button>
-              <span className="blog-chip blog-chip-static">{active.category}</span>
               <h1>{active.title}</h1>
-              <p className="blog-article-lede">{active.excerpt}</p>
+              {showLede && <p className="blog-article-lede">{active.excerpt}</p>}
               <div className="blog-byline">
                 <span className="blog-avatar">N</span>
                 <div>
@@ -157,12 +245,15 @@ export default function BlogsPage({
           </header>
 
           <main className="blog-main blog-main-article">
-            <div className="blog-article-wrap">
+            <div className={`blog-article-wrap${headings.length > 2 ? ' has-toc' : ''}`}>
               <img src={active.image} alt={active.title} className="blog-article-img" />
 
-              <article className="blog-article-body">
-                {active.body.map((block, i) => <Block key={i} block={block} />)}
-              </article>
+              <div className="blog-article-layout">
+                <article className="blog-article-body">
+                  {active.body.map((block, i) => <Block key={i} block={block} onOpenPost={openPost} />)}
+                </article>
+                {headings.length > 2 && <Contents headings={headings} />}
+              </div>
 
               <div className="blog-share">
                 <span>Share this article</span>
@@ -240,28 +331,13 @@ export default function BlogsPage({
 
           <main className="blog-main">
             <div className="blog-wrap">
-              <div className="blog-filters" role="tablist" aria-label="Article categories">
-                {BLOG_CATEGORIES.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    role="tab"
-                    aria-selected={category === c}
-                    className={`blog-filter${category === c ? ' is-active' : ''}`}
-                    onClick={() => setCategory(c)}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
-
               {featured && (
                 <button type="button" className="blog-featured" onClick={() => openPost(featured.id)}>
                   <div className="blog-featured-media">
                     <img src={featured.image} alt="" />
                   </div>
                   <div className="blog-featured-body">
-                    <span className="blog-featured-label">Featured · {featured.category}</span>
+                    <span className="blog-featured-label">Featured</span>
                     <h2>{featured.title}</h2>
                     <p>{featured.excerpt}</p>
                     <PostMeta post={featured} />
@@ -273,16 +349,29 @@ export default function BlogsPage({
               {featured && <h2 className="blog-section-title">Latest articles</h2>}
 
               {gridPosts.length > 0 ? (
-                <div className="blog-grid">
-                  {gridPosts.map((post) => <PostCard key={post.id} post={post} onOpen={openPost} />)}
-                </div>
+                <>
+                  <div className="blog-grid">
+                    {shownPosts.map((post) => <PostCard key={post.id} post={post} onOpen={openPost} />)}
+                  </div>
+                  {gridPosts.length > visible && (
+                    <div className="blog-more">
+                      <button
+                        type="button"
+                        className="blog-btn blog-btn-outline"
+                        onClick={() => setVisible((v) => v + PAGE_SIZE)}
+                      >
+                        Load more articles ({gridPosts.length - visible})
+                      </button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="blog-empty">
                   <p>No articles match your search.</p>
                   <button
                     type="button"
                     className="blog-btn blog-btn-primary"
-                    onClick={() => { setQuery(''); setCategory('All'); }}
+                    onClick={() => setQuery('')}
                   >
                     Show all articles
                   </button>

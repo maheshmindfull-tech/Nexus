@@ -15,28 +15,43 @@ import CareersPage from './components/CareersPage';
 import CPInquiryPage from './components/CPInquiryPage';
 import SkydaleLandingPage from './components/SkydaleLandingPage';
 import ProjectLandingPage, { LANDING_PROJECTS } from './components/ProjectLandingPage';
-import ContactPage from './components/ContactPage';
 import BlogsPage from './components/BlogsPage';
 import { applyPageSeo, pageFromLocation, pathForPage } from './seo';
 
 export default function App() {
   const [enquireOpen, setEnquireOpen] = useState(false);
   const [navCount, setNavCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(() =>
-    typeof window !== 'undefined' ? pageFromLocation() : 'home'
-  );
+  const [currentPage, setCurrentPage] = useState(() => {
+    if (typeof window === 'undefined') return 'home';
+    const page = pageFromLocation();
+    return page === 'contact' ? 'home' : page;
+  });
 
   useEffect(() => {
     const page = pageFromLocation();
-    const clean = pathForPage(page);
-    const path = window.location.pathname.replace(/\/+$/, '') || '/';
-    if (path !== clean || window.location.hash) {
-      window.history.replaceState({ page }, '', clean);
+    if (page === 'contact') {
+      window.history.replaceState({ page: 'home' }, '', '/');
+      setCurrentPage('home');
+      setEnquireOpen(true);
+      applyPageSeo('home');
+    } else {
+      const clean = pathForPage(page);
+      const path = window.location.pathname.replace(/\/+$/, '') || '/';
+      if (path !== clean || window.location.hash) {
+        window.history.replaceState({ page }, '', clean);
+      }
+      applyPageSeo(page);
     }
-    applyPageSeo(page);
 
     const onPop = () => {
       const next = pageFromLocation();
+      if (next === 'contact') {
+        window.history.replaceState({ page: 'home' }, '', '/');
+        setCurrentPage('home');
+        setEnquireOpen(true);
+        applyPageSeo('home');
+        return;
+      }
       setCurrentPage(next);
       applyPageSeo(next);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -47,6 +62,11 @@ export default function App() {
   }, []);
 
   const handleNavigate = (page, section) => {
+    if (page === 'contact') {
+      setEnquireOpen(true);
+      return;
+    }
+
     const next = pathForPage(page) ? page : 'home';
     const clean = pathForPage(next);
     window.history.pushState({ page: next }, '', clean);
@@ -94,7 +114,7 @@ export default function App() {
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateLanding={(page) => handleNavigate(page)}
-          onNavigateContact={() => handleNavigate('contact')}
+          onNavigateContact={() => setEnquireOpen(true)}
           onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
@@ -106,7 +126,7 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => handleNavigate('contact')}
+          onNavigateContact={() => setEnquireOpen(true)}
           onNavigateBlogs={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
@@ -118,7 +138,7 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => handleNavigate('contact')}
+          onNavigateContact={() => setEnquireOpen(true)}
           onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
@@ -131,7 +151,7 @@ export default function App() {
           onNavigateCareers={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => handleNavigate('contact')}
+          onNavigateContact={() => setEnquireOpen(true)}
           onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
@@ -143,20 +163,7 @@ export default function App() {
           onNavigateProjects={() => handleNavigate('projects')}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => handleNavigate('contact')}
-          onNavigateBlogs={() => handleNavigate('blogs')}
-          onOpenEnquire={() => setEnquireOpen(true)}
-        />
-      ) : currentPage === 'contact' ? (
-        /* DEDICATED CONTACT PAGE */
-        <ContactPage
-          onNavigateHome={(sec) => handleNavigate('home', sec)}
-          onNavigateAbout={() => handleNavigate('about')}
-          onNavigateProjects={() => handleNavigate('projects')}
-          onNavigateCareers={() => handleNavigate('careers')}
-          onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
-          onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onNavigateContact={() => setEnquireOpen(true)}
           onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
@@ -199,7 +206,7 @@ export default function App() {
             onNavigateCareers={() => handleNavigate('careers')}
             onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
             onNavigateSkydale={() => handleNavigate('skydale')}
-            onNavigateContact={() => handleNavigate('contact')}
+            onNavigateContact={() => setEnquireOpen(true)}
             onNavigateBlogs={() => handleNavigate('blogs')}
             onNavigateHome={(sec) => handleNavigate('home', sec)}
             onOpenEnquire={() => setEnquireOpen(true)}

@@ -27,7 +27,7 @@ const PROJECTS = [
   {
     id: 'skydale',
     name: 'Nexus Skydale',
-    location: 'Kate Wasti, Punawale',
+    location: 'Pandhare Wasti, Punawale',
     type: 'Residential & Commercial',
     status: 'Ongoing',
     config: '2, 3 & 4 BHK | 581 Flats | 62 Shops',

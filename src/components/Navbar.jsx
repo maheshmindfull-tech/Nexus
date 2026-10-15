@@ -104,14 +104,6 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
     e.preventDefault();
     setMobileMenuOpen(false);
 
-    if (currentPage === 'contact') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    if (onNavigate) {
-      onNavigate('contact');
-      return;
-    }
     if (onOpenEnquire) {
       onOpenEnquire();
     }
@@ -130,7 +122,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
         transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         padding: 0,
         background: isScrolled
-          ? 'rgba(0, 34, 40, 0.97)'
+          ? 'rgba(7, 56, 66, 0.97)'
           : 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)',
         backdropFilter: isScrolled ? 'blur(20px) saturate(1.4)' : 'none',
         WebkitBackdropFilter: isScrolled ? 'blur(20px) saturate(1.4)' : 'none',

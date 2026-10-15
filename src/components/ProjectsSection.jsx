@@ -5,7 +5,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
     {
       id: 'skydale',
       name: 'Nexus Skydale',
-      loc: 'Kate Wasti, Punawale',
+      loc: 'Pandhare Wasti, Punawale',
       img: '/assets/projects/nexus-skydale.jpg',
       page: 'skydale',
       href: '/skydale',
@@ -88,29 +88,17 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
               onClick={(event) => openProject(event, p)}
             >
               <img src={p.img} alt={p.name} loading="lazy" />
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                  <strong style={{ display: 'block', fontSize: '14px', letterSpacing: '0.04em' }}>
+              <div className="pcard-info">
+                <div className="pcard-info-main">
+                  <strong className="pcard-title">
                     {p.name}
                   </strong>
-                  <span
-                    style={{
-                      background: 'rgba(197, 160, 89, 0.95)',
-                      color: '#0e1b2e',
-                      fontSize: '10.5px',
-                      fontWeight: 700,
-                      letterSpacing: '0.05em',
-                      textTransform: 'uppercase',
-                      padding: '3px 8px',
-                      borderRadius: '4px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    Learn more
+                  <span className="pcard-loc">
+                    {p.loc} <br />• Built by NEXUS
                   </span>
                 </div>
-                <span style={{ opacity: 0.88, fontSize: '11.5px', letterSpacing: '0.02em', display: 'block', marginTop: '4px' }}>
-                  {p.loc} • Built by NEXUS
+                <span className="pcard-learn-more">
+                  Learn More <span className="pcard-arrow"></span>
                 </span>
               </div>
             </a>

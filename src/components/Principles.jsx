@@ -4,7 +4,7 @@ const PRINCIPLES_DATA = [
   {
     id: 'transparency',
     name: 'Transparency',
-    tag: '01 — TRANSPARENCY',
+    tag: '01 - TRANSPARENCY',
     headline: 'Clarity That Builds Confidence',
     story: [
       'At Nexus Group, we believe trust begins with transparency. From the first conversation to the final handover, we believe in keeping every process clear, every commitment honest and every detail accounted for.',
@@ -17,7 +17,7 @@ const PRINCIPLES_DATA = [
   {
     id: 'integrity',
     name: 'Integrity',
-    tag: '02 — INTEGRITY',
+    tag: '02 - INTEGRITY',
     headline: 'Built on What We Believe In.',
     story: [
       'For Nexus Group, integrity means doing the right thing - consistently, responsibly and with the same commitment behind every project.',
@@ -30,10 +30,10 @@ const PRINCIPLES_DATA = [
   {
     id: 'responsibility',
     name: 'Responsibility',
-    tag: '03 — RESPONSIBILITY',
+    tag: '03 - RESPONSIBILITY',
     headline: 'Building Responsibly. Preserving Naturally.',
     story: [
-      'Every space we create becomes a part of the larger environment around it. That makes responsible development more than a choice — it is a responsibility we carry with every project.',
+      'Every space we create becomes a part of the larger environment around it. That makes responsible development more than a choice - it is a responsibility we carry with every project.',
       'At Nexus Group, we strive to bring this thinking into the way we plan and develop our spaces - with thoughtful design, eco-friendly practices, green landscapes and communities that are designed to remain relevant for generations.',
       'Because building for the future also means being mindful of the world we leave behind.',
     ],
@@ -43,7 +43,7 @@ const PRINCIPLES_DATA = [
   {
     id: 'planning',
     name: 'Planning',
-    tag: '04 — PLANNING',
+    tag: '04 - PLANNING',
     headline: 'Every Landmark Begins With a Plan.',
     story: [
       'At Nexus Group, we believe good spaces begin long before the first brick is laid. They begin with thoughtful planning.',

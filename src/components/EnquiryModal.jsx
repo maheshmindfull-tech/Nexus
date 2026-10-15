@@ -70,7 +70,7 @@ export default function EnquiryModal({ isOpen, onClose }) {
                     setSubmitted(false);
                     onClose();
                   }}
-                  className="px-6 py-2 bg-[#0097a7] hover:bg-[#008290] text-white font-semibold rounded-lg text-xs transition-colors cursor-pointer"
+                  className="px-6 py-2 bg-[#009dbd] hover:bg-[#007c93] text-white font-semibold rounded-none text-xs transition-colors cursor-pointer"
                 >
                   Close
                 </button>

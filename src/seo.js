@@ -48,7 +48,7 @@ export const PAGE_SEO = {
       name: 'Nexus Pune Projects',
       itemListElement: [
         ['Nexus Kinara', 'Jadhavwadi, Chikhali'],
-        ['Nexus Skydale', 'Kate Wasti, Punawale'],
+        ['Nexus Skydale', 'Pandhare Wasti, Punawale'],
         ['Nexus Westia', 'Punawale, Pune'],
         ['Nexus Prime Square', 'Borhadewadi, Moshi'],
         ['Nexus Atrium', 'Borhadewadi, Moshi'],
@@ -135,7 +135,7 @@ export const PAGE_SEO = {
     path: '/skydale',
     title: 'Nexus Skydale Punawale | 2, 3 & 4 BHK Homes in Pune',
     description:
-      'Nexus Skydale in Kate Wasti, Punawale offers 2, 3 and 4 BHK homes with a prime Pune location, smart-home planning, and premium amenities. MahaRERA P52100050149.',
+      'Nexus Skydale in Pandhare Wasti, Punawale offers 2, 3 and 4 BHK homes with a prime Pune location, smart-home planning, and premium amenities. MahaRERA P52100050149.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ApartmentComplex',

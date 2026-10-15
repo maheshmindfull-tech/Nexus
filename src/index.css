@@ -5,10 +5,10 @@
 :root {
   --font-primary: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --teal: #0097a7;
-  --teal-d: #00444c;
-  --teal-darker: #002e35;
-  --deep: #00444c;
+  --teal: #009dbd;
+  --teal-d: #0c4d5b;
+  --teal-darker: #073842;
+  --deep: #0c4d5b;
   --ink: #1f242e;
   --mute: #5a6472;
   --line: #dfe6e7;
@@ -245,9 +245,9 @@ h2.big span {
   z-index: 100;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at 80% 20%, rgba(0, 151, 167, 0.22), transparent 50%),
-    radial-gradient(circle at 20% 80%, rgba(0, 68, 76, 0.35), transparent 50%),
-    linear-gradient(135deg, #041219 0%, #00282f 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(0, 157, 189, 0.32), transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(12, 77, 91, 0.45), transparent 50%),
+    linear-gradient(135deg, #05262d 0%, #0c4d5b 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   color: #fff;
@@ -979,18 +979,83 @@ hr.teal {
   z-index: 1;
 }
 
-.pcard div {
+.pcard > div,
+.pcard-info {
   position: absolute;
   z-index: 2;
   left: 16px;
   bottom: 14px;
   right: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
   color: rgba(255, 255, 255, 0.94);
   font-family: var(--font-primary);
   font-weight: 500;
   font-size: 11.5px;
   letter-spacing: 0.03em;
   line-height: 1.4;
+}
+
+.pcard-info-main {
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+
+.pcard-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.pcard-loc {
+  display: block;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.35;
+}
+
+.pcard-learn-more {
+  position: static !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-bottom: 1px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  transition: color 0.25s ease;
+  cursor: pointer;
+}
+
+.pcard-arrow {
+  display: inline-block;
+  font-size: 13px;
+  transition: transform 0.25s ease;
+}
+
+.pcard:hover .pcard-learn-more,
+.pcard-learn-more:hover {
+  color: #00d2ee !important;
+}
+
+.pcard:hover .pcard-arrow {
+  transform: translateX(3px);
 }
 
 .arrows {
@@ -1450,6 +1515,34 @@ footer .brand p {
   color: #ffffffcc;
 }
 
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.footer-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.footer-social-btn:hover {
+  background: #009dbd;
+  border-color: #009dbd;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
 footer .cols {
   display: flex;
   gap: 50px;
@@ -1539,9 +1632,11 @@ footer .bot {
 .modal-dialog {
   position: relative;
   width: 100%;
-  max-width: 410px;
+  max-width: 440px;
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
   overflow: hidden;
   animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -1559,14 +1654,15 @@ footer .bot {
 
 .modal-header {
   position: relative;
-  padding: 18px 22px 15px;
-  background: linear-gradient(135deg, #021a22 0%, #00363f 100%);
+  padding: 18px 24px 15px;
+  background: linear-gradient(135deg, #073842 0%, #0f596b 100%);
   color: #ffffff;
-  border-bottom: 2px solid #0097a7;
+  border-bottom: 2px solid #009dbd;
+  border-radius: 0;
 }
 
 .modal-title {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.2px;
@@ -1574,8 +1670,8 @@ footer .bot {
 }
 
 .modal-subtitle {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.78);
   margin-top: 3px;
   line-height: 1.4;
 }
@@ -1586,9 +1682,9 @@ footer .bot {
   right: 15px;
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -1639,7 +1735,7 @@ footer .bot {
   color: #1e293b;
   background: #f8fafc;
   border: 1px solid #cbd5e1;
-  border-radius: 7px;
+  border-radius: 0;
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
@@ -1649,7 +1745,7 @@ footer .bot {
 .form-select:focus,
 .form-textarea:focus {
   background: #ffffff;
-  border-color: #0097a7;
+  border-color: #009dbd;
 }
 
 .form-textarea {
@@ -1659,14 +1755,14 @@ footer .bot {
 
 .modal-submit-btn {
   width: 100%;
-  padding: 10px 14px;
-  background: linear-gradient(135deg, #0097a7 0%, #007c8a 100%);
+  padding: 11px 16px;
+  background: linear-gradient(135deg, #009dbd 0%, #007c93 100%);
   color: #ffffff;
   border: 0;
-  border-radius: 7px;
+  border-radius: 0;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1677,7 +1773,7 @@ footer .bot {
 }
 
 .modal-submit-btn:hover {
-  background: linear-gradient(135deg, #00a8bb 0%, #008998 100%);
+  background: linear-gradient(135deg, #00aecf 0%, #008fa8 100%);
   transform: translateY(-1px);
 }
 
@@ -3234,71 +3330,76 @@ footer .bot {
 }
 
 .modal-overlay {
-  padding: 20px;
+  padding: 16px;
 }
 
 .modal-dialog {
-  max-height: min(92vh, 760px);
-  overflow-y: auto;
-  border-radius: 18px;
+  max-height: calc(100vh - 32px);
+  overflow: hidden;
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.14);
 }
 
 .modal-header {
-  padding: 25px 26px 20px;
-  background: linear-gradient(135deg, #07333a 0%, #07515a 100%);
+  padding: 18px 24px 15px;
+  background: linear-gradient(135deg, #073842 0%, #0f596b 100%);
+  border-radius: 0;
 }
 
 .modal-title {
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .modal-subtitle {
   max-width: 38ch;
-  margin-top: 7px;
-  font-size: 13px;
-  line-height: 1.6;
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 .modal-form {
-  padding: 24px 26px 26px;
+  padding: 18px 24px 20px;
 }
 
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 11px;
 }
 
 .form-row {
-  gap: 14px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 11px;
 }
 
 .form-label {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: #354649;
   font-size: 11px;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.05em;
 }
 
 .form-input,
 .form-select,
 .form-textarea {
-  min-height: 44px;
-  padding: 10px 12px;
-  border-color: #d8e1e2;
-  border-radius: 9px;
+  min-height: unset;
+  height: 38px;
+  padding: 8px 12px;
+  border-color: #cbd5e1;
+  border-radius: 0;
   background: #fbfcfc;
   font-size: 13px;
 }
 
 .form-textarea {
-  min-height: 90px;
-  resize: vertical;
+  height: 56px;
+  min-height: 50px;
+  resize: none;
 }
 
 .modal-submit-btn {
-  min-height: 46px;
-  border-radius: 999px;
+  height: 42px;
+  min-height: 42px;
+  border-radius: 0;
 }
 
 @media (max-width: 900px) {

@@ -273,7 +273,7 @@ export default function SkydaleLandingPage({ onNavigateHome }) {
             </a>
           </div>
           <div className="skydale-footer-brand">
-            Nexus Skydale • Survey No 14, 10, Pandhare Wasti Road, Kate Wasti, Punawale, Pune 411 033 • MahaRERA Registered
+            Nexus Skydale • Survey No 14, 10, Pandhare Wasti, Punawale, Pune 411 033 • MahaRERA Registered
           </div>
         </footer>
       </main>

@@ -33,7 +33,7 @@ export default function Hero({ onOpenEnquire, onViewProjects }) {
           <p className="hero-kicker">Nexus Group · Pune since 1996</p>
           <h1>
             Homes built
-            <span>with purpose.</span>
+            <span>with purpose-</span>
           </h1>
           <p className="hero-description">
             Luxury homes and commercial landmarks across Pimpri Chinchwad,
