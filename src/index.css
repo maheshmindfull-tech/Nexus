@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@source "../index.html";
-@source "../src/**/*.{js,ts,jsx,tsx}";
 
 :root {
   --font-primary: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -1242,6 +1240,7 @@ hr.teal {
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
