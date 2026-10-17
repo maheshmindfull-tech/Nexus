@@ -79,7 +79,7 @@ const PROJECTS = [
     location: 'Borhadewadi, Moshi',
     type: 'Residential',
     status: 'Ongoing',
-    config: '2 & 3 BHK | 147 Flats',
+    config: '1, 2 & 3 BHK | 147 Flats',
     image: '/assets/projects/profile/atrium.jpg',
   },
   {

@@ -20,6 +20,9 @@ const NOSCRIPT = `
         <li><a href="/projects">Projects in Pune</a></li>
         <li><a href="/skydale">Nexus Skydale, Punawale</a></li>
         <li><a href="/kinara">Nexus Kinaara, Chikhali</a></li>
+        <li><a href="/atrium">Nexus Atrium, Moshi</a></li>
+        <li><a href="/genesis">Nexus Genesis, Kiwale</a></li>
+        <li><a href="/prime-square">Nexus Prime Square, Moshi</a></li>
         <li><a href="/westia">Nexus Westia, Punawale</a></li>
         <li><a href="/careers">Careers</a></li>
         <li><a href="/contact">Contact Us</a></li>
@@ -82,7 +85,14 @@ export default defineConfig({
   ],
   server: {
     watch: {
-      ignored: ['**/public/pdfs/**', '**/Information pdfs/**', '**/*.pdf'],
+      // Windows locks image files while editors/tools touch them; don't watch static assets.
+      ignored: [
+        '**/public/pdfs/**',
+        '**/public/assets/**',
+        '**/Information pdfs/**',
+        '**/*.pdf',
+        '**/*.{png,jpg,jpeg,webp,gif,mp4}',
+      ],
     },
   },
 })

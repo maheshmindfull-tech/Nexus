@@ -178,7 +178,17 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   </a>
                 </li>
                 <li>
-                  <a href="/projects" onClick={(e) => handleLinkClick(e, '#projects')}>
+                  <a href="/atrium">
+                    Atrium, Moshi
+                  </a>
+                </li>
+                <li>
+                  <a href="/genesis">
+                    Genesis, Kiwale
+                  </a>
+                </li>
+                <li>
+                  <a href="/prime-square" onClick={(e) => handleLinkClick(e, 'square')}>
                     Prime Square, Moshi
                   </a>
                 </li>

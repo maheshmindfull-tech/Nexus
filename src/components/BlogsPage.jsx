@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Calendar, ChevronDown, Clock, Link2, Search } fr
 import Footer from './Footer';
 import { BLOG_POSTS, readMinutes, slugify } from '../data/blogPosts';
 import { applyPageSeo } from '../seo';
+import { canGoBack, pushAppState } from '../historyState';
 import '../blogs.css';
 
 function postFromUrl() {
@@ -192,10 +193,14 @@ export default function BlogsPage({
   }, [active]);
 
   const openPost = (id) => {
-    window.history.pushState({ page: 'blogs' }, '', id ? `/blogs?post=${id}` : '/blogs');
-    setActiveId(id);
+    if (!id && canGoBack()) {
+      window.history.back();
+      return;
+    }
+    pushAppState('blogs', id ? `/blogs?post=${id}` : '/blogs');
+    setActiveId(id || null);
     setCopied(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   const filtered = useMemo(() => {

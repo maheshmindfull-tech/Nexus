@@ -1132,7 +1132,7 @@ hr.teal {
 }
 
 .testi-track-text {
-  animation: testiScrollText 42s linear infinite;
+  animation: testiScrollText 80s linear infinite;
 }
 
 .testi-marquee-wrapper:hover .testi-marquee-track {

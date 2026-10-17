@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutStats from './components/AboutStats';
@@ -17,10 +17,12 @@ import SkydaleLandingPage from './components/SkydaleLandingPage';
 import ProjectLandingPage, { LANDING_PROJECTS } from './components/ProjectLandingPage';
 import BlogsPage from './components/BlogsPage';
 import { applyPageSeo, pageFromLocation, pathForPage } from './seo';
+import { canGoBack, markRestoring, pushAppState, rememberScroll, stampHistory } from './historyState';
 
 export default function App() {
   const [enquireOpen, setEnquireOpen] = useState(false);
-  const [navCount, setNavCount] = useState(0);
+  const [historyTick, setHistoryTick] = useState(0);
+  const restoreY = useRef(null);
   const [currentPage, setCurrentPage] = useState(() => {
     if (typeof window === 'undefined') return 'home';
     const page = pageFromLocation();
@@ -30,36 +32,62 @@ export default function App() {
   useEffect(() => {
     const page = pageFromLocation();
     if (page === 'contact') {
-      window.history.replaceState({ page: 'home' }, '', '/');
+      stampHistory('home', '/');
       setCurrentPage('home');
       setEnquireOpen(true);
       applyPageSeo('home');
     } else {
-      const clean = pathForPage(page);
-      const path = window.location.pathname.replace(/\/+$/, '') || '/';
-      if (path !== clean || window.location.hash) {
-        window.history.replaceState({ page }, '', clean);
-      }
+      stampHistory(page, pathForPage(page));
       applyPageSeo(page);
     }
 
     const onPop = () => {
       const next = pageFromLocation();
+      restoreY.current = window.history.state?.scrollY ?? 0;
       if (next === 'contact') {
-        window.history.replaceState({ page: 'home' }, '', '/');
+        stampHistory('home', '/');
         setCurrentPage('home');
         setEnquireOpen(true);
         applyPageSeo('home');
-        return;
+      } else {
+        setCurrentPage(next);
+        applyPageSeo(next);
       }
-      setCurrentPage(next);
-      applyPageSeo(next);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setHistoryTick((n) => n + 1);
+    };
+
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => rememberScroll());
     };
 
     window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('popstate', onPop);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
+
+  useLayoutEffect(() => {
+    if (historyTick === 0) return undefined;
+    const y = restoreY.current ?? 0;
+    markRestoring(true);
+    const apply = () => window.scrollTo(0, y);
+    apply();
+    const soon = window.setTimeout(apply, 160);
+    const later = window.setTimeout(() => {
+      apply();
+      markRestoring(false);
+    }, 480);
+    return () => {
+      window.clearTimeout(soon);
+      window.clearTimeout(later);
+      markRestoring(false);
+    };
+  }, [historyTick]);
 
   const handleNavigate = (page, section) => {
     if (page === 'contact') {
@@ -68,20 +96,25 @@ export default function App() {
     }
 
     const next = pathForPage(page) ? page : 'home';
-    const clean = pathForPage(next);
-    window.history.pushState({ page: next }, '', clean);
+    pushAppState(next, pathForPage(next));
     setCurrentPage(next);
     applyPageSeo(next);
+    window.scrollTo(0, 0);
 
     if (next === 'home' && section) {
-      setTimeout(() => {
+      window.setTimeout(() => {
         const el = document.getElementById(section);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 120);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  };
+
+  const handleBack = () => {
+    if (canGoBack()) {
+      window.history.back();
       return;
     }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    handleNavigate('home');
   };
 
   return (
@@ -97,19 +130,19 @@ export default function App() {
 
       {currentPage === 'skydale' ? (
         /* DEDICATED SKYDALE LANDING PAGE */
-        <SkydaleLandingPage onNavigateHome={() => handleNavigate('home')} />
+        <SkydaleLandingPage onNavigateHome={handleBack} />
       ) : LANDING_PROJECTS[currentPage] ? (
         <ProjectLandingPage
           key={currentPage}
           project={currentPage}
-          onNavigateHome={() => handleNavigate('home')}
+          onNavigateHome={handleBack}
         />
       ) : currentPage === 'projects' ? (
         /* DEDICATED PROJECTS PAGE */
         <ProjectsPage
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
-          onNavigateProjects={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onNavigateProjects={() => handleNavigate('projects')}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
@@ -127,7 +160,7 @@ export default function App() {
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => setEnquireOpen(true)}
-          onNavigateBlogs={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
       ) : currentPage === 'about' ? (
@@ -148,7 +181,7 @@ export default function App() {
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
           onNavigateProjects={() => handleNavigate('projects')}
-          onNavigateCareers={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => setEnquireOpen(true)}

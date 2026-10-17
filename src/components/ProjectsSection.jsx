@@ -23,16 +23,16 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       name: 'Nexus Prime Square',
       loc: 'Borhadewadi, Moshi',
       img: '/assets/projects/nexus-square.jpg',
-      page: 'projects',
-      href: '/projects',
+      page: 'square',
+      href: '/prime-square',
     },
     {
       id: 'genesis',
       name: 'Nexus Genesis',
       loc: 'Kiwale, Pune',
       img: '/assets/projects/nexus-genesis.jpg',
-      page: 'projects',
-      href: '/projects',
+      page: 'genesis',
+      href: '/genesis',
     },
     {
       id: 'imperia',
@@ -47,8 +47,8 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       name: 'Nexus Atrium',
       loc: 'Borhadewadi, Moshi',
       img: '/assets/projects/nexus-atrium.jpg',
-      page: 'projects',
-      href: '/projects',
+      page: 'atrium',
+      href: '/atrium',
     },
   ];
 

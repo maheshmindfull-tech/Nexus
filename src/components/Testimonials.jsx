@@ -49,40 +49,76 @@ export default function Testimonials() {
 
   const textTestimonials = [
     {
-      p: '“The attention to detail in the clubhouse and pool area is exceptional. We moved in 6 months ago and the community is already so warm and welcoming.”',
+      p: '“We were moving up from a 2 BHK and wanted more space for the kids. The 3 BHK layout felt just right.”',
       b: 'Aarav & Priya Mehta',
-      s: '3 BHK Signature • Tower B, Nexus Skydale',
-      tag: 'Clubhouse & Amenities',
+      s: '3 BHK • Nexus Skydale, Punawale',
+      tag: 'Skydale, Punawale',
     },
     {
-      p: '“The balcony views are stunning, and the cross-ventilation is so much better than our previous home. The Nexus team was very transparent throughout the handover.”',
-      b: 'Dr. Neha & Rohan Shah',
-      s: '2 BHK Elegance • Tower A, Nexus Westia',
-      tag: 'Architecture & Design',
+      p: '“My wife and I wanted something away from the crowded city vibe. The riverside setting is what pulled us in.”',
+      b: 'Rahul & Sneha Jadhav',
+      s: '2 BHK Riverside Home • Nexus Kinaara, Chikhali',
+      tag: 'Kinaara, Chikhali',
     },
     {
-      p: '“The kids love the play area and the security team is always responsive. The master plan feels very well thought out — it\'s a great place to raise a family.”',
+      p: '“Got a shop on the ground floor for my small business. Good footfall area, and the plan was explained clearly.”',
+      b: 'Vikram Rane',
+      s: 'Commercial Shop • Nexus Prime Square, Moshi',
+      tag: 'Prime Square, Moshi',
+    },
+    {
+      p: '“We didn\'t want a huge crowded society. Around 150 flats felt like the right size for our family.”',
       b: 'Smita & Karan Desai',
-      s: '4 BHK Royal Grande • Tower C, Nexus Kinara',
-      tag: 'Family & Security',
+      s: '2 BHK • Nexus Atrium, Moshi',
+      tag: 'Atrium, Moshi',
     },
     {
-      p: '“Timely delivery and zero hidden charges. From booking till possession, the Nexus customer relations team guided us through every bank step smoothly.”',
-      b: 'Vikram & Ananya Rane',
-      s: '2 BHK Premium • Nexus Prime Square',
-      tag: 'Smooth Possession',
+      p: '“Only 84 flats, so it feels more like a community than a township. Paperwork was explained patiently — that\'s why we trusted them.”',
+      b: 'Amit & Pooja Kulkarni',
+      s: '2 BHK • Nexus Imperia, Moshi',
+      tag: 'Imperia, Moshi',
     },
     {
-      p: '“The construction quality and earthquake-resistant structure give complete peace of mind. Every square foot has been utilized thoughtfully without waste.”',
+      p: '“We wanted 4 BHK for our joint family. Not many options give that at a fair price with a good carpet area.”',
       b: 'Mahesh & Sunita Patil',
-      s: '3 BHK Grande • Nexus Genesis',
-      tag: 'Build Quality',
+      s: '4 BHK • Nexus Genesis, Kiwale',
+      tag: 'Genesis, Kiwale',
     },
     {
-      p: '“Living here feels like a luxury retreat every day. Premium fittings, wide corridors, and lush landscaped gardens make it truly the best investment of our life.”',
-      b: 'Rajesh & Shweta Kulkarni',
-      s: '3 BHK Luxury • Nexus Atrium',
-      tag: 'Lifestyle & Comfort',
+      p: '“We already live in Punawale and didn\'t want to move far. Smaller building, so the team gave us personal attention.”',
+      b: 'Dr. Neha & Rohan Shah',
+      s: '2 BHK • Nexus Westia, Punawale',
+      tag: 'Westia, Punawale',
+    },
+    {
+      p: '“We decided to book early because the pricing and location made sense. They explained the plan and timeline clearly.”',
+      b: 'Rajesh & Shweta Joshi',
+      s: 'Upcoming Project • Nexus Green\'s, Punawale',
+      tag: 'Green\'s, Punawale',
+    },
+    {
+      p: '“We have been living here for a long time. Big society, but it feels well managed. My neighbours became friends.”',
+      b: 'Anand & Kavita Bhosale',
+      s: 'Resident • Gulmohar, Charholi Budruk',
+      tag: 'Gulmohar, Charholi',
+    },
+    {
+      p: '“Shops on the ground floor make our life super easy. Everything\'s downstairs — daily needs sorted without stepping out.”',
+      b: 'Sachin & Rupal Pawar',
+      s: 'Resident • West Pride, Punawale',
+      tag: 'West Pride, Punawale',
+    },
+    {
+      p: '“Loved the open feel and the greenery. Kids play freely here — it\'s the kind of space every family dreams of.”',
+      b: 'Tushar & Manasi Deshpande',
+      s: 'Resident • Nirvana Beyond, Ravet-Kiwale',
+      tag: 'Nirvana Beyond',
+    },
+    {
+      p: '“We\'ve lived here since handover. Never faced any major issue. Minor issues get resolved very quickly.”',
+      b: 'Suresh & Lata Gaikwad',
+      s: 'Resident • Govind Darshan, Ravet',
+      tag: 'Govind Darshan, Ravet',
     },
   ];
 
@@ -101,7 +137,7 @@ export default function Testimonials() {
         <div className="testi-section-block">
           <div className="testi-subheading">
             <Video className="w-4 h-4 text-[#0097a7]" />
-            <span>Video Testimonials • Real Resident Stories</span>
+            <span>Video Testimonials</span>
           </div>
 
           <div className="testi-marquee-wrapper">
@@ -138,11 +174,11 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* 2. Continuous Single-Line 6 Text Testimonials Row */}
+        {/* 2. Continuous Single-Line 12 Text Testimonials Row */}
         <div className="testi-section-block" style={{ marginTop: '42px' }}>
           <div className="testi-subheading">
             <Quote className="w-4 h-4 text-[#0097a7]" />
-            <span>Homeowner Reviews • 6 Verified Experiences</span>
+            <span>Homeowner Reviews</span>
           </div>
 
           <div className="testi-marquee-wrapper">
