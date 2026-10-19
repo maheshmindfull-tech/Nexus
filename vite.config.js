@@ -23,6 +23,7 @@ const NOSCRIPT = `
         <li><a href="/atrium">Nexus Atrium, Moshi</a></li>
         <li><a href="/genesis">Nexus Genesis, Kiwale</a></li>
         <li><a href="/prime-square">Nexus Prime Square, Moshi</a></li>
+        <li><a href="/imperia">Nexus Imperia, Moshi</a></li>
         <li><a href="/westia">Nexus Westia, Punawale</a></li>
         <li><a href="/careers">Careers</a></li>
         <li><a href="/contact">Contact Us</a></li>

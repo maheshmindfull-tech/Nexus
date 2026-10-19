@@ -193,6 +193,11 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   </a>
                 </li>
                 <li>
+                  <a href="/imperia" onClick={(e) => handleLinkClick(e, 'imperia')}>
+                    Imperia, Moshi
+                  </a>
+                </li>
+                <li>
                   <a href="/projects" onClick={(e) => handleLinkClick(e, '#projects')}>
                     Ongoing developments
                   </a>

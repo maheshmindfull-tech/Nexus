@@ -39,8 +39,8 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       name: 'Nexus Imperia',
       loc: 'Borhadewadi, Moshi',
       img: '/assets/projects/nexus-imperia.jpg',
-      page: 'projects',
-      href: '/projects',
+      page: 'imperia',
+      href: '/imperia',
     },
     {
       id: 'atrium',

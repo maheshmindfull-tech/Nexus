@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ArrowLeft, Download, X } from 'lucide-react';
+import AmenityBoard from './AmenityBoard';
 import { LANDING_CONTENT } from '../data/landings';
 import { submitLeadToGoogleSheet } from '../services/leadService';
 import '../skydale-landing.css';
@@ -37,7 +38,7 @@ function GalleryCarousel({ items }) {
   const animating = useRef(false);
   const pendingWrap = useRef(null);
   const chainTimer = useRef(0);
-  const goRef = useRef(() => {});
+  const goRef = useRef(() => { });
 
   const stepOnce = (dir) => {
     const from = indexRef.current;
@@ -137,9 +138,7 @@ function GalleryCarousel({ items }) {
 export default function LandingView({ id, onNavigateHome }) {
   const p = LANDING_CONTENT[id];
   const isKinara = p?.theme === 'kinara';
-  const breakShots = isKinara
-    ? [p.gallery?.[1]?.src, p.gallery?.[3]?.src || p.gallery?.[2]?.src].filter(Boolean)
-    : [];
+  const breakShot = p?.breakShot || (isKinara ? (p.gallery?.[3]?.src || p.gallery?.[2]?.src || p.gallery?.[0]?.src) : null);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -199,6 +198,7 @@ export default function LandingView({ id, onNavigateHome }) {
   }, [lightbox, enquiryOpen]);
 
   if (!p) return null;
+  const editorial = p.layout === 'editorial';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -220,7 +220,7 @@ export default function LandingView({ id, onNavigateHome }) {
   const setField = (key) => (e) => setFormData((prev) => ({ ...prev, [key]: e.target.value }));
 
   return (
-    <div className={`lp-page${p.theme ? ` lp-theme-${p.theme}` : ''}`}>
+    <div className={`lp-page lp-brand-${id}${p.theme ? ` lp-theme-${p.theme}` : ''}${editorial ? ' lp-edit' : ''}`}>
       <header className="lp-bar">
         <div className="lp-bar-inner">
           <button type="button" className="lp-back" onClick={onNavigateHome}>
@@ -248,28 +248,38 @@ export default function LandingView({ id, onNavigateHome }) {
 
       {p.theme === 'kinara' ? (
         <section
-          className={`lp-hero lp-hero-light${p.heroScrim ? ' has-scrim' : ''}`}
+          className={`lp-hero lp-hero-light${p.heroScrim ? ' has-scrim' : ''}${p.heroSoft ? ' is-soft' : ''}`}
           aria-label={p.name}
           style={{
-            backgroundImage: `url(${p.hero})`,
+            ...(p.hero ? { backgroundImage: `url(${p.hero})` } : {}),
             ...(p.heroPosition ? { backgroundPosition: p.heroPosition } : {}),
           }}
         >
-          {p.logo ? <img className="lp-hero-logo" src={p.logo} alt="" /> : null}
+          {p.heroArt ? <img className="lp-hero-art" src={p.heroArt} alt="" /> : null}
+          {p.logo ? <img className={`lp-hero-logo${p.logoColor ? ' is-color' : ''}${p.logoMark ? ' is-mark' : ''}`} src={p.logo} alt="" /> : null}
           <div className="lp-hero-copy-overlay">
             <p className="lp-hero-script lp-hero-anim" style={{ animationDelay: '0.08s' }}>{p.headingPrefix}</p>
-            <h1 className="lp-hero-title lp-hero-anim" style={{ animationDelay: '0.18s' }}>
-              {(p.heroTitle || [
+            {(() => {
+              const lines = p.heroTitle || [
                 { text: 'Final' },
                 { text: 'Chapter', dash: '–', after: 'E' },
-              ]).map((line, i) => (
-                <span key={`${line.text}-${i}`} className={i > 0 ? 'lp-hero-line2' : undefined}>
-                  {line.text}
-                  {line.dash ? <span className="lp-hero-dash">{line.dash}</span> : null}
-                  {line.after || null}
-                </span>
-              ))}
-            </h1>
+              ];
+              const oneLine = lines.length === 2
+                && lines.every((line) => !line.dash && !line.after && line.text.trim().split(/\s+/).length === 1);
+              return (
+                <h1 className={`lp-hero-title lp-hero-anim${oneLine ? ' is-one-line' : ''}`} style={{ animationDelay: '0.18s' }}>
+                  {oneLine ? (
+                    <span>{lines.map((line) => line.text).join(' ')}</span>
+                  ) : lines.map((line, i) => (
+                    <span key={`${line.text}-${i}`} className={i > 0 ? 'lp-hero-line2' : undefined}>
+                      {line.text}
+                      {line.dash ? <span className="lp-hero-dash">{line.dash}</span> : null}
+                      {line.after || null}
+                    </span>
+                  ))}
+                </h1>
+              );
+            })()}
             {p.lede ? <p className="lp-hero-tagline lp-hero-anim" style={{ animationDelay: '0.32s' }}>{p.lede}</p> : null}
             <div className="lp-hero-actions lp-hero-anim" style={{ animationDelay: '0.44s' }}>
               <button type="button" className="lp-btn lp-btn-gold" onClick={openEnquiry}>
@@ -339,72 +349,104 @@ export default function LandingView({ id, onNavigateHome }) {
             {!isKinara && <p className="lp-eyebrow">At a glance</p>}
             <h2>Project highlights</h2>
           </div>
-          <div className="lp-highlights">
-            {p.highlights.map((item, i) => (
-              <article
-                key={item.title}
-                className="lp-highlight lp-reveal"
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <img src={item.src} alt="" />
-                <h3>{item.title}</h3>
-              </article>
-            ))}
-          </div>
+          {editorial ? (
+            <div className="lp-edit-highlights">
+              {p.highlights.map((item, i) => (
+                <article
+                  key={item.title}
+                  className={`lp-edit-highlight lp-reveal${i === 0 ? ' is-feature' : ''}`}
+                  style={{ transitionDelay: `${i * 80}ms` }}
+                >
+                  <img src={item.src} alt="" />
+                  <h3>{item.title}</h3>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="lp-highlights">
+              {p.highlights.map((item, i) => (
+                <article
+                  key={item.title}
+                  className="lp-highlight lp-reveal"
+                  style={{ transitionDelay: `${i * 80}ms` }}
+                >
+                  <img src={item.src} alt="" />
+                  <h3>{item.title}</h3>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {p.amenities && (
-        <section className="lp-section lp-amenities" aria-label="Lifestyle amenities">
-          <div className="lp-wrap">
-            <div className="lp-section-head lp-reveal">
-              {!isKinara && <p className="lp-eyebrow">Life on site</p>}
-              <h2>Amenities</h2>
-              {p.amenities.subtitle ? <p className="lp-sub">{p.amenities.subtitle}</p> : null}
-              {!isKinara && (
-                <p className="lp-disclaimer">
-                  Artist’s impressions of the amenities planned for this project. The images show the intended lifestyle. Finished spaces follow the sanctioned plans, so finishes and details on site can differ from the picture.
-                </p>
+        <section className={`lp-section lp-amenities${p.amenityLayout ? ` is-${p.amenityLayout}` : ''}`} aria-label="Lifestyle amenities">
+          {p.amenityLayout ? (
+            <AmenityBoard layout={p.amenityLayout} lead={p.amenities.lead} items={p.amenities.items} />
+          ) : (
+            <div className="lp-wrap">
+              <div className="lp-section-head lp-reveal">
+                {!isKinara && <p className="lp-eyebrow">Life on site</p>}
+                <h2>Amenities</h2>
+                {p.amenities.subtitle ? <p className="lp-sub">{p.amenities.subtitle}</p> : null}
+                {!isKinara && (
+                  <p className="lp-disclaimer">
+                    Artist’s impressions of the amenities planned for this project. The images show the intended lifestyle. Finished spaces follow the sanctioned plans, so finishes and details on site can differ from the picture.
+                  </p>
+                )}
+              </div>
+              {editorial ? (
+                <div className="lp-edit-amenities">
+                  {p.amenities.items.map((item, i) => (
+                    <figure
+                      key={item.label}
+                      className="lp-reveal"
+                      style={{ transitionDelay: `${i * 70}ms` }}
+                    >
+                      <img src={item.src} alt="" />
+                      <figcaption>{item.label}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ) : isKinara ? (
+                <div className="lp-amenity-bento">
+                  <figure className="lp-bento-shot is-lead">
+                    {p.amenities.lead.video ? (
+                      <video
+                        src={p.amenities.lead.src}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        aria-label={p.amenities.lead.label}
+                      />
+                    ) : (
+                      <img src={p.amenities.lead.src} alt={p.amenities.lead.label} />
+                    )}
+                  </figure>
+                  {p.amenities.items.map((item, i) => (
+                    <figure key={item.label} className={`lp-bento-shot is-slot-${i}`}>
+                      <img src={item.src} alt="" />
+                      <span>{item.label}</span>
+                    </figure>
+                  ))}
+                </div>
+              ) : (
+                <div className="lp-amenity-grid">
+                  {p.amenities.items.map((item, i) => (
+                    <figure
+                      key={item.label}
+                      className={`lp-amenity lp-reveal${i === 0 ? ' is-lead' : ''}`}
+                      style={{ transitionDelay: `${i * 90}ms` }}
+                    >
+                      <img src={item.src} alt={item.label} />
+                      <figcaption>{item.label}</figcaption>
+                    </figure>
+                  ))}
+                </div>
               )}
             </div>
-            {isKinara ? (
-              <div className="lp-amenity-bento">
-                <figure className="lp-bento-shot is-lead">
-                  {p.amenities.lead.video ? (
-                    <video
-                      src={p.amenities.lead.src}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      aria-label={p.amenities.lead.label}
-                    />
-                  ) : (
-                    <img src={p.amenities.lead.src} alt={p.amenities.lead.label} />
-                  )}
-                </figure>
-                {p.amenities.items.map((item, i) => (
-                  <figure key={item.label} className={`lp-bento-shot is-slot-${i}`}>
-                    <img src={item.src} alt="" />
-                    <span>{item.label}</span>
-                  </figure>
-                ))}
-              </div>
-            ) : (
-              <div className="lp-amenity-grid">
-                {p.amenities.items.map((item, i) => (
-                  <figure
-                    key={item.label}
-                    className={`lp-amenity lp-reveal${i === 0 ? ' is-lead' : ''}`}
-                    style={{ transitionDelay: `${i * 90}ms` }}
-                  >
-                    <img src={item.src} alt={item.label} />
-                    <figcaption>{item.label}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            )}
-          </div>
+          )}
         </section>
       )}
 
@@ -432,41 +474,55 @@ export default function LandingView({ id, onNavigateHome }) {
       )}
 
       {p.plans?.length > 0 && (
-      <section className="lp-section lp-plans-sec" aria-label="Floor plans">
-        <div className="lp-wrap">
-          <div className="lp-section-head lp-reveal">
-            {!isKinara && <p className="lp-eyebrow">Layouts</p>}
-            <h2>Floor plans</h2>
-            {p.plansIntro ? <p className="lp-sub">{p.plansIntro}</p> : null}
-            {!isKinara && (
-              <p className="lp-disclaimer">
-                Floor plans are artist-designed illustrations. Furniture shown is conceptual. Exact layout and carpet area follow the sanctioned plans.
-              </p>
-            )}
-          </div>
-          <div className={`lp-plans lp-plans-${p.plans.length}`}>
-            {p.plans.map((plan, i) => (
-              <article key={plan.title} className="lp-plan lp-reveal" style={{ transitionDelay: `${i * 90}ms` }}>
-                {isKinara ? (
-                  <div className="lp-plan-shot">
-                    <img src={plan.src} alt={`${plan.title} floor plan`} />
-                  </div>
-                ) : (
+        <section className="lp-section lp-plans-sec" aria-label="Floor plans">
+          <div className="lp-wrap">
+            <div className="lp-section-head lp-reveal">
+              {!isKinara && <p className="lp-eyebrow">Layouts</p>}
+              <h2>Floor plans</h2>
+              {p.plansIntro ? <p className="lp-sub">{p.plansIntro}</p> : null}
+              {!isKinara && (
+                <p className="lp-disclaimer">
+                  Floor plans are artist-designed illustrations. Furniture shown is conceptual. Exact layout and carpet area follow the sanctioned plans.
+                </p>
+              )}
+            </div>
+            <div className={`lp-plans lp-plans-${p.plans.length}`}>
+              {p.plans.map((plan, i) => (
+                <article key={plan.title} className="lp-plan lp-reveal" style={{ transitionDelay: `${i * 90}ms` }}>
                   <button type="button" className="lp-plan-shot" onClick={() => setLightbox(plan)} aria-label={`View ${plan.title} floor plan`}>
                     <img src={plan.src} alt={`${plan.title} floor plan`} />
                   </button>
-                )}
-                <h3>{plan.title}</h3>
-              </article>
-            ))}
+                  <h3>{plan.title}</h3>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
-      {breakShots[0] ? <ProjectBreak src={breakShots[0]} /> : null}
-
-      {p.gallerySlide ? (
+      {editorial ? (
+        <section className="lp-section lp-edit-gallery-sec" aria-label="Gallery">
+          <div className="lp-wrap">
+            <div className="lp-section-head lp-reveal">
+              <h2>Gallery</h2>
+            </div>
+            <div className="lp-edit-gallery">
+              {p.gallery.map((shot, i) => (
+                <figure
+                  key={shot.src}
+                  className={`lp-reveal${shot.wide ? ' is-wide' : ''}`}
+                  style={{ transitionDelay: `${(i % 4) * 70}ms` }}
+                >
+                  <button type="button" onClick={() => setLightbox(shot)} aria-label={`View ${shot.label}`}>
+                    <img src={shot.src} alt={shot.label} />
+                    <figcaption>{shot.label}</figcaption>
+                  </button>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : p.gallerySlide ? (
         <GalleryCarousel items={p.gallery} />
       ) : (
         <section className="lp-section" aria-label="Gallery">
@@ -527,7 +583,7 @@ export default function LandingView({ id, onNavigateHome }) {
         </section>
       )}
 
-      {breakShots[1] ? <ProjectBreak src={breakShots[1]} /> : null}
+      {breakShot ? <ProjectBreak src={breakShot} /> : null}
 
       <section className="lp-contact" aria-label="Project address and contact">
         <div className="lp-wrap lp-visit">
@@ -567,6 +623,7 @@ export default function LandingView({ id, onNavigateHome }) {
             <ArrowLeft size={16} />
             Back to main site
           </button>
+          <img className="lp-foot-logo" src="/assets/logo/nexus-logo-white.png" alt="Nexus" />
           <p>
             {p.name} · {p.location}, Pune
           </p>
@@ -584,13 +641,22 @@ export default function LandingView({ id, onNavigateHome }) {
           aria-label={lightbox.label || lightbox.title}
           onClick={() => setLightbox(null)}
         >
-          <button type="button" className="lp-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close">
-            <X size={20} />
-          </button>
-          <figure onClick={(e) => e.stopPropagation()}>
-            <img src={lightbox.src} alt={lightbox.label || lightbox.title} />
-            <figcaption>{lightbox.label || lightbox.title}</figcaption>
-          </figure>
+          <div className="lp-lightbox-window" onClick={(e) => e.stopPropagation()}>
+            <div className="lp-lightbox-head">
+              <h3 className="lp-lightbox-title">{lightbox.label || lightbox.title}</h3>
+              <button
+                type="button"
+                className="lp-lightbox-close"
+                onClick={() => setLightbox(null)}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="lp-lightbox-body">
+              <img src={lightbox.src} alt={lightbox.label || lightbox.title} />
+            </div>
+          </div>
         </div>
       )}
 

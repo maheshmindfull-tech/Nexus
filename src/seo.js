@@ -216,6 +216,28 @@ export const PAGE_SEO = {
       brand: { '@id': `${ORIGIN}/#organization` },
     },
   },
+  imperia: {
+    path: '/imperia',
+    title: 'Nexus Imperia Moshi | 2 & 3 BHK Supreme Homes in Pune',
+    description:
+      'Nexus Imperia in Borhadewadi, Moshi offers 2 and 3 BHK homes with a gymnasium, community hall, landscape garden and children’s play. MahaRERA P52100053378.',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'ApartmentComplex',
+      name: 'Nexus Imperia',
+      url: `${ORIGIN}/imperia`,
+      description: '2 and 3 BHK residences by Nexus Group in Borhadewadi, Moshi, Pune.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Gat No. 79, Opposite Prasanna Goldfields Commercial Complex, Borhadewadi',
+        addressLocality: 'Moshi',
+        postalCode: '412105',
+        addressRegion: 'Maharashtra',
+        addressCountry: 'IN',
+      },
+      brand: { '@id': `${ORIGIN}/#organization` },
+    },
+  },
   atrium: {
     path: '/atrium',
     title: 'Nexus Atrium Moshi | 1, 2 & 3 BHK Homes in Pune',
@@ -328,6 +350,8 @@ const HASH_TO_PAGE = {
   '#square': 'square',
   '#prime-square': 'square',
   '#nexus-prime-square': 'square',
+  '#imperia': 'imperia',
+  '#nexus-imperia': 'imperia',
   '#nexus-genesis': 'genesis',
   '#contact': 'contact',
   '#contact-us': 'contact',
