@@ -133,15 +133,15 @@ export const PAGE_SEO = {
   },
   skydale: {
     path: '/skydale',
-    title: 'Nexus Skydale Punawale | 2, 3 & 4 BHK Homes in Pune',
+    title: 'Nexus Skydale Punawale | 2, 3 & 4 BHK Homes & Commercial Spaces in Pune',
     description:
-      'Nexus Skydale in Pandhare Wasti, Punawale offers 2, 3 and 4 BHK homes with a prime Pune location, smart-home planning, and premium amenities. MahaRERA P52100050149.',
+      'Nexus Skydale in Pandhare Wasti, Punawale offers 2, 3 and 4 BHK homes & commercial spaces with a prime Pune location, smart-home planning, and premium amenities. MahaRERA P52100050149.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ApartmentComplex',
       name: 'Nexus Skydale',
       url: `${ORIGIN}/skydale`,
-      description: '2, 3 and 4 BHK residences by Nexus Group in Punawale, Pune.',
+      description: '2, 3 and 4 BHK residences & commercial spaces by Nexus Group in Punawale, Pune.',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Punawale',

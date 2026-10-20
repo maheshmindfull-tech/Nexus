@@ -1,8 +1,21 @@
 import kinaraLeadVideo from '../assets/kinara-lead-portrait.mp4';
 import kinaraPlanA from '../assets/kinara-plan-a.jpg';
 import kinaraPlanB from '../assets/kinara-plan-b.jpg';
-import primeArchitecture from '../assets/prime-square-architecture.jpg';
 import kinaraBreakBoat from '../assets/kinara-break-boat.jpg';
+import westiaBreak from '../assets/westia-break.jpg';
+import skydaleBreak from '../assets/skydale-break.jpg';
+import atriumBreak from '../assets/atrium-break.jpg';
+import genesisBreak from '../assets/genesis-break.jpg';
+import primeBreak from '../assets/prime-break.jpg';
+import imperiaBreak from '../assets/imperia-break.jpg';
+import primeHero from '../../public/assets/prime-landing/hero-rooftop.png';
+import genesisLogoClear from '../assets/genesis-logo-clear.png';
+import skydaleHero from '../../public/assets/skydale-landing/v2/hero-sunset.png';
+import skydalePoolVideo from '../assets/skydale-villa-pool.mp4';
+import westiaRoadVideo from '../assets/westia-road.mp4';
+import genesisYogaVideo from '../assets/genesis-yoga-couple.mp4';
+import atriumGymVideo from '../assets/atrium-gym-men.mp4';
+import imperiaHallVideo from '../assets/imperia-amenity.mp4';
 
 const TEAM = [
   { role: 'Architect', name: 'Kalparachana' },
@@ -87,6 +100,7 @@ export const LANDING_CONTENT = {
     shortName: 'Westia',
     location: 'Punawale',
     theme: 'kinara',
+    breakShot: westiaBreak,
     gallerySlide: true,
     heroScrim: true,
     heroSoft: true,
@@ -121,15 +135,15 @@ export const LANDING_CONTENT = {
       'The site sits close to workplaces and IT hubs such as Hinjewadi and Wakad, beside Punawale’s oxygen park, with the kind of growth and timely delivery Nexus is known for.',
     ],
     highlights: [
-      { src: '/assets/westia-landing/highlights/1.jpg', title: 'Premium and unique elevation' },
-      { src: '/assets/westia-landing/highlights/2.jpg', title: 'Two balconies for each home' },
-      { src: '/assets/westia-landing/highlights/3.jpg', title: 'Designer landscape garden' },
-      { src: '/assets/westia-landing/highlights/4.jpg', title: 'Easy reach to Hinjewadi and Wakad' },
-      { src: '/assets/westia-landing/highlights/5.jpg', title: 'Next to Punawale’s oxygen park' },
+      { src: '/assets/westia-landing/highlights/1.jpg', title: 'Punawale’s oxygen park' },
+      { src: '/assets/westia-landing/highlights/2.jpg', title: 'Hinjewadi and Wakad' },
+      { src: '/assets/westia-landing/highlights/3.jpg', title: 'Two balconies in each home' },
+      { src: '/assets/westia-landing/highlights/4.jpg', title: 'Designer landscape garden' },
+      { src: '/assets/westia-landing/highlights/5.jpg', title: 'Low-density living' },
     ],
     amenities: {
       subtitle: '',
-      lead: { src: '/assets/westia-landing/hero.jpg', label: 'Nexus Westia' },
+      lead: { src: westiaRoadVideo, label: 'Road connectivity', video: true },
       items: [
         { src: '/assets/westia-landing/amenities/garden.jpg', label: 'Landscape Garden' },
         { src: '/assets/westia-landing/amenities/park.jpg', label: 'Oxygen Park' },
@@ -160,6 +174,7 @@ export const LANDING_CONTENT = {
     shortName: 'Skydale',
     location: 'Punawale',
     theme: 'kinara',
+    breakShot: skydaleBreak,
     gallerySlide: true,
     heroScrim: true,
     heroSoft: true,
@@ -171,8 +186,8 @@ export const LANDING_CONTENT = {
       { text: 'Luxury' },
       { text: 'Living' },
     ],
-    lede: 'Premium 2, 3 and 4 BHK homes in Punawale.',
-    hero: '/assets/skydale-landing/v2/g-hall.jpg',
+    lede: 'Premium 2, 3 and 4 BHK homes & commercial spaces in Punawale.',
+    hero: skydaleHero,
     logo: '/assets/projects/logos/skydale.png',
     logoColor: true,
     logoMark: true,
@@ -195,15 +210,15 @@ export const LANDING_CONTENT = {
       'Quality construction and refined finishes sit alongside lifestyle amenities, seamless connectivity, and Nexus Group’s record of clear titles and timely possession.',
     ],
     highlights: [
-      { src: '/assets/skydale-landing/kinara/highlights/tower.jpg', title: 'A landmark elevation' },
-      { src: '/assets/skydale-landing/kinara/highlights/location.jpg', title: 'Prime Punawale location' },
+      { src: '/assets/skydale-landing/kinara/highlights/tower.jpg', title: 'Prime Location' },
+      { src: '/assets/skydale-landing/kinara/highlights/location.jpg', title: 'Connectivity' },
       { src: '/assets/skydale-landing/kinara/highlights/smart.jpg', title: 'Thoughtfully designed homes' },
       { src: '/assets/skydale-landing/kinara/highlights/club.jpg', title: 'Clubhouse living' },
       { src: '/assets/skydale-landing/kinara/highlights/play.jpg', title: 'Children’s play area' },
     ],
     amenities: {
       subtitle: '',
-      lead: { src: '/assets/skydale-landing/v2/g-dusk.jpg', label: 'Nexus Skydale' },
+      lead: { src: skydalePoolVideo, label: 'Swimming pool', video: true },
       items: [
         { src: '/assets/skydale-landing/kinara/amenities/gym.jpg', label: 'Gymnasium' },
         { src: '/assets/skydale-landing/kinara/amenities/club.jpg', label: 'Clubhouse' },
@@ -236,7 +251,7 @@ export const LANDING_CONTENT = {
     shortName: 'Atrium',
     location: 'Moshi',
     theme: 'kinara',
-    breakShot: '/assets/atrium-landing/banner.jpg',
+    breakShot: atriumBreak,
     gallerySlide: true,
     heroScrim: true,
     heroSoft: true,
@@ -271,15 +286,15 @@ export const LANDING_CONTENT = {
       'Homes are Vastu compliant, with two balconies and cross ventilation. A landscaped garden, children’s play area, gymnasium and community hall complete the project.',
     ],
     highlights: [
-      { src: '/assets/atrium-landing/highlights/elevation.jpg', title: 'Premium and unique elevation' },
-      { src: '/assets/atrium-landing/highlights/facade.jpg', title: 'Two balconies in every home' },
-      { src: '/assets/atrium-landing/highlights/garden.jpg', title: 'Landscaped central garden' },
-      { src: '/assets/atrium-landing/highlights/entrance.jpg', title: 'Grand entrance with security cabin' },
-      { src: '/assets/atrium-landing/highlights/play.jpg', title: 'Thoughtfully planned children’s play' },
+      { src: '/assets/atrium-landing/highlights/elevation.jpg', title: '1, 2 and 3 BHK homes' },
+      { src: '/assets/atrium-landing/highlights/facade.jpg', title: 'Two minutes to Spine Road' },
+      { src: '/assets/atrium-landing/highlights/garden.jpg', title: 'Vastu-compliant homes' },
+      { src: '/assets/atrium-landing/highlights/entrance.jpg', title: 'Entrance with security cabin' },
+      { src: '/assets/atrium-landing/highlights/play.jpg', title: 'Community hall' },
     ],
     amenities: {
       subtitle: '',
-      lead: { src: '/assets/atrium-landing/street.jpg', label: 'Nexus Atrium' },
+      lead: { src: atriumGymVideo, label: 'Gymnasium', video: true },
       items: [
         { src: '/assets/atrium-landing/amenities/gym.jpg', label: 'Gymnasium' },
         { src: '/assets/atrium-landing/amenities/hall.jpg', label: 'Community Hall' },
@@ -310,6 +325,7 @@ export const LANDING_CONTENT = {
     shortName: 'Genesis',
     location: 'Kiwale',
     theme: 'kinara',
+    breakShot: genesisBreak,
     gallerySlide: true,
     heroScrim: true,
     heroSoft: true,
@@ -323,7 +339,7 @@ export const LANDING_CONTENT = {
     ],
     lede: '2, 3 and 4 BHK homes on 3.5 acres in Kiwale.',
     hero: '/assets/genesis-landing/living.jpg',
-    logo: '/assets/projects/logos/genesis.png',
+    logo: genesisLogoClear,
     logoColor: true,
     brochure: '/pdfs/nexus-genesis-brochure.pdf',
     brochureName: 'Nexus Genesis Brochure.pdf',
@@ -344,15 +360,14 @@ export const LANDING_CONTENT = {
       'A 12-ft pool, glass clubhouse, gymnasium, yoga terrace, landscaped garden and children’s play sit within the project, a short drive from the Mumbai–Pune Expressway and Hinjewadi.',
     ],
     highlights: [
-      { src: '/assets/genesis-landing/highlights/towers.jpg', title: 'Five towers on 3.5 acres' },
-      { src: '/assets/genesis-landing/highlights/evening.jpg', title: 'Elevated evening living' },
       { src: '/assets/genesis-landing/highlights/pool.jpg', title: '12-ft swimming pool' },
       { src: '/assets/genesis-landing/highlights/clubhouse.jpg', title: 'Three-side glass clubhouse' },
-      { src: '/assets/genesis-landing/highlights/play.jpg', title: 'Children’s play area' },
+      { src: '/assets/genesis-landing/highlights/evening.jpg', title: 'Yoga terrace' },
+      { src: '/assets/genesis-landing/highlights/play.jpg', title: 'Mumbai–Pune Expressway' },
     ],
     amenities: {
       subtitle: '',
-      lead: { src: '/assets/genesis-landing/dusk.jpg', label: 'Nexus Genesis' },
+      lead: { src: genesisYogaVideo, label: 'Yoga terrace', video: true },
       items: [
         { src: '/assets/genesis-landing/amenities/pool.jpg', label: 'Swimming Pool' },
         { src: '/assets/genesis-landing/amenities/gym.jpg', label: 'Gymnasium' },
@@ -376,7 +391,7 @@ export const LANDING_CONTENT = {
     shortName: 'Prime Square',
     location: 'Moshi',
     theme: 'kinara',
-    breakShot: '/assets/prime-landing/banner.jpg',
+    breakShot: primeBreak,
     gallerySlide: true,
     heroScrim: true,
     heroSoft: true,
@@ -388,8 +403,7 @@ export const LANDING_CONTENT = {
       { text: 'Dreams' },
     ],
     lede: '2 and 3 BHK homes in Borhadewadi, Moshi.',
-    hero: '',
-    heroArt: primeArchitecture,
+    hero: primeHero,
     logo: '/assets/projects/logos/square.png',
     logoColor: true,
     brochure: '/pdfs/nexus-prime-square-brochure.pdf',
@@ -411,11 +425,11 @@ export const LANDING_CONTENT = {
       'Podium and ground-level amenities include a swimming pool, fitness zone, indoor games, community hall, landscaped garden and children’s play area, with 24-hour security and power backup for each home.',
     ],
     highlights: [
-      { src: '/assets/prime-landing/highlights/towers.jpg', title: 'Premium and unique elevation' },
-      { src: '/assets/prime-landing/highlights/aerial.jpg', title: 'At the centre of Moshi' },
-      { src: '/assets/prime-landing/highlights/pool.jpg', title: 'Swimming pool on the podium' },
-      { src: '/assets/prime-landing/highlights/play.jpg', title: 'Children’s play lawn' },
-      { src: '/assets/prime-landing/highlights/garden.jpg', title: 'Podium garden' },
+      { src: '/assets/prime-landing/highlights/towers.jpg', title: 'At the centre of Moshi' },
+      { src: '/assets/prime-landing/highlights/pool.jpg', title: 'Podium swimming pool' },
+      { src: '/assets/prime-landing/highlights/aerial.jpg', title: 'Indoor games' },
+      { src: '/assets/prime-landing/highlights/garden.jpg', title: 'Fitness zone' },
+      { src: '/assets/prime-landing/highlights/play.jpg', title: 'For children and seniors' },
     ],
     amenities: {
       subtitle: '',
@@ -451,7 +465,7 @@ export const LANDING_CONTENT = {
     shortName: 'Imperia',
     location: 'Moshi',
     theme: 'kinara',
-    breakShot: '/assets/imperia-landing/banner.jpg',
+    breakShot: imperiaBreak,
     gallerySlide: true,
     heroScrim: true,
     heroSoft: true,
@@ -488,15 +502,14 @@ export const LANDING_CONTENT = {
       'The address connects towards Chakan, Bhosari, Markal, Talawade IT Park and Hinjewadi IT Park. Spine Road and Tata Motors are about 2 minutes away, and Pune–Nashik Highway about 3 minutes.',
     ],
     highlights: [
-      { src: '/assets/imperia-landing/highlights/elevation.jpg', title: 'Premium elevation' },
-      { src: '/assets/imperia-landing/highlights/gate.jpg', title: 'Grand entrance' },
-      { src: '/assets/imperia-landing/highlights/aerial.jpg', title: 'Connected Moshi address' },
-      { src: '/assets/imperia-landing/highlights/play.jpg', title: 'Children’s play lawn' },
-      { src: '/assets/imperia-landing/highlights/balconies.jpg', title: 'Two balconies in every home' },
+      { src: '/assets/imperia-landing/highlights/elevation.jpg', title: 'Dedicated wardrobe space' },
+      { src: '/assets/imperia-landing/highlights/aerial.jpg', title: 'Double-charged marble floors' },
+      { src: '/assets/imperia-landing/highlights/gate.jpg', title: 'Video door phone' },
+      { src: '/assets/imperia-landing/highlights/play.jpg', title: 'Spine Road in two minutes' },
     ],
     amenities: {
       subtitle: '',
-      lead: { src: '/assets/imperia-landing/amenities/garden.jpg', label: 'Landscape Garden' },
+      lead: { src: imperiaHallVideo, label: 'Community Hall', video: true },
       items: [
         { src: '/assets/imperia-landing/amenities/gym.jpg', label: 'Gymnasium' },
         { src: '/assets/imperia-landing/amenities/hall.jpg', label: 'Community Hall' },

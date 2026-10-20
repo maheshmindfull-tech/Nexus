@@ -619,10 +619,6 @@ export default function LandingView({ id, onNavigateHome }) {
 
       <footer className="lp-foot">
         <div className="lp-wrap lp-foot-inner">
-          <button type="button" className="lp-back lp-back-light" onClick={onNavigateHome}>
-            <ArrowLeft size={16} />
-            Back to main site
-          </button>
           <img className="lp-foot-logo" src="/assets/logo/nexus-logo-white.png" alt="Nexus" />
           <p>
             {p.name} · {p.location}, Pune
@@ -709,7 +705,7 @@ export default function LandingView({ id, onNavigateHome }) {
                   </label>
                   <label className="lp-field">
                     <span>Message</span>
-                    <textarea rows={3} value={formData.message} onChange={setField('message')} />
+                    <textarea rows={2} value={formData.message} onChange={setField('message')} />
                   </label>
                   <button type="submit" className="lp-btn lp-btn-solid" disabled={isSubmitting}>
                     {isSubmitting ? 'Submitting…' : 'Submit inquiry'}

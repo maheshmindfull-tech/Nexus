@@ -1150,6 +1150,20 @@
   display: block;
 }
 
+.lp-page.lp-brand-skydale .lp-bento-shot.is-lead video {
+  object-position: center 100%;
+}
+
+.lp-page.lp-brand-imperia .lp-bento-shot.is-lead {
+  background: #f4efe8;
+}
+
+.lp-page.lp-brand-imperia .lp-bento-shot.is-lead video {
+  object-fit: contain;
+  object-position: center center;
+  background: #f4efe8;
+}
+
 .lp-bento-shot.is-slot-0 { grid-column: 2 / span 2; grid-row: 1; }
 .lp-bento-shot.is-slot-1 { grid-column: 4 / span 2; grid-row: 1; }
 .lp-bento-shot.is-slot-2 { grid-column: 2; grid-row: 2; }
@@ -1161,7 +1175,8 @@
   object-position: center top;
 }
 
-.lp-bento-shot.is-slot-0::after {
+.lp-bento-shot.is-slot-0::after,
+.lp-page:not(.lp-brand-kinara) .lp-bento-shot:not(.is-lead)::after {
   content: "";
   position: absolute;
   inset: auto 0 0 0;
@@ -1615,27 +1630,61 @@
 
 .lp-enquiry-panel {
   position: relative;
-  width: min(480px, 100%);
-  max-height: min(90vh, 760px);
-  overflow: auto;
-  padding: 28px 24px 24px;
+  width: min(460px, 100%);
+  max-height: none;
+  overflow: visible;
+  padding: 20px 20px 16px;
   background: #fbf9f5;
   border: 1px solid rgba(28, 43, 69, 0.1);
   animation: lp-pop 0.35s ease both;
 }
 
+.lp-enquiry-panel .lp-eyebrow {
+  margin-bottom: 6px;
+}
+
 .lp-enquiry-panel h2 {
   margin: 0;
-  font-size: clamp(26px, 4vw, 34px);
+  font-size: 26px;
   line-height: 1.15;
 }
 
 .lp-enquiry-panel .lp-sub {
-  margin-top: 10px;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.lp-enquiry-panel .lp-enquiry-mail {
+  margin-top: 8px;
 }
 
 .lp-enquiry-panel .lp-form-card {
-  margin-top: 22px;
+  margin-top: 12px;
+  padding: 14px 14px 12px;
+  border-radius: 14px;
+}
+
+.lp-enquiry-panel .lp-field {
+  margin-bottom: 8px;
+}
+
+.lp-enquiry-panel .lp-field span {
+  margin-bottom: 3px;
+}
+
+.lp-enquiry-panel .lp-field input,
+.lp-enquiry-panel .lp-field textarea {
+  padding: 8px 12px;
+}
+
+.lp-enquiry-panel .lp-field textarea {
+  min-height: 52px;
+  resize: none;
+}
+
+.lp-enquiry-panel .lp-btn {
+  height: 42px;
 }
 
 .lp-enquiry-close {
@@ -2224,52 +2273,6 @@
   background: linear-gradient(90deg, rgba(6, 14, 24, 0.72) 0%, rgba(6, 14, 24, 0.38) 34%, rgba(6, 14, 24, 0.08) 58%, rgba(6, 14, 24, 0) 74%);
 }
 
-.lp-brand-square .lp-hero-light {
-  background-color: #ffc2a6;
-}
-
-.lp-brand-square .lp-hero-art {
-  position: absolute;
-  z-index: 1;
-  right: 1.2%;
-  top: 0;
-  height: 100%;
-  width: auto;
-  max-width: 48%;
-  object-fit: contain;
-  object-position: right center;
-  pointer-events: none;
-  user-select: none;
-}
-
-.lp-brand-square .lp-hero-light.has-scrim::before {
-  background: none;
-}
-
-.lp-brand-square .lp-hero-light .lp-hero-script,
-.lp-brand-square .lp-hero-light .lp-hero-tagline {
-  color: #4a3218;
-  text-shadow: none;
-}
-
-.lp-brand-square .lp-hero-light .lp-hero-title {
-  background: linear-gradient(180deg, #c6a15a 0%, #8d6230 55%, #5a3a16 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-.lp-brand-square .lp-hero-light .lp-btn-ghost {
-  color: #4a3218;
-  border-color: rgba(74, 50, 24, 0.55);
-  background: rgba(255, 255, 255, 0.28);
-}
-
-.lp-brand-square .lp-hero-light .lp-btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
 .lp-theme-kinara .lp-hero-logo {
   position: absolute;
   z-index: 2;
@@ -2535,6 +2538,86 @@
   box-shadow: 0 14px 34px color-mix(in srgb, var(--lp-accent-2) 32%, transparent);
 }
 
+.lp-page.lp-brand-westia .lp-highlight img,
+.lp-page.lp-brand-atrium .lp-highlight img,
+.lp-page.lp-brand-genesis .lp-highlight img,
+.lp-page.lp-brand-square .lp-highlight img,
+.lp-page.lp-brand-imperia .lp-highlight img {
+  aspect-ratio: 1050 / 1450;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.lp-page.lp-brand-imperia .lp-highlight img {
+  aspect-ratio: 1050 / 1320;
+}
+
+.lp-page.lp-brand-imperia .lp-highlights {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.lp-page.lp-brand-imperia .lp-highlight h3 {
+  bottom: 7%;
+  left: 8%;
+  right: 8%;
+}
+
+@media (max-width: 1080px) {
+  .lp-page.lp-brand-imperia .lp-highlights {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 440px) {
+  .lp-page.lp-brand-imperia .lp-highlights {
+    grid-template-columns: 1fr;
+    max-width: 290px;
+  }
+}
+
+.lp-page.lp-brand-westia .lp-highlight img {
+  aspect-ratio: 850 / 1326;
+}
+
+.lp-page.lp-brand-westia .lp-highlight h3 {
+  bottom: 4.5%;
+}
+
+.lp-page.lp-brand-square .lp-highlight img {
+  aspect-ratio: 980 / 1320;
+}
+
+.lp-page.lp-brand-square .lp-highlight h3 {
+  bottom: 8%;
+}
+
+.lp-page.lp-brand-genesis .lp-highlight img {
+  aspect-ratio: 1050 / 1320;
+}
+
+.lp-page.lp-brand-genesis .lp-highlights {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1080px) {
+  .lp-page.lp-brand-genesis .lp-highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 440px) {
+  .lp-page.lp-brand-genesis .lp-highlights {
+    grid-template-columns: 1fr;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+}
+
 .lp-theme-kinara .lp-highlight h3 {
   position: absolute;
   left: 6%;
@@ -2559,7 +2642,7 @@
   }
 
   .lp-theme-kinara .lp-break {
-    height: clamp(170px, 22vw, 200px);
+    height: clamp(128px, 18vw, 160px);
   }
 }
 
@@ -2570,7 +2653,7 @@
   }
 
   .lp-theme-kinara .lp-break {
-    height: clamp(140px, 32vw, 175px);
+    height: clamp(108px, 28vw, 136px);
     border-radius: 0;
   }
 
@@ -2594,7 +2677,7 @@
 
 .lp-theme-kinara .lp-break {
   width: min(1120px, calc(100% - 40px));
-  height: clamp(190px, 20vw, 220px);
+  height: clamp(148px, 16vw, 188px);
   margin: 20px auto 0;
   padding: 0;
   line-height: 0;
@@ -2610,7 +2693,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 62%;
+  object-position: center center;
   border-radius: 0;
   transition: transform 0.6s ease;
 }
@@ -2700,6 +2783,31 @@
   transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--lp-accent-2) 60%, transparent);
   box-shadow: 0 10px 24px rgba(28, 43, 69, 0.08);
+}
+
+.lp-page.lp-brand-westia .lp-plan-shot,
+.lp-page.lp-brand-imperia .lp-plan-shot,
+.lp-page.lp-brand-atrium .lp-plan-shot,
+.lp-page.lp-brand-square .lp-plan-shot,
+.lp-page.lp-brand-atrium .lp-plans-4 .lp-plan-shot,
+.lp-page.lp-brand-square .lp-plans-5 .lp-plan-shot {
+  aspect-ratio: auto;
+  height: auto;
+  overflow: visible;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.lp-page.lp-brand-westia .lp-plan img,
+.lp-page.lp-brand-imperia .lp-plan img,
+.lp-page.lp-brand-atrium .lp-plan img,
+.lp-page.lp-brand-square .lp-plan img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  background: #ffffff;
+  border-radius: 16px;
 }
 
 .lp-theme-kinara .lp-plan-shot {
@@ -2801,9 +2909,31 @@
     left: auto;
     top: auto;
     width: 168px;
+    max-width: 100%;
     margin: 0 0 12px;
     opacity: 1;
     transform: none;
+  }
+
+  .lp-theme-kinara .lp-hero-logo.is-color {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 78px;
+  }
+
+  .lp-theme-kinara .lp-hero-logo.is-color.is-mark {
+    max-width: 120px;
+    max-height: 96px;
+  }
+
+  .lp-theme-kinara .lp-hero-title.is-one-line {
+    font-size: 44px;
+    line-height: 1.05;
+  }
+
+  .lp-theme-kinara .lp-hero-title > span {
+    white-space: normal;
   }
 
   .lp-theme-kinara .lp-hero-copy-overlay {

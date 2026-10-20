@@ -16,3 +16,5 @@ Thumbs.db
 /Images/
 /extracted_assets/
 /pdf_extracted_images/
+temp_img_*
+*.bin

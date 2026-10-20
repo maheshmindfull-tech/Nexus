@@ -1898,8 +1898,8 @@ footer .bot {
   opacity: 0.92;
 }
 
-/* Mobile breakpoint */
-@media (max-width: 768px) {
+/* Phones and small tablets: the full link row collides with Contact below ~900px */
+@media (max-width: 900px) {
   .navbar-inner {
     padding: max(12px, env(safe-area-inset-top)) 18px 12px !important;
   }
@@ -1941,7 +1941,7 @@ footer .bot {
 }
 
 /* Tablet tweaks */
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1024px) and (min-width: 901px) {
   .navbar-link {
     padding: 8px 14px !important;
     font-size: 13px !important;
@@ -2151,13 +2151,15 @@ footer .bot {
 
 .about-intro-grid {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: clamp(52px, 6.5vw, 96px);
   align-items: center;
 }
 
 .about-intro-media {
   position: relative;
+  width: 100%;
+  min-width: 0;
   border-radius: 8px;
   overflow: hidden;
   aspect-ratio: 4 / 3.8;
@@ -2165,6 +2167,8 @@ footer .bot {
 }
 
 .about-intro-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2775,6 +2779,10 @@ footer .bot {
     height: auto;
     min-height: 0;
     padding-bottom: 48px;
+  }
+
+  .about-intro-media {
+    min-height: 0;
   }
 }
 
