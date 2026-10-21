@@ -13,10 +13,25 @@ import AboutPage from './components/AboutPage';
 import ProjectsPage from './components/ProjectsPage';
 import CareersPage from './components/CareersPage';
 import CPInquiryPage from './components/CPInquiryPage';
-import SkydaleLandingPage from './components/SkydaleLandingPage';
-import ProjectLandingPage, { LANDING_PROJECTS } from './components/ProjectLandingPage';
+import KinaraPage from './landings/kinara/page';
+import WestiaPage from './landings/westia/page';
+import SkydalePage from './landings/skydale/page';
+import AtriumPage from './landings/atrium/page';
+import GenesisPage from './landings/genesis/page';
+import PrimePage from './landings/prime/page';
+import ImperiaPage from './landings/imperia/page';
 import BlogsPage from './components/BlogsPage';
 import { applyPageSeo, pageFromLocation, pathForPage } from './seo';
+
+const LANDING_PAGES = {
+  kinara: KinaraPage,
+  westia: WestiaPage,
+  skydale: SkydalePage,
+  atrium: AtriumPage,
+  genesis: GenesisPage,
+  square: PrimePage,
+  imperia: ImperiaPage,
+};
 import { canGoBack, markRestoring, pushAppState, rememberScroll, stampHistory } from './historyState';
 
 export default function App() {
@@ -117,10 +132,11 @@ export default function App() {
     handleNavigate('home');
   };
 
+  const LandingPage = LANDING_PAGES[currentPage];
+
   return (
     <div className="min-h-screen bg-white text-[#1f1f1f] flex flex-col font-sans selection:bg-[#0097a7] selection:text-white">
-      {/* Universal Fixed Navigation Bar across all pages except custom landing page */}
-      {currentPage !== 'skydale' && !LANDING_PROJECTS[currentPage] && (
+      {!LandingPage && (
         <Navbar
           currentPage={currentPage}
           onNavigate={handleNavigate}
@@ -128,15 +144,8 @@ export default function App() {
         />
       )}
 
-      {currentPage === 'skydale' ? (
-        /* DEDICATED SKYDALE LANDING PAGE */
-        <SkydaleLandingPage onNavigateHome={handleBack} />
-      ) : LANDING_PROJECTS[currentPage] ? (
-        <ProjectLandingPage
-          key={currentPage}
-          project={currentPage}
-          onNavigateHome={handleBack}
-        />
+      {LandingPage ? (
+        <LandingPage key={currentPage} onNavigateHome={handleBack} />
       ) : currentPage === 'projects' ? (
         /* DEDICATED PROJECTS PAGE */
         <ProjectsPage

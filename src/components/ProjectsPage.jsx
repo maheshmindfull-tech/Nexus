@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { MapPin } from 'lucide-react';
 import Footer from './Footer';
 import Typewriter from './Typewriter';
-import { LANDING_PROJECTS } from './ProjectLandingPage';
+import { LANDING_PROJECTS } from '../landings';
 import '../projects.css';
 
 const PROJECT_HERO_PHRASES = [
@@ -21,8 +21,8 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2 & 3 BHK | 620 Flats | 3 Shops',
     image: '/assets/projects/profile/kinara.jpg',
-    landing: '/pdfs/nexus-kinara-brochure.pdf',
-    pdf: '/pdfs/nexus-kinara-brochure.pdf',
+    landing: '/landings/kinara/nexus-kinara-brochure.pdf',
+    pdf: '/landings/kinara/nexus-kinara-brochure.pdf',
   },
   {
     id: 'skydale',
@@ -33,7 +33,7 @@ const PROJECTS = [
     config: '2, 3 & 4 BHK | 581 Flats | 62 Shops',
     image: '/assets/projects/profile/skydale.jpg',
     landing: '/skydale',
-    pdf: '/pdfs/skydale-brouchure.pdf',
+    pdf: '/landings/skydale/skydale-brouchure.pdf',
   },
   {
     id: 'westia',
@@ -43,8 +43,8 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2 & 3 BHK | 86 Flats | 17 Shops',
     image: '/assets/projects/profile/westia.jpg',
-    landing: '/pdfs/nexus-westia-brochure.pdf',
-    pdf: '/pdfs/nexus-westia-brochure.pdf',
+    landing: '/landings/westia/nexus-westia-brochure.pdf',
+    pdf: '/landings/westia/nexus-westia-brochure.pdf',
   },
   {
     id: 'square',
