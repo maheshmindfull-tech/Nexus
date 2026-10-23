@@ -43,16 +43,21 @@ export default function App() {
     const page = pageFromLocation();
     return page === 'contact' ? 'home' : page;
   });
+  const [blogSlug, setBlogSlug] = useState(() => (
+    typeof window === 'undefined' ? null : currentBlogSlug()
+  ));
 
   useEffect(() => {
     const page = pageFromLocation();
     if (page === 'contact') {
       stampHistory('home', '/');
       setCurrentPage('home');
+      setBlogSlug(null);
       setEnquireOpen(true);
       applyPageSeo('home');
     } else {
       stampHistory(page, pathForPage(page));
+      setBlogSlug(page === 'blog' ? currentBlogSlug() : null);
       applyPageSeo(page);
     }
 
@@ -62,10 +67,12 @@ export default function App() {
       if (next === 'contact') {
         stampHistory('home', '/');
         setCurrentPage('home');
+        setBlogSlug(null);
         setEnquireOpen(true);
         applyPageSeo('home');
       } else {
         setCurrentPage(next);
+        setBlogSlug(next === 'blog' ? currentBlogSlug() : null);
         applyPageSeo(next);
       }
       setHistoryTick((n) => n + 1);
@@ -113,6 +120,7 @@ export default function App() {
     const next = pathForPage(page) ? page : 'home';
     pushAppState(next, pathForPage(next));
     setCurrentPage(next);
+    if (next !== 'blog') setBlogSlug(null);
     applyPageSeo(next);
     window.scrollTo(0, 0);
 
@@ -138,6 +146,7 @@ export default function App() {
       return;
     }
     pushAppState('blog', `/blog/${id}`);
+    setBlogSlug(id);
     setCurrentPage('blog');
     applyPageSeo('blog');
     window.scrollTo(0, 0);
@@ -173,7 +182,7 @@ export default function App() {
         />
       ) : currentPage === 'blogs' || currentPage === 'blog' ? (
         <BlogsPage
-          postId={currentPage === 'blog' ? currentBlogSlug() : null}
+          postId={currentPage === 'blog' ? blogSlug : null}
           onOpenPost={openBlogPost}
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
