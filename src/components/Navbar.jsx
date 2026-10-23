@@ -11,14 +11,14 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
       ? 'projects'
       : currentPage === 'careers'
       ? 'careers'
-      : currentPage === 'blogs'
+      : currentPage === 'blogs' || currentPage === 'blog'
       ? 'blogs'
       : 'home'
   );
   const headerRef = useRef(null);
 
   useEffect(() => {
-    setActiveTab(currentPage);
+    setActiveTab(currentPage === 'blog' ? 'blogs' : currentPage);
   }, [currentPage]);
 
   useEffect(() => {

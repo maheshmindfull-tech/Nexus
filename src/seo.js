@@ -1,4 +1,48 @@
+import { BLOG_POSTS } from './data/blogPosts.js';
+
 const ORIGIN = 'https://nexuspune.in';
+const DEFAULT_OG_IMAGE = `${ORIGIN}/assets/home/slide-01.png`;
+
+export function currentBlogSlug(loc) {
+  if (typeof window === 'undefined' && !loc) return null;
+  const source = loc || window.location;
+  const path = source.pathname.replace(/\/+$/, '') || '/';
+  const fromPath = path.match(/^\/blog\/([^/]+)$/);
+  if (fromPath) {
+    const slug = decodeURIComponent(fromPath[1]);
+    return BLOG_POSTS.some((post) => post.id === slug) ? slug : null;
+  }
+  if (path === '/blogs') {
+    const slug = new URLSearchParams(source.search).get('post');
+    return slug && BLOG_POSTS.some((post) => post.id === slug) ? slug : null;
+  }
+  return null;
+}
+
+export function blogStaticPages() {
+  return BLOG_POSTS.map((post) => {
+    const path = `/blog/${post.id}`;
+    const image = post.image.startsWith('http') ? post.image : `${ORIGIN}${post.image}`;
+    return {
+      path,
+      title: `${post.title} | Nexus Journal`,
+      description: post.excerpt,
+      image,
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        image,
+        datePublished: post.date,
+        url: `${ORIGIN}${path}`,
+        mainEntityOfPage: `${ORIGIN}${path}`,
+        author: { '@type': 'Organization', name: 'Nexus Editorial Team' },
+        publisher: { '@id': `${ORIGIN}/#organization` },
+      },
+    };
+  });
+}
 
 export const PAGE_SEO = {
   home: {
@@ -294,7 +338,64 @@ function upsertMeta(attr, key, content) {
   el.setAttribute('content', content);
 }
 
+function applyArticleSeo(post) {
+  const url = `${ORIGIN}/blog/${post.id}`;
+  const title = `${post.title} | Nexus Journal`;
+  const description = post.excerpt;
+  const image = post.image.startsWith('http') ? post.image : `${ORIGIN}${post.image}`;
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description,
+    image,
+    datePublished: post.date,
+    url,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Nexus Editorial Team' },
+    publisher: { '@id': `${ORIGIN}/#organization` },
+  };
+
+  document.title = title;
+  upsertMeta('name', 'description', description);
+  upsertMeta('name', 'title', title);
+  upsertMeta('property', 'og:title', title);
+  upsertMeta('property', 'og:description', description);
+  upsertMeta('property', 'og:url', url);
+  upsertMeta('property', 'og:type', 'article');
+  upsertMeta('property', 'og:image', image);
+  upsertMeta('name', 'twitter:title', title);
+  upsertMeta('name', 'twitter:description', description);
+  upsertMeta('name', 'twitter:url', url);
+  upsertMeta('name', 'twitter:image', image);
+
+  let canonical = document.head.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', url);
+
+  let script = document.getElementById('page-schema');
+  if (!script) {
+    script = document.createElement('script');
+    script.id = 'page-schema';
+    script.type = 'application/ld+json';
+    document.head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(schema);
+}
+
 export function applyPageSeo(page) {
+  if (page === 'blog') {
+    const post = BLOG_POSTS.find((item) => item.id === currentBlogSlug());
+    if (post) {
+      applyArticleSeo(post);
+      return;
+    }
+  }
+
   const seo = PAGE_SEO[page] || PAGE_SEO.home;
   const url = `${ORIGIN}${seo.path}`;
 
@@ -307,6 +408,9 @@ export function applyPageSeo(page) {
   upsertMeta('name', 'twitter:title', seo.title);
   upsertMeta('name', 'twitter:description', seo.description);
   upsertMeta('name', 'twitter:url', url);
+  upsertMeta('property', 'og:type', 'website');
+  upsertMeta('property', 'og:image', DEFAULT_OG_IMAGE);
+  upsertMeta('name', 'twitter:image', DEFAULT_OG_IMAGE);
 
   let canonical = document.head.querySelector('link[rel="canonical"]');
   if (!canonical) {
@@ -366,6 +470,8 @@ const HASH_TO_PAGE = {
 export function pageFromLocation() {
   if (typeof window === 'undefined') return 'home';
   const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (currentBlogSlug()) return 'blog';
+  if (/^\/blog\/[^/]+$/.test(path)) return 'blogs';
   const hash = window.location.hash.toLowerCase();
 
   if (path.endsWith('about.html') || HASH_TO_PAGE[hash]) {
@@ -377,5 +483,9 @@ export function pageFromLocation() {
 }
 
 export function pathForPage(page) {
+  if (page === 'blog') {
+    const slug = currentBlogSlug();
+    return slug ? `/blog/${slug}` : '/blogs';
+  }
   return (PAGE_SEO[page] || PAGE_SEO.home).path;
 }

@@ -186,6 +186,7 @@
 /* Featured */
 .blog-featured {
   display: grid;
+  text-decoration: none;
   grid-template-columns: 1.15fr 1fr;
   width: 100%;
   padding: 0;
@@ -269,6 +270,7 @@
 
 .blog-card {
   display: flex;
+  text-decoration: none;
   flex-direction: column;
   text-align: left;
   background: #fff;
@@ -454,6 +456,7 @@
 
 .blog-back {
   display: inline-flex;
+  text-decoration: none;
   align-items: center;
   gap: 8px;
   border: 0;

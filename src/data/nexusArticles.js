@@ -38,7 +38,7 @@ export const NEXUS_ARTICLES = [
       "The phrase “new flat” sounds attractive, but buyers should look beyond the brochure.",
       "Before booking any apartment in Punawale, check the project’s MahaRERA registration, approved plans, development details, construction status and declared possession date.",
       "For example, Nexus Westia under MahaRERA registration number P52100080184 project records identify its location near Savata Mali Mandir in Punawale and list 2 BHK and 3 BHK configurations.",
-      "Similarly, Nexus Skydale with MahaRERA registration number P52100055009 and show 2 BHK, 3 BHK and [4 BHK in Punawale](/blogs?post=roi-and-appreciation-trends-for-4-bhk-flats-in-punawale).",
+      "Similarly, Nexus Skydale with MahaRERA registration number P52100055009 and show 2 BHK, 3 BHK and [4 BHK in Punawale](/blog/roi-and-appreciation-trends-for-4-bhk-flats-in-punawale).",
       "Treat these details as a starting point, not a substitute for checking the official regulatory record.",
       {
         "h": "Westia: A 2 BHK Option in Punawale"
@@ -618,7 +618,7 @@ export const NEXUS_ARTICLES = [
       {
         "h": "Conclusion"
       },
-      "Kiwale combines connectivity and residential growth. [Luxury homes in Kiwale](/blogs?post=how-to-choose-the-perfect-4-bhk-flat-in-kiwale) can appeal to families, professionals and investors.",
+      "Kiwale combines connectivity and residential growth. [Luxury homes in Kiwale](/blog/how-to-choose-the-perfect-4-bhk-flat-in-kiwale) can appeal to families, professionals and investors.",
       "Explore Genesis by Nexus Pune and project information before deciding."
     ]
   },
@@ -875,7 +875,7 @@ export const NEXUS_ARTICLES = [
       "Kiwale has an established presence within the PCMC region, while wider infrastructure projects continue to shape western Pune. Official sources confirm ongoing development around regional transport and connectivity, but buyers should evaluate each project's real-world access and current conditions rather than relying on future promises.",
       "For homebuyers specifically exploring 3 BHK flats in Kiwale, [Genesis by Nexus Group](https://nexusgenesis.co.in/) Pune is one project worth considering. The project offers 2, 3 and 4 BHK residences at Survey No. 42A/7, Vikas Nagar, Kiwale, Pune, according to the project's official website. The project is registered under MahaRERA with registration number PR1261012501959.",
       "Genesis is presented as a residential development by Nexus Group Pune, with the project designed around modern residential living and community-oriented amenities. Buyers should still review the official project documentation, specifications, approvals and applicable terms before making a purchase decision.",
-      "Whether you are comparing 3 BHK homes in Kiwale, looking for [2 BHK flats in Kiwale](/blogs?post=2-bhk-flat-in-kiwale-guide), or actively searching for a 3 BHK flat for sale in Kiwale, take your time.",
+      "Whether you are comparing 3 BHK homes in Kiwale, looking for [2 BHK flats in Kiwale](/blog/2-bhk-flat-in-kiwale-guide), or actively searching for a 3 BHK flat for sale in Kiwale, take your time.",
       "Check the documents. Walk through the actual home. Speak with residents. Visit the neighbourhood more than once.",
       "Because buying a home is a long-term decision. The brochure gets you excited; due diligence keeps you comfortable.",
       {
@@ -1076,7 +1076,7 @@ export const NEXUS_ARTICLES = [
       {
         "h": "Why Skydale by Nexus Stands Out"
       },
-      "Skydale by Nexus offers [2 bhk flats](/blogs?post=why-young-professionals-prefer-2-bhk-flats-in-punawale), 3 bhk flats and 4 BHK residences in Punawale. Available project information highlights spacious configurations, premium positioning and amenities such as a swimming pool, gymnasium, children’s play area and landscaped spaces.",
+      "Skydale by Nexus offers [2 bhk flats](/blog/why-young-professionals-prefer-2-bhk-flats-in-punawale), 3 bhk flats and 4 BHK residences in Punawale. Available project information highlights spacious configurations, premium positioning and amenities such as a swimming pool, gymnasium, children’s play area and landscaped spaces.",
       "Its location can appeal to families seeking connectivity to the Hinjawadi corridor and the expressway. The 4 BHK layouts also address the needs of buyers looking for larger, family-oriented homes with long-term ownership value.",
       {
         "h": "Future Outlook: Can 4 BHK Flats Continue to Appreciate?"
@@ -1151,7 +1151,7 @@ export const NEXUS_ARTICLES = [
           "Long-term investors"
         ]
       },
-      "A 2 bhk [apartment in Kiwale](/blogs?post=why-apartments-in-kiwale-are-in-high-demand) gives buyers a balance between affordability and comfortable living. You get dedicated bedrooms, a living room, kitchen, bathrooms, and often a balcony without stretching your budget toward a larger apartment.",
+      "A 2 bhk [apartment in Kiwale](/blog/why-apartments-in-kiwale-are-in-high-demand) gives buyers a balance between affordability and comfortable living. You get dedicated bedrooms, a living room, kitchen, bathrooms, and often a balcony without stretching your budget toward a larger apartment.",
       {
         "h": "Excellent Connectivity Makes Daily Life Easier"
       },
@@ -1448,7 +1448,7 @@ export const NEXUS_ARTICLES = [
       },
       "Many buyers compare only the total apartment size.",
       "Instead, compare carpet area because it represents the usable living space inside your home.",
-      "When choosing an [Apartment in Kiwale](/blogs?post=why-apartments-in-kiwale-are-in-high-demand), ask for:",
+      "When choosing an [Apartment in Kiwale](/blog/why-apartments-in-kiwale-are-in-high-demand), ask for:",
       {
         "ul": [
           "Carpet area",
@@ -1926,7 +1926,7 @@ export const NEXUS_ARTICLES = [
     "image": "/assets/blog/why-young-professionals-prefer-2-bhk-flats-in-punawale.jpg",
     "excerpt": "Starting a successful career often comes with a new goal of owning a home. Today's young professionals are looking beyond just four walls. They want a home that offers comfort, convenience and long-term value.",
     "body": [
-      "Starting a successful career often comes with a new goal of owning a home. Today's young professionals are looking beyond just four walls. They want a home that offers comfort, convenience and long-term value. This shift in priorities has made [Flats in Punawale](/blogs?post=flats-in-punawale-the-ideal-blend-of-comfort-and-connectivity) a preferred choice for first-time homebuyers and working professionals seeking the perfect balance between affordability and lifestyle.",
+      "Starting a successful career often comes with a new goal of owning a home. Today's young professionals are looking beyond just four walls. They want a home that offers comfort, convenience and long-term value. This shift in priorities has made [Flats in Punawale](/blog/flats-in-punawale-the-ideal-blend-of-comfort-and-connectivity) a preferred choice for first-time homebuyers and working professionals seeking the perfect balance between affordability and lifestyle.",
       "With excellent connectivity, modern infrastructure and growing employment opportunities nearby, Punawale has become one of Pune's most promising residential destinations.",
       {
         "h": "What Makes Punawale So Attractive?"
@@ -2114,7 +2114,7 @@ export const NEXUS_ARTICLES = [
         "h": "3. Growing Residential Development"
       },
       "Moshi has experienced considerable residential development, giving buyers a range of apartment options.",
-      "For someone comparing [flats in Moshi](/blogs?post=why-flats-in-moshi-are-becoming-punes-top-choice-for-homebuyers), this can be useful because buyers can evaluate multiple projects rather than committing to the first property they see.",
+      "For someone comparing [flats in Moshi](/blog/why-flats-in-moshi-are-becoming-punes-top-choice-for-homebuyers), this can be useful because buyers can evaluate multiple projects rather than committing to the first property they see.",
       "At the same time, increasing supply should be considered from an investment perspective.",
       "More projects can give buyers greater choice, but investors should also understand the competitive environment. If several similar apartments are available for rent or resale, landlords and sellers may need to compete on price, apartment condition and amenities.",
       "Therefore, don't look at development only as a positive factor. Consider both:",

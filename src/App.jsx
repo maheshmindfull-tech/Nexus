@@ -21,7 +21,7 @@ import GenesisPage from './landings/genesis/page';
 import PrimePage from './landings/prime/page';
 import ImperiaPage from './landings/imperia/page';
 import BlogsPage from './components/BlogsPage';
-import { applyPageSeo, pageFromLocation, pathForPage } from './seo';
+import { applyPageSeo, currentBlogSlug, pageFromLocation, pathForPage } from './seo';
 
 const LANDING_PAGES = {
   kinara: KinaraPage,
@@ -132,6 +132,17 @@ export default function App() {
     handleNavigate('home');
   };
 
+  const openBlogPost = (id) => {
+    if (!id) {
+      handleNavigate('blogs');
+      return;
+    }
+    pushAppState('blog', `/blog/${id}`);
+    setCurrentPage('blog');
+    applyPageSeo('blog');
+    window.scrollTo(0, 0);
+  };
+
   const LandingPage = LANDING_PAGES[currentPage];
 
   return (
@@ -160,8 +171,10 @@ export default function App() {
           onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={() => setEnquireOpen(true)}
         />
-      ) : currentPage === 'blogs' ? (
+      ) : currentPage === 'blogs' || currentPage === 'blog' ? (
         <BlogsPage
+          postId={currentPage === 'blog' ? currentBlogSlug() : null}
+          onOpenPost={openBlogPost}
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
           onNavigateProjects={() => handleNavigate('projects')}

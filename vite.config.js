@@ -3,7 +3,7 @@ import path from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { PAGE_SEO } from './src/seo.js'
+import { PAGE_SEO, blogStaticPages } from './src/seo.js'
 
 const ORIGIN = 'https://nexuspune.in'
 
@@ -43,7 +43,12 @@ function routeHtmlPlugin() {
       const outDir = path.resolve('dist')
       const template = fs.readFileSync(path.join(outDir, 'index.html'), 'utf8')
 
-      for (const [page, seo] of Object.entries(PAGE_SEO)) {
+      const routes = [
+        ...Object.entries(PAGE_SEO),
+        ...blogStaticPages().map((seo) => [seo.path, seo]),
+      ]
+
+      for (const [page, seo] of routes) {
         const url = `${ORIGIN}${seo.path}`
         const title = escapeAttr(seo.title)
         const description = escapeAttr(seo.description)
@@ -59,6 +64,10 @@ function routeHtmlPlugin() {
           .replace(/(<meta name="twitter:url" content=")[^"]*(")/, `$1${url}$2`)
           .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${title}$2`)
           .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${description}$2`)
+          .replace(
+            /(<meta property="og:image" content=")[^"]*(")/,
+            `$1${escapeAttr(seo.image || `${ORIGIN}/assets/home/slide-01.png`)}$2`
+          )
           .replace(
             '</head>',
             `  <script id="page-schema" type="application/ld+json">${JSON.stringify(seo.schema)}</script>\n  </head>`

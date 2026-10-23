@@ -2,14 +2,18 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, ArrowRight, Calendar, ChevronDown, Clock, Link2, Search } from 'lucide-react';
 import Footer from './Footer';
 import { BLOG_POSTS, readMinutes, slugify } from '../data/blogPosts';
-import { applyPageSeo } from '../seo';
-import { canGoBack, pushAppState } from '../historyState';
 import '../blogs.css';
 
-function postFromUrl() {
-  if (typeof window === 'undefined') return null;
-  const id = new URLSearchParams(window.location.search).get('post');
-  return BLOG_POSTS.some((p) => p.id === id) ? id : null;
+function postIdFromHref(href) {
+  if (href.startsWith('/blog/')) {
+    const id = decodeURIComponent(href.slice(6).split(/[?#]/)[0].replace(/\/$/, ''));
+    return BLOG_POSTS.some((post) => post.id === id) ? id : null;
+  }
+  if (href.startsWith('/blogs?post=')) {
+    const id = href.slice(12).split('&')[0];
+    return BLOG_POSTS.some((post) => post.id === id) ? id : null;
+  }
+  return null;
 }
 
 function PostMeta({ post }) {
@@ -37,14 +41,18 @@ function Rich({ text, onOpenPost }) {
       parts.push(<strong key={m.index}>{m[1]}</strong>);
     } else {
       const href = m[3];
-      const postId = href.startsWith('/blogs?post=') ? href.slice(12) : null;
+      const postId = postIdFromHref(href);
       const external = /^https?:/i.test(href);
       parts.push(
         <a
           key={m.index}
-          href={href}
+          href={postId ? `/blog/${postId}` : href}
           {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-          onClick={postId ? (e) => { e.preventDefault(); onOpenPost(postId); } : undefined}
+          onClick={postId ? (e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+            e.preventDefault();
+            onOpenPost(postId);
+          } : undefined}
         >
           {m[2]}
         </a>,
@@ -121,9 +129,15 @@ function Contents({ headings }) {
   );
 }
 
+function openArticle(event, id, onOpen) {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+  event.preventDefault();
+  onOpen(id);
+}
+
 function PostCard({ post, onOpen }) {
   return (
-    <button type="button" className="blog-card" onClick={() => onOpen(post.id)}>
+    <a className="blog-card" href={`/blog/${post.id}`} onClick={(event) => openArticle(event, post.id, onOpen)}>
       <div className="blog-card-media">
         <img src={post.image} alt="" loading="lazy" />
       </div>
@@ -133,7 +147,7 @@ function PostCard({ post, onOpen }) {
         <p>{post.excerpt}</p>
         <span className="blog-read">Read article <ArrowRight size={14} /></span>
       </div>
-    </button>
+    </a>
   );
 }
 
@@ -147,14 +161,15 @@ export default function BlogsPage({
   onNavigateContact,
   onNavigateBlogs,
   onOpenEnquire,
+  postId = null,
+  onOpenPost,
 }) {
-  const [activeId, setActiveId] = useState(postFromUrl);
   const [query, setQuery] = useState('');
   const [copied, setCopied] = useState(false);
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(PAGE_SIZE);
 
-  const active = BLOG_POSTS.find((post) => post.id === activeId) || null;
+  const active = BLOG_POSTS.find((post) => post.id === postId) || null;
   const headings = active ? active.body.filter((b) => b && b.h).map((b) => b.h) : [];
   const showLede = active
     ? !(typeof active.body[0] === 'string' && plainText(active.body[0]).startsWith(active.excerpt))
@@ -165,18 +180,9 @@ export default function BlogsPage({
   }, [query]);
 
   useEffect(() => {
-    const onPop = () => setActiveId(postFromUrl());
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
-  }, []);
-
-  useEffect(() => {
-    if (active) {
-      document.title = `${active.title} | Nexus Journal`;
-    } else {
-      applyPageSeo('blogs');
-    }
-  }, [active]);
+    setCopied(false);
+    setProgress(0);
+  }, [postId]);
 
   useEffect(() => {
     if (!active) return undefined;
@@ -193,14 +199,7 @@ export default function BlogsPage({
   }, [active]);
 
   const openPost = (id) => {
-    if (!id && canGoBack()) {
-      window.history.back();
-      return;
-    }
-    pushAppState('blogs', id ? `/blogs?post=${id}` : '/blogs');
-    setActiveId(id || null);
-    setCopied(false);
-    window.scrollTo(0, 0);
+    if (onOpenPost) onOpenPost(id || null);
   };
 
   const filtered = useMemo(() => {
@@ -215,7 +214,7 @@ export default function BlogsPage({
 
   const related = active ? BLOG_POSTS.filter((p) => p.id !== active.id).slice(0, 3) : [];
 
-  const shareUrl = active ? `${window.location.origin}/blogs?post=${active.id}` : '';
+  const shareUrl = active ? `${window.location.origin}/blog/${active.id}` : '';
 
   const copyLink = async () => {
     try {
@@ -236,9 +235,9 @@ export default function BlogsPage({
             <img src={active.image} alt="" className="blog-hero-bg" />
             <div className="blog-hero-overlay" aria-hidden="true" />
             <div className="blog-article-head">
-              <button type="button" className="blog-back" onClick={() => openPost(null)}>
+              <a className="blog-back" href="/blogs" onClick={(event) => openArticle(event, null, openPost)}>
                 <ArrowLeft size={15} /> All articles
-              </button>
+              </a>
               <h1>{active.title}</h1>
               {showLede && <p className="blog-article-lede">{active.excerpt}</p>}
               <div className="blog-byline">
@@ -345,7 +344,7 @@ export default function BlogsPage({
           <main className="blog-main">
             <div className="blog-wrap">
               {featured && (
-                <button type="button" className="blog-featured" onClick={() => openPost(featured.id)}>
+                <a className="blog-featured" href={`/blog/${featured.id}`} onClick={(event) => openArticle(event, featured.id, openPost)}>
                   <div className="blog-featured-media">
                     <img src={featured.image} alt="" />
                   </div>
@@ -356,7 +355,7 @@ export default function BlogsPage({
                     <PostMeta post={featured} />
                     <span className="blog-read">Read article <ArrowRight size={14} /></span>
                   </div>
-                </button>
+                </a>
               )}
 
               {featured && <h2 className="blog-section-title">Latest articles</h2>}
