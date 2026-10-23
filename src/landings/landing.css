@@ -3953,3 +3953,238 @@
     overflow-x: auto;
   }
 }
+
+/* Phones and tablets: show the whole photograph, then a readable stack. */
+@media (max-width: 900px) {
+  .lp-theme-kinara .lp-hero-light {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: 0;
+    height: auto;
+    padding: 50% 0 28px;
+    background-color: #ffffff;
+    background-size: 100% auto !important;
+    background-repeat: no-repeat;
+    background-position: top center !important;
+  }
+
+  .lp-theme-kinara .lp-hero-logo,
+  .lp-theme-kinara .lp-hero-logo.is-color,
+  .lp-theme-kinara .lp-hero-logo.is-color.is-mark {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    max-width: 148px;
+    max-height: 64px;
+    margin: 18px 20px 0;
+    filter: none;
+  }
+
+  .lp-page.lp-brand-genesis .lp-hero-logo.is-color,
+  .lp-page.lp-brand-atrium .lp-hero-logo.is-color,
+  .lp-page.lp-brand-westia .lp-hero-logo.is-color {
+    filter: none;
+  }
+
+  .lp-theme-kinara .lp-hero-copy-overlay {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin: 6px 0 0;
+    padding: 0 20px;
+  }
+
+  .lp-theme-kinara .lp-hero-script {
+    margin: 0 0 2px;
+    color: #9a7b45;
+    font-size: 34px;
+    text-shadow: none;
+  }
+
+  .lp-theme-kinara .lp-hero-title,
+  .lp-theme-kinara .lp-hero-title.is-one-line {
+    font-size: 36px;
+    line-height: 1.08;
+  }
+
+  .lp-theme-kinara .lp-hero-title > span {
+    white-space: normal;
+  }
+
+  .lp-theme-kinara .lp-hero-tagline {
+    max-width: 36ch;
+    margin-top: 10px;
+    color: #3c4654;
+    font-size: 15px;
+    line-height: 1.5;
+    text-shadow: none;
+  }
+
+  .lp-theme-kinara .lp-hero-light .lp-hero-actions {
+    margin-top: 16px;
+  }
+
+  .lp-theme-kinara .lp-hero-light .lp-btn {
+    height: 44px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .lp-theme-kinara .lp-hero-light .lp-btn-ghost {
+    color: #1c2b45;
+    border-color: rgba(28, 43, 69, 0.35);
+  }
+
+  .lp-theme-kinara .lp-hero-light .lp-btn-ghost:hover {
+    background: rgba(28, 43, 69, 0.06);
+  }
+
+  .lp-theme-kinara .lp-highlights,
+  .lp-page.lp-brand-genesis .lp-highlights,
+  .lp-page.lp-brand-imperia .lp-highlights {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin-inline: auto;
+    gap: 16px;
+  }
+
+  .lp-theme-kinara .lp-amenity-bento {
+    width: 100%;
+    aspect-ratio: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 12px;
+  }
+
+  .lp-bento-shot.is-lead,
+  .lp-bento-shot.is-slot-0,
+  .lp-bento-shot.is-slot-1,
+  .lp-bento-shot.is-slot-2,
+  .lp-bento-shot.is-slot-3,
+  .lp-bento-shot.is-slot-4,
+  .lp-bento-shot.is-slot-5 {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+
+  .lp-bento-shot.is-lead img,
+  .lp-bento-shot.is-lead video,
+  .lp-bento-shot:not(.is-lead) img {
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .lp-bento-shot.is-lead {
+    aspect-ratio: auto;
+    background: transparent;
+  }
+
+  .lp-bento-shot.is-lead img,
+  .lp-bento-shot.is-lead video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: transparent;
+  }
+
+  .lp-bento-shot:not(.is-lead) span {
+    font-size: 18px;
+    padding: 0 12px 14px;
+  }
+
+  .lp-carousel {
+    padding: 40px 0 28px;
+  }
+
+  .lp-carousel h2 {
+    font-size: 28px;
+    letter-spacing: 0.14em;
+    text-indent: 0.14em;
+  }
+
+  .lp-carousel-stage {
+    width: min(100% - 32px, 720px);
+    aspect-ratio: 3 / 2;
+    margin-top: 18px;
+  }
+
+  .lp-card[data-slot="-2"],
+  .lp-card[data-slot="-1"],
+  .lp-card[data-slot="0"],
+  .lp-card[data-slot="1"],
+  .lp-card[data-slot="2"] {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .lp-card[data-slot="-2"],
+  .lp-card[data-slot="-1"],
+  .lp-card[data-slot="1"],
+  .lp-card[data-slot="2"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .lp-card img {
+    object-fit: contain;
+    background: #f3f0ea;
+  }
+
+  .lp-theme-kinara .lp-break,
+  .lp-page.lp-brand-genesis .lp-break {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    margin: 16px 0 0;
+  }
+
+  .lp-theme-kinara .lp-break img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center center;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .lp-theme-kinara .lp-highlights,
+  .lp-page.lp-brand-genesis .lp-highlights,
+  .lp-page.lp-brand-imperia .lp-highlights {
+    grid-template-columns: 1fr 1fr;
+    max-width: 760px;
+  }
+
+  .lp-theme-kinara .lp-amenity-bento {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lp-bento-shot.is-lead {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .lp-theme-kinara .lp-hero-light .lp-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lp-theme-kinara .lp-hero-light .lp-btn {
+    width: 100%;
+  }
+
+  .lp-theme-kinara .lp-hero-title,
+  .lp-theme-kinara .lp-hero-title.is-one-line {
+    font-size: 32px;
+  }
+}

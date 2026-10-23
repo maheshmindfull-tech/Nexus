@@ -4,7 +4,10 @@ export default function SliderSection() {
   const slides = [
     '/assets/home/slide-01.png',
     '/assets/home/slide-02.png',
-    '/assets/home/slide-03.png',
+    '/assets/home/slide-03.jpg',
+    '/assets/home/slide-04.jpg',
+    '/assets/home/slide-05.jpg',
+    '/assets/home/slide-06.jpg',
   ];
 
   const [current, setCurrent] = useState(0);

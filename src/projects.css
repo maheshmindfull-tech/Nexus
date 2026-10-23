@@ -466,7 +466,27 @@
   .pj-segment-btn {
     flex: 1;
     min-height: 44px;
-    padding: 10px 8px;
-    font-size: 12.5px;
+    padding: 10px 6px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
+
+/* Phone and tablet: the status art is a wide poster. Show all of it. */
+@media (max-width: 900px) {
+  .pj-hero {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4800 / 3300;
+    padding: 0;
+  }
+
+  .pj-hero-bg-layer {
+    background-size: contain;
+    background-position: center center;
+  }
+
+  .pj-hero::after {
+    background: none;
   }
 }
