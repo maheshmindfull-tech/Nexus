@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 130px 48px 60px;
+  padding: 130px 0 60px;
   box-sizing: border-box;
   background: linear-gradient(135deg, #1e202c 0%, #2a2538 35%, #3a2e38 70%, #463738 100%);
   color: #ffffff;
@@ -51,9 +51,11 @@
 .cp-hero-wrap {
   position: relative;
   z-index: 3;
-  width: 100%;
-  max-width: 1200px;
+  width: min(100%, var(--page, 1360px));
+  max-width: var(--page, 1360px);
   margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 56px);
+  box-sizing: border-box;
 }
 
 .cp-hero-content {
@@ -118,13 +120,16 @@
 /* Simple Form Container */
 .cp-form-section {
   flex: 1;
-  padding: 50px 20px 80px;
+  padding: 50px 0 80px;
   background: #f8fafc;
 }
 
 .cp-form-wrap {
-  max-width: 760px;
+  width: min(100%, var(--page, 1360px));
+  max-width: var(--page, 1360px);
   margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 56px);
+  box-sizing: border-box;
 }
 
 .cp-form-card {
@@ -367,7 +372,7 @@
   .cp-hero {
     min-height: 0;
     align-items: flex-end;
-    padding: 112px 20px 48px;
+    padding: 112px 0 48px;
   }
 
   .cp-title {
@@ -382,9 +387,9 @@
     grid-template-columns: 1fr;
   }
   .cp-hero {
-    padding: 110px 16px 45px;
+    padding: 110px 0 45px;
   }
   .cp-form-section {
-    padding: 30px 16px 60px;
+    padding: 30px 0 60px;
   }
 }

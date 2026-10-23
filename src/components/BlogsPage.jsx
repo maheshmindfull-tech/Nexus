@@ -233,6 +233,8 @@ export default function BlogsPage({
         <>
           <div className="blog-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
           <header className={`blog-article-hero${headings.length > 2 ? ' has-toc' : ''}`}>
+            <img src={active.image} alt="" className="blog-hero-bg" />
+            <div className="blog-hero-overlay" aria-hidden="true" />
             <div className="blog-article-head">
               <button type="button" className="blog-back" onClick={() => openPost(null)}>
                 <ArrowLeft size={15} /> All articles
@@ -314,6 +316,12 @@ export default function BlogsPage({
       ) : (
         <>
           <header className="blog-hero">
+            <img
+              src="/assets/blog/top-residential-locations-in-pcmc-where-to-buy-your-dream-home-in-2026.jpg"
+              alt=""
+              className="blog-hero-bg"
+            />
+            <div className="blog-hero-overlay" aria-hidden="true" />
             <div className="blog-hero-wrap">
               <div className="blog-eyebrow">Nexus Journal</div>
               <h1 className="blog-title">Insights for smarter homebuying in Pune</h1>

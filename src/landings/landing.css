@@ -653,8 +653,11 @@
 }
 
 .lp-wrap {
-  width: min(1120px, calc(100% - 40px));
+  width: min(100%, var(--page, 1360px));
+  max-width: var(--page, 1360px);
   margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 56px);
+  box-sizing: border-box;
 }
 
 .lp-bar {
@@ -670,9 +673,12 @@
 }
 
 .lp-bar-inner {
-  width: min(1120px, calc(100% - 28px));
+  width: min(100%, var(--page, 1360px));
+  max-width: var(--page, 1360px);
   height: 100%;
   margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 56px);
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1265,7 +1271,8 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.lp-plans-3 {
+.lp-plans-3,
+.lp-plans-6 {
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -1273,7 +1280,7 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
-  width: min(100%, 880px);
+  width: 100%;
   margin-inline: auto;
 }
 
@@ -1289,7 +1296,7 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
-  width: min(100%, 880px);
+  width: 100%;
   margin-inline: auto;
 }
 
@@ -1730,9 +1737,9 @@
 
 .lp-enquiry-panel {
   position: relative;
-  width: min(460px, 100%);
-  max-height: none;
-  overflow: visible;
+  width: min(520px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  overflow: auto;
   padding: 20px 20px 16px;
   background: #fbf9f5;
   border: 1px solid rgba(28, 43, 69, 0.1);
@@ -1996,6 +2003,7 @@
 
   .lp-specs,
   .lp-plans-3,
+  .lp-plans-6,
   .lp-team {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2067,7 +2075,7 @@
 @media (max-width: 680px) {
   .lp-wrap,
   .lp-theme-kinara .lp-break {
-    width: min(1120px, calc(100% - 28px));
+    width: min(100%, var(--page, 1360px));
   }
 
   .lp-bar-name {
@@ -2128,6 +2136,12 @@
   .lp-plans-5 {
     grid-template-columns: 1fr;
     width: min(100%, 340px);
+    gap: 14px;
+  }
+
+  .lp-plans-6 {
+    grid-template-columns: 1fr;
+    width: 100%;
     gap: 14px;
   }
 
@@ -2835,9 +2849,15 @@
   }
 }
 
+.lp-page.lp-brand-genesis .lp-break {
+  aspect-ratio: 1120 / 188;
+  height: auto;
+}
+
 .lp-theme-kinara .lp-break {
-  width: min(1120px, calc(100% - 40px));
-  height: clamp(148px, 16vw, 188px);
+  width: min(100%, var(--page, 1360px));
+  height: auto;
+  aspect-ratio: 1120 / 188;
   margin: 20px auto 0;
   padding: 0;
   line-height: 0;
@@ -2852,7 +2872,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
   border-radius: 0;
 }
@@ -2874,16 +2894,13 @@
   padding-top: 28px;
 }
 
-.lp-theme-kinara .lp-plans {
+.lp-theme-kinara .lp-plans,
+.lp-theme-kinara .lp-plans-4,
+.lp-theme-kinara .lp-plans-5 {
   gap: 20px;
-  width: min(100%, 860px);
+  width: 100%;
+  max-width: none;
   margin-inline: auto;
-}
-
-.lp-theme-kinara .lp-plans-4 {
-  width: min(100%, 880px);
-  margin-inline: auto;
-  gap: 20px;
 }
 
 .lp-theme-kinara .lp-plans-4 .lp-plan-shot {
@@ -2905,7 +2922,7 @@
 }
 
 .lp-theme-kinara .lp-plans-5 {
-  width: min(100%, 880px);
+  width: 100%;
   margin-inline: auto;
   gap: 20px;
 }
@@ -3827,5 +3844,112 @@
 
   .lp-am-mosaic {
     grid-auto-rows: 120px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .lp-theme-kinara .lp-break {
+    height: clamp(128px, 18vw, 160px);
+    aspect-ratio: auto;
+  }
+
+  .lp-theme-kinara .lp-break img {
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 680px) {
+  .lp-theme-kinara .lp-break {
+    height: clamp(108px, 28vw, 136px);
+  }
+}
+
+.lp-page.lp-theme-kinara .lp-plans:not(.is-marquee) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+}
+
+.lp-page.lp-theme-kinara .lp-plan {
+  width: min(78vw, 380px);
+  flex: 0 0 min(78vw, 380px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.lp-page.lp-theme-kinara .lp-plan-shot,
+.lp-page.lp-brand-westia .lp-plan-shot,
+.lp-page.lp-brand-imperia .lp-plan-shot,
+.lp-page.lp-brand-atrium .lp-plan-shot,
+.lp-page.lp-brand-square .lp-plan-shot,
+.lp-page.lp-brand-skydale .lp-plan-shot,
+.lp-page.lp-brand-kinara .lp-plan-shot {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.lp-page.lp-theme-kinara .lp-plan img,
+.lp-page.lp-brand-westia .lp-plan img,
+.lp-page.lp-brand-imperia .lp-plan img,
+.lp-page.lp-brand-atrium .lp-plan img,
+.lp-page.lp-brand-square .lp-plan img,
+.lp-page.lp-brand-skydale .lp-plan img,
+.lp-page.lp-brand-kinara .lp-plan img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.lp-page.lp-theme-kinara .lp-plan h3 {
+  min-height: 2.6em;
+  white-space: normal;
+}
+
+.lp-page.lp-theme-kinara .lp-plans.is-marquee {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.lp-page.lp-theme-kinara .lp-plans-track {
+  display: flex;
+  width: max-content;
+  animation: lp-plans-slide 36s linear infinite;
+}
+
+.lp-page.lp-theme-kinara .lp-plans.is-marquee .lp-plan {
+  margin-right: 20px;
+}
+
+.lp-page.lp-theme-kinara .lp-plans.is-marquee:hover .lp-plans-track,
+.lp-page.lp-theme-kinara .lp-plans.is-marquee:focus-within .lp-plans-track {
+  animation-play-state: paused;
+}
+
+.lp-page.lp-theme-kinara .lp-plans.is-marquee .lp-plan:hover {
+  transform: none;
+}
+
+@keyframes lp-plans-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-page.lp-theme-kinara .lp-plans-track {
+    animation: none;
+  }
+
+  .lp-page.lp-theme-kinara .lp-plans.is-marquee {
+    overflow-x: auto;
   }
 }

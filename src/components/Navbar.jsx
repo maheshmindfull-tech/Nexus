@@ -136,7 +136,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
       <div
         className="navbar-inner"
         style={{
-          maxWidth: '1400px',
+          maxWidth: 'var(--page)',
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',

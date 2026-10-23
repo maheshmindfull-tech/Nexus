@@ -12,6 +12,12 @@ import img8 from './images/amenities/lifestyle.jpg';
 import img9 from './images/amenities/elevation.jpg';
 import img10 from './images/amenities/aerial.jpg';
 import img11 from './images/amenities/connect.jpg';
+import img21 from './images/plans/2bhk-1.jpg';
+import img22 from './images/plans/2bhk-2.jpg';
+import img23 from './images/plans/2bhk-3.jpg';
+import img24 from './images/plans/3bhk-1.jpg';
+import img25 from './images/plans/3bhk-2.jpg';
+import img26 from './images/plans/3bhk-3.jpg';
 import img12 from './images/cuts/fp-2a.jpg';
 import img13 from './images/cuts/fp-2b.jpg';
 import img14 from './images/cuts/fp-2c.jpg';
@@ -35,6 +41,12 @@ const files = {
   './images/amenities/elevation.jpg': img9,
   './images/amenities/aerial.jpg': img10,
   './images/amenities/connect.jpg': img11,
+  './images/plans/2bhk-1.jpg': img21,
+  './images/plans/2bhk-2.jpg': img22,
+  './images/plans/2bhk-3.jpg': img23,
+  './images/plans/3bhk-1.jpg': img24,
+  './images/plans/3bhk-2.jpg': img25,
+  './images/plans/3bhk-3.jpg': img26,
   './images/cuts/fp-2a.jpg': img12,
   './images/cuts/fp-2b.jpg': img13,
   './images/cuts/fp-2c.jpg': img14,

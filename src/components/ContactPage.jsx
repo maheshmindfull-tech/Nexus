@@ -11,6 +11,8 @@ const PROJECT_OPTIONS = [
   'Nexus Westia (Punawale)',
   'Nexus Prime Square (Moshi)',
   'Nexus Genesis (Kiwale)',
+  'Nexus Atrium (Moshi)',
+  'Nexus Imperia (Moshi)',
 ];
 
 const EMPTY_FORM = {

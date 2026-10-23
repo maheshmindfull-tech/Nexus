@@ -219,6 +219,21 @@ export default function LandingView({ id, onNavigateHome }) {
   };
 
   const setField = (key) => (e) => setFormData((prev) => ({ ...prev, [key]: e.target.value }));
+  const slidingPlans = (p.plans?.length || 0) > 3;
+  const planCard = (plan, key, hidden) => (
+    <article key={key} className="lp-plan" aria-hidden={hidden || undefined}>
+      <button
+        type="button"
+        className="lp-plan-shot"
+        tabIndex={hidden ? -1 : undefined}
+        onClick={() => setLightbox(plan)}
+        aria-label={`View ${plan.title} floor plan`}
+      >
+        <img src={plan.src} alt={hidden ? '' : `${plan.title} floor plan`} />
+      </button>
+      <h3>{plan.title}</h3>
+    </article>
+  );
 
   return (
     <div className={`lp-page lp-brand-${id}${p.theme ? ` lp-theme-${p.theme}` : ''}${editorial ? ' lp-edit' : ''}`}>
@@ -487,15 +502,15 @@ export default function LandingView({ id, onNavigateHome }) {
                 </p>
               )}
             </div>
-            <div className={`lp-plans lp-plans-${p.plans.length}`}>
-              {p.plans.map((plan, i) => (
-                <article key={plan.title} className="lp-plan lp-reveal" style={{ transitionDelay: `${i * 90}ms` }}>
-                  <button type="button" className="lp-plan-shot" onClick={() => setLightbox(plan)} aria-label={`View ${plan.title} floor plan`}>
-                    <img src={plan.src} alt={`${plan.title} floor plan`} />
-                  </button>
-                  <h3>{plan.title}</h3>
-                </article>
-              ))}
+            <div className={`lp-plans${slidingPlans ? ' is-marquee' : ''}`}>
+              {slidingPlans ? (
+                <div className="lp-plans-track" style={{ animationDuration: `${p.plans.length * 6}s` }}>
+                  {p.plans.map((plan, i) => planCard(plan, `a-${i}`, false))}
+                  {p.plans.map((plan, i) => planCard(plan, `b-${i}`, true))}
+                </div>
+              ) : (
+                p.plans.map((plan, i) => planCard(plan, `a-${i}`, false))
+              )}
             </div>
           </div>
         </section>

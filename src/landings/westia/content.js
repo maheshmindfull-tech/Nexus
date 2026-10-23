@@ -62,11 +62,14 @@ const westia = {
       { src: image('amenities/connect.jpg'), label: 'Connected Address' },
     ],
   },
-  plansIntro: '2 BHK layouts. 3 BHK plans are included in the brochure.',
+  plansIntro: '2 and 3 BHK layouts.',
   plans: [
-    { src: image('cuts/fp-2a.jpg'), title: '2 BHK · Type 1' },
-    { src: image('cuts/fp-2b.jpg'), title: '2 BHK · Type 2' },
-    { src: image('cuts/fp-2c.jpg'), title: '2 BHK · Type 3' },
+    { src: image('plans/2bhk-1.jpg'), title: '2 BHK · Type 1' },
+    { src: image('plans/2bhk-2.jpg'), title: '2 BHK · Type 2' },
+    { src: image('plans/2bhk-3.jpg'), title: '2 BHK · Type 3' },
+    { src: image('plans/3bhk-1.jpg'), title: '3 BHK · Type 1' },
+    { src: image('plans/3bhk-2.jpg'), title: '3 BHK · Type 2' },
+    { src: image('plans/3bhk-3.jpg'), title: '3 BHK · Type 3' },
   ],
   gallery: [
     { src: image('hero.jpg'), label: 'Tower elevation' },

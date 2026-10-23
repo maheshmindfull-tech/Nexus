@@ -17,20 +17,54 @@
 
 .blog-wrap,
 .blog-hero-wrap {
-  max-width: 1160px;
+  width: min(100%, var(--page, 1360px));
+  max-width: var(--page, 1360px);
   margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 56px);
+  box-sizing: border-box;
 }
 
 /* ---------------- Listing hero ---------------- */
 .blog-hero {
   position: relative;
-  padding: 150px 20px 72px;
-  background:
-    radial-gradient(1000px 450px at 85% -10%, rgba(0, 157, 189, 0.45), transparent 65%),
-    radial-gradient(600px 320px at 10% 100%, rgba(0, 157, 189, 0.22), transparent 55%),
-    linear-gradient(160deg, #073842 0%, #0c4d5b 52%, #126374 100%);
+  padding: 150px 0 72px;
+  background: #073842;
   color: #fff;
   overflow: hidden;
+}
+
+.blog-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+  z-index: 0;
+  pointer-events: none;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.blog-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(4, 28, 34, 0.42) 0%, rgba(7, 48, 56, 0.5) 55%, rgba(4, 24, 30, 0.62) 100%);
+}
+
+@media (min-width: 900px) {
+  .blog-hero-overlay {
+    background:
+      linear-gradient(105deg, rgba(4, 32, 38, 0.78) 0%, rgba(7, 46, 54, 0.52) 46%, rgba(8, 40, 48, 0.28) 100%),
+      linear-gradient(180deg, rgba(0, 16, 20, 0.18) 0%, rgba(0, 16, 20, 0.08) 50%, rgba(0, 12, 16, 0.4) 100%);
+  }
+}
+
+.blog-hero-wrap {
+  position: relative;
+  z-index: 2;
 }
 
 .blog-hero::after {
@@ -38,6 +72,7 @@
   position: absolute;
   inset: auto 0 0 0;
   height: 1px;
+  z-index: 2;
   background: linear-gradient(90deg, transparent, rgba(201, 164, 92, 0.6), transparent);
 }
 
@@ -137,7 +172,7 @@
 /* ---------------- Listing ---------------- */
 .blog-main {
   flex: 1;
-  padding: 40px 20px 96px;
+  padding: 40px 0 96px;
 }
 
 .blog-section-title {
@@ -398,15 +433,21 @@
 }
 
 .blog-article-hero {
-  padding: 120px 20px 150px;
-  background:
-    radial-gradient(900px 420px at 80% -10%, rgba(0, 157, 189, 0.4), transparent 65%),
-    radial-gradient(550px 300px at 10% 100%, rgba(0, 157, 189, 0.2), transparent 55%),
-    linear-gradient(160deg, #073842 0%, #0c4d5b 55%, #126374 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 150px;
+  background: #073842;
   color: #fff;
 }
 
+.blog-article-hero .blog-hero-bg {
+  object-position: center 35%;
+  filter: saturate(0.9);
+}
+
 .blog-article-head {
+  position: relative;
+  z-index: 2;
   max-width: 820px;
   margin: 0 auto;
 }
@@ -963,14 +1004,14 @@
 
 @media (max-width: 640px) {
   .blog-hero {
-    padding: 120px 18px 52px;
+    padding: 120px 0 52px;
   }
   .blog-grid {
     grid-template-columns: 1fr;
     gap: 22px;
   }
   .blog-article-hero {
-    padding: 104px 18px 110px;
+    padding: 104px 0 110px;
   }
   .blog-article-wrap {
     margin-top: -80px;
