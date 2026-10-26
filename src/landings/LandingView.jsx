@@ -6,12 +6,48 @@ import { LANDING_CONTENT } from './index';
 import { submitLeadToGoogleSheet } from '../services/leadService';
 import './landing.css';
 
-function ProjectBreak({ src }) {
-  if (!src) return null;
+function ProjectBreak({ sources }) {
+  const list = (sources || []).filter(Boolean);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (list.length < 2) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % list.length);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, [list.length]);
+
+  if (!list.length) return null;
+  if (list.length === 1) {
+    return (
+      <figure className="lp-break" aria-hidden="true">
+        <img src={list[0]} alt="" />
+      </figure>
+    );
+  }
+
   return (
-    <figure className="lp-break" aria-hidden="true">
-      <img src={src} alt="" />
-    </figure>
+    <div className="lp-break-block">
+      <figure className="lp-break is-stack">
+        {list.map((src, i) => (
+          <img key={src} src={src} alt="" className={i === index ? 'is-on' : ''} />
+        ))}
+      </figure>
+      <div className="lp-break-dots">
+        {list.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            className={i === index ? 'is-on' : ''}
+            aria-label={`Show image ${i + 1} of ${list.length}`}
+            aria-current={i === index ? 'true' : undefined}
+            onClick={() => setIndex(i)}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -139,7 +175,9 @@ function GalleryCarousel({ items }) {
 export default function LandingView({ id, onNavigateHome }) {
   const p = LANDING_CONTENT[id];
   const isKinara = p?.theme === 'kinara';
-  const breakShot = p?.breakShot || (isKinara ? (p.gallery?.[3]?.src || p.gallery?.[2]?.src || p.gallery?.[0]?.src) : null);
+  const breakShots = p?.breakShots?.length
+    ? p.breakShots
+    : [p?.breakShot || (isKinara ? (p.gallery?.[3]?.src || p.gallery?.[2]?.src || p.gallery?.[0]?.src) : null)].filter(Boolean);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -226,7 +264,7 @@ export default function LandingView({ id, onNavigateHome }) {
         type="button"
         className="lp-plan-shot"
         tabIndex={hidden ? -1 : undefined}
-        onClick={() => setLightbox(plan)}
+        onClick={() => setLightbox({ ...plan, isPlan: true })}
         aria-label={`View ${plan.title} floor plan`}
       >
         <img src={plan.src} alt={hidden ? '' : `${plan.title} floor plan`} />
@@ -599,7 +637,7 @@ export default function LandingView({ id, onNavigateHome }) {
         </section>
       )}
 
-      {breakShot ? <ProjectBreak src={breakShot} /> : null}
+      {breakShots.length ? <ProjectBreak sources={breakShots} /> : null}
 
       <footer className="lp-foot" aria-label="Project address and contact">
         <div className="lp-visit-panel">
@@ -646,7 +684,10 @@ export default function LandingView({ id, onNavigateHome }) {
           aria-label={lightbox.label || lightbox.title}
           onClick={() => setLightbox(null)}
         >
-          <div className="lp-lightbox-window" onClick={(e) => e.stopPropagation()}>
+          <div
+            className={`lp-lightbox-window${lightbox.isPlan || lightbox.title ? ' is-plan' : ''}`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="lp-lightbox-head">
               <h3 className="lp-lightbox-title">{lightbox.label || lightbox.title}</h3>
               <button

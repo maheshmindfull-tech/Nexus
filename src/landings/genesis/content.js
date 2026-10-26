@@ -1,5 +1,5 @@
 import { image } from './images';
-import breakShot from './media/meditation-sunrise.png';
+import breakShot from './media/family-lawn.jpg';
 import amenityVideo from './media/amenity.mp4';
 import logo from './media/logo.png';
 import { OFFICE } from '../shared';

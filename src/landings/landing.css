@@ -1895,13 +1895,18 @@
   color: #0b1523;
 }
 
+.lp-lightbox-window.is-plan {
+  max-height: min(90vh, 760px);
+}
+
 .lp-lightbox-body {
   padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
-  overflow: hidden;
+  background: #ffffff;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .lp-lightbox-body img {
@@ -1914,6 +1919,18 @@
   object-fit: contain;
   border-radius: 8px;
   background: #ffffff;
+}
+
+.lp-lightbox-window.is-plan .lp-lightbox-body {
+  padding: 14px 16px 18px;
+}
+
+.lp-lightbox-window.is-plan .lp-lightbox-body img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
 }
 
 .lp-lightbox figure {
@@ -2849,9 +2866,69 @@
   }
 }
 
-.lp-page.lp-brand-genesis .lp-break {
+.lp-page.lp-brand-genesis .lp-break,
+.lp-page.lp-brand-kinara .lp-break {
   aspect-ratio: 1120 / 188;
   height: auto;
+}
+
+.lp-page.lp-brand-kinara .lp-break img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.lp-page.lp-brand-genesis .lp-break.is-stack,
+.lp-theme-kinara .lp-break.is-stack {
+  position: relative;
+  aspect-ratio: 1120 / 188;
+  height: auto;
+}
+
+.lp-theme-kinara .lp-break.is-stack img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.lp-theme-kinara .lp-break.is-stack img.is-on {
+  opacity: 1;
+}
+
+.lp-break-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  width: min(100%, var(--page, 1360px));
+  margin: 12px auto 0;
+}
+
+.lp-break-dots button {
+  width: 22px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #d9dee6;
+  cursor: pointer;
+}
+
+.lp-break-dots button.is-on {
+  width: 34px;
+  background: var(--lp-accent, #1d3f73);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-theme-kinara .lp-break.is-stack img {
+    transition: none;
+  }
 }
 
 .lp-theme-kinara .lp-break {

@@ -3,7 +3,7 @@ import logo from '../../../public/assets/projects/logos/kinara.png';
 import leadVideo from './media/lead.mp4';
 import planA from './media/plan-a.jpg';
 import planB from './media/plan-b.jpg';
-import breakShot from './media/break.jpg';
+import breakShot from './media/sunrise-lake.png';
 import { OFFICE } from '../shared';
 
 const kinara = {
