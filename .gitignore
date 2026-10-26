@@ -13,6 +13,7 @@ Thumbs.db
 
 # Raw extraction and temporary folders
 /*.jpeg
+# /*.png
 /Images/
 /extracted_assets/
 /pdf_extracted_images/

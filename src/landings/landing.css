@@ -1189,6 +1189,16 @@
   object-position: center 28%;
 }
 
+.lp-page.lp-brand-skydale .lp-bento-shot.is-slot-3 img {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.lp-page.lp-brand-skydale .lp-bento-shot.is-slot-3::after,
+.lp-page.lp-brand-skydale .lp-bento-shot.is-slot-3 span {
+  display: none;
+}
+
 .lp-page.lp-brand-westia .lp-bento-shot:not(.is-lead) img {
   object-position: center center;
 }

@@ -528,11 +528,11 @@ export default function LandingView({ id, onNavigateHome }) {
       )}
 
       {p.plans?.length > 0 && (
-        <section className="lp-section lp-plans-sec" aria-label="Floor plans">
+        <section className="lp-section lp-plans-sec" aria-label={p.plansTitle || 'Floor plans'}>
           <div className="lp-wrap">
             <div className="lp-section-head lp-reveal">
               {!isKinara && <p className="lp-eyebrow">Layouts</p>}
-              <h2>Floor plans</h2>
+              <h2>{p.plansTitle || 'Floor plans'}</h2>
               {p.plansIntro ? <p className="lp-sub">{p.plansIntro}</p> : null}
               {!isKinara && (
                 <p className="lp-disclaimer">

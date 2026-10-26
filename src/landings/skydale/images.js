@@ -12,9 +12,6 @@ import img8 from './images/amenities/lounge.jpg';
 import img9 from './images/amenities/play.jpg';
 import img10 from './images/amenities/table-tennis.jpg';
 import img11 from './images/amenities/balcony.jpg';
-import img12 from './images/cuts/fp-2.jpg';
-import img13 from './images/cuts/fp-3.jpg';
-import img14 from './images/cuts/fp-4.jpg';
 import img15 from './images/v2/g-aerial.jpg';
 import img16 from './images/v2/g-hall.jpg';
 import img17 from './images/v2/g-kids.jpg';
@@ -23,6 +20,17 @@ import img19 from './images/v2/g-dusk.jpg';
 import img20 from './images/gallery/towers.jpg';
 import img21 from './images/gallery/aerial-site.jpg';
 import img22 from './images/gallery/facade.jpg';
+import imgTower from './images/amenities/tower.jpg';
+
+import fpEWing from './images/cuts/fp-e-wing.png';
+import fp4bhkA from './images/cuts/fp-4bhk-a.png';
+import fp3bhkB from './images/cuts/fp-3bhk-b.png';
+import fp2bhkC from './images/cuts/fp-2bhk-c.png';
+import fp2bhkD from './images/cuts/fp-2bhk-d.png';
+import fp3bhkE from './images/cuts/fp-3bhk-e.png';
+import fp4bhkF from './images/cuts/fp-4bhk-f.png';
+import fp3bhkG from './images/cuts/fp-3bhk-g.png';
+import fp3bhkH from './images/cuts/fp-3bhk-h.png';
 
 const files = {
   './images/v2/hero-penthouse.jpg': img0,
@@ -37,9 +45,16 @@ const files = {
   './images/amenities/play.jpg': img9,
   './images/amenities/table-tennis.jpg': img10,
   './images/amenities/balcony.jpg': img11,
-  './images/cuts/fp-2.jpg': img12,
-  './images/cuts/fp-3.jpg': img13,
-  './images/cuts/fp-4.jpg': img14,
+  './images/amenities/tower.jpg': imgTower,
+  './images/cuts/fp-e-wing.png': fpEWing,
+  './images/cuts/fp-4bhk-a.png': fp4bhkA,
+  './images/cuts/fp-3bhk-b.png': fp3bhkB,
+  './images/cuts/fp-2bhk-c.png': fp2bhkC,
+  './images/cuts/fp-2bhk-d.png': fp2bhkD,
+  './images/cuts/fp-3bhk-e.png': fp3bhkE,
+  './images/cuts/fp-4bhk-f.png': fp4bhkF,
+  './images/cuts/fp-3bhk-g.png': fp3bhkG,
+  './images/cuts/fp-3bhk-h.png': fp3bhkH,
   './images/v2/g-aerial.jpg': img15,
   './images/v2/g-hall.jpg': img16,
   './images/v2/g-kids.jpg': img17,
