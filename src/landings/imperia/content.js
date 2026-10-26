@@ -1,7 +1,7 @@
 import { image } from './images';
 import logo from '../../../public/assets/projects/logos/imperia.png';
 import breakShot from './media/break.jpg';
-import hallVideo from './media/hall.mp4';
+import connectivityVideo from './media/connectivity.mp4';
 import { OFFICE } from '../shared';
 
 const imperia = {
@@ -46,19 +46,21 @@ const imperia = {
     'The address connects towards Chakan, Bhosari, Markal, Talawade IT Park and Hinjewadi IT Park. Spine Road and Tata Motors are about 2 minutes away, and Pune–Nashik Highway about 3 minutes.',
   ],
   highlights: [
-    { src: image('highlights/aerial.jpg'), title: 'Double-charged marble floors' },
-    { src: image('highlights/play.jpg'), title: 'Spine Road in two minutes' },
+    { src: image('highlights/convenient.jpg'), title: 'Highly Convenient Place' },
+    { src: image('highlights/locality.jpg'), title: 'Unmatched locality' },
+    { src: image('highlights/sustainable.jpg'), title: 'Sustainable Amenities' },
+    { src: image('highlights/aerial.jpg'), title: 'Double-charged marble floors with Vastu Compliant Homes' },
   ],
   amenities: {
     subtitle: '',
-    lead: { src: hallVideo, label: 'Community Hall', video: true },
+    lead: { src: connectivityVideo, label: 'Strategic Connectivity', video: true },
     items: [
       { src: image('amenities/gym.jpg'), label: 'Gymnasium' },
       { src: image('amenities/hall.jpg'), label: 'Community Hall' },
       { src: image('amenities/play.jpg'), label: 'Children’s Play' },
       { src: image('amenities/garden.jpg'), label: 'Landscape Garden' },
-      { src: image('amenities/entrance.jpg'), label: 'Grand Entrance' },
-      { src: image('amenities/living.jpg'), label: 'Spacious Homes' },
+      { src: image('amenities/entrance.jpg'), label: 'Low Density' },
+      { src: image('amenities/living.jpg'), label: 'Smart Homes' },
     ],
   },
   plansIntro: '',

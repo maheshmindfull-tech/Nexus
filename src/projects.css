@@ -169,6 +169,16 @@
   text-decoration: underline;
 }
 
+.pj-soon-banner {
+  margin: -8px 0 28px;
+  text-align: center;
+  font-size: clamp(13px, 1.5vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-d);
+}
+
 /* Grid */
 .pj-grid {
   display: grid;
@@ -320,6 +330,17 @@
   line-height: 1.3;
   letter-spacing: -0.01em;
   color: var(--ink);
+}
+
+.pj-code-name {
+  font-weight: 400;
+}
+
+.pj-status-badge.is-inline {
+  position: static;
+  align-self: flex-start;
+  margin-bottom: 10px;
+  background: rgba(14, 27, 46, 0.82);
 }
 
 .pj-card-loc {

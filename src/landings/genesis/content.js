@@ -47,7 +47,8 @@ const genesis = {
     { src: image('highlights/pool.jpg'), title: 'Swimming Pool' },
     { src: image('highlights/clubhouse.jpg'), title: 'Clubhouse' },
     { src: image('highlights/evening.jpg'), title: 'Relaxation Area' },
-    { src: image('highlights/play.jpg'), title: 'Mumbai–Pune Expressway' },
+    { src: image('highlights/play.jpg'), title: 'Easy Access to Mumbai-Pune Expressway' },
+    { src: image('highlights/market.jpg'), title: 'Established Market Place' },
   ],
   amenities: {
     subtitle: '',
@@ -61,6 +62,13 @@ const genesis = {
       { src: image('amenities/clubhouse.jpg'), label: 'Clubhouse' },
     ],
   },
+  plansIntro: '2, 3 and 4 BHK layouts.',
+  plans: [
+    { src: image('plans/plan-1.png'), title: 'Floor Plan · Type 1' },
+    { src: image('plans/plan-2.png'), title: 'Floor Plan · Type 2' },
+    { src: image('plans/plan-3.png'), title: 'Floor Plan · Type 3' },
+    { src: image('plans/plan-4.png'), title: 'Floor Plan · Type 4' },
+  ],
   gallery: [
     { src: image('hero.jpg'), label: 'Evening aerial' },
     { src: image('street.jpg'), label: 'Tower elevation' },

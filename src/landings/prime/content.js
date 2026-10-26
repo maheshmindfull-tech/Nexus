@@ -44,7 +44,7 @@ const square = {
   ],
   highlights: [
     { src: image('highlights/towers.jpg'), title: 'At the centre of Moshi' },
-    { src: image('highlights/pool.jpg'), title: 'Podium swimming pool' },
+    { src: image('highlights/pool.jpg'), title: 'Multilevel Amenities' },
     { src: image('highlights/aerial.jpg'), title: 'Indoor games' },
     { src: image('highlights/garden.jpg'), title: 'Fitness zone' },
     { src: image('highlights/play.jpg'), title: 'For children and seniors' },

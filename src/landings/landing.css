@@ -1160,15 +1160,10 @@
   object-position: center center;
 }
 
-.lp-page.lp-brand-imperia .lp-bento-shot.is-lead {
-  background: #f4efe8;
+.lp-page.lp-brand-imperia .lp-bento-shot.is-lead video {
+  object-fit: fill;
 }
 
-.lp-page.lp-brand-imperia .lp-bento-shot.is-lead video {
-  object-fit: contain;
-  object-position: center center;
-  background: #f4efe8;
-}
 
 .lp-bento-shot.is-slot-0 { grid-column: 2 / span 2; grid-row: 1; }
 .lp-bento-shot.is-slot-1 { grid-column: 4 / span 2; grid-row: 1; }
@@ -2756,7 +2751,7 @@
 }
 
 .lp-page.lp-brand-imperia .lp-highlights {
-  grid-template-columns: repeat(2, 260px);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
 }
 
@@ -2799,24 +2794,6 @@
 
 .lp-page.lp-brand-genesis .lp-highlight img {
   aspect-ratio: 1050 / 1320;
-}
-
-.lp-page.lp-brand-genesis .lp-highlights {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 1080px) {
-  .lp-page.lp-brand-genesis .lp-highlights {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 440px) {
-  .lp-page.lp-brand-genesis .lp-highlights {
-    grid-template-columns: 1fr;
-    max-width: 290px;
-    margin: 0 auto;
-  }
 }
 
 .lp-theme-kinara .lp-highlight h3 {

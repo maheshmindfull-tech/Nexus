@@ -5,6 +5,7 @@ import img1 from './images/highlights/pool.jpg';
 import img2 from './images/highlights/clubhouse.jpg';
 import img3 from './images/highlights/evening.jpg';
 import img4 from './images/highlights/play.jpg';
+import imgMarket from './images/highlights/market.jpg';
 import img5 from './images/amenities/pool.jpg';
 import img6 from './images/amenities/gym.jpg';
 import img7 from './images/amenities/play.jpg';
@@ -17,6 +18,10 @@ import img13 from './images/dusk.jpg';
 import img14 from './images/pool.jpg';
 import img15 from './images/play.jpg';
 import img16 from './images/lawn.jpg';
+import plan1 from './images/plans/plan-1.png';
+import plan2 from './images/plans/plan-2.png';
+import plan3 from './images/plans/plan-3.png';
+import plan4 from './images/plans/plan-4.png';
 
 const files = {
   './images/home.jpg': img0,
@@ -24,6 +29,7 @@ const files = {
   './images/highlights/clubhouse.jpg': img2,
   './images/highlights/evening.jpg': img3,
   './images/highlights/play.jpg': img4,
+  './images/highlights/market.jpg': imgMarket,
   './images/amenities/pool.jpg': img5,
   './images/amenities/gym.jpg': img6,
   './images/amenities/play.jpg': img7,
@@ -36,6 +42,10 @@ const files = {
   './images/pool.jpg': img14,
   './images/play.jpg': img15,
   './images/lawn.jpg': img16,
+  './images/plans/plan-1.png': plan1,
+  './images/plans/plan-2.png': plan2,
+  './images/plans/plan-3.png': plan3,
+  './images/plans/plan-4.png': plan4,
 };
 
 export const image = bindImages(files, 'genesis');

@@ -5,6 +5,9 @@ import img1 from './images/highlights/elevation.jpg';
 import img2 from './images/highlights/aerial.jpg';
 import img3 from './images/highlights/gate.jpg';
 import img4 from './images/highlights/play.jpg';
+import imgConvenient from './images/highlights/convenient.jpg';
+import imgLocality from './images/highlights/locality.jpg';
+import imgSustainable from './images/highlights/sustainable.jpg';
 import img5 from './images/amenities/gym.jpg';
 import img6 from './images/amenities/hall.jpg';
 import img7 from './images/amenities/play.jpg';
@@ -26,6 +29,9 @@ const files = {
   './images/highlights/aerial.jpg': img2,
   './images/highlights/gate.jpg': img3,
   './images/highlights/play.jpg': img4,
+  './images/highlights/convenient.jpg': imgConvenient,
+  './images/highlights/locality.jpg': imgLocality,
+  './images/highlights/sustainable.jpg': imgSustainable,
   './images/amenities/gym.jpg': img5,
   './images/amenities/hall.jpg': img6,
   './images/amenities/play.jpg': img7,

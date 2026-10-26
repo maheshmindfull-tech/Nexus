@@ -254,6 +254,54 @@ const PROJECTS = [
     image: '/assets/projects/nexus-hermitage.jpg',
   },
   {
+    id: 'kinara-e-wing',
+    name: 'Nexus Kinaara E Wing',
+    location: 'Jadhavwadi, Chikhali, Pune',
+    type: 'Residential & Commercial',
+    status: 'Coming Soon',
+    config: 'Spacious 3 BHK',
+    image: '/assets/projects/coming-soon-card.jpg',
+  },
+  {
+    id: 'atrium-d-wing',
+    name: 'Nexus Atrium D Wing',
+    location: 'Borhadewadi, Moshi',
+    type: 'Residential',
+    status: 'Coming Soon',
+    config: 'Smart 2 & 3 BHK',
+    image: '/assets/projects/coming-soon-card.jpg',
+  },
+  {
+    id: 'nexus-supreme',
+    codeName: true,
+    name: 'Nexus Supreme',
+    location: 'Borhadewadi, Moshi',
+    type: 'Residential',
+    status: 'Coming Soon',
+    config: 'Premium 2 & 3 BHK',
+    image: '/assets/projects/coming-soon-card.jpg',
+  },
+  {
+    id: 'greens-punawale',
+    codeName: true,
+    name: 'Nexus Greens, Punawale',
+    location: 'Punawale, PCMC',
+    type: 'Residential & Commercial',
+    status: 'Coming Soon',
+    config: 'Luxury 2, 3 & 4 BHK',
+    image: '/assets/projects/coming-soon-card.jpg',
+  },
+  {
+    id: 'greens-moshi',
+    codeName: true,
+    name: 'Nexus Greens, Moshi',
+    location: 'Moshi, PCMC',
+    type: 'Residential & Commercial',
+    status: 'Coming Soon',
+    config: 'Luxury 2, 3 & 4 BHK',
+    image: '/assets/projects/coming-soon-card.jpg',
+  },
+  {
     id: 'crown',
     name: 'Nexus Crown',
     location: 'Ravet / Kiwale, Pune',
@@ -368,22 +416,37 @@ export default function ProjectsPage({
             </div>
           </div>
 
+          {status === 'Coming Soon' && (
+            <p className="pj-soon-banner">Coming Soon — Stay Tuned — Stay Connected</p>
+          )}
+
           {filtered.length > 0 ? (
             <div className="pj-grid">
               {filtered.map((p) => (
-                <article className="pj-card" key={p.id}>
-                  <div className="pj-card-media">
-                    <img className="pj-card-photo" src={p.image} alt={p.name} loading="lazy" />
-                    <span className={`pj-status-badge ${p.status.toLowerCase().replace(/\s+/g, '-')}`}>
-                      <span className="pj-status-dot" aria-hidden="true" />
-                      <span>{p.status}</span>
-                    </span>
-                  </div>
+                <article className={`pj-card${p.image ? '' : ' is-plain'}`} key={p.id}>
+                  {p.image ? (
+                    <div className="pj-card-media">
+                      <img className="pj-card-photo" src={p.image} alt={p.name} loading="lazy" />
+                      <span className={`pj-status-badge ${p.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                        <span className="pj-status-dot" aria-hidden="true" />
+                        <span>{p.status}</span>
+                      </span>
+                    </div>
+                  ) : null}
                   <div className="pj-card-body">
+                    {!p.image && (
+                      <span className={`pj-status-badge is-inline ${p.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                        <span className="pj-status-dot" aria-hidden="true" />
+                        <span>{p.status}</span>
+                      </span>
+                    )}
                     <div className="pj-card-head">
                       <div className="pj-card-copy">
                         <div className="pj-card-type">{p.type}</div>
-                        <h2 className="pj-card-name">{p.name}</h2>
+                        <h2 className="pj-card-name">
+                          {p.codeName ? <span className="pj-code-name">Code Name </span> : null}
+                          {p.name}
+                        </h2>
                         <div className="pj-card-loc">
                           <MapPin size={14} strokeWidth={2} />
                           <span>{p.location}</span>
@@ -408,7 +471,7 @@ export default function ProjectsPage({
                                 ? () => onNavigateLanding(p.id)
                                 : onOpenEnquire
                           }
-                          title={`Learn more about ${p.name}`}
+                          title={`Learn more about ${p.codeName ? `Code Name ${p.name}` : p.name}`}
                         >
                           Learn more
                         </button>
