@@ -1,18 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { CheckCircle2, Send, X, Loader2 } from 'lucide-react';
 import { submitLeadToGoogleSheet } from '../services/leadService';
 
-export default function EnquiryModal({ isOpen, onClose }) {
+export const DEFAULT_PROJECT_OPTIONS = [
+  'Nexus Skydale (Punawale)',
+  'Nexus Kinara (Chikhali)',
+  'Nexus Westia (Punawale)',
+  'Nexus Prime Square (Moshi)',
+  'Nexus Genesis (Kiwale)',
+  'Nexus Atrium (Moshi)',
+  'Nexus Imperia (Moshi)',
+  'General Enquiry',
+];
+
+export function resolveProjectOption(input, options = DEFAULT_PROJECT_OPTIONS) {
+  if (!input) return 'General Enquiry';
+  const str = String(input).trim();
+  if (!str) return 'General Enquiry';
+
+  const lower = str.toLowerCase();
+
+  // 1. Exact match (case-insensitive)
+  const exact = options.find((opt) => opt.toLowerCase() === lower);
+  if (exact) return exact;
+
+  // 2. Base project name match (ignoring parentheses e.g. "Nexus Kinara (Chikhali)" -> "nexus kinara")
+  const inputBase = lower.replace(/\s*\([^)]*\)$/, '').trim();
+  const baseMatch = options.find((opt) => {
+    const optBase = opt.toLowerCase().replace(/\s*\([^)]*\)$/, '').trim();
+    return optBase === inputBase;
+  });
+  if (baseMatch) return baseMatch;
+
+  // 3. Keyword / partial match (without "nexus " prefix)
+  const cleanWord = inputBase.replace(/^nexus\s+/, '').trim();
+  if (cleanWord) {
+    const keywordMatch = options.find((opt) => opt.toLowerCase().includes(cleanWord));
+    if (keywordMatch) return keywordMatch;
+  }
+
+  // 4. Return as-is if no preset match (will be added as a custom option in the dropdown)
+  return str;
+}
+
+export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    project: 'Nexus Skydale (Punawale)',
+    project: resolveProjectOption(initialProject),
     message: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setSubmitted(false);
+      setIsSubmitting(false);
+      const targetProject = initialProject
+        ? resolveProjectOption(initialProject)
+        : 'General Enquiry';
+      setFormData((prev) => ({
+        ...prev,
+        project: targetProject,
+      }));
+    }
+  }, [isOpen, initialProject]);
+
+  const projectOptions = useMemo(() => {
+    if (formData.project && !DEFAULT_PROJECT_OPTIONS.includes(formData.project)) {
+      return [formData.project, ...DEFAULT_PROJECT_OPTIONS];
+    }
+    return DEFAULT_PROJECT_OPTIONS;
+  }, [formData.project]);
 
   if (!isOpen) return null;
 
@@ -24,7 +86,7 @@ export default function EnquiryModal({ isOpen, onClose }) {
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
-      project: formData.project || 'Nexus Skydale (Punawale)',
+      project: formData.project || 'General Enquiry',
       message: formData.message || '',
     });
     setIsSubmitting(false);
@@ -125,14 +187,11 @@ export default function EnquiryModal({ isOpen, onClose }) {
                   onChange={(e) => setFormData({ ...formData, project: e.target.value })}
                   className="form-select"
                 >
-                  <option value="Nexus Skydale (Punawale)">Nexus Skydale (Punawale)</option>
-                  <option value="Nexus Kinara (Chikhali)">Nexus Kinara (Chikhali)</option>
-                  <option value="Nexus Westia (Punawale)">Nexus Westia (Punawale)</option>
-                  <option value="Nexus Prime Square (Moshi)">Nexus Prime Square (Moshi)</option>
-                  <option value="Nexus Genesis (Kiwale)">Nexus Genesis (Kiwale)</option>
-                  <option value="Nexus Atrium (Moshi)">Nexus Atrium (Moshi)</option>
-                  <option value="Nexus Imperia (Moshi)">Nexus Imperia (Moshi)</option>
-                  <option value="General Enquiry">General Enquiry</option>
+                  {projectOptions.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
                 </select>
               </div>
 

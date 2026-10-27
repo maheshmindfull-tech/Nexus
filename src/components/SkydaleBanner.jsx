@@ -83,7 +83,7 @@ export default function SkydaleBanner({ onOpenEnquire }) {
               {/* Action Button */}
               <div className="sm:col-span-4 flex sm:justify-end">
                 <button
-                  onClick={onOpenEnquire}
+                  onClick={() => onOpenEnquire?.('Nexus Skydale (Punawale)')}
                   className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-[#009bb0] hover:bg-[#00879a] text-white font-semibold text-sm rounded-full flex items-center justify-center gap-2 hover:gap-3 transition-all cursor-pointer"
                 >
                   <span>Download Brochure</span>

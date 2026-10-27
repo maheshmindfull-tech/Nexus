@@ -469,13 +469,17 @@ export default function ProjectsPage({
                               ? onNavigateSkydale
                               : LANDING_PROJECTS[p.id] && onNavigateLanding
                                 ? () => onNavigateLanding(p.id)
-                                : onOpenEnquire
+                                : () => onOpenEnquire?.(p.name)
                           }
                           title={`Learn more about ${p.codeName ? `Code Name ${p.name}` : p.name}`}
                         >
                           Learn more
                         </button>
-                        <button type="button" className="pj-card-cta" onClick={onOpenEnquire}>
+                        <button
+                          type="button"
+                          className="pj-card-cta"
+                          onClick={() => onOpenEnquire?.(p.name)}
+                        >
                           Enquire
                         </button>
                       </div>

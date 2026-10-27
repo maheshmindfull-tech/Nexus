@@ -36,6 +36,7 @@ import { canGoBack, markRestoring, pushAppState, rememberScroll, stampHistory } 
 
 export default function App() {
   const [enquireOpen, setEnquireOpen] = useState(false);
+  const [enquireProject, setEnquireProject] = useState('');
   const [historyTick, setHistoryTick] = useState(0);
   const restoreY = useRef(null);
   const [currentPage, setCurrentPage] = useState(() => {
@@ -47,13 +48,18 @@ export default function App() {
     typeof window === 'undefined' ? null : currentBlogSlug()
   ));
 
+  const handleOpenEnquire = (projectName) => {
+    setEnquireProject(typeof projectName === 'string' ? projectName : '');
+    setEnquireOpen(true);
+  };
+
   useEffect(() => {
     const page = pageFromLocation();
     if (page === 'contact') {
       stampHistory('home', '/');
       setCurrentPage('home');
       setBlogSlug(null);
-      setEnquireOpen(true);
+      handleOpenEnquire('');
       applyPageSeo('home');
     } else {
       stampHistory(page, pathForPage(page));
@@ -68,7 +74,7 @@ export default function App() {
         stampHistory('home', '/');
         setCurrentPage('home');
         setBlogSlug(null);
-        setEnquireOpen(true);
+        handleOpenEnquire('');
         applyPageSeo('home');
       } else {
         setCurrentPage(next);
@@ -113,7 +119,7 @@ export default function App() {
 
   const handleNavigate = (page, section) => {
     if (page === 'contact') {
-      setEnquireOpen(true);
+      handleOpenEnquire('');
       return;
     }
 
@@ -160,7 +166,7 @@ export default function App() {
         <Navbar
           currentPage={currentPage}
           onNavigate={handleNavigate}
-          onOpenEnquire={() => setEnquireOpen(true)}
+          onOpenEnquire={() => handleOpenEnquire('')}
         />
       )}
 
@@ -176,9 +182,9 @@ export default function App() {
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateLanding={(page) => handleNavigate(page)}
-          onNavigateContact={() => setEnquireOpen(true)}
+          onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
-          onOpenEnquire={() => setEnquireOpen(true)}
+          onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'blogs' || currentPage === 'blog' ? (
         <BlogsPage
@@ -190,9 +196,9 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => setEnquireOpen(true)}
+          onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
-          onOpenEnquire={() => setEnquireOpen(true)}
+          onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'about' ? (
         /* DEDICATED ABOUT US PAGE */
@@ -202,9 +208,9 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => setEnquireOpen(true)}
+          onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
-          onOpenEnquire={() => setEnquireOpen(true)}
+          onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'careers' ? (
         /* DEDICATED CAREERS PAGE */
@@ -215,9 +221,9 @@ export default function App() {
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => setEnquireOpen(true)}
+          onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
-          onOpenEnquire={() => setEnquireOpen(true)}
+          onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'cp-inquiry' ? (
         /* DEDICATED CP INQUIRY PAGE */
@@ -227,9 +233,9 @@ export default function App() {
           onNavigateProjects={() => handleNavigate('projects')}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateContact={() => setEnquireOpen(true)}
+          onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
-          onOpenEnquire={() => setEnquireOpen(true)}
+          onOpenEnquire={handleOpenEnquire}
         />
       ) : (
         /* HOME PAGE */
@@ -237,7 +243,7 @@ export default function App() {
           <main className="flex-1">
             {/* 1. Hero */}
             <Hero
-              onOpenEnquire={() => setEnquireOpen(true)}
+              onOpenEnquire={() => handleOpenEnquire('')}
               onViewProjects={() => handleNavigate('projects')}
             />
 
@@ -270,10 +276,10 @@ export default function App() {
             onNavigateCareers={() => handleNavigate('careers')}
             onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
             onNavigateSkydale={() => handleNavigate('skydale')}
-            onNavigateContact={() => setEnquireOpen(true)}
+            onNavigateContact={() => handleOpenEnquire('')}
             onNavigateBlogs={() => handleNavigate('blogs')}
             onNavigateHome={(sec) => handleNavigate('home', sec)}
-            onOpenEnquire={() => setEnquireOpen(true)}
+            onOpenEnquire={handleOpenEnquire}
           />
         </>
       )}
@@ -281,7 +287,11 @@ export default function App() {
       {/* Interactive Enquiry Modal */}
       <EnquiryModal
         isOpen={enquireOpen}
-        onClose={() => setEnquireOpen(false)}
+        initialProject={enquireProject}
+        onClose={() => {
+          setEnquireOpen(false);
+          setEnquireProject('');
+        }}
       />
     </div>
   );
