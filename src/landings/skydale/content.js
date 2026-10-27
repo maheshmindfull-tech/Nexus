@@ -60,7 +60,7 @@ const skydale = {
       { src: image('amenities/lounge.jpg'), label: 'Community Hall' },
       { src: image('amenities/tower.jpg'), label: 'High Rise Tower' },
       { src: image('amenities/table-tennis.jpg'), label: 'Indoor Games' },
-      { src: image('amenities/balcony.jpg'), label: 'Panaromic Balconies' },
+      { src: image('amenities/balcony.jpg'), label: 'Panoramic Balconies' },
     ],
   },
   plansTitle: 'E-Wing Floor Plans',
