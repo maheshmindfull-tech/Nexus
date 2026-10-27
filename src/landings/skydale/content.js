@@ -1,5 +1,5 @@
 import { image } from './images';
-import logo from '../../../public/assets/projects/logos/skydale.png';
+const logo = '/assets/projects/logos/skydale.png';
 import breakShot from './images/twilight-terrace.jpg';
 import poolVideo from './media/pool.mp4';
 import { OFFICE, TEAM } from '../shared';

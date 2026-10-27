@@ -102,22 +102,16 @@ const VALUES = [
 
 const LEADERS = [
   {
-    name: 'Rajendra B. Patil',
-    role: 'Founder & Chairman',
-    desc: 'Founded Nexus in 1996 on the bedrock of uncompromising quality and ethical development. His visionary leadership has guided over 55 milestone projects across three decades.',
-    image: '/assets/about/leader-01.jpg',
+    name: 'Mr. Naresh Patel',
+    role: 'Founder Director, Nexus Group, Pune',
+    desc: 'Founded Nexus in 1996 with a vision to build homes, enduring relationships, and lasting trust. Believes real estate is about understanding family aspirations and crafting communities that stand the test of time.',
+    image: '/assets/about/naresh-patel.jpg',
   },
   {
-    name: 'Amit R. Patil',
-    role: 'Managing Director',
-    desc: 'Drives strategic expansion, modern architectural philosophies, and eco-friendly master planning, establishing Nexus as a benchmark brand across Pimpri-Chinchwad, Pune and Nashik.',
-    image: '/assets/about/leader-02.jpg',
-  },
-  {
-    name: 'Sunil M. Kulkarni',
-    role: 'Director – Projects & Engineering',
-    desc: 'Brings 25+ years of structural precision, stringent on-site safety, and seamless execution to deliver every development with certainty and excellence.',
-    image: '/assets/about/leader-03.jpg',
+    name: 'Mr. Satish Patel',
+    role: 'Executive Director, Nexus Group, Pune',
+    desc: 'Carries forward the Nexus legacy by pairing contemporary architecture with transparent execution. Committed to creating well-planned spaces and shaping possibilities for tomorrow.',
+    image: '/assets/about/satish-patel.jpg',
   },
 ];
 
@@ -175,6 +169,35 @@ const STATS = [
     value: '7.5K+',
     label: 'Happy Families',
     sub: 'Thriving Communities',
+  },
+];
+
+const TEAM_PHOTOS = [
+  {
+    id: 'team-03',
+    alt: 'Nexus Corporate & Sales Team at Nexus Prime Square',
+    image: '/assets/about/team/team-03.jpg',
+    isHero: true,
+  },
+  {
+    id: 'team-01',
+    alt: 'Nexus Project Engineering and Site Execution Team',
+    image: '/assets/about/team/team-01.jpg',
+  },
+  {
+    id: 'team-11',
+    alt: 'Nexus Group Founders - Mr. Naresh Patel and Mr. Satish Patel',
+    image: '/assets/about/team/team-11.jpg',
+  },
+  {
+    id: 'team-04',
+    alt: 'Nexus Central Operations and Management Staff',
+    image: '/assets/about/team/team-04.jpg',
+  },
+  {
+    id: 'team-02',
+    alt: 'Nexus Site Delivery and Quality Construction Force',
+    image: '/assets/about/team/team-02.jpg',
   },
 ];
 
@@ -402,7 +425,7 @@ export default function AboutPage({
             ============================================================ */}
         <section className="about-leaders">
           <div className="wrap">
-            <Eyebrow light>Our leaders</Eyebrow>
+            <Eyebrow light>Our leadership</Eyebrow>
             <h2 className="big" style={{ color: '#fff' }}>
               Experience That Leads.{' '}
               <span style={{ color: 'rgba(255,255,255,0.55)' }}>Vision That Builds.</span>
@@ -424,13 +447,123 @@ export default function AboutPage({
                   )}
                   <div className="about-leader-scrim" />
                   <div className="about-leader-info">
-                    <small className="about-leader-tag">Leader 0{i + 1}</small>
+                    <small className="about-leader-tag"></small>
                     <b>{person.name}</b>
                     <span>{person.role}</span>
                     <p>{person.desc}</p>
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            6. OUR PURPOSE / OUR TEAM (Pixel-Perfect Reference Format)
+            ============================================================ */}
+        <section className="about-team" id="our-team">
+          <div className="wrap about-team-container">
+            {/* Header: ABOUT US — | Our Purpose. | Subtitle + Top-Right PEOPLE/PROGRESS/COMMUNITY Badge */}
+            <div className="about-team-header">
+              <div className="about-team-header-main">
+                <div className="about-team-eyebrow">
+                  <span>ABOUT US</span>
+                  <span className="about-team-eyebrow-line" aria-hidden="true" />
+                </div>
+                <h2 className="about-team-title">
+                  Our <span>Purpose.</span>
+                </h2>
+                <p className="about-team-intro">
+                  At Nexus Group, we believe in building more than just spaces —<br />
+                  we build people, communities and a better tomorrow.
+                </p>
+              </div>
+
+              <div className="about-team-badge">
+                <div className="about-team-badge-stack">
+                  <span>PEOPLE</span>
+                  <span>PROGRESS</span>
+                  <span>COMMUNITY</span>
+                </div>
+                <span className="about-team-badge-line" aria-hidden="true" />
+              </div>
+            </div>
+
+            {/* Row 1: Big Photo (left) + "Our Team" caption (right) */}
+            <div className="about-team-row about-team-row-1">
+              <div className="about-team-photo-wrap about-team-photo-hero">
+                <img
+                  src="/assets/about/team/team-01.jpg"
+                  alt="Nexus Team"
+                  className="about-team-img"
+                  loading="lazy"
+                />
+              </div>
+              <div className="about-team-caption">
+                <span className="about-team-dash" aria-hidden="true" />
+                <h3 className="about-team-caption-title">Our Team</h3>
+                <p className="about-team-caption-desc">
+                  A passionate team<br />
+                  working together<br />
+                  to create lasting<br />
+                  impact.
+                </p>
+              </div>
+            </div>
+
+            {/* Row 2: 2 Photos side-by-side (left) + "Together We Grow" caption (right) */}
+            <div className="about-team-row about-team-row-2">
+              <div className="about-team-photos-pair">
+                <div className="about-team-photo-wrap about-team-photo-pair-1">
+                  <img
+                    src="/assets/about/team/team-03.jpg"
+                    alt="Nexus Corporate & Sales Team at Nexus Prime Square"
+                    className="about-team-img"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="about-team-photo-wrap about-team-photo-pair-2">
+                  <img
+                    src="/assets/about/team/team-04.jpg"
+                    alt="Nexus Operations Staff"
+                    className="about-team-img"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div className="about-team-caption">
+                <span className="about-team-dash" aria-hidden="true" />
+                <h3 className="about-team-caption-title">
+                  Together<br />We Grow
+                </h3>
+                <p className="about-team-caption-desc">
+                  Diverse people.<br />
+                  Shared values.<br />
+                  One vision.
+                </p>
+              </div>
+            </div>
+
+            {/* Row 3: "Leadership with Vision" caption (left) + Wide photo of founders (right) */}
+            <div className="about-team-row about-team-row-3">
+              <div className="about-team-caption about-team-caption-left">
+                <span className="about-team-dash" aria-hidden="true" />
+                <h3 className="about-team-caption-title">
+                  Leadership<br />with Vision
+                </h3>
+                <p className="about-team-caption-desc">
+                  Guiding today,<br />
+                  shaping tomorrow.
+                </p>
+              </div>
+              <div className="about-team-photo-wrap about-team-photo-wide">
+                <img
+                  src="/assets/about/team/team-11.jpg"
+                  alt="Nexus Founders - Mr. Naresh Patel and Mr. Satish Patel"
+                  className="about-team-img"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </section>

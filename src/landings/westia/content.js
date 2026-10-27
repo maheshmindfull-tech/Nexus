@@ -1,5 +1,5 @@
 import { image } from './images';
-import logo from '../../../public/assets/projects/logos/westia.png';
+const logo = '/assets/projects/logos/westia.png';
 import breakShot from './media/break.jpg';
 import roadVideo from './media/road.mp4';
 import { OFFICE, TEAM } from '../shared';

@@ -1,5 +1,5 @@
 import { image } from './images';
-import logo from '../../../public/assets/projects/logos/atrium.png';
+const logo = '/assets/projects/logos/atrium.png';
 import breakShot from './media/break.jpg';
 import childrenVideo from './media/children.mp4';
 import { OFFICE } from '../shared';

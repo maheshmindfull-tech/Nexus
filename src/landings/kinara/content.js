@@ -1,5 +1,5 @@
 import { image } from './images';
-import logo from '../../../public/assets/projects/logos/kinara.png';
+const logo = '/assets/projects/logos/kinara.png';
 import leadVideo from './media/lead.mp4';
 import planA from './media/plan-a.jpg';
 import planB from './media/plan-b.jpg';

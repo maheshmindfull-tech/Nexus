@@ -1,5 +1,5 @@
 import { image } from './images';
-import logo from '../../../public/assets/projects/logos/square.png';
+const logo = '/assets/projects/logos/square.png';
 import breakShot from './media/break.jpg';
 import familyVideo from './media/family.mp4';
 import { OFFICE } from '../shared';
