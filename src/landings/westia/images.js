@@ -25,7 +25,7 @@ import img15 from './images/hero.jpg';
 import img16 from './images/cuts/g-garden.jpg';
 import img17 from './images/gallery/aerial.jpg';
 import img18 from './images/gallery/evening.jpg';
-import img19 from './images/cuts/g-elevation.jpg';
+import img19 from './images/gallery/masterplan.jpg';
 import img20 from './images/gallery/site.jpg';
 
 const files = {
@@ -54,7 +54,7 @@ const files = {
   './images/cuts/g-garden.jpg': img16,
   './images/gallery/aerial.jpg': img17,
   './images/gallery/evening.jpg': img18,
-  './images/cuts/g-elevation.jpg': img19,
+  './images/gallery/masterplan.jpg': img19,
   './images/gallery/site.jpg': img20,
 };
 
