@@ -36,7 +36,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
     { id: 'about', label: 'About Us', href: '/about' },
     { id: 'projects', label: 'Projects', href: '/projects' },
     { id: 'careers', label: 'Careers', href: '/careers' },
-    { id: 'cp-inquiry', label: 'CP Inquiry', href: '/cp-inquiry' },
+    { id: 'cp-inquiry', label: 'Channel Partner', href: '/cp-inquiry' },
     { id: 'blogs', label: 'Blogs', href: '/blogs' },
   ];
 
@@ -159,7 +159,7 @@ export default function Navbar({ onOpenEnquire, currentPage = 'home', onNavigate
             alt="Nexus Pune"
             className="navbar-logo-img"
             style={{
-              height: isScrolled ? '40px' : '48px',
+              height: isScrolled ? '68px' : '82px',
               width: 'auto',
               objectFit: 'contain',
               transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',

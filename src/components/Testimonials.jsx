@@ -24,37 +24,37 @@ export default function Testimonials() {
     {
       p: '“We were moving up from a 2 BHK and wanted more space for the kids. The 3 BHK layout felt just right.”',
       b: 'Chetan Wani',
-      s: 'Unit A 305 • Nexus Skydale, Punawale',
+      s: 'Flat No. A 305 • Nexus Skydale, Punawale',
       tag: 'Skydale, Punawale',
     },
     {
       p: '“Big project, so I was worried about quality. Visited the site three times and the work looked consistent.”',
       b: 'Pankaj Bhangale',
-      s: 'Unit E 1006 • Nexus Skydale, Punawale',
+      s: 'Flat No. E 1006 • Nexus Skydale, Punawale',
       tag: 'Skydale, Punawale',
     },
     {
       p: '“My wife and I wanted something away from the crowded city vibe. The riverside setting is what pulled us in.”',
       b: 'Popat Pisal',
-      s: 'Unit B 206 • Nexus Kinaara, Chikhali',
+      s: 'Flat No. B 206 • Nexus Kinaara, Chikhali',
       tag: 'Kinaara, Chikhali',
     },
     {
       p: '“First home for us, and the 2 BHK fit our budget without stretching too much.”',
       b: 'Jayendra Chapolikar',
-      s: 'Unit B 1301 • Nexus Kinaara, Chikhali',
+      s: 'Flat No. B 1301 • Nexus Kinaara, Chikhali',
       tag: 'Kinaara, Chikhali',
     },
     {
       p: '“Went on a weekend visit just to see, and ended up booking. The location felt peaceful.”',
       b: 'Rohit Pawar',
-      s: 'Unit D 1107 • Nexus Kinaara, Chikhali',
+      s: 'Flat No. D 1107 • Nexus Kinaara, Chikhali',
       tag: 'Kinaara, Chikhali',
     },
     {
       p: '“Compared a few projects in Moshi and this one felt the most organised.”',
       b: 'Sachin Varade',
-      s: 'Unit A 705 • Nexus Prime Square, Moshi',
+      s: 'Flat No. A 705 • Nexus Prime Square, Moshi',
       tag: 'Prime Square, Moshi',
     },
     {
@@ -66,49 +66,49 @@ export default function Testimonials() {
     {
       p: '“We didn\'t want a huge crowded society. Approx 100-150 flats felt like the right size.”',
       b: 'Uttam Shinde',
-      s: 'Unit C 306 • Nexus Atrium, Moshi',
+      s: 'Flat No. C 306 • Nexus Atrium, Moshi',
       tag: 'Atrium, Moshi',
     },
     {
       p: '“Booked for my parents. They wanted a calm place. Everyone on site was easy to talk to.”',
       b: 'Jayesh Pachpute',
-      s: 'Unit C 505 • Nexus Atrium, Moshi',
+      s: 'Flat No. C 505 • Nexus Atrium, Moshi',
       tag: 'Atrium, Moshi',
     },
     {
       p: '“Liked that it\'s a smaller project. Easier to know the neighbours.”',
       b: 'Pravin Ranmale',
-      s: 'Unit B 606 • Nexus Imperia, Moshi',
+      s: 'Flat No. B 606 • Nexus Imperia, Moshi',
       tag: 'Imperia, Moshi',
     },
     {
       p: '“Paperwork was explained patiently. That\'s why we trusted them.”',
       b: 'Tejas Naik',
-      s: 'Unit B 502 • Nexus Imperia, Moshi',
+      s: 'Flat No. B 502 • Nexus Imperia, Moshi',
       tag: 'Imperia, Moshi',
     },
     {
       p: '“I needed an easy way to reach the highway for work. The Kiwale location suits that.”',
       b: 'Nisha R',
-      s: 'Unit D 1005 • Nexus Genesis, Kiwale',
+      s: 'Flat No. D 1005 • Nexus Genesis, Kiwale',
       tag: 'Genesis, Kiwale',
     },
     {
       p: '“We saw the site progress every month through photo updates. It felt reassuring.”',
       b: 'Girish Kamble',
-      s: 'Unit D 606 • Nexus Genesis, Kiwale',
+      s: 'Flat No. D 606 • Nexus Genesis, Kiwale',
       tag: 'Genesis, Kiwale',
     },
     {
       p: '“We wanted 4 BHK for our joint family. Not many options give that at a fair price with a good carpet area.”',
       b: 'Atul Sonawane',
-      s: 'Unit E 703 • Nexus Genesis, Kiwale',
+      s: 'Flat No. E 703 • Nexus Genesis, Kiwale',
       tag: 'Genesis, Kiwale',
     },
     {
       p: '“We already live in Punawale and didn\'t want to move far. This was the right fit.”',
       b: 'Vivek Baviskar',
-      s: 'Unit 804 • Nexus Westia, Punawale',
+      s: 'Flat No. 804 • Nexus Westia, Punawale',
       tag: 'Westia, Punawale',
     },
     {
@@ -120,13 +120,13 @@ export default function Testimonials() {
     {
       p: '“We moved in a long time ago and are still happy. Maintenance has been smooth.”',
       b: 'Girish Rudrawar',
-      s: 'Unit 802 • Nexus West Pride, Punawale',
+      s: 'Flat No. 802 • Nexus West Pride, Punawale',
       tag: 'West Pride, Punawale',
     },
     {
       p: '“Bought as a first home years back. I was very worried but it\'s been a good decision.”',
       b: 'Rahul Dey',
-      s: 'Unit H 1501 • Nexus Gulmohar, Charholi Budruk',
+      s: 'Flat No. H 1501 • Nexus Gulmohar, Charholi Budruk',
       tag: 'Gulmohar, Charholi',
     },
   ];
@@ -165,11 +165,12 @@ export default function Testimonials() {
                     </div>
                   </div>
                   <div className="v-content">
-                    <p className="v-quote">Watch this resident video.</p>
                     <div className="v-author-info">
                       <div>
                         <strong className="v-name">{v.name}</strong>
-                        <span className="v-project">{v.detail}</span>
+                        <span className="v-project">
+                          {v.flat ? `${v.project} · Flat No. ${v.flat}` : v.project}
+                        </span>
                       </div>
                       <span className="v-watch-pill">
                         <Play className="w-3 h-3 fill-current" /> Watch

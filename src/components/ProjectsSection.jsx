@@ -12,7 +12,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
     },
     {
       id: 'kinara',
-      name: 'Nexus Kinara',
+      name: 'Nexus Kinaara',
       loc: 'Jadhavwadi, Chikhali',
       img: '/assets/projects/nexus-kinara.jpg',
       page: 'kinara',
@@ -94,7 +94,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
                     {p.name}
                   </strong>
                   <span className="pcard-loc">
-                    {p.loc} <br />• Built by NEXUS
+                    {p.loc}
                   </span>
                 </div>
                 <span className="pcard-learn-more">

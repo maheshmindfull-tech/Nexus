@@ -2,8 +2,6 @@ import { image } from './images';
 const logo = '/assets/projects/logos/imperia.png';
 import breakShot from './media/break.jpg';
 import connectivityVideo from './media/connectivity.mp4';
-import { OFFICE } from '../shared';
-
 const imperia = {
   name: 'Nexus Imperia',
   shortName: 'Imperia',
@@ -27,10 +25,8 @@ const imperia = {
   logoColor: true,
   brochure: '/landings/imperia/nexus-imperia-brochure.pdf',
   brochureName: 'Nexus Imperia Brochure.pdf',
-  email: 'imperia@nexuspune.in',
-  phone: '800 70 70 144',
+  email: 'info@nexuspune.in',
   address: 'Gat No. 79, Opposite Prasanna Goldfields Commercial Complex, Near MNGL CNG, Borhadewadi, Moshi, Pune 412 105.',
-  office: OFFICE,
   rera: 'P52100053378',
   phoneRequired: false,
   stats: [

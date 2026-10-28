@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Building2,
   ShieldCheck,
   TrendingUp,
   HeartHandshake,
-  MapPin,
-  Briefcase,
-  Clock,
-  ChevronDown,
-  ChevronUp,
   Send,
   ArrowRight,
-  Sparkles,
-  Award,
   CheckCircle2,
+  X,
 } from 'lucide-react';
 import Footer from './Footer';
 import { submitLeadToGoogleSheet } from '../services/leadService';
@@ -26,121 +20,16 @@ const CAREER_HERO_PHRASES = [
   'Where Passion Meets Engineering Rigor.',
 ];
 
-const JOB_OPENINGS = [
-  {
-    id: 'pm-highrise',
-    title: 'Senior Project Manager (High-Rise RCC)',
-    department: 'Civil & Engineering',
-    location: 'Punawale & Kiwale, Pune',
-    experience: '8–12 Years',
-    type: 'Full-Time',
-    summary:
-      'Lead execution of landmark 20+ story residential towers. Oversee RCC contractors, monolithic formwork, safety benchmarks, and ensure timely zero-defect handovers.',
-    responsibilities: [
-      'Manage on-site structural execution, scheduling, and contractor coordination.',
-      'Enforce Nexus zero-compromise quality & safety standards across all tower floors.',
-      'Coordinate with MEP, structural consultants, and liaison authorities.',
-      'Track procurement schedules, concrete test results, and milestone certifications.',
-    ],
-    requirements: [
-      'B.Tech / B.E. in Civil Engineering with strong high-rise RCC execution track record.',
-      'Minimum 8 years experience in reputed real estate development firms.',
-      'Proficiency in MS Project, AutoCAD, and modern formwork methodologies (Mivan / Aluminum).',
-    ],
-  },
-  {
-    id: 'arch-lead',
-    title: 'Architectural Design Lead',
-    department: 'Architecture & Planning',
-    location: 'Nexus Corporate HQ, Pune',
-    experience: '5–8 Years',
-    type: 'Full-Time',
-    summary:
-      'Drive conceptual master planning, residential unit layouts, and statutory drawing approvals for upcoming residential and commercial developments.',
-    responsibilities: [
-      'Collaborate with principal architects to develop functional, light-filled spatial plans.',
-      'Ensure strict compliance with Pune Municipal Corporation (PMC/PCMC) UDCPR bylaws.',
-      'Interface with 3D visualization, BIM, and landscape design partners.',
-      'Conduct periodic site reviews to verify architectural execution against drawings.',
-    ],
-    requirements: [
-      'B.Arch / M.Arch from an accredited architectural institute.',
-      '5+ years with focus on premium residential & commercial mixed-use design.',
-      'Strong proficiency in Revit, AutoCAD, SketchUp, and presentation tools.',
-    ],
-  },
-  {
-    id: 'sales-manager',
-    title: 'Assistant Sales Manager (Luxury Residential)',
-    department: 'Sales & Marketing',
-    location: 'Chikhali & Moshi, Pune',
-    experience: '4–7 Years',
-    type: 'Full-Time',
-    summary:
-      'Drive high-ticket residential unit sales for Nexus Kinara and Nexus Atrium. Guide prospective buyers through property walkthroughs, pricing negotiations, and closure.',
-    responsibilities: [
-      'Conduct consultative product presentations to high-net-worth homebuyers and investors.',
-      'Build and nurture relationships with premier Channel Partners across PCMC & Pune.',
-      'Achieve monthly and quarterly site sales targets with high closing ratios.',
-      'Ensure seamless post-booking onboarding in coordination with the CRM team.',
-    ],
-    requirements: [
-      'Graduate or MBA in Marketing / Real Estate Management.',
-      'Proven track record of primary real estate residential sales in Pune / PCMC.',
-      'Exceptional interpersonal, negotiation, and relationship management skills.',
-    ],
-  },
-  {
-    id: 'qa-qc-lead',
-    title: 'Lead QA / QC & Safety Engineer',
-    department: 'Civil & Engineering',
-    location: 'Punawale Project Sites',
-    experience: '6–9 Years',
-    type: 'Full-Time',
-    summary:
-      'Spearhead quality assurance audits, raw material testing protocols, and on-site occupational safety governance across ongoing sites.',
-    responsibilities: [
-      'Conduct rigorous batch testing for ready-mix concrete, steel reinforcements, and waterproofing.',
-      'Maintain QA/QC registers, non-conformance reports (NCR), and corrective action logs.',
-      'Implement daily toolbox talks and zero-incident safety protocols for site workers.',
-      'Lead final pre-possession snagging audits prior to unit delivery.',
-    ],
-    requirements: [
-      'Diploma / Degree in Civil Engineering with certified QA/QC & Safety credentials.',
-      '6+ years hands-on site quality testing experience with top-tier builders.',
-      'Deep knowledge of IS codes, lab testing procedures, and safety standards.',
-    ],
-  },
-  {
-    id: 'crm-mgr',
-    title: 'Relationship Manager (Customer Experience & Handover)',
-    department: 'CRM & Quality',
-    location: 'Nexus Corporate HQ, Pune',
-    experience: '3–6 Years',
-    type: 'Full-Time',
-    summary:
-      'Serve as the primary trusted advisor for homebuyers from agreement registration through key handover and society formation.',
-    responsibilities: [
-      'Manage home loan disbursements, demand letters, and payment milestone tracking.',
-      'Organize customer possession walkthroughs and coordinate snag resolution with site teams.',
-      'Address customer inquiries promptly to maintain highest CSAT ratings.',
-      'Coordinate execution of registered agreements and deed handovers.',
-    ],
-    requirements: [
-      'Graduate with 3+ years in Real Estate Customer Relationship Management (CRM).',
-      'Familiarity with Real Estate ERP software (Farvision / Salesforce / Highrise).',
-      'Warm communication and empathy in handling customer expectations.',
-    ],
-  },
-];
-
-const CATEGORIES = [
-  'All Roles',
-  'Civil & Engineering',
-  'Architecture & Planning',
-  'Sales & Marketing',
-  'CRM & Quality',
-];
+const EMPTY_FORM = {
+  fullName: '',
+  email: '',
+  phone: '',
+  role: '',
+  experience: '',
+  currentOrg: '',
+  portfolioLink: '',
+  message: '',
+};
 
 export default function CareersPage({
   onNavigateHome,
@@ -153,35 +42,24 @@ export default function CareersPage({
   onNavigateBlogs,
   onOpenEnquire,
 }) {
-  const [selectedCategory, setSelectedCategory] = useState('All Roles');
-  const [expandedJobId, setExpandedJobId] = useState(null);
-
-  // Application form state
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    role: '',
-    experience: '',
-    currentOrg: '',
-    portfolioLink: '',
-    message: '',
-  });
+  const [formOpen, setFormOpen] = useState(false);
+  const [formData, setFormData] = useState(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const filteredJobs = JOB_OPENINGS.filter((job) => {
-    if (selectedCategory === 'All Roles') return true;
-    return job.department === selectedCategory;
-  });
-
-  const handleApplyClick = (jobTitle) => {
-    setFormData((prev) => ({ ...prev, role: jobTitle }));
-    const el = document.getElementById('apply-form');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    if (!formOpen) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') setFormOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [formOpen]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -195,7 +73,7 @@ export default function CareersPage({
     if (cleanPhone.length !== 10) return;
     setSubmitting(true);
     await submitLeadToGoogleSheet({
-      formType: 'Careers Job Application',
+      formType: 'Careers Resume Submission',
       cp: 'No',
       isCP: 'No',
       name: formData.fullName.trim(),
@@ -208,16 +86,7 @@ export default function CareersPage({
       portfolioLink: formData.portfolioLink.trim(),
       message: formData.message.trim(),
     });
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      role: '',
-      experience: '',
-      currentOrg: '',
-      portfolioLink: '',
-      message: '',
-    });
+    setFormData(EMPTY_FORM);
     setSubmitting(false);
     setSubmitted(true);
   };
@@ -251,13 +120,10 @@ export default function CareersPage({
             </p>
 
             <div className="car-hero-actions">
-              <a href="#open-roles" className="car-btn-primary">
-                <span>View Open Positions</span>
+              <button type="button" className="car-btn-primary" onClick={() => setFormOpen(true)}>
+                <span>Submit your resume</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
-              <a href="#apply-form" className="car-btn-secondary">
-                <span>Submit Direct CV</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -359,112 +225,18 @@ export default function CareersPage({
       </section>
 
 
-      {/* 5. OPEN POSITIONS SECTION */}
       <section className="car-jobs-sec" id="open-roles">
         <div className="wrap">
-          <div className="car-sec-header">
-            <span className="car-sec-eyebrow">Current Opportunities</span>
-            <h2 className="car-sec-title">Explore Open Roles</h2>
+          <div className="car-resume-panel">
+            <span className="car-sec-eyebrow">Careers</span>
+            <h2 className="car-sec-title">Share your resume</h2>
             <p className="car-sec-subtitle">
-              Find your next career chapter. We are expanding across Pune, Punawale,
-              Chikhali, Moshi, and Nashik developments.
+              Tell us about your experience and send your resume or CV. Our team will review it and get in touch when there is a suitable opportunity.
             </p>
-          </div>
-
-          {/* Filter Bar */}
-          <div className="car-filter-bar">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                className={`car-filter-btn ${selectedCategory === cat ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Job List */}
-          <div className="car-jobs-list">
-            {filteredJobs.length === 0 ? (
-              <div className="text-center py-12 text-gray-500">
-                No active roles currently in this department. Please submit a direct application below.
-              </div>
-            ) : (
-              filteredJobs.map((job) => {
-                const isExpanded = expandedJobId === job.id;
-                return (
-                  <div className="car-job-card" key={job.id}>
-                    <div className="car-job-header">
-                      <div className="car-job-title-row">
-                        <h3 className="car-job-role">{job.title}</h3>
-                        <div className="car-job-meta-row">
-                          <span className="car-job-dept-pill">{job.department}</span>
-                          <span className="car-job-exp-pill">{job.experience}</span>
-                          <span className="car-job-meta-item">
-                            <MapPin className="w-3.5 h-3.5 text-gray-400" />
-                            {job.location}
-                          </span>
-                          <span className="car-job-meta-item">
-                            <Clock className="w-3.5 h-3.5 text-gray-400" />
-                            {job.type}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="car-job-actions">
-                        <button
-                          type="button"
-                          className="car-job-details-btn"
-                          onClick={() => setExpandedJobId(isExpanded ? null : job.id)}
-                        >
-                          {isExpanded ? (
-                            <span className="inline-flex items-center gap-1">
-                              Hide Details <ChevronUp className="w-4 h-4" />
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center gap-1">
-                              View Details <ChevronDown className="w-4 h-4" />
-                            </span>
-                          )}
-                        </button>
-
-                        <button
-                          type="button"
-                          className="car-job-apply-btn"
-                          onClick={() => handleApplyClick(job.title)}
-                        >
-                          Apply Now
-                        </button>
-                      </div>
-                    </div>
-
-                    <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-                      {job.summary}
-                    </p>
-
-                    {isExpanded && (
-                      <div className="car-job-expandable">
-                        <h4>Key Responsibilities</h4>
-                        <ul>
-                          {job.responsibilities.map((r, i) => (
-                            <li key={i}>{r}</li>
-                          ))}
-                        </ul>
-
-                        <h4>Role Qualifications & Experience</h4>
-                        <ul>
-                          {job.requirements.map((req, i) => (
-                            <li key={i}>{req}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                );
-              })
-            )}
+            <button type="button" className="car-btn-primary" onClick={() => setFormOpen(true)}>
+              <span>Submit your resume or CV</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
@@ -516,14 +288,28 @@ export default function CareersPage({
         </div>
       </section>
 
-      {/* 7. APPLICATION FORM */}
-      <section className="car-apply-sec" id="apply-form">
-        <div className="wrap">
+      {formOpen && (
+      <div
+        className="car-form-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="car-form-title"
+        onClick={() => setFormOpen(false)}
+      >
+        <div className="car-form-modal-panel" onClick={(event) => event.stopPropagation()}>
+          <button
+            type="button"
+            className="car-form-modal-close"
+            onClick={() => setFormOpen(false)}
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
           <div className="car-sec-header">
-            <span className="car-sec-eyebrow">Get In Touch</span>
-            <h2 className="car-sec-title">Submit Your Application</h2>
+            <span className="car-sec-eyebrow">Resume or CV</span>
+            <h2 className="car-sec-title" id="car-form-title">Submit your resume</h2>
             <p className="car-sec-subtitle">
-              Apply directly for an open role or register your profile in our talent pool for upcoming project expansions.
+              Share your details and a link to your resume or CV. Our team will review it and contact you.
             </p>
           </div>
 
@@ -540,16 +326,7 @@ export default function CareersPage({
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
-                    setFormData({
-                      fullName: '',
-                      email: '',
-                      phone: '',
-                      role: '',
-                      experience: '',
-                      currentOrg: '',
-                      portfolioLink: '',
-                      message: '',
-                    });
+                    setFormData(EMPTY_FORM);
                   }}
                   className="mt-5 text-sm font-semibold text-emerald-900 underline cursor-pointer"
                 >
@@ -614,32 +391,17 @@ export default function CareersPage({
 
                   <div className="car-form-group">
                     <label className="car-form-label" htmlFor="role">
-                      Position of Interest *
+                      Role or area of interest
                     </label>
-                    <select
+                    <input
                       id="role"
                       name="role"
-                      required
+                      type="text"
+                      placeholder="e.g. Civil engineering, Sales, Architecture"
                       value={formData.role}
                       onChange={handleFormChange}
-                      className="car-form-select"
-                    >
-                      <option value="">-- Select a Position --</option>
-                      {JOB_OPENINGS.map((j) => (
-                        <option key={j.id} value={j.title}>
-                          {j.title} ({j.department})
-                        </option>
-                      ))}
-                      <option value="General Engineering / Construction">
-                        General Engineering / Construction
-                      </option>
-                      <option value="General Sales & Marketing">
-                        General Sales & Marketing
-                      </option>
-                      <option value="Other / Spontaneous Application">
-                        Other / Spontaneous Application
-                      </option>
-                    </select>
+                      className="car-form-input"
+                    />
                   </div>
 
                   <div className="car-form-group">
@@ -675,14 +437,14 @@ export default function CareersPage({
 
                   <div className="car-form-group car-form-full">
                     <label className="car-form-label" htmlFor="portfolioLink">
-                      Resume Link / LinkedIn / Portfolio URL *
+                      Resume or CV link *
                     </label>
                     <input
                       id="portfolioLink"
                       name="portfolioLink"
                       type="url"
                       required
-                      placeholder="https://linkedin.com/in/... or Google Drive resume link"
+                      placeholder="Google Drive, Dropbox, or LinkedIn link to your resume"
                       value={formData.portfolioLink}
                       onChange={handleFormChange}
                       className="car-form-input"
@@ -717,7 +479,7 @@ export default function CareersPage({
                         'Submitting...'
                       ) : (
                         <>
-                          <span>Submit Application</span>
+                          <span>Submit resume</span>
                           <Send className="w-4 h-4" />
                         </>
                       )}
@@ -728,7 +490,8 @@ export default function CareersPage({
             )}
           </div>
         </div>
-      </section>
+      </div>
+      )}
 
       {/* 8. GLOBAL FOOTER */}
       <Footer

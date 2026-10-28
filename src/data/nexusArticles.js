@@ -430,7 +430,7 @@ export const NEXUS_ARTICLES = [
       "The phrase “new flat” sounds attractive, but buyers should look beyond the brochure.",
       "Before booking any apartment in Punawale, check the project’s MahaRERA registration, approved plans, development details, construction status and declared possession date.",
       "For example, Nexus Westia under MahaRERA registration number P52100080184 project records identify its location near Savata Mali Mandir in Punawale and list 2 BHK and 3 BHK configurations.",
-      "Similarly, Nexus Skydale with MahaRERA registration number P52100055009 and show 2 BHK, 3 BHK and [4 BHK in Punawale](/blog/roi-and-appreciation-trends-for-4-bhk-flats-in-punawale).",
+      "Similarly, Nexus Skydale with MahaRERA registration number PR1260002502718 and show 2 BHK, 3 BHK and [4 BHK in Punawale](/blog/roi-and-appreciation-trends-for-4-bhk-flats-in-punawale).",
       "Treat these details as a starting point, not a substitute for checking the official regulatory record.",
       {
         "h": "Westia: A 2 BHK Option in Punawale"
@@ -443,7 +443,7 @@ export const NEXUS_ARTICLES = [
         "h": "Skydale: Another Project to Compare"
       },
       "Skydale provides another option for buyers researching residential projects in Punawale.",
-      "Nexus Skydale in the Punawale area and identifies 2 BHK, 3 BHK and 4 BHK configurations. Its MahaRERA registration is listed as P52100055009.",
+      "Nexus Skydale in the Punawale area and identifies 2 BHK, 3 BHK and 4 BHK configurations. Its MahaRERA registration is listed as PR1260002502718.",
       "indicates a larger development than Westia, with multiple buildings and different home configurations.",
       "This makes Skydale worth comparing with Westia if your requirement is specifically a 2 BHK.",
       "The comparison should focus on practical factors: carpet area, floor plan, orientation, construction progress, total purchase cost, parking, maintenance expectations, connectivity and the developer’s documented commitments.",

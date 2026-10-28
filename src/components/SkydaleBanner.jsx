@@ -1,5 +1,8 @@
 import React from 'react';
-import { QrCode, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import skydaleQr from '../landings/rera/PR1260002502718.svg';
+
+const SKYDALE_CERTIFICATE = 'https://maharera.maharashtra.gov.in/project-document?id=62453&type=DocProjectCert';
 
 export default function SkydaleBanner({ onOpenEnquire }) {
   return (
@@ -27,23 +30,21 @@ export default function SkydaleBanner({ onOpenEnquire }) {
               </div>
 
               {/* MahaRERA QR Code & Badge matching the mockup */}
-              <div className="flex items-center gap-3 bg-black/60 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-white/20">
+              <a
+                href={SKYDALE_CERTIFICATE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-black/60 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-white/20"
+              >
                 <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white p-1 rounded-lg flex items-center justify-center">
-                  {/* High quality clean QR code SVG */}
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-full h-full text-slate-900"
-                  >
-                    <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm8-2h8v8h-8V2zm2 2v4h4V4h-4zM2 12h8v8H2v-8zm2 2v4h4v-4H4zm11-2h2v2h-2v-2zm-3 0h2v2h-2v-2zm6 0h2v2h-2v-2zm-3 3h2v2h-2v-2zm3 0h2v2h-2v-2zm-6 3h2v2h-2v-2zm3 0h2v2h-2v-2zm3 0h2v2h-2v-2zm-6 3h2v2h-2v-2zm6 0h2v2h-2v-2z" />
-                  </svg>
+                  <img src={skydaleQr} alt="" className="w-full h-full object-contain" />
                 </div>
                 <div className="text-[10px] sm:text-xs text-white/90 leading-tight space-y-0.5">
                   <p className="font-bold tracking-wider text-[#38e1f5]">MAHARERA REG.</p>
-                  <p className="font-mono text-white/80">P52100051234</p>
-                  <p className="text-[9px] text-white/60">maharera.mahaonline.gov.in</p>
+                  <p className="font-mono text-white/80">PR1260002502718</p>
+                  <p className="text-[9px] text-white/60">maharera.maharashtra.gov.in</p>
                 </div>
-              </div>
+              </a>
             </div>
 
             {/* Middle / Bottom Branding: SKYDALE PUNAWALE E WING */}

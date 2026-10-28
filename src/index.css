@@ -1542,7 +1542,7 @@ footer .brand {
 }
 
 footer .brand img {
-  height: 70px;
+  height: 82px;
   width: auto;
   object-fit: contain;
   margin-bottom: 16px;
@@ -2049,7 +2049,7 @@ footer .bot {
   }
 
   .navbar-logo-img {
-    height: 38px !important;
+    height: 64px !important;
   }
 }
 
@@ -2059,7 +2059,7 @@ footer .bot {
   }
 
   .navbar-logo-img {
-    height: 34px !important;
+    height: 54px !important;
   }
 
   .navbar-mobile-toggle {
@@ -2743,13 +2743,14 @@ footer .bot {
   margin-bottom: 3px;
 }
 
-.about-leader-info > span {
+.about-leader-designation {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: #5fd6e2;
+  letter-spacing: 0.02em;
   margin-bottom: 6px;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .about-leader-info p {

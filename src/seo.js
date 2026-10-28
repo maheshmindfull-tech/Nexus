@@ -91,7 +91,7 @@ export const PAGE_SEO = {
       '@type': 'ItemList',
       name: 'Nexus Pune Projects',
       itemListElement: [
-        ['Nexus Kinara', 'Jadhavwadi, Chikhali'],
+        ['Nexus Kinaara', 'Jadhavwadi, Chikhali'],
         ['Nexus Skydale', 'Pandhare Wasti, Punawale'],
         ['Nexus Westia', 'Punawale, Pune'],
         ['Nexus Prime Square', 'Borhadewadi, Moshi'],
@@ -108,31 +108,15 @@ export const PAGE_SEO = {
   },
   careers: {
     path: '/careers',
-    title: 'Careers at Nexus Pune | Engineering, Architecture & Sales Roles',
+    title: 'Careers at Nexus Pune | Submit Your Resume',
     description:
-      'Join Nexus Group in Pune. Open roles in high-rise project management, architectural design, and luxury residential sales across Punawale, Kiwale, Chikhali, and Moshi.',
+      'Share your resume or CV with Nexus Group in Pune. Our team reviews applications across engineering, architecture, sales, and customer care.',
     schema: {
       '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'Open roles at Nexus Group Pune',
-      itemListElement: [
-        'Senior Project Manager (High-Rise RCC)',
-        'Architectural Design Lead',
-        'Assistant Sales Manager (Luxury Residential)',
-      ].map((title, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'JobPosting',
-          title,
-          hiringOrganization: { '@id': `${ORIGIN}/#organization` },
-          jobLocation: {
-            '@type': 'Place',
-            address: { '@type': 'PostalAddress', addressLocality: 'Pune', addressRegion: 'Maharashtra', addressCountry: 'IN' },
-          },
-          employmentType: 'FULL_TIME',
-        },
-      })),
+      '@type': 'WebPage',
+      name: 'Careers at Nexus Group Pune',
+      url: `${ORIGIN}/careers`,
+      description: 'Submit your resume or CV to Nexus Group in Pune.',
     },
   },
   'cp-inquiry': {
@@ -179,7 +163,7 @@ export const PAGE_SEO = {
     path: '/skydale',
     title: 'Nexus Skydale Punawale | 2, 3 & 4 BHK Homes & Commercial Spaces in Pune',
     description:
-      'Nexus Skydale in Pandhare Wasti, Punawale offers 2, 3 and 4 BHK homes & commercial spaces with a prime Pune location, smart-home planning, and premium amenities. MahaRERA P52100050149.',
+      'Nexus Skydale in Pandhare Wasti, Punawale offers 2, 3 and 4 BHK homes & commercial spaces with a prime Pune location, smart-home planning, and premium amenities. MahaRERA PR1260002502718.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ApartmentComplex',

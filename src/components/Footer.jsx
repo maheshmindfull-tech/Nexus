@@ -43,6 +43,10 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
       onNavigateProjects();
       return;
     }
+    if (target === 'upcoming' && onNavigateProjects) {
+      onNavigateProjects('coming-soon');
+      return;
+    }
     if (target.startsWith('#')) {
       const el = document.getElementById(target.replace('#', ''));
       if (el) {
@@ -65,8 +69,9 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
               <img src="/assets/logo/nexus-logo-white.png" alt="Nexus" />
             </button>
             <p>
-              Nexus Real Estate Developers - premium residential and commercial
-              spaces in Pune. Communities planned with vision, quality, and trust.
+              Nexus Group -
+              <br />
+              Premium Residential and commercial spaces in Pune. Communities planned with vision, quality, and trust.
             </p>
             <div className="footer-socials">
               <a
@@ -143,7 +148,7 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                 </li>
                 <li>
                   <a href="/cp-inquiry" onClick={(e) => handleLinkClick(e, 'cp-inquiry')}>
-                    Channel Partner Inquiry
+                    Channel Partner 
                   </a>
                 </li>
                 <li>
@@ -169,37 +174,37 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
               <ul>
                 <li>
                   <a href="/skydale" onClick={(e) => handleLinkClick(e, 'skydale')}>
-                    Skydale, Pandhare Wasti
+                    Nexus Skydale, Punawale
                   </a>
                 </li>
                 <li>
                   <a href="/kinara">
-                    Kinara, Chikhali
+                    Nexus Kinaara, Chikhali
                   </a>
                 </li>
                 <li>
                   <a href="/atrium">
-                    Atrium, Moshi
+                    Nexus Atrium, Moshi
                   </a>
                 </li>
                 <li>
                   <a href="/genesis">
-                    Genesis, Kiwale
+                    Nexus Genesis, Kiwale
                   </a>
                 </li>
                 <li>
                   <a href="/prime-square" onClick={(e) => handleLinkClick(e, 'square')}>
-                    Prime Square, Moshi
+                    Nexus Prime Square, Moshi
                   </a>
                 </li>
                 <li>
                   <a href="/imperia" onClick={(e) => handleLinkClick(e, 'imperia')}>
-                    Imperia, Moshi
+                    Nexus Imperia, Moshi
                   </a>
                 </li>
                 <li>
-                  <a href="/projects" onClick={(e) => handleLinkClick(e, '#projects')}>
-                    Ongoing developments
+                  <a href="/projects?status=coming-soon" onClick={(e) => handleLinkClick(e, 'upcoming')}>
+                    Upcoming Projects
                   </a>
                 </li>
               </ul>
@@ -212,12 +217,12 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   <a href="mailto:info@nexuspune.in">info@nexuspune.in</a>
                 </li>
                 <li>
-                  <a href="tel:+919307313009">+91 93073 13009</a> / <a href="tel:+9102027473366">+91 020-27473366</a>
+                  <a href="tel:+919307313009">+91 93073 13009</a> 
                 </li>
                 <li>
                   Plot No.P-087, D-II Block, MIDC,
                   <br />
-                  Pimpari Industrial Area, near Wonder Cars Showroom,
+                  Pimpri Industrial Area, Near Wonder Cars Showroom, KSB Chowk, 
                   <br />
                   Chinchwad, Pune, Maharashtra 411019
                 </li>

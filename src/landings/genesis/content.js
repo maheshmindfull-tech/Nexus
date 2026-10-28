@@ -2,8 +2,6 @@ import { image } from './images';
 import breakShot from './media/family-lawn.jpg';
 import amenityVideo from './media/amenity.mp4';
 import logo from './media/logo.png';
-import { OFFICE } from '../shared';
-
 const genesis = {
   name: 'Nexus Genesis',
   shortName: 'Genesis',
@@ -27,16 +25,15 @@ const genesis = {
   logoColor: true,
   brochure: '/landings/genesis/nexus-genesis-brochure.pdf',
   brochureName: 'Nexus Genesis Brochure.pdf',
-  email: 'sales@nexuspune.com',
+  email: 'info@nexuspune.in',
   address: 'Survey No. 42A/7, Vikas Nagar, Kiwale, Pune, Maharashtra.',
-  office: OFFICE,
   rera: 'PR1261012501959',
   phoneRequired: false,
   stats: [
     { value: '2, 3 & 4', label: 'BHK homes' },
     { value: '550+', label: 'Residences' },
     { value: '5', label: 'Towers on 3.5 acres' },
-    { value: '12 ft', label: 'Swimming pool' },
+    { value: 'Established', label: 'market place' },
   ],
   aboutTitle: 'Where life begins, in the heart of Kiwale.',
   about: [

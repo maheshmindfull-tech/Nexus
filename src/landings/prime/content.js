@@ -2,8 +2,6 @@ import { image } from './images';
 const logo = '/assets/projects/logos/square.png';
 import breakShot from './media/break.jpg';
 import familyVideo from './media/family.mp4';
-import { OFFICE } from '../shared';
-
 const square = {
   name: 'Nexus Prime Square',
   shortName: 'Prime Square',
@@ -26,9 +24,8 @@ const square = {
   logoColor: true,
   brochure: '/landings/prime/nexus-prime-square-brochure.pdf',
   brochureName: 'Nexus Prime Square Brochure.pdf',
-  email: 'sales@nexuspune.com',
+  email: 'info@nexuspune.in',
   address: 'Sr. No. 643/44, Laxman Sadashiv Alhar Marg, Borhadewadi, Moshi, Pune 412 105.',
-  office: OFFICE,
   rera: 'P52100050975',
   phoneRequired: false,
   stats: [

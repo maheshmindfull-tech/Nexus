@@ -2,7 +2,7 @@ import { image } from './images';
 const logo = '/assets/projects/logos/westia.png';
 import breakShot from './media/break.jpg';
 import roadVideo from './media/road.mp4';
-import { OFFICE, TEAM } from '../shared';
+import { TEAM } from '../shared';
 
 const westia = {
   name: 'Nexus Westia',
@@ -27,9 +27,8 @@ const westia = {
   logoColor: true,
   brochure: '/landings/westia/nexus-westia-brochure.pdf',
   brochureName: 'Nexus Westia Brochure.pdf',
-  email: 'westia@nexuspune.in',
+  email: 'info@nexuspune.in',
   address: 'Sr. No. 41/48, Near Savata Mali Mandir, Malwadi, Punawale, Pimpri Chinchwad, Pune, Maharashtra 411 033.',
-  office: OFFICE,
   rera: 'P52100080184',
   phoneRequired: false,
   stats: [
@@ -44,7 +43,7 @@ const westia = {
     'The site sits close to workplaces and IT hubs such as Hinjewadi and Wakad, beside Punawale’s oxygen park, with the kind of growth and timely delivery Nexus is known for.',
   ],
   highlights: [
-    { src: image('highlights/1.jpg'), title: 'Punawale’s oxygen park' },
+    { src: image('highlights/1.jpg'), title: 'Close to Punawale’s oxygen park' },
     { src: image('highlights/2.jpg'), title: 'Close to IT Park and NH4' },
     { src: image('highlights/3.jpg'), title: 'Two Balconies Spacious Flat' },
     { src: image('highlights/4.jpg'), title: 'Designer landscape garden' },

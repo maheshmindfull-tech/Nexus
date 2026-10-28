@@ -102,15 +102,15 @@ const VALUES = [
 
 const LEADERS = [
   {
-    name: 'Mr. Naresh Patel',
-    role: 'A Vision Built on Trust. A Legacy Built for Generations.',
-    desc: 'â€œSince 1996, our vision has been to build more than structures â€” to create lasting relationships rooted in trust.â€',
+    name: 'Mr. Nareshkumar Patel',
+    designation: 'Founder & Director',
+    desc: '“Since 1996, our vision has been to build more than structures — to create lasting relationships rooted in trust.”',
     image: '/assets/about/naresh-patel.jpg',
   },
   {
-    name: 'Mr. Satish Patel',
-    role: 'Carrying Our Legacy Forward. Creating Tomorrowâ€™s Possibilities.',
-    desc: 'â€œAt Nexus Group, we believe in turning aspirations into meaningful spaces for people to live, grow, and prosper.â€',
+    name: 'Mr. Satishkumar Patel',
+    designation: 'Managing Director',
+    desc: '“At Nexus Group, we believe in turning aspirations into meaningful spaces for people to live, grow, and prosper.”',
     image: '/assets/about/satish-patel.jpg',
   },
 ];
@@ -245,7 +245,7 @@ export default function AboutPage({
               />
               <div className="arch-caption-scrim" />
               <div className="arch-caption">
-                Nexus Vision & Architecture â€¢ Built by NEXUS
+                Nexus Vision & Architecture
               </div>
             </div>
 
@@ -423,7 +423,7 @@ export default function AboutPage({
                   <div className="about-leader-scrim" />
                   <div className="about-leader-info">
                     <b>{person.name}</b>
-                    <span>{person.role}</span>
+                    <span className="about-leader-designation">{person.designation}</span>
                     <p>{person.desc}</p>
                   </div>
                 </div>
@@ -479,7 +479,7 @@ export default function AboutPage({
                   The People Behind Nexus. <span>United by Passion & Purpose.</span>
                 </h2>
                 <p className="about-team-intro">
-                  At Nexus Group, we believe in building more than just spaces â€”<br />
+                  At Nexus Group, we believe in building more than just spaces —<br />
                   we build people, communities and a better tomorrow.
                 </p>
               </div>
@@ -604,7 +604,7 @@ export default function AboutPage({
                   />
                   <div className="arch-caption-scrim" />
                   <div className="arch-caption" style={{ fontSize: '10px', bottom: '8px', left: '10px' }}>
-                    {p.label || p.title} â€¢ NEXUS
+                    {p.label || p.title} • NEXUS
                   </div>
                 </div>
               ))}

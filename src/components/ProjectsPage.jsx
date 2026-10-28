@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { MapPin } from 'lucide-react';
 import Footer from './Footer';
 import Typewriter from './Typewriter';
-import { LANDING_PROJECTS } from '../landings';
 import '../projects.css';
 
 const PROJECT_HERO_PHRASES = [
@@ -15,13 +14,14 @@ const PROJECT_HERO_PHRASES = [
 const PROJECTS = [
   {
     id: 'kinara',
-    name: 'Nexus Kinara',
+    name: 'Nexus Kinaara',
     location: 'Jadhavwadi, Chikhali',
     type: 'Residential & Commercial',
     status: 'Ongoing',
     config: '2 & 3 BHK | 620 Flats | 3 Shops',
     image: '/assets/projects/profile/kinara.jpg',
-    landing: '/landings/kinara/nexus-kinara-brochure.pdf',
+    page: 'kinara',
+    href: '/kinara',
     pdf: '/landings/kinara/nexus-kinara-brochure.pdf',
   },
   {
@@ -32,18 +32,20 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2, 3 & 4 BHK | 581 Flats | 62 Shops',
     image: '/assets/projects/profile/skydale.jpg',
-    landing: '/skydale',
+    page: 'skydale',
+    href: '/skydale',
     pdf: '/landings/skydale/skydale-brouchure.pdf',
   },
   {
     id: 'westia',
     name: 'Nexus Westia',
-    location: 'Jamhe Road, Punawale',
+    location: 'Jambhe Road, Punawale',
     type: 'Residential & Commercial',
     status: 'Ongoing',
     config: '2 & 3 BHK | 86 Flats | 17 Shops',
     image: '/assets/projects/profile/westia.jpg',
-    landing: '/landings/westia/nexus-westia-brochure.pdf',
+    page: 'westia',
+    href: '/westia',
     pdf: '/landings/westia/nexus-westia-brochure.pdf',
   },
   {
@@ -54,6 +56,8 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2 & 3 BHK | 268 Flats | 56 Shops',
     image: '/assets/projects/profile/square.jpg',
+    page: 'square',
+    href: '/prime-square',
   },
   {
     id: 'genesis',
@@ -63,6 +67,8 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2, 3 & 4 BHK | 550 Flats | 5 Shops',
     image: '/assets/projects/profile/genesis.jpg',
+    page: 'genesis',
+    href: '/genesis',
   },
   {
     id: 'imperia',
@@ -72,6 +78,8 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '2 & 3 BHK | 84 Flats',
     image: '/assets/projects/profile/imperia.jpg',
+    page: 'imperia',
+    href: '/imperia',
   },
   {
     id: 'atrium',
@@ -81,6 +89,8 @@ const PROJECTS = [
     status: 'Ongoing',
     config: '1, 2 & 3 BHK | 147 Flats',
     image: '/assets/projects/profile/atrium.jpg',
+    page: 'atrium',
+    href: '/atrium',
   },
   {
     id: 'gulmohar',
@@ -183,7 +193,7 @@ const PROJECTS = [
   },
   {
     id: 'paradise',
-    name: 'Nexus Paradise',
+    name: 'Paradise',
     location: 'Dhanori, Pune',
     type: 'Residential',
     status: 'Completed',
@@ -192,7 +202,7 @@ const PROJECTS = [
   },
   {
     id: 'panorama',
-    name: 'Nexus Panorama',
+    name: 'Panorama',
     location: 'Datt Nagar, Dighi',
     type: 'Residential & Commercial',
     status: 'Completed',
@@ -201,7 +211,7 @@ const PROJECTS = [
   },
   {
     id: 'castellum',
-    name: 'Nexus Castellum',
+    name: 'Castellum',
     location: 'Dighi, Pune',
     type: 'Residential',
     status: 'Completed',
@@ -210,7 +220,7 @@ const PROJECTS = [
   },
   {
     id: 'govind-darshan',
-    name: 'Nexus Govind Darshan',
+    name: 'Govind Darshan',
     location: 'Sector 29, Ravet, Pune',
     type: 'Residential',
     status: 'Completed',
@@ -219,7 +229,7 @@ const PROJECTS = [
   },
   {
     id: 'bhalchandra-nagari',
-    name: 'Nexus Bhalchandra Nagari',
+    name: 'Bhalchandra Nagari',
     location: 'Ravet, Pune',
     type: 'Residential',
     status: 'Completed',
@@ -228,7 +238,7 @@ const PROJECTS = [
   },
   {
     id: 'indradhanu',
-    name: 'Nexus Indradhanu',
+    name: 'Indradhanu',
     location: 'Jadhavwadi, Pune',
     type: 'Residential',
     status: 'Completed',
@@ -237,7 +247,7 @@ const PROJECTS = [
   },
   {
     id: 'residency',
-    name: 'Nexus Residency',
+    name: 'Residency',
     location: 'Sector 20, Moshi, Pune',
     type: 'Residential',
     status: 'Completed',
@@ -246,7 +256,7 @@ const PROJECTS = [
   },
   {
     id: 'hermitage',
-    name: 'Nexus Hermitage',
+    name: 'Hermitage',
     location: 'Sector 18, Moshi, Pune',
     type: 'Residential & Commercial',
     status: 'Completed',
@@ -261,6 +271,8 @@ const PROJECTS = [
     status: 'Coming Soon',
     config: 'Spacious 3 BHK',
     image: '/assets/projects/coming-soon-card.jpg',
+    page: 'kinara',
+    href: '/kinara',
   },
   {
     id: 'atrium-d-wing',
@@ -367,12 +379,17 @@ export default function ProjectsPage({
   onNavigateCareers,
   onNavigateCPInquiry,
   onNavigateSkydale,
-  onNavigateLanding,
   onNavigateContact,
   onNavigateBlogs,
   onOpenEnquire,
+  onOpenProject,
+  initialStatus = 'Ongoing',
 }) {
-  const [status, setStatus] = useState('Ongoing');
+  const [status, setStatus] = useState(initialStatus);
+
+  useEffect(() => {
+    setStatus(initialStatus || 'Ongoing');
+  }, [initialStatus]);
 
   const filtered = useMemo(
     () =>
@@ -451,29 +468,38 @@ export default function ProjectsPage({
                     </div>
                     <div className="pj-card-foot">
                       <span className="pj-card-config">{p.config}</span>
-                      <div className="pj-card-actions">
-                        <button
-                          type="button"
-                          className="pj-brochure-btn"
-                          onClick={
-                            p.id === 'skydale'
-                              ? onNavigateSkydale
-                              : LANDING_PROJECTS[p.id] && onNavigateLanding
-                                ? () => onNavigateLanding(p.id)
-                                : () => onOpenEnquire?.(p.name)
-                          }
-                          title={`Learn more about ${p.codeName ? `Code Name ${p.name}` : p.name}`}
-                        >
-                          Learn more
-                        </button>
-                        <button
-                          type="button"
-                          className="pj-card-cta"
-                          onClick={() => onOpenEnquire?.(p.name)}
-                        >
-                          Enquire
-                        </button>
-                      </div>
+                      {(p.status === 'Ongoing' || p.status === 'Coming Soon') && (
+                        <div className="pj-card-actions">
+                          {p.href ? (
+                            <a
+                              className="pj-btn pj-btn-learn"
+                              href={p.href}
+                              onClick={(event) => {
+                                if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+                                event.preventDefault();
+                                onOpenProject?.(p.page);
+                              }}
+                            >
+                              Learn more
+                            </a>
+                          ) : (
+                            <button
+                              type="button"
+                              className="pj-btn pj-btn-learn"
+                              onClick={() => onOpenEnquire?.(p.name)}
+                            >
+                              Learn more
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            className="pj-btn pj-btn-enquire"
+                            onClick={() => onOpenEnquire?.(p.name)}
+                          >
+                            Enquire
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>

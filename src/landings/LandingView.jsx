@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ArrowLeft, CheckCircle2, Download, X } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, X } from 'lucide-react';
 import AmenityBoard from './AmenityBoard';
 import ReraBadge from './ReraBadge';
 import { LANDING_CONTENT } from './index';
@@ -292,10 +292,6 @@ export default function LandingView({ id, onNavigateHome }) {
                 <button type="button" className="lp-bar-link" onClick={openEnquiry}>
                   Enquire
                 </button>
-                <a className="lp-brochure" href={p.brochure} download={p.brochureName}>
-                  <Download size={15} strokeWidth={2.4} />
-                  <span>Brochure</span>
-                </a>
               </div>
             </>
           )}
@@ -341,10 +337,6 @@ export default function LandingView({ id, onNavigateHome }) {
               <button type="button" className="lp-btn lp-btn-gold" onClick={openEnquiry}>
                 Enquire now
               </button>
-              <a className="lp-btn lp-btn-ghost" href={p.brochure} download={p.brochureName}>
-                <Download size={16} />
-                Download brochure
-              </a>
             </div>
           </div>
         </section>
@@ -362,10 +354,6 @@ export default function LandingView({ id, onNavigateHome }) {
               <button type="button" className="lp-btn lp-btn-gold" onClick={openEnquiry}>
                 Enquire now
               </button>
-              <a className="lp-btn lp-btn-ghost" href={p.brochure} download={p.brochureName}>
-                <Download size={16} />
-                Download brochure
-              </a>
             </div>
           </div>
         </section>
@@ -605,21 +593,6 @@ export default function LandingView({ id, onNavigateHome }) {
         </section>
       )}
 
-      {!isKinara && (
-        <section className="lp-download lp-reveal" id="download-brochure">
-          <div className="lp-wrap lp-download-inner">
-            <div>
-              <p className="lp-eyebrow">Brochure</p>
-              <h2>Plans and the full project brochure.</h2>
-            </div>
-            <a className="lp-btn lp-btn-gold" href={p.brochure} download={p.brochureName}>
-              <Download size={18} />
-              Download brochure
-            </a>
-          </div>
-        </section>
-      )}
-
       {!isKinara && p.team && (
         <section className="lp-team-sec" aria-label="Our team">
           <div className="lp-wrap">
@@ -649,7 +622,6 @@ export default function LandingView({ id, onNavigateHome }) {
               <h2>Site address</h2>
               <p className="lp-visit-address">{p.address}</p>
               <div className="lp-addresses">
-                <p><strong>Office</strong> {p.office}</p>
                 {p.rera ? <ReraBadge number={p.rera} /> : null}
                 <p><a href={`mailto:${p.email}`}>{p.email}</a></p>
                 {p.phone ? <p><a href={`tel:${p.phone.replace(/\s/g, '')}`}>{p.phone}</a></p> : null}

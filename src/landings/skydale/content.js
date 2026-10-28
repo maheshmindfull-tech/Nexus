@@ -2,7 +2,7 @@ import { image } from './images';
 const logo = '/assets/projects/logos/skydale.png';
 import breakShot from './images/twilight-terrace.jpg';
 import poolVideo from './media/pool.mp4';
-import { OFFICE, TEAM } from '../shared';
+import { TEAM } from '../shared';
 
 const skydale = {
   name: 'Nexus Skydale',
@@ -28,16 +28,15 @@ const skydale = {
   logoMark: true,
   brochure: '/landings/skydale/skydale-brouchure.pdf',
   brochureName: 'Nexus Skydale Brochure.pdf',
-  email: 'skydale@nexuspune.in',
+  email: 'info@nexuspune.in',
   address: 'Survey No. 14, 10, Pandhare Wasti Road, Kate Wasti, Punawale, Pimpri Chinchwad, Pune, Maharashtra 411 033.',
-  office: OFFICE,
-  rera: 'P52100050149',
+  rera: 'PR1260002502718',
   phoneRequired: true,
   stats: [
     { value: '2, 3, 4', label: 'BHK residences' },
     { value: 'Smart', label: 'Home planning' },
-    { value: 'Infinity', label: 'Pool and club life' },
-    { value: '24/7', label: 'Security' },
+    { value: '930', label: 'Sq. ft. feels like 1,800' },
+    { value: 'Panoramic', label: 'Balcony views' },
   ],
   aboutTitle: 'Homes designed for the way Punawale lives now.',
   about: [

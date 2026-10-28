@@ -4,8 +4,6 @@ import leadVideo from './media/lead.mp4';
 import planA from './media/plan-a.jpg';
 import planB from './media/plan-b.jpg';
 import breakShot from './media/sunrise-lake.png';
-import { OFFICE } from '../shared';
-
 const kinara = {
   name: 'Nexus Kinaara',
   shortName: 'Kinaara',
@@ -25,9 +23,8 @@ const kinara = {
   logo,
   brochure: '/landings/kinara/nexus-kinara-brochure.pdf',
   brochureName: 'Nexus Kinaara Brochure.pdf',
-  email: 'kinaara@nexuspune.in',
+  email: 'info@nexuspune.in',
   address: 'Gat No. 79, Behind River Residency, Chikhali, Pimpri Chinchwad, Pune, Maharashtra 412 114.',
-  office: OFFICE,
   phoneRequired: false,
   stats: [
     { value: '3 BHK', label: 'Riverside homes' },

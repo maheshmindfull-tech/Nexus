@@ -29,7 +29,6 @@ export default function CPInquiryPage({
     email: '',
     reraNumber: '',
     projectInterest: 'All Projects',
-    nationality: '',
     message: '',
   });
 
@@ -63,7 +62,6 @@ export default function CPInquiryPage({
       email: formData.email.trim(),
       reraNumber: formData.reraNumber.trim() || 'N/A',
       project: formData.projectInterest || 'All Projects',
-      nationality: formData.nationality,
       message: formData.message.trim(),
     });
     setSubmittedInfo(info);
@@ -74,7 +72,6 @@ export default function CPInquiryPage({
       email: '',
       reraNumber: '',
       projectInterest: 'All Projects',
-      nationality: '',
       message: '',
     });
     setIsSubmitting(false);
@@ -89,7 +86,6 @@ export default function CPInquiryPage({
       email: '',
       reraNumber: '',
       projectInterest: 'All Projects',
-      nationality: '',
       message: '',
     });
     setIsSubmitted(false);
@@ -251,33 +247,12 @@ export default function CPInquiryPage({
                     >
                       <option value="All Projects">All Nexus Projects</option>
                       <option value="Nexus Skydale">Nexus Skydale (Punawale)</option>
-                      <option value="Nexus Kinara">Nexus Kinara (Chikhali)</option>
+                      <option value="Nexus Kinaara">Nexus Kinaara (Chikhali)</option>
                       <option value="Nexus Westia">Nexus Westia (Punawale)</option>
                       <option value="Nexus Prime Square">Nexus Prime Square (Moshi)</option>
                       <option value="Nexus Atrium">Nexus Atrium (Commercial)</option>
                       <option value="Nexus Genesis">Nexus Genesis (Kiwale)</option>
                       <option value="Nexus Imperia">Nexus Imperia (Moshi)</option>
-                    </select>
-                  </div>
-
-                  <div className="cp-field">
-                    <label className="cp-label">
-                      Nationality <span>*</span>
-                    </label>
-                    <select
-                      name="nationality"
-                      required
-                      value={formData.nationality}
-                      onChange={handleChange}
-                      className="cp-select"
-                    >
-                      <option value="" disabled>
-                        Select nationality
-                      </option>
-                      <option value="Indian">Indian</option>
-                      <option value="NRI">NRI</option>
-                      <option value="OCI">OCI</option>
-                      <option value="Foreign National">Foreign National</option>
                     </select>
                   </div>
 
@@ -323,15 +298,11 @@ export default function CPInquiryPage({
           <div className="cp-contact-bar">
             <div className="cp-contact-box">
               <small>CP Helpdesk</small>
-              <strong>+91 20 6700 8888</strong>
+              <strong>9595400300</strong>
             </div>
             <div className="cp-contact-box">
               <small>Email</small>
-              <strong>channelpartner@nexus.in</strong>
-            </div>
-            <div className="cp-contact-box">
-              <small>Head Office</small>
-              <strong>Baner / PCMC, Pune</strong>
+              <strong>samarth@nexuspune.in</strong>
             </div>
           </div>
         </div>

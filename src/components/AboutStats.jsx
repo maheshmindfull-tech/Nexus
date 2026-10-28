@@ -24,7 +24,7 @@ export default function AboutStats({ onNavigateAbout }) {
             />
             <div className="arch-caption-scrim" />
             <div className="arch-caption">
-              Nexus Vision & Architecture • Built by NEXUS
+              Nexus Vision & Architecture
             </div>
           </div>
 

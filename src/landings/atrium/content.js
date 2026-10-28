@@ -2,8 +2,6 @@ import { image } from './images';
 const logo = '/assets/projects/logos/atrium.png';
 import breakShot from './media/break.jpg';
 import childrenVideo from './media/children.mp4';
-import { OFFICE } from '../shared';
-
 const atrium = {
   name: 'Nexus Atrium',
   shortName: 'Atrium',
@@ -27,10 +25,8 @@ const atrium = {
   logoColor: true,
   brochure: '/landings/atrium/nexus-atrium-brochure.pdf',
   brochureName: 'Nexus Atrium Brochure.pdf',
-  email: 'atrium@nexuspune.in',
-  phone: '800 70 70 144',
+  email: 'info@nexuspune.in',
   address: 'Gat No. 79, Opposite Prasanna Goldfields Commercial Complex, Near MNGL CNG Pump, Borhadewadi, Moshi, Pune 412 105.',
-  office: OFFICE,
   rera: 'P52100032575',
   phoneRequired: false,
   stats: [

@@ -7,7 +7,7 @@ import '../contact.css';
 const PROJECT_OPTIONS = [
   'General Enquiry',
   'Nexus Skydale (Punawale)',
-  'Nexus Kinara (Chikhali)',
+  'Nexus Kinaara (Chikhali)',
   'Nexus Westia (Punawale)',
   'Nexus Prime Square (Moshi)',
   'Nexus Genesis (Kiwale)',

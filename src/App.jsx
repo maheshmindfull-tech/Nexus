@@ -47,6 +47,12 @@ export default function App() {
   const [blogSlug, setBlogSlug] = useState(() => (
     typeof window === 'undefined' ? null : currentBlogSlug()
   ));
+  const [projectsStatus, setProjectsStatus] = useState(() => (
+    typeof window !== 'undefined'
+    && new URLSearchParams(window.location.search).get('status') === 'coming-soon'
+      ? 'Coming Soon'
+      : 'Ongoing'
+  ));
 
   const handleOpenEnquire = (projectName) => {
     setEnquireProject(typeof projectName === 'string' ? projectName : '');
@@ -79,6 +85,10 @@ export default function App() {
       } else {
         setCurrentPage(next);
         setBlogSlug(next === 'blog' ? currentBlogSlug() : null);
+        if (next === 'projects') {
+          const comingSoon = new URLSearchParams(window.location.search).get('status') === 'coming-soon';
+          setProjectsStatus(comingSoon ? 'Coming Soon' : 'Ongoing');
+        }
         applyPageSeo(next);
       }
       setHistoryTick((n) => n + 1);
@@ -124,7 +134,14 @@ export default function App() {
     }
 
     const next = pathForPage(page) ? page : 'home';
-    pushAppState(next, pathForPage(next));
+    if (next === 'projects') {
+      setProjectsStatus(section === 'coming-soon' ? 'Coming Soon' : 'Ongoing');
+    }
+    const nextPath = pathForPage(next);
+    const url = next === 'projects' && section === 'coming-soon'
+      ? `${nextPath}?status=coming-soon`
+      : nextPath;
+    pushAppState(next, url);
     setCurrentPage(next);
     if (next !== 'blog') setBlogSlug(null);
     applyPageSeo(next);
@@ -175,16 +192,17 @@ export default function App() {
       ) : currentPage === 'projects' ? (
         /* DEDICATED PROJECTS PAGE */
         <ProjectsPage
+          initialStatus={projectsStatus}
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
-          onNavigateProjects={() => handleNavigate('projects')}
+          onNavigateProjects={(section) => handleNavigate('projects', section)}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
-          onNavigateLanding={(page) => handleNavigate(page)}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
           onOpenEnquire={handleOpenEnquire}
+          onOpenProject={(page) => handleNavigate(page)}
         />
       ) : currentPage === 'blogs' || currentPage === 'blog' ? (
         <BlogsPage
@@ -192,7 +210,7 @@ export default function App() {
           onOpenPost={openBlogPost}
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
-          onNavigateProjects={() => handleNavigate('projects')}
+          onNavigateProjects={(section) => handleNavigate('projects', section)}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
@@ -204,7 +222,7 @@ export default function App() {
         /* DEDICATED ABOUT US PAGE */
         <AboutPage
           onNavigateHome={() => handleNavigate('home')}
-          onNavigateProjects={() => handleNavigate('projects')}
+          onNavigateProjects={(section) => handleNavigate('projects', section)}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
@@ -217,7 +235,7 @@ export default function App() {
         <CareersPage
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
-          onNavigateProjects={() => handleNavigate('projects')}
+          onNavigateProjects={(section) => handleNavigate('projects', section)}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
@@ -230,7 +248,7 @@ export default function App() {
         <CPInquiryPage
           onNavigateHome={(sec) => handleNavigate('home', sec)}
           onNavigateAbout={() => handleNavigate('about')}
-          onNavigateProjects={() => handleNavigate('projects')}
+          onNavigateProjects={(section) => handleNavigate('projects', section)}
           onNavigateCareers={() => handleNavigate('careers')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
@@ -272,7 +290,7 @@ export default function App() {
           {/* 9. Footer */}
           <Footer
             onNavigateAbout={() => handleNavigate('about')}
-            onNavigateProjects={() => handleNavigate('projects')}
+            onNavigateProjects={(section) => handleNavigate('projects', section)}
             onNavigateCareers={() => handleNavigate('careers')}
             onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
             onNavigateSkydale={() => handleNavigate('skydale')}

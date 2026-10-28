@@ -4,7 +4,7 @@ import { submitLeadToGoogleSheet } from '../services/leadService';
 
 export const DEFAULT_PROJECT_OPTIONS = [
   'Nexus Skydale (Punawale)',
-  'Nexus Kinara (Chikhali)',
+  'Nexus Kinaara (Chikhali)',
   'Nexus Westia (Punawale)',
   'Nexus Prime Square (Moshi)',
   'Nexus Genesis (Kiwale)',
@@ -24,7 +24,7 @@ export function resolveProjectOption(input, options = DEFAULT_PROJECT_OPTIONS) {
   const exact = options.find((opt) => opt.toLowerCase() === lower);
   if (exact) return exact;
 
-  // 2. Base project name match (ignoring parentheses e.g. "Nexus Kinara (Chikhali)" -> "nexus kinara")
+  // 2. Base project name match (ignoring parentheses e.g. "Nexus Kinaara (Chikhali)" -> "nexus kinaara")
   const inputBase = lower.replace(/\s*\([^)]*\)$/, '').trim();
   const baseMatch = options.find((opt) => {
     const optBase = opt.toLowerCase().replace(/\s*\([^)]*\)$/, '').trim();
