@@ -1,51 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Play, X, Video, Star, Quote } from 'lucide-react';
+import { residentVideos } from '../data/residentVideos';
 
 export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState(null);
+  const videoStories = residentVideos;
 
-  const videoStories = [
-    {
-      id: 'v1',
-      name: 'Aarav & Priya Mehta',
-      project: 'Nexus Skydale, Punawale',
-      unit: '3 BHK Signature Residence',
-      quote: '“Clubhouse views and the warm community make living here feel like a luxury resort every day.”',
-      duration: '2:15 min',
-      thumbnail: '/assets/testimonials/video-skydale.jpg',
-      videoUrl: '/assets/home/hero-video.mp4',
-    },
-    {
-      id: 'v2',
-      name: 'Rahul, Priya & Aria Sharma',
-      project: 'Nexus Westia, Punawale',
-      unit: '2 BHK Elegance Tower',
-      quote: '“Spacious balconies, zero wastage layout and seamless handover made our dream home a reality.”',
-      duration: '1:45 min',
-      thumbnail: '/assets/testimonials/video-westia.jpg',
-      videoUrl: '/assets/home/hero-video.mp4',
-    },
-    {
-      id: 'v3',
-      name: 'Rajesh & Anita Sharma',
-      project: 'Nexus Kinara, Chikhali',
-      unit: 'Garden Promenade Living',
-      quote: '“Unmatched construction quality, serene green surroundings and great connectivity for our family.”',
-      duration: '2:30 min',
-      thumbnail: '/assets/testimonials/video-kinara.jpg',
-      videoUrl: '/assets/home/hero-video.mp4',
-    },
-    {
-      id: 'v4',
-      name: 'Aditya & Shalini Bankar',
-      project: 'Nexus Prime Square',
-      unit: 'Handover Day Experience',
-      quote: '“Possession ahead of schedule! Complete transparency and genuine professionalism throughout.”',
-      duration: '1:55 min',
-      thumbnail: '/assets/testimonials/video-prime.jpg',
-      videoUrl: '/assets/home/hero-video.mp4',
-    },
-  ];
+  useEffect(() => {
+    if (!activeVideo) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (event) => {
+      if (event.key === 'Escape') setActiveVideo(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [activeVideo]);
 
   const textTestimonials = [
     {
@@ -185,19 +158,18 @@ export default function Testimonials() {
                   onClick={() => setActiveVideo(v)}
                 >
                   <div className="v-media">
-                    <img src={v.thumbnail} alt={v.name} loading="lazy" />
+                    <img src={v.thumbnail} alt={v.name} loading="lazy" referrerPolicy="no-referrer" />
                     <div className="v-media-scrim" />
                     <div className="v-play-btn" aria-label="Play Video">
                       <Play className="w-5 h-5 fill-white text-white ml-0.5" />
                     </div>
-                    <span className="v-duration-badge">{v.duration}</span>
                   </div>
                   <div className="v-content">
-                    <p className="v-quote">{v.quote}</p>
+                    <p className="v-quote">Watch this resident video.</p>
                     <div className="v-author-info">
                       <div>
                         <strong className="v-name">{v.name}</strong>
-                        <span className="v-project">{v.project}</span>
+                        <span className="v-project">{v.detail}</span>
                       </div>
                       <span className="v-watch-pill">
                         <Play className="w-3 h-3 fill-current" /> Watch
@@ -250,39 +222,31 @@ export default function Testimonials() {
         <div
           className="video-modal-backdrop"
           onClick={() => setActiveVideo(null)}
-          role="dialog"
-          aria-modal="true"
+          role="presentation"
         >
-          <div className="video-modal-box" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="video-modal-box"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={activeVideo.name}
+          >
             <button
               type="button"
               className="video-modal-close"
               onClick={() => setActiveVideo(null)}
               aria-label="Close video"
             >
-              <X className="w-5 h-5 text-white" />
+              <X className="w-4 h-4" />
             </button>
             <div className="video-player-frame">
-              <video
+              <iframe
                 src={activeVideo.videoUrl}
-                controls
-                autoPlay
-                playsInline
-                className="w-full h-full"
+                title={activeVideo.name}
+                allow="autoplay; encrypted-media; fullscreen"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
               />
-            </div>
-            <div className="video-modal-meta">
-              <div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: '#fff' }}>
-                  {activeVideo.name}
-                </h3>
-                <p style={{ fontSize: '13px', color: '#00bcd4', margin: '3px 0 0' }}>
-                  {activeVideo.project} • {activeVideo.unit}
-                </p>
-              </div>
-              <span style={{ fontSize: '12px', background: 'rgba(255,255,255,0.1)', padding: '4px 10px', borderRadius: '12px' }}>
-                Verified Resident Story
-              </span>
             </div>
           </div>
         </div>

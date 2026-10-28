@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 
 /* ------------------------------------------------------------------ */
-/*  Typewriter – types a phrase, pauses, backspaces, then moves on     */
+/*  Typewriter â€“ types a phrase, pauses, backspaces, then moves on     */
 /* ------------------------------------------------------------------ */
 const HERO_PHRASES = [
   'Three decades of building with purpose.',
@@ -59,7 +59,7 @@ function Typewriter({ phrases, typeMs = 70, deleteMs = 38, holdMs = 1900 }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Reusable section eyebrow – uses the global .eyebrow class          */
+/*  Reusable section eyebrow â€“ uses the global .eyebrow class          */
 /* ------------------------------------------------------------------ */
 function Eyebrow({ children, light }) {
   return (
@@ -104,13 +104,13 @@ const LEADERS = [
   {
     name: 'Mr. Naresh Patel',
     role: 'A Vision Built on Trust. A Legacy Built for Generations.',
-    desc: '“Since 1996, our vision has been to build more than structures — to create lasting relationships rooted in trust.”',
+    desc: 'â€œSince 1996, our vision has been to build more than structures â€” to create lasting relationships rooted in trust.â€',
     image: '/assets/about/naresh-patel.jpg',
   },
   {
     name: 'Mr. Satish Patel',
-    role: 'Carrying Our Legacy Forward. Creating Tomorrow’s Possibilities.',
-    desc: '“At Nexus Group, we believe in turning aspirations into meaningful spaces for people to live, grow, and prosper.”',
+    role: 'Carrying Our Legacy Forward. Creating Tomorrowâ€™s Possibilities.',
+    desc: 'â€œAt Nexus Group, we believe in turning aspirations into meaningful spaces for people to live, grow, and prosper.â€',
     image: '/assets/about/satish-patel.jpg',
   },
 ];
@@ -172,34 +172,6 @@ const STATS = [
   },
 ];
 
-const TEAM_PHOTOS = [
-  {
-    id: 'team-03',
-    alt: 'Nexus Corporate & Sales Team at Nexus Prime Square',
-    image: '/assets/about/team/team-03.jpg',
-    isHero: true,
-  },
-  {
-    id: 'team-01',
-    alt: 'Nexus Project Engineering and Site Execution Team',
-    image: '/assets/about/team/team-01.jpg',
-  },
-  {
-    id: 'team-11',
-    alt: 'Nexus Group Founders - Mr. Naresh Patel and Mr. Satish Patel',
-    image: '/assets/about/team/friendly-executive-conversation.png',
-  },
-  {
-    id: 'team-04',
-    alt: 'Nexus Central Operations and Management Staff',
-    image: '/assets/about/team/team-04.jpg',
-  },
-  {
-    id: 'team-02',
-    alt: 'Nexus Site Delivery and Quality Construction Force',
-    image: '/assets/about/team/team-02.jpg',
-  },
-];
 
 /* ------------------------------------------------------------------ */
 /*  About Page Component                                               */
@@ -273,7 +245,7 @@ export default function AboutPage({
               />
               <div className="arch-caption-scrim" />
               <div className="arch-caption">
-                Nexus Vision & Architecture • Built by NEXUS
+                Nexus Vision & Architecture â€¢ Built by NEXUS
               </div>
             </div>
 
@@ -327,7 +299,7 @@ export default function AboutPage({
             </div>
 
             <div className="about-what-side">
-              {/* 2×2 stats - clean professional corporate cards */}
+              {/* 2Ã—2 stats - clean professional corporate cards */}
               <div className="about-stats-grid">
                 {STATS.map((s) => (
                   <div key={s.label} className="about-stat-cell">
@@ -496,7 +468,7 @@ export default function AboutPage({
           </svg>
 
           <div className="wrap about-team-container">
-            {/* Header: ABOUT US — | Our Purpose. | Subtitle + Top-Right PEOPLE/PROGRESS/COMMUNITY Badge */}
+            {/* Header: ABOUT US â€” | Our Purpose. | Subtitle + Top-Right PEOPLE/PROGRESS/COMMUNITY Badge */}
             <div className="about-team-header">
               <div className="about-team-header-main">
                 <div className="about-team-eyebrow">
@@ -507,7 +479,7 @@ export default function AboutPage({
                   The People Behind Nexus. <span>United by Passion & Purpose.</span>
                 </h2>
                 <p className="about-team-intro">
-                  At Nexus Group, we believe in building more than just spaces —<br />
+                  At Nexus Group, we believe in building more than just spaces â€”<br />
                   we build people, communities and a better tomorrow.
                 </p>
               </div>
@@ -632,7 +604,7 @@ export default function AboutPage({
                   />
                   <div className="arch-caption-scrim" />
                   <div className="arch-caption" style={{ fontSize: '10px', bottom: '8px', left: '10px' }}>
-                    {p.label || p.title} • NEXUS
+                    {p.label || p.title} â€¢ NEXUS
                   </div>
                 </div>
               ))}

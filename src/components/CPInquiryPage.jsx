@@ -226,7 +226,6 @@ export default function CPInquiryPage({
                       <option value="Nexus Skydale">Nexus Skydale (Punawale)</option>
                       <option value="Nexus Kinara">Nexus Kinara (Chikhali)</option>
                       <option value="Nexus Westia">Nexus Westia (Punawale)</option>
-                      <option value="Nexus Crown">Nexus Crown (Ravet / Kiwale)</option>
                       <option value="Nexus Prime Square">Nexus Prime Square (Moshi)</option>
                       <option value="Nexus Atrium">Nexus Atrium (Commercial)</option>
                       <option value="Nexus Genesis">Nexus Genesis (Kiwale)</option>

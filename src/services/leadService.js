@@ -3,6 +3,15 @@
  * Connects directly to Google Sheets via Google Apps Script Web App
  */
 
+// Target Google Sheet for all Nexus website contact & lead forms
+export const GOOGLE_SHEET_ID =
+  import.meta.env.VITE_GOOGLE_SHEET_ID ||
+  '1js21r_clRb6ry6CBWnbZOA38zkIZ_slQ0SSCIDnLVYQ';
+
+export const GOOGLE_SHEET_URL =
+  import.meta.env.VITE_GOOGLE_SHEET_URL ||
+  `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}`;
+
 // Configured Google Apps Script Web App URL
 export const GOOGLE_SHEETS_SCRIPT_URL =
   import.meta.env.VITE_GOOGLE_SHEETS_URL ||
@@ -18,6 +27,9 @@ export async function submitLeadToGoogleSheet(data) {
     const payload = {
       timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
       sourceUrl: typeof window !== 'undefined' ? window.location.href : '',
+      sheetId: GOOGLE_SHEET_ID,
+      spreadsheetId: GOOGLE_SHEET_ID,
+      sheetUrl: GOOGLE_SHEET_URL,
       ...data,
     };
 

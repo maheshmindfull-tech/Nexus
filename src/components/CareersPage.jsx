@@ -13,8 +13,10 @@ import {
   ArrowRight,
   Sparkles,
   Award,
+  CheckCircle2,
 } from 'lucide-react';
 import Footer from './Footer';
+import { submitLeadToGoogleSheet } from '../services/leadService';
 import Typewriter from './Typewriter';
 import '../careers.css';
 
@@ -186,14 +188,23 @@ export default function CareersPage({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate swift submission
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 900);
+    await submitLeadToGoogleSheet({
+      formType: 'Careers Job Application',
+      name: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      project: formData.role,
+      role: formData.role,
+      experience: formData.experience,
+      company: formData.currentOrg || 'N/A',
+      portfolioLink: formData.portfolioLink,
+      message: formData.message || '',
+    });
+    setSubmitting(false);
+    setSubmitted(true);
   };
 
   return (

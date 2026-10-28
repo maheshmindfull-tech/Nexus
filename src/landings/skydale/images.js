@@ -9,7 +9,6 @@ import img5 from './images/kinara/highlights/play.jpg';
 import img6 from './images/amenities/gym.jpg';
 import img7 from './images/amenities/billiards.jpg';
 import img8 from './images/amenities/lounge.jpg';
-import img9 from './images/amenities/play.jpg';
 import img10 from './images/amenities/table-tennis.jpg';
 import img11 from './images/amenities/balcony.jpg';
 import img15 from './images/v2/g-aerial.jpg';
@@ -42,7 +41,6 @@ const files = {
   './images/amenities/gym.jpg': img6,
   './images/amenities/billiards.jpg': img7,
   './images/amenities/lounge.jpg': img8,
-  './images/amenities/play.jpg': img9,
   './images/amenities/table-tennis.jpg': img10,
   './images/amenities/balcony.jpg': img11,
   './images/amenities/tower.jpg': imgTower,

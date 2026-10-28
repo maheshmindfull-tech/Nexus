@@ -301,15 +301,6 @@ const PROJECTS = [
     config: 'Luxury 2, 3 & 4 BHK',
     image: '/assets/projects/coming-soon-card.jpg',
   },
-  {
-    id: 'crown',
-    name: 'Nexus Crown',
-    location: 'Ravet / Kiwale, Pune',
-    type: 'Residential',
-    status: 'Coming Soon',
-    config: 'Premium 2, 3 & 4 BHK Residences',
-    image: '/assets/projects/coming-soon-project.png',
-  },
 ];
 
 const PROJECT_LOGOS = {

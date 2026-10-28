@@ -18,9 +18,6 @@ import img23 from './images/plans/2bhk-3.jpg';
 import img24 from './images/plans/3bhk-1.jpg';
 import img25 from './images/plans/3bhk-2.jpg';
 import img26 from './images/plans/3bhk-3.jpg';
-import img12 from './images/cuts/fp-2a.jpg';
-import img13 from './images/cuts/fp-2b.jpg';
-import img14 from './images/cuts/fp-2c.jpg';
 import img15 from './images/hero.jpg';
 import img16 from './images/cuts/g-garden.jpg';
 import img17 from './images/gallery/aerial.jpg';
@@ -47,9 +44,6 @@ const files = {
   './images/plans/3bhk-1.jpg': img24,
   './images/plans/3bhk-2.jpg': img25,
   './images/plans/3bhk-3.jpg': img26,
-  './images/cuts/fp-2a.jpg': img12,
-  './images/cuts/fp-2b.jpg': img13,
-  './images/cuts/fp-2c.jpg': img14,
   './images/hero.jpg': img15,
   './images/cuts/g-garden.jpg': img16,
   './images/gallery/aerial.jpg': img17,

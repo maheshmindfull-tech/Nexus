@@ -1,10 +1,7 @@
 import { bindImages } from '../asset';
 
 import img0 from './images/hero-city.jpg';
-import img1 from './images/highlights/elevation.jpg';
 import img2 from './images/highlights/aerial.jpg';
-import img3 from './images/highlights/gate.jpg';
-import img4 from './images/highlights/play.jpg';
 import imgConvenient from './images/highlights/convenient.jpg';
 import imgLocality from './images/highlights/locality.jpg';
 import imgSustainable from './images/highlights/sustainable.jpg';
@@ -25,10 +22,7 @@ import img18 from './images/gallery/living.jpg';
 
 const files = {
   './images/hero-city.jpg': img0,
-  './images/highlights/elevation.jpg': img1,
   './images/highlights/aerial.jpg': img2,
-  './images/highlights/gate.jpg': img3,
-  './images/highlights/play.jpg': img4,
   './images/highlights/convenient.jpg': imgConvenient,
   './images/highlights/locality.jpg': imgLocality,
   './images/highlights/sustainable.jpg': imgSustainable,
