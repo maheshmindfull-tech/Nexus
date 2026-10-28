@@ -33,27 +33,49 @@ export default function CPInquiryPage({
     message: '',
   });
 
+  const [submittedInfo, setSubmittedInfo] = useState({ fullName: '', companyName: '', mobile: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const cleanVal = name === 'mobile' ? value.replace(/\D/g, '').slice(0, 10) : value;
+    setFormData((prev) => ({ ...prev, [name]: cleanVal }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const cleanPhone = formData.mobile.replace(/\D/g, '').slice(0, 10);
+    if (cleanPhone.length !== 10) return;
     setIsSubmitting(true);
+    const info = {
+      fullName: formData.fullName.trim(),
+      companyName: formData.companyName.trim(),
+      mobile: cleanPhone,
+    };
     await submitLeadToGoogleSheet({
       formType: 'Channel Partner Registration & Inquiry',
-      name: formData.fullName,
-      company: formData.companyName,
-      phone: formData.mobile,
-      email: formData.email,
-      reraNumber: formData.reraNumber || 'N/A',
+      cp: 'Yes',
+      isCP: 'Yes',
+      name: info.fullName,
+      company: info.companyName,
+      phone: info.mobile,
+      email: formData.email.trim(),
+      reraNumber: formData.reraNumber.trim() || 'N/A',
       project: formData.projectInterest || 'All Projects',
       nationality: formData.nationality,
-      message: formData.message || '',
+      message: formData.message.trim(),
+    });
+    setSubmittedInfo(info);
+    setFormData({
+      fullName: '',
+      companyName: '',
+      mobile: '',
+      email: '',
+      reraNumber: '',
+      projectInterest: 'All Projects',
+      nationality: '',
+      message: '',
     });
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -113,9 +135,9 @@ export default function CPInquiryPage({
                 </div>
                 <h3>Inquiry Submitted Successfully</h3>
                 <p>
-                  Thank you, <strong>{formData.fullName}</strong>. Your Channel Partner
-                  inquiry for <strong>{formData.companyName}</strong> has been received. Our
-                  partnership manager will contact you at <strong>{formData.mobile}</strong> shortly.
+                  Thank you, <strong>{submittedInfo.fullName}</strong>. Your Channel Partner
+                  inquiry for <strong>{submittedInfo.companyName}</strong> has been received. Our
+                  partnership manager will contact you at <strong>{submittedInfo.mobile}</strong> shortly.
                 </p>
                 <button
                   type="button"
@@ -168,13 +190,18 @@ export default function CPInquiryPage({
                   {/* Mobile Number */}
                   <div className="cp-field">
                     <label className="cp-label">
-                      Mobile Number <span>*</span>
+                      Mobile Number (10 Digits) <span>*</span>
                     </label>
                     <input
                       type="tel"
+                      inputMode="numeric"
                       name="mobile"
                       required
-                      placeholder="+91 98765 43210"
+                      maxLength={10}
+                      minLength={10}
+                      pattern="[0-9]{10}"
+                      title="Please enter a valid 10-digit mobile number"
+                      placeholder="9876543210"
                       value={formData.mobile}
                       onChange={handleChange}
                       className="cp-input"

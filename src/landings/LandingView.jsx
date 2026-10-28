@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ArrowLeft, Download, X } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Download, X } from 'lucide-react';
 import AmenityBoard from './AmenityBoard';
 import ReraBadge from './ReraBadge';
 import { LANDING_CONTENT } from './index';
@@ -186,6 +186,8 @@ export default function LandingView({ id, onNavigateHome }) {
 
   const openEnquiry = () => {
     setSubmitted(false);
+    setIsSubmitting(false);
+    setFormData({ name: '', email: '', phone: '', message: '' });
     setEnquiryOpen(true);
   };
 
@@ -729,8 +731,21 @@ export default function LandingView({ id, onNavigateHome }) {
             <div className="lp-form-card">
               {submitted ? (
                 <div className="lp-success" role="status">
-                  <strong>Inquiry received</strong>
+                  <div className="lp-success-icon">
+                    <CheckCircle2 size={30} strokeWidth={2.2} />
+                  </div>
+                  <strong>Enquiry Received!</strong>
                   <p>Thank you for your interest in {p.name}. Our sales advisor will contact you shortly.</p>
+                  <button
+                    type="button"
+                    className="lp-btn lp-btn-solid lp-success-btn"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setEnquiryOpen(false);
+                    }}
+                  >
+                    Done
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
@@ -743,11 +758,16 @@ export default function LandingView({ id, onNavigateHome }) {
                     <input required type="email" value={formData.email} onChange={setField('email')} autoComplete="email" />
                   </label>
                   <label className="lp-field">
-                    <span>Phone</span>
+                    <span>Phone (10 Digits)</span>
                     <input
-                      required={p.phoneRequired}
+                      required
                       type="tel"
-                      inputMode="tel"
+                      inputMode="numeric"
+                      maxLength={10}
+                      minLength={10}
+                      pattern="[0-9]{10}"
+                      title="Please enter a valid 10-digit mobile number"
+                      placeholder="9876543210"
                       value={formData.phone}
                       onChange={setField('phone')}
                       autoComplete="tel"

@@ -35,6 +35,7 @@ export default function ContactPage({
   onOpenEnquire,
 }) {
   const [formData, setFormData] = useState(EMPTY_FORM);
+  const [submittedInfo, setSubmittedInfo] = useState({ name: '', phone: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -42,21 +43,27 @@ export default function ContactPage({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const cleanVal = name === 'phone' ? value.replace(/\D/g, '').slice(0, 10) : value;
+    setFormData((prev) => ({ ...prev, [name]: cleanVal }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const cleanPhone = formData.phone.replace(/\D/g, '').slice(0, 10);
+    if (cleanPhone.length !== 10) return;
     setError('');
     setIsSubmitting(true);
 
+    const info = { name: formData.name.trim(), phone: cleanPhone };
     const result = await submitLeadToGoogleSheet({
       formType: 'Website Contact Page',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
+      cp: 'No',
+      isCP: 'No',
+      name: info.name,
+      phone: info.phone,
+      email: formData.email.trim(),
       project: formData.project,
-      message: formData.message,
+      message: formData.message.trim(),
     });
 
     setIsSubmitting(false);
@@ -65,6 +72,8 @@ export default function ContactPage({
       setError('Something went wrong while sending your message. Please try again or call us.');
       return;
     }
+    setSubmittedInfo(info);
+    setFormData(EMPTY_FORM);
     setIsSubmitted(true);
     cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
@@ -97,8 +106,8 @@ export default function ContactPage({
                 </div>
                 <h2>Message sent</h2>
                 <p>
-                  Thank you, <strong>{formData.name}</strong>. Our team will contact you on{' '}
-                  <strong>{formData.phone}</strong> shortly.
+                  Thank you, <strong>{submittedInfo.name}</strong>. Our team will contact you on{' '}
+                  <strong>{submittedInfo.phone}</strong> shortly.
                 </p>
                 <button type="button" onClick={handleReset} className="ct-reset-btn">
                   Send another message
@@ -131,7 +140,7 @@ export default function ContactPage({
 
                   <div className="ct-field">
                     <label className="ct-label" htmlFor="ct-phone">
-                      Mobile Number <span>*</span>
+                      Mobile Number (10 Digits) <span>*</span>
                     </label>
                     <input
                       id="ct-phone"
@@ -139,10 +148,12 @@ export default function ContactPage({
                       name="phone"
                       required
                       autoComplete="tel"
-                      inputMode="tel"
-                      pattern="[0-9+\s\-]{10,15}"
-                      title="Enter a valid mobile number"
-                      placeholder="+91 98765 43210"
+                      inputMode="numeric"
+                      maxLength={10}
+                      minLength={10}
+                      pattern="[0-9]{10}"
+                      title="Please enter a valid 10-digit mobile number"
+                      placeholder="9876543210"
                       value={formData.phone}
                       onChange={handleChange}
                       className="ct-input"

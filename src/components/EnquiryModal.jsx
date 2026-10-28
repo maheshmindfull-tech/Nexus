@@ -44,14 +44,16 @@ export function resolveProjectOption(input, options = DEFAULT_PROJECT_OPTIONS) {
 }
 
 export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
-  const [formData, setFormData] = useState({
+  const getEmptyForm = (proj) => ({
     name: '',
     phone: '',
     email: '',
-    project: resolveProjectOption(initialProject),
+    project: proj ? resolveProjectOption(proj) : 'General Enquiry',
     message: '',
   });
 
+  const [formData, setFormData] = useState(() => getEmptyForm(initialProject));
+  const [submittedInfo, setSubmittedInfo] = useState({ name: '', project: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -59,13 +61,8 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
     if (isOpen) {
       setSubmitted(false);
       setIsSubmitting(false);
-      const targetProject = initialProject
-        ? resolveProjectOption(initialProject)
-        : 'General Enquiry';
-      setFormData((prev) => ({
-        ...prev,
-        project: targetProject,
-      }));
+      setSubmittedInfo({ name: '', project: '' });
+      setFormData(getEmptyForm(initialProject));
     }
   }, [isOpen, initialProject]);
 
@@ -80,15 +77,24 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const cleanPhone = formData.phone.replace(/\D/g, '').slice(0, 10);
+    if (cleanPhone.length !== 10) return;
+
     setIsSubmitting(true);
+    const currentName = formData.name.trim();
+    const currentProject = formData.project || 'General Enquiry';
     await submitLeadToGoogleSheet({
       formType: 'Website Contact / Enquiry Modal',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      project: formData.project || 'General Enquiry',
-      message: formData.message || '',
+      cp: 'No',
+      isCP: 'No',
+      name: currentName,
+      phone: cleanPhone,
+      email: formData.email.trim(),
+      project: currentProject,
+      message: formData.message.trim(),
     });
+    setSubmittedInfo({ name: currentName, project: currentProject });
+    setFormData(getEmptyForm(initialProject));
     setIsSubmitting(false);
     setSubmitted(true);
   };
@@ -115,26 +121,27 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
         {/* Body */}
         <div className="modal-form">
           {submitted ? (
-            <div className="py-6 text-center space-y-3">
-              <div className="w-12 h-12 bg-teal-50 text-[#0097a7] rounded-full mx-auto flex items-center justify-center">
-                <CheckCircle2 className="w-7 h-7" />
+            <div className="modal-success" role="status" aria-live="polite">
+              <div className="modal-success-icon">
+                <CheckCircle2 size={32} strokeWidth={2.2} />
               </div>
-              <h4 className="text-lg font-bold text-slate-800">
-                Message Sent!
-              </h4>
-              <p className="text-xs text-slate-600 max-w-xs mx-auto leading-relaxed">
-                Thank you, <strong className="text-slate-900">{formData.name}</strong>. Our team will reach out to you shortly.
+              <span className="modal-success-badge">Enquiry Confirmed</span>
+              <h4 className="modal-success-title">Thank You, {submittedInfo.name || 'There'}!</h4>
+              <p className="modal-success-text">
+                We have received your enquiry for{' '}
+                <strong>{submittedInfo.project || 'Nexus Group'}</strong>. Our team will reach out to you shortly.
               </p>
-              <div className="pt-2">
+              <div className="modal-success-actions">
                 <button
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
+                    setFormData(getEmptyForm(initialProject));
                     onClose();
                   }}
-                  className="px-6 py-2 bg-[#009dbd] hover:bg-[#007c93] text-white font-semibold rounded-none text-xs transition-colors cursor-pointer"
+                  className="modal-success-btn"
                 >
-                  Close
+                  Done
                 </button>
               </div>
             </div>
@@ -156,13 +163,23 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
               {/* Phone & Email Row */}
               <div className="form-row">
                 <div>
-                  <label className="form-label">Phone *</label>
+                  <label className="form-label">Phone (10 Digits) *</label>
                   <input
                     type="tel"
+                    inputMode="numeric"
                     required
-                    placeholder="+91 98765 43210"
+                    maxLength={10}
+                    minLength={10}
+                    pattern="[0-9]{10}"
+                    title="Please enter a valid 10-digit mobile number"
+                    placeholder="9876543210"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        phone: e.target.value.replace(/\D/g, '').slice(0, 10),
+                      })
+                    }
                     className="form-input"
                   />
                 </div>

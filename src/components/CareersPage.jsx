@@ -185,23 +185,38 @@ export default function CareersPage({
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const cleanVal = name === 'phone' ? value.replace(/\D/g, '').slice(0, 10) : value;
+    setFormData((prev) => ({ ...prev, [name]: cleanVal }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const cleanPhone = formData.phone.replace(/\D/g, '').slice(0, 10);
+    if (cleanPhone.length !== 10) return;
     setSubmitting(true);
     await submitLeadToGoogleSheet({
       formType: 'Careers Job Application',
-      name: formData.fullName,
-      email: formData.email,
-      phone: formData.phone,
+      cp: 'No',
+      isCP: 'No',
+      name: formData.fullName.trim(),
+      email: formData.email.trim(),
+      phone: cleanPhone,
       project: formData.role,
       role: formData.role,
-      experience: formData.experience,
-      company: formData.currentOrg || 'N/A',
-      portfolioLink: formData.portfolioLink,
-      message: formData.message || '',
+      experience: formData.experience.trim(),
+      company: formData.currentOrg.trim() || 'N/A',
+      portfolioLink: formData.portfolioLink.trim(),
+      message: formData.message.trim(),
+    });
+    setFormData({
+      fullName: '',
+      email: '',
+      phone: '',
+      role: '',
+      experience: '',
+      currentOrg: '',
+      portfolioLink: '',
+      message: '',
     });
     setSubmitting(false);
     setSubmitted(true);
@@ -578,14 +593,19 @@ export default function CareersPage({
 
                   <div className="car-form-group">
                     <label className="car-form-label" htmlFor="phone">
-                      Mobile / WhatsApp Number *
+                      Mobile / WhatsApp Number (10 Digits) *
                     </label>
                     <input
                       id="phone"
                       name="phone"
                       type="tel"
+                      inputMode="numeric"
                       required
-                      placeholder="e.g. +91 98765 43210"
+                      maxLength={10}
+                      minLength={10}
+                      pattern="[0-9]{10}"
+                      title="Please enter a valid 10-digit mobile number"
+                      placeholder="9876543210"
                       value={formData.phone}
                       onChange={handleFormChange}
                       className="car-form-input"

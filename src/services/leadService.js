@@ -24,6 +24,14 @@ export const GOOGLE_SHEETS_SCRIPT_URL =
  */
 export async function submitLeadToGoogleSheet(data) {
   try {
+    const isCpInquiry =
+      data?.isCP === true ||
+      String(data?.isCP || '').toLowerCase() === 'yes' ||
+      String(data?.cp || '').toLowerCase() === 'yes' ||
+      /channel partner|\bcp\b/i.test(String(data?.formType || ''));
+
+    const cpStatus = isCpInquiry ? 'Yes' : 'No';
+
     const payload = {
       timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
       sourceUrl: typeof window !== 'undefined' ? window.location.href : '',
@@ -31,6 +39,8 @@ export async function submitLeadToGoogleSheet(data) {
       spreadsheetId: GOOGLE_SHEET_ID,
       sheetUrl: GOOGLE_SHEET_URL,
       ...data,
+      cp: cpStatus,
+      isCP: cpStatus,
     };
 
     // If script URL is still placeholder, gracefully log so frontend flows continue without crash
