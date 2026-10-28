@@ -3,19 +3,19 @@
  * Connects directly to Google Sheets via Google Apps Script Web App
  */
 
-// Target Google Sheet for all Nexus website contact & lead forms
+// Target Google Sheet for all Nexus website contact & enquiry forms
 export const GOOGLE_SHEET_ID =
   import.meta.env.VITE_GOOGLE_SHEET_ID ||
-  '1js21r_clRb6ry6CBWnbZOA38zkIZ_slQ0SSCIDnLVYQ';
+  '1b0-Eh7DHDNVJpVjbTAO3yfX1LZRO0nFm9CroEv1z4us';
 
 export const GOOGLE_SHEET_URL =
   import.meta.env.VITE_GOOGLE_SHEET_URL ||
-  `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}`;
+  'https://docs.google.com/spreadsheets/d/1b0-Eh7DHDNVJpVjbTAO3yfX1LZRO0nFm9CroEv1z4us/edit?gid=0#gid=0';
 
-// Configured Google Apps Script Web App URL
+// Deployed Google Apps Script Web App URL
 export const GOOGLE_SHEETS_SCRIPT_URL =
   import.meta.env.VITE_GOOGLE_SHEETS_URL ||
-  'https://script.google.com/macros/s/AKfycbxZE9c3QuJnTPRSG_7xABrElKGo-bhj-qmrLXBfwtyKeL91nT-KXIVW3y3dkilz-2Pn/exec';
+  'https://script.google.com/macros/s/AKfycby1xU_WPDIbbSfMmTBlMtIXB99oLmDL_yYgCz3wOE64fekBlV0Zx76CyJ5P5igAdxEh/exec';
 
 /**
  * Submits form data to Google Sheet
@@ -42,12 +42,12 @@ export async function submitLeadToGoogleSheet(data) {
       return { success: true, simulated: true };
     }
 
-    // Send payload using no-cors to handle Google Apps Script 302 redirect cleanly
+    // Use text/plain with no-cors so browsers send the full JSON body without a CORS preflight block
     await fetch(GOOGLE_SHEETS_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain;charset=utf-8',
       },
       body: JSON.stringify(payload),
     });
