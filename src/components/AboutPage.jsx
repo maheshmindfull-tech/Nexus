@@ -187,7 +187,7 @@ const TEAM_PHOTOS = [
   {
     id: 'team-11',
     alt: 'Nexus Group Founders - Mr. Naresh Patel and Mr. Satish Patel',
-    image: '/assets/about/team/team-11.jpg',
+    image: '/assets/about/team/friendly-executive-conversation.png',
   },
   {
     id: 'team-04',
@@ -461,7 +461,38 @@ export default function AboutPage({
         {/* ============================================================
             6. OUR PURPOSE / OUR TEAM (Pixel-Perfect Reference Format)
             ============================================================ */}
+        {/* ============================================================
+            6. OUR PURPOSE / OUR TEAM (Pixel-Perfect Reference Format)
+            ============================================================ */}
         <section className="about-team" id="our-team">
+          {/* Top-Right Soft Fluid Mint Wave */}
+          <svg
+            className="about-team-bg-wave"
+            viewBox="0 0 520 380"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M 140 0 C 180 120, 290 200, 370 230 C 440 255, 480 240, 520 260 L 520 0 Z"
+              fill="#eaf1f1"
+            />
+          </svg>
+
+          {/* SVG Clip Path for Row 1 Hero Photo: exact gentle top slope with 28px rounded corners */}
+          <svg
+            width="0"
+            height="0"
+            style={{ position: 'absolute', pointerEvents: 'none' }}
+            aria-hidden="true"
+          >
+            <defs>
+              <clipPath id="slantedHeroClip" clipPathUnits="objectBoundingBox">
+                <path d="M 0,0.17419 A 0.02786,0.09032 0 0 1 0.02786,0.08387 L 0.97214,0 A 0.02786,0.09032 0 0 1 1,0.09032 L 1,0.90968 A 0.02786,0.09032 0 0 1 0.97214,1 L 0.02786,1 A 0.02786,0.09032 0 0 1 0,0.90968 Z" />
+              </clipPath>
+            </defs>
+          </svg>
+
           <div className="wrap about-team-container">
             {/* Header: ABOUT US — | Our Purpose. | Subtitle + Top-Right PEOPLE/PROGRESS/COMMUNITY Badge */}
             <div className="about-team-header">
@@ -558,7 +589,7 @@ export default function AboutPage({
               </div>
               <div className="about-team-photo-wrap about-team-photo-wide">
                 <img
-                  src="/assets/about/team/team-11.jpg"
+                  src="/assets/about/team/friendly-executive-conversation.png"
                   alt="Nexus Founders - Mr. Naresh Patel and Mr. Satish Patel"
                   className="about-team-img"
                   loading="lazy"
