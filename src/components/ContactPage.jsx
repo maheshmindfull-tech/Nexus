@@ -238,11 +238,11 @@ export default function ContactPage({
           <aside className="ct-info" aria-label="Nexus contact details">
             <div className="ct-info-box">
               <small>Email</small>
-              <a href="mailto:sales@nexuspune.com">sales@nexuspune.com</a>
+              <a href="mailto:info@nexuspune.in">info@nexuspune.in</a>
             </div>
             <div className="ct-info-box">
               <small>Phone</small>
-              <a href="tel:+912067899900">+91 20 6789 9900</a>
+              <a href="tel:+919307313009">+91 93073 13009</a> / <a href="tel:+9102027473366">+91 020-27473366</a>
             </div>
             <div className="ct-info-box">
               <small>Office</small>

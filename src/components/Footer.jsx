@@ -209,10 +209,10 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
               <h2>Contact</h2>
               <ul>
                 <li>
-                  <a href="mailto:sales@nexuspune.com">sales@nexuspune.com</a>
+                  <a href="mailto:info@nexuspune.in">info@nexuspune.in</a>
                 </li>
                 <li>
-                  <a href="tel:+912067899900">+91 20 6789 9900</a>
+                  <a href="tel:+919307313009">+91 93073 13009</a> / <a href="tel:+9102027473366">+91 020-27473366</a>
                 </li>
                 <li>
                   Plot No.P-087, D-II Block, MIDC,
