@@ -103,14 +103,14 @@ const VALUES = [
 const LEADERS = [
   {
     name: 'Mr. Naresh Patel',
-    role: 'Founder Director, Nexus Group, Pune',
-    desc: 'Founded Nexus in 1996 with a vision to build homes, enduring relationships, and lasting trust. Believes real estate is about understanding family aspirations and crafting communities that stand the test of time.',
+    role: 'A Vision Built on Trust. A Legacy Built for Generations.',
+    desc: '“Since 1996, our vision has been to build more than structures — to create lasting relationships rooted in trust.”',
     image: '/assets/about/naresh-patel.jpg',
   },
   {
     name: 'Mr. Satish Patel',
-    role: 'Executive Director, Nexus Group, Pune',
-    desc: 'Carries forward the Nexus legacy by pairing contemporary architecture with transparent execution. Committed to creating well-planned spaces and shaping possibilities for tomorrow.',
+    role: 'Carrying Our Legacy Forward. Creating Tomorrow’s Possibilities.',
+    desc: '“At Nexus Group, we believe in turning aspirations into meaningful spaces for people to live, grow, and prosper.”',
     image: '/assets/about/satish-patel.jpg',
   },
 ];
@@ -425,15 +425,17 @@ export default function AboutPage({
             ============================================================ */}
         <section className="about-leaders">
           <div className="wrap">
-            <Eyebrow light>Our leadership</Eyebrow>
-            <h2 className="big" style={{ color: '#fff' }}>
-              Experience That Leads.{' '}
-              <span style={{ color: 'rgba(255,255,255,0.55)' }}>Vision That Builds.</span>
-            </h2>
-            <p className="about-body" style={{ color: 'rgba(255,255,255,0.75)' }}>
-              Leadership rooted in experience, guided by purpose, and focused
-              on building the future of Nexus.
-            </p>
+            <div className="about-leaders-header">
+              <Eyebrow light>Our leadership</Eyebrow>
+              <h2 className="big" style={{ color: '#fff' }}>
+                Experience That Leads.{' '}
+                <span style={{ color: 'rgba(255,255,255,0.55)' }}>Vision That Builds.</span>
+              </h2>
+              <p className="about-body" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                Leadership rooted in experience, guided by purpose, and focused
+                on building the future of Nexus.
+              </p>
+            </div>
 
             <div className="about-leaders-grid">
               {LEADERS.map((person, i) => (
@@ -443,11 +445,11 @@ export default function AboutPage({
                       src={person.image}
                       alt={person.name}
                       className="about-leader-img"
+                      loading="lazy"
                     />
                   )}
                   <div className="about-leader-scrim" />
                   <div className="about-leader-info">
-                    <small className="about-leader-tag"></small>
                     <b>{person.name}</b>
                     <span>{person.role}</span>
                     <p>{person.desc}</p>
@@ -498,25 +500,16 @@ export default function AboutPage({
             <div className="about-team-header">
               <div className="about-team-header-main">
                 <div className="about-team-eyebrow">
-                  <span>ABOUT US</span>
+                  <span>Team</span>
                   <span className="about-team-eyebrow-line" aria-hidden="true" />
                 </div>
                 <h2 className="about-team-title">
-                  Our <span>Purpose.</span>
+                  The People Behind Nexus. <span>United by Passion & Purpose.</span>
                 </h2>
                 <p className="about-team-intro">
                   At Nexus Group, we believe in building more than just spaces —<br />
                   we build people, communities and a better tomorrow.
                 </p>
-              </div>
-
-              <div className="about-team-badge">
-                <div className="about-team-badge-stack">
-                  <span>PEOPLE</span>
-                  <span>PROGRESS</span>
-                  <span>COMMUNITY</span>
-                </div>
-                <span className="about-team-badge-line" aria-hidden="true" />
               </div>
             </div>
 
