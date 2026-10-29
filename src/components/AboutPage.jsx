@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 import Footer from './Footer';
 
 /* ------------------------------------------------------------------ */
@@ -187,6 +188,17 @@ export default function AboutPage({
   onOpenEnquire,
 }) {
   const [openAccordion, setOpenAccordion] = useState(0);
+  const officeVideoRef = useRef(null);
+  const [officeMuted, setOfficeMuted] = useState(true);
+
+  const toggleOfficeSound = () => {
+    const video = officeVideoRef.current;
+    if (!video) return;
+    const nextMuted = !officeMuted;
+    video.muted = nextMuted;
+    setOfficeMuted(nextMuted);
+    if (!nextMuted) video.play().catch(() => {});
+  };
 
   return (
     <>
@@ -238,15 +250,33 @@ export default function AboutPage({
         <section className="about-intro">
           <div className="wrap about-intro-grid">
             <div className="about-intro-media arch-frame">
-              <img
-                src="/images/about_nexus_monument.png"
-                alt="Nexus Vision and Architectural Monument"
-                className="about-intro-img"
-              />
+              <video
+                ref={officeVideoRef}
+                className="about-intro-img about-intro-video"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                disablePictureInPicture
+                controls={false}
+                aria-label="Nexus office tour"
+              >
+                <source src="/assets/about/office-tour.mp4" type="video/mp4" />
+              </video>
               <div className="arch-caption-scrim" />
               <div className="arch-caption">
                 Nexus Vision & Architecture
               </div>
+              <button
+                type="button"
+                className="hero-sound"
+                onClick={toggleOfficeSound}
+                aria-pressed={!officeMuted}
+                aria-label={officeMuted ? 'Turn sound on' : 'Turn sound off'}
+              >
+                {officeMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+              </button>
             </div>
 
             <div className="about-intro-copy">
@@ -490,10 +520,14 @@ export default function AboutPage({
               <div className="about-team-photo-wrap about-team-photo-hero">
                 <img
                   src="/assets/about/team/team-01.jpg"
-                  alt="Nexus Team"
+                  alt="Engineering Team — The Execution Unit"
                   className="about-team-img"
                   loading="lazy"
                 />
+                <div className="about-team-photo-label">
+                  <span>The Execution Unit</span>
+                  <strong>Engineering Team</strong>
+                </div>
               </div>
               <div className="about-team-caption">
                 <span className="about-team-dash" aria-hidden="true" />
@@ -513,18 +547,26 @@ export default function AboutPage({
                 <div className="about-team-photo-wrap about-team-photo-pair-1">
                   <img
                     src="/assets/about/team/team-03.jpg"
-                    alt="Nexus Corporate & Sales Team at Nexus Prime Square"
+                    alt="Sales Team — The Experience Unit"
                     className="about-team-img"
                     loading="lazy"
                   />
+                  <div className="about-team-photo-label">
+                    <span>The Experience Unit</span>
+                    <strong>Sales Team</strong>
+                  </div>
                 </div>
                 <div className="about-team-photo-wrap about-team-photo-pair-2">
                   <img
                     src="/assets/about/team/team-04.jpg"
-                    alt="Nexus Operations Staff"
+                    alt="Accounts Team — The Assurance Unit"
                     className="about-team-img"
                     loading="lazy"
                   />
+                  <div className="about-team-photo-label">
+                    <span>The Assurance Unit</span>
+                    <strong>Accounts Team</strong>
+                  </div>
                 </div>
               </div>
               <div className="about-team-caption">

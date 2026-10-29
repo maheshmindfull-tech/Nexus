@@ -233,9 +233,12 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
 
         <div className="bot">
           <span>
-            © 2026 Nexus Pune. All rights reserved. Managed by Nexus Real Estate Developers.
+            © 2026 Nexus Group Pune. All rights reserved. Managed by Nexus Group.
           </span>
           <span>Powered By: MINDFULL®</span>
+          <p className="footer-disclaimer">
+            Disclaimer: Images used on this website are for representational purposes only. Actual features, specifications, and project details may vary.
+          </p>
         </div>
       </div>
     </footer>

@@ -230,20 +230,22 @@ export default function Testimonials() {
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label={activeVideo.name}
+            aria-label="Resident video"
           >
-            <button
-              type="button"
-              className="video-modal-close"
-              onClick={() => setActiveVideo(null)}
-              aria-label="Close video"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <div className="video-modal-bar">
+              <button
+                type="button"
+                className="video-modal-close"
+                onClick={() => setActiveVideo(null)}
+                aria-label="Close video"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
             <div className="video-player-frame">
               <iframe
                 src={activeVideo.videoUrl}
-                title={activeVideo.name}
+                title="Resident video"
                 allow="autoplay; encrypted-media; fullscreen"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
