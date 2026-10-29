@@ -183,7 +183,7 @@ export const PAGE_SEO = {
     path: '/kinara',
     title: 'Nexus Kinaara Chikhali | 3 BHK Riverside Homes in Pune',
     description:
-      'Nexus Kinaara in Chikhali, Pune offers 3 BHK riverside homes with landscaped amenities. View highlights, floor plans and download the brochure.',
+      'Nexus Kinaara in Chikhali, Pune offers 3 BHK riverside homes with landscaped amenities. View highlights, floor plans and download the brochure. MahaRERA P52100051339, P52100031120, P52100033605.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ApartmentComplex',

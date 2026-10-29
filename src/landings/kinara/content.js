@@ -25,6 +25,12 @@ const kinara = {
   brochureName: 'Nexus Kinaara Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Gat No. 79, Behind River Residency, Chikhali, Pimpri Chinchwad, Pune, Maharashtra 412 114.',
+  rera: 'P52100051339',
+  reraNumbers: [
+    'P52100051339 (A)',
+    'P52100031120 (BC)',
+    'P52100033605 (D)',
+  ],
   phoneRequired: false,
   stats: [
     { value: '3 BHK', label: 'Riverside homes' },

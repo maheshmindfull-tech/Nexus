@@ -622,7 +622,7 @@ export default function LandingView({ id, onNavigateHome }) {
               <h2>Site address</h2>
               <p className="lp-visit-address">{p.address}</p>
               <div className="lp-addresses">
-                {p.rera ? <ReraBadge number={p.rera} /> : null}
+                {p.rera ? <ReraBadge number={p.rera} numbers={p.reraNumbers} /> : null}
                 <p><a href={`mailto:${p.email}`}>{p.email}</a></p>
                 {p.phone ? <p><a href={`tel:${p.phone.replace(/\s/g, '')}`}>{p.phone}</a></p> : null}
               </div>
