@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Pause, Play, Volume2, VolumeX } from 'lucide-react';
 import Footer from './Footer';
 
 /* ------------------------------------------------------------------ */
-/*  Typewriter â€“ types a phrase, pauses, backspaces, then moves on     */
+/*  Typewriter – types a phrase, pauses, backspaces, then moves on     */
 /* ------------------------------------------------------------------ */
 const HERO_PHRASES = [
   'Three decades of building with purpose.',
@@ -60,7 +60,7 @@ function Typewriter({ phrases, typeMs = 70, deleteMs = 38, holdMs = 1900 }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Reusable section eyebrow â€“ uses the global .eyebrow class          */
+/*  Reusable section eyebrow – uses the global .eyebrow class          */
 /* ------------------------------------------------------------------ */
 function Eyebrow({ children, light }) {
   return (
@@ -193,14 +193,15 @@ export default function AboutPage({
   onOpenEnquire,
 }) {
   const [openAccordion, setOpenAccordion] = useState(0);
-  const officeVideoRef = useRef(null);
+  const officeVideoRefs = useRef([]);
   const officeMediaRef = useRef(null);
   const [officeMuted, setOfficeMuted] = useState(true);
+  const [officePaused, setOfficePaused] = useState(false);
   const [officePart, setOfficePart] = useState(0);
-  const [officeReady, setOfficeReady] = useState(false);
+  const [officeStarted, setOfficeStarted] = useState(false);
   const [officeShouldLoad, setOfficeShouldLoad] = useState(false);
 
-  // Defer video download until the intro media is near the viewport.
+  // Defer video download until the tour section is approaching the viewport.
   useEffect(() => {
     const node = officeMediaRef.current;
     if (!node) return undefined;
@@ -217,51 +218,77 @@ export default function AboutPage({
           observer.disconnect();
         }
       },
-      { rootMargin: '200px 0px' }
+      { rootMargin: '400px 0px' }
     );
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  // Warm the next clip while the current one plays so part switches feel instant.
   useEffect(() => {
     if (!officeShouldLoad) return undefined;
-    const nextSrc = OFFICE_TOUR_PARTS[(officePart + 1) % OFFICE_TOUR_PARTS.length];
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.as = 'video';
-    link.href = nextSrc;
-    document.head.appendChild(link);
-    return () => {
-      link.remove();
-    };
-  }, [officePart, officeShouldLoad]);
+    const activeVideo = officeVideoRefs.current[officePart];
+    const inactiveVideo = officeVideoRefs.current[(officePart + 1) % OFFICE_TOUR_PARTS.length];
 
-  useEffect(() => {
-    if (!officeShouldLoad) return;
-    const video = officeVideoRef.current;
-    if (!video) return;
-    video.muted = officeMuted;
-    if (!officeMuted) video.volume = 1;
-    const tryPlay = () => video.play().catch(() => {});
-    if (video.readyState >= 2) tryPlay();
-    else video.addEventListener('loadeddata', tryPlay, { once: true });
-    return () => video.removeEventListener('loadeddata', tryPlay);
-  }, [officePart, officeMuted, officeShouldLoad]);
+    if (inactiveVideo) {
+      inactiveVideo.pause();
+      inactiveVideo.muted = true;
+    }
+
+    if (!activeVideo) return undefined;
+    activeVideo.muted = officeMuted;
+    if (!officeMuted) activeVideo.volume = 1;
+
+    if (officePaused) {
+      activeVideo.pause();
+      return undefined;
+    }
+
+    const tryPlay = () => activeVideo.play().catch(() => {});
+    if (activeVideo.readyState >= 2) tryPlay();
+    else activeVideo.addEventListener('loadeddata', tryPlay, { once: true });
+    return () => activeVideo.removeEventListener('loadeddata', tryPlay);
+  }, [officePart, officeMuted, officePaused, officeShouldLoad]);
 
   const toggleOfficeSound = () => {
-    const video = officeVideoRef.current;
-    if (!video) return;
     const nextMuted = !officeMuted;
-    video.muted = nextMuted;
-    if (!nextMuted) video.volume = 1;
+    const activeVideo = officeVideoRefs.current[officePart];
+    if (activeVideo) {
+      activeVideo.muted = nextMuted;
+      if (!nextMuted) {
+        activeVideo.volume = 1;
+        if (!officePaused) activeVideo.play().catch(() => {});
+      }
+    }
     setOfficeMuted(nextMuted);
-    if (!nextMuted) video.play().catch(() => {});
   };
 
-  const handleOfficeEnded = () => {
-    setOfficeReady(false);
-    setOfficePart((part) => (part + 1) % OFFICE_TOUR_PARTS.length);
+  const toggleOfficePlay = () => {
+    const activeVideo = officeVideoRefs.current[officePart];
+    if (!activeVideo) return;
+    if (officePaused) {
+      activeVideo.play().catch(() => {});
+      setOfficePaused(false);
+    } else {
+      activeVideo.pause();
+      setOfficePaused(true);
+    }
+  };
+
+  const handleOfficeEnded = (idx) => {
+    if (idx !== officePart) return;
+    const nextPart = (idx + 1) % OFFICE_TOUR_PARTS.length;
+    const nextVideo = officeVideoRefs.current[nextPart];
+    const prevVideo = officeVideoRefs.current[idx];
+    if (nextVideo) {
+      nextVideo.currentTime = 0;
+      nextVideo.muted = officeMuted;
+      if (!officeMuted) nextVideo.volume = 1;
+      nextVideo.play().catch(() => {});
+    }
+    setOfficePart(nextPart);
+    if (prevVideo) {
+      prevVideo.currentTime = 0;
+    }
   };
 
   return (
@@ -313,44 +340,17 @@ export default function AboutPage({
             ============================================================ */}
         <section className="about-intro">
           <div className="wrap about-intro-grid">
-            <div className="about-intro-media arch-frame" ref={officeMediaRef}>
+            <div className="about-intro-media arch-frame">
               <img
-                src={OFFICE_TOUR_POSTER}
-                alt=""
-                aria-hidden="true"
-                className={`about-intro-img about-intro-poster${officeReady ? ' is-hidden' : ''}`}
-                decoding="async"
-                fetchPriority="high"
+                src="/images/about_nexus_monument.png"
+                alt="Nexus Vision and Architectural Monument"
+                className="about-intro-img"
+                loading="lazy"
               />
-              {officeShouldLoad && (
-                <video
-                  key={officePart}
-                  ref={officeVideoRef}
-                  className={`about-intro-img about-intro-video${officeReady ? ' is-ready' : ''}`}
-                  autoPlay
-                  muted={officeMuted}
-                  playsInline
-                  preload="auto"
-                  poster={OFFICE_TOUR_POSTER}
-                  disablePictureInPicture
-                  controls={false}
-                  aria-label="Nexus office tour"
-                  onLoadedData={() => setOfficeReady(true)}
-                  onPlaying={() => setOfficeReady(true)}
-                  onEnded={handleOfficeEnded}
-                >
-                  <source src={OFFICE_TOUR_PARTS[officePart]} type="video/mp4" />
-                </video>
-              )}
-              <button
-                type="button"
-                className="hero-sound"
-                onClick={toggleOfficeSound}
-                aria-pressed={!officeMuted}
-                aria-label={officeMuted ? 'Turn sound on' : 'Turn sound off'}
-              >
-                {officeMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-              </button>
+              <div className="arch-caption-scrim" />
+              <div className="arch-caption">
+                Nexus Vision &amp; Architecture
+              </div>
             </div>
 
             <div className="about-intro-copy">
@@ -403,7 +403,7 @@ export default function AboutPage({
             </div>
 
             <div className="about-what-side">
-              {/* 2Ã—2 stats - clean professional corporate cards */}
+              {/* 2×2 stats - clean professional corporate cards */}
               <div className="about-stats-grid">
                 {STATS.map((s) => (
                   <div key={s.label} className="about-stat-cell">
@@ -514,7 +514,7 @@ export default function AboutPage({
             </div>
 
             <div className="about-leaders-grid">
-              {LEADERS.map((person, i) => (
+              {LEADERS.map((person) => (
                 <div key={person.name} className="about-leader-card">
                   {person.image && (
                     <img
@@ -536,9 +536,6 @@ export default function AboutPage({
           </div>
         </section>
 
-        {/* ============================================================
-            6. OUR PURPOSE / OUR TEAM (Pixel-Perfect Reference Format)
-            ============================================================ */}
         {/* ============================================================
             6. OUR PURPOSE / OUR TEAM (Pixel-Perfect Reference Format)
             ============================================================ */}
@@ -572,7 +569,7 @@ export default function AboutPage({
           </svg>
 
           <div className="wrap about-team-container">
-            {/* Header: ABOUT US â€” | Our Purpose. | Subtitle + Top-Right PEOPLE/PROGRESS/COMMUNITY Badge */}
+            {/* Header: ABOUT US – | Our Purpose. | Subtitle + Top-Right PEOPLE/PROGRESS/COMMUNITY Badge */}
             <div className="about-team-header">
               <div className="about-team-header-main">
                 <div className="about-team-eyebrow">
@@ -580,7 +577,7 @@ export default function AboutPage({
                   <span className="about-team-eyebrow-line" aria-hidden="true" />
                 </div>
                 <h2 className="about-team-title">
-                  The People Behind Nexus. <span>United by Passion & Purpose.</span>
+                  The People Behind Nexus. <span>United by Passion &amp; Purpose.</span>
                 </h2>
                 <p className="about-team-intro">
                   At Nexus Group, we believe in building more than just spaces —<br />
@@ -680,10 +677,83 @@ export default function AboutPage({
           </div>
         </section>
 
+        {/* ============================================================
+            7. CORPORATE OFFICE TOUR (CONTAINED SHOWCASE)
+            ============================================================ */}
+        <section className="about-tour" aria-label="Nexus Corporate Office Tour">
+          <div className="wrap">
+            <div className="about-tour-header">
+              <Eyebrow>Inside Nexus</Eyebrow>
+              <h2 className="big">
+                Where vision takes shape.{' '}
+                <span>Inside our corporate office.</span>
+              </h2>
+            </div>
 
+            <div className="about-tour-stage" ref={officeMediaRef}>
+              <img
+                src={OFFICE_TOUR_POSTER}
+                alt="Nexus Corporate Headquarters"
+                className={`about-tour-media about-tour-poster${officeStarted ? ' is-hidden' : ''}`}
+                loading="lazy"
+                decoding="async"
+              />
+              {officeShouldLoad &&
+                OFFICE_TOUR_PARTS.map((src, idx) => {
+                  const isActive = officePart === idx;
+                  return (
+                    <video
+                      key={src}
+                      ref={(el) => {
+                        officeVideoRefs.current[idx] = el;
+                      }}
+                      className={`about-tour-media about-tour-video${isActive && officeStarted ? ' is-active' : ''}`}
+                      autoPlay={idx === 0}
+                      muted={isActive ? officeMuted : true}
+                      playsInline
+                      preload={idx === 0 || officeStarted ? 'auto' : 'metadata'}
+                      disablePictureInPicture
+                      controls={false}
+                      aria-hidden={!isActive}
+                      onLoadedData={() => {
+                        if (idx === 0) setOfficeStarted(true);
+                      }}
+                      onPlaying={() => {
+                        if (isActive) setOfficeStarted(true);
+                      }}
+                      onEnded={() => handleOfficeEnded(idx)}
+                    >
+                      <source src={src} type="video/mp4" />
+                    </video>
+                  );
+                })}
+
+              <div className="about-tour-controls">
+                <button
+                  type="button"
+                  className="about-tour-ctrl"
+                  onClick={toggleOfficePlay}
+                  aria-pressed={officePaused}
+                  aria-label={officePaused ? 'Play office tour video' : 'Pause office tour video'}
+                >
+                  {officePaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+                </button>
+                <button
+                  type="button"
+                  className="about-tour-ctrl"
+                  onClick={toggleOfficeSound}
+                  aria-pressed={!officeMuted}
+                  aria-label={officeMuted ? 'Turn sound on' : 'Turn sound off'}
+                >
+                  {officeMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* ============================================================
-            6. WHY CHOOSE NEXUS
+            8. WHY CHOOSE NEXUS
             ============================================================ */}
         <section className="about-pillars">
           <div className="wrap">
@@ -730,7 +800,7 @@ export default function AboutPage({
       </main>
 
       {/* ============================================================
-          8. SHARED FOOTER (same component as home page)
+          9. SHARED FOOTER (same component as home page)
           ============================================================ */}
       <Footer
         onNavigateAbout={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

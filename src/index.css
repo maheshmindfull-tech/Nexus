@@ -4425,3 +4425,219 @@ footer .bot {
     width: 460px;
   }
 }
+
+
+/* ============================================================
+   ABOUT PAGE – CONTAINED CORPORATE OFFICE TOUR SHOWCASE
+   ============================================================ */
+.about-tour {
+  position: relative;
+  width: 100%;
+  background: #071e24;
+  overflow: hidden;
+}
+
+.about-tour-stage {
+  position: relative;
+  width: 100%;
+  height: auto; aspect-ratio: 16 / 9;
+  min-height: 0; border-radius: 0; border: 1px solid rgba(6, 61, 69, 0.14);
+  background: #071e24;
+  overflow: hidden;
+}
+
+.about-tour-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.about-tour-poster {
+  z-index: 3;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.about-tour-poster.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.about-tour-video {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.about-tour-video.is-active {
+  z-index: 2;
+  opacity: 1;
+}
+
+.about-tour-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 24, 30, 0.14) 0%,
+    rgba(6, 24, 30, 0) 24%,
+    rgba(6, 24, 30, 0) 60%,
+    rgba(5, 20, 26, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+.about-tour-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  padding-bottom: clamp(18px, 2.8vw, 34px);
+  pointer-events: none;
+}
+
+.about-tour-bar-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.about-tour-caption {
+  padding-left: 14px;
+  border-left: 3px solid #5fd6e2;
+  color: #ffffff;
+}
+
+.about-tour-kicker {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5fd6e2;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.about-tour-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.about-tour-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+
+.about-tour-ctrl {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(12, 34, 40, 0.62);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.about-tour-ctrl:hover {
+  background: rgba(0, 151, 167, 0.85);
+  border-color: rgba(95, 214, 226, 0.7);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .about-tour-stage {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-tour-bar {
+    padding-bottom: 12px;
+  }
+
+  .about-tour-caption {
+    padding-left: 10px;
+    border-left-width: 2.5px;
+  }
+
+  .about-tour-kicker {
+    font-size: 9.5px;
+    margin-bottom: 2px;
+  }
+
+  .about-tour-heading {
+    font-size: 14px;
+  }
+
+  .about-tour-controls {
+    gap: 8px;
+  }
+
+  .about-tour-ctrl {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+
+.about-tour {
+  padding: clamp(56px, 7vw, 88px) 0;
+  background: var(--soft, #f5f8f8);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.about-tour-header {
+  text-align: left;
+  margin: 0 0 clamp(24px, 3vw, 34px) 0;
+}
+
+.about-tour-stage {
+  width: 100%;
+  max-width: none;
+  max-height: 78svh;
+  margin: 0;
+  border-radius: 0 !important;
+  border: 1px solid rgba(6, 61, 69, 0.14);
+}
+
+.about-tour-media {
+  object-position: center 78%;
+}
+
+.about-tour-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 5;
+}
+
+@media (max-width: 640px) {
+  .about-tour-controls {
+    right: 12px;
+    bottom: 12px;
+  }
+}
