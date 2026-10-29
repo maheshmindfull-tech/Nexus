@@ -140,7 +140,7 @@ export default function CareersPage({
             </div>
 
             <div className="car-metric-item">
-              <div className="car-metric-num">500+</div>
+              <div className="car-metric-num">150+</div>
               <div className="car-metric-label">Team Members</div>
               <div className="car-metric-sub">Across engineering, design & sales</div>
             </div>

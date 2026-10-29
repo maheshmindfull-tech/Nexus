@@ -173,6 +173,11 @@ const STATS = [
   },
 ];
 
+const OFFICE_TOUR_PARTS = [
+  '/assets/about/office-tour-1.mp4?v=2',
+  '/assets/about/office-tour-2.mp4?v=2',
+];
+const OFFICE_TOUR_POSTER = '/assets/about/office-tour-poster.jpg';
 
 /* ------------------------------------------------------------------ */
 /*  About Page Component                                               */
@@ -188,21 +193,61 @@ export default function AboutPage({
   onOpenEnquire,
 }) {
   const [openAccordion, setOpenAccordion] = useState(0);
-  const OFFICE_TOUR_PARTS = [
-    '/assets/about/office-tour-1.mp4',
-    '/assets/about/office-tour-2.mp4',
-  ];
   const officeVideoRef = useRef(null);
+  const officeMediaRef = useRef(null);
   const [officeMuted, setOfficeMuted] = useState(true);
   const [officePart, setOfficePart] = useState(0);
+  const [officeReady, setOfficeReady] = useState(false);
+  const [officeShouldLoad, setOfficeShouldLoad] = useState(false);
+
+  // Defer video download until the intro media is near the viewport.
+  useEffect(() => {
+    const node = officeMediaRef.current;
+    if (!node) return undefined;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setOfficeShouldLoad(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setOfficeShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px 0px' }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  // Warm the next clip while the current one plays so part switches feel instant.
+  useEffect(() => {
+    if (!officeShouldLoad) return undefined;
+    const nextSrc = OFFICE_TOUR_PARTS[(officePart + 1) % OFFICE_TOUR_PARTS.length];
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.as = 'video';
+    link.href = nextSrc;
+    document.head.appendChild(link);
+    return () => {
+      link.remove();
+    };
+  }, [officePart, officeShouldLoad]);
 
   useEffect(() => {
+    if (!officeShouldLoad) return;
     const video = officeVideoRef.current;
     if (!video) return;
     video.muted = officeMuted;
     if (!officeMuted) video.volume = 1;
-    video.play().catch(() => {});
-  }, [officePart, officeMuted]);
+    const tryPlay = () => video.play().catch(() => {});
+    if (video.readyState >= 2) tryPlay();
+    else video.addEventListener('loadeddata', tryPlay, { once: true });
+    return () => video.removeEventListener('loadeddata', tryPlay);
+  }, [officePart, officeMuted, officeShouldLoad]);
 
   const toggleOfficeSound = () => {
     const video = officeVideoRef.current;
@@ -215,6 +260,7 @@ export default function AboutPage({
   };
 
   const handleOfficeEnded = () => {
+    setOfficeReady(false);
     setOfficePart((part) => (part + 1) % OFFICE_TOUR_PARTS.length);
   };
 
@@ -267,26 +313,35 @@ export default function AboutPage({
             ============================================================ */}
         <section className="about-intro">
           <div className="wrap about-intro-grid">
-            <div className="about-intro-media arch-frame">
-              <video
-                key={officePart}
-                ref={officeVideoRef}
-                className="about-intro-img about-intro-video"
-                autoPlay
-                muted={officeMuted}
-                playsInline
-                preload="auto"
-                disablePictureInPicture
-                controls={false}
-                aria-label="Nexus office tour"
-                onEnded={handleOfficeEnded}
-              >
-                <source src={OFFICE_TOUR_PARTS[officePart]} type="video/mp4" />
-              </video>
-              <div className="arch-caption-scrim" />
-              <div className="arch-caption">
-                Nexus Vision & Architecture
-              </div>
+            <div className="about-intro-media arch-frame" ref={officeMediaRef}>
+              <img
+                src={OFFICE_TOUR_POSTER}
+                alt=""
+                aria-hidden="true"
+                className={`about-intro-img about-intro-poster${officeReady ? ' is-hidden' : ''}`}
+                decoding="async"
+                fetchPriority="high"
+              />
+              {officeShouldLoad && (
+                <video
+                  key={officePart}
+                  ref={officeVideoRef}
+                  className={`about-intro-img about-intro-video${officeReady ? ' is-ready' : ''}`}
+                  autoPlay
+                  muted={officeMuted}
+                  playsInline
+                  preload="auto"
+                  poster={OFFICE_TOUR_POSTER}
+                  disablePictureInPicture
+                  controls={false}
+                  aria-label="Nexus office tour"
+                  onLoadedData={() => setOfficeReady(true)}
+                  onPlaying={() => setOfficeReady(true)}
+                  onEnded={handleOfficeEnded}
+                >
+                  <source src={OFFICE_TOUR_PARTS[officePart]} type="video/mp4" />
+                </video>
+              )}
               <button
                 type="button"
                 className="hero-sound"

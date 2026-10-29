@@ -298,7 +298,7 @@ export default function CPInquiryPage({
           <div className="cp-contact-bar">
             <div className="cp-contact-box">
               <small>CP Helpdesk</small>
-              <strong>9595400300</strong>
+              <strong>+919595400300</strong>
             </div>
             <div className="cp-contact-box">
               <small>Email</small>

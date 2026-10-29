@@ -2318,6 +2318,23 @@ footer .bot {
 .about-intro-video {
   filter: none;
   background: #0f172a;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.about-intro-video.is-ready {
+  opacity: 1;
+}
+
+.about-intro-poster {
+  filter: none;
+  z-index: 0;
+  transition: opacity 0.35s ease;
+}
+
+.about-intro-poster.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .about-intro-media::after {
