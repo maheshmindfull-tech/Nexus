@@ -30,7 +30,10 @@ const skydale = {
   brochureName: 'Nexus Skydale Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Survey No. 14, 10, Pandhare Wasti Road, Kate Wasti, Punawale, Pimpri Chinchwad, Pune, Maharashtra 411 033.',
-  rera: 'PR1260002502718',
+  rera: [
+    { number: 'P52100055009', label: 'P52100055009 (A, B, C)' },
+    { number: 'PR1260002502718', label: 'PR1260002502718 (E)' },
+  ],
   phoneRequired: true,
   stats: [
     { value: '2, 3, 4', label: 'BHK residences' },
