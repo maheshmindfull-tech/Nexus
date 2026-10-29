@@ -3167,6 +3167,18 @@ footer .bot {
     gap: 12px;
   }
 
+  .about-team-row-1,
+  .about-team-row-2 {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .about-team-row-3 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .about-team-photo-hero,
   .about-team-photo-pair-1,
   .about-team-photo-pair-2 {
