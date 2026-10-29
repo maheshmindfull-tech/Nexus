@@ -1701,6 +1701,17 @@
   object-position: center top;
 }
 
+.lp-rera-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 2px 0 10px;
+}
+
+.lp-rera-list .lp-rera {
+  margin: 0;
+}
+
 .lp-rera {
   display: flex;
   flex-direction: column;
