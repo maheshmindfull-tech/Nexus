@@ -188,16 +188,34 @@ export default function AboutPage({
   onOpenEnquire,
 }) {
   const [openAccordion, setOpenAccordion] = useState(0);
+  const OFFICE_TOUR_PARTS = [
+    '/assets/about/office-tour-1.mp4',
+    '/assets/about/office-tour-2.mp4',
+  ];
   const officeVideoRef = useRef(null);
   const [officeMuted, setOfficeMuted] = useState(true);
+  const [officePart, setOfficePart] = useState(0);
+
+  useEffect(() => {
+    const video = officeVideoRef.current;
+    if (!video) return;
+    video.muted = officeMuted;
+    if (!officeMuted) video.volume = 1;
+    video.play().catch(() => {});
+  }, [officePart, officeMuted]);
 
   const toggleOfficeSound = () => {
     const video = officeVideoRef.current;
     if (!video) return;
     const nextMuted = !officeMuted;
     video.muted = nextMuted;
+    if (!nextMuted) video.volume = 1;
     setOfficeMuted(nextMuted);
     if (!nextMuted) video.play().catch(() => {});
+  };
+
+  const handleOfficeEnded = () => {
+    setOfficePart((part) => (part + 1) % OFFICE_TOUR_PARTS.length);
   };
 
   return (
@@ -251,18 +269,19 @@ export default function AboutPage({
           <div className="wrap about-intro-grid">
             <div className="about-intro-media arch-frame">
               <video
+                key={officePart}
                 ref={officeVideoRef}
                 className="about-intro-img about-intro-video"
                 autoPlay
-                loop
-                muted
+                muted={officeMuted}
                 playsInline
-                preload="metadata"
+                preload="auto"
                 disablePictureInPicture
                 controls={false}
                 aria-label="Nexus office tour"
+                onEnded={handleOfficeEnded}
               >
-                <source src="/assets/about/office-tour.mp4" type="video/mp4" />
+                <source src={OFFICE_TOUR_PARTS[officePart]} type="video/mp4" />
               </video>
               <div className="arch-caption-scrim" />
               <div className="arch-caption">

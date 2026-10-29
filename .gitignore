@@ -8,8 +8,8 @@ dist-ssr
 Thumbs.db
 .vite
 
-# Large media files (exceeds GitHub 100MB limit)
-# *.mp4
+# Original office tour is larger than GitHub allows. The site uses the two parts in public/assets.
+/Office tour video.mp4
 
 # Raw extraction and temporary folders
 /*.jpeg
