@@ -25,14 +25,14 @@ const QR = {
 const CERT = {
   P52100032575: 'https://maharera.maharashtra.gov.in/project-document?id=30631&type=DocProjectCert',
   PR1260002502718: 'https://maharera.maharashtra.gov.in/project-document?id=62453&type=DocProjectCert',
-  P52100055009: 'https://maharerait.mahaonline.gov.in/ProjectSummaryView/ProjectSummaryQRCodeView?id=Q2VydGlmaWNhdGVObz1QNTIxMDAwNTUwMDkmU2NhbnR5cGU9UHJvbW90ZXJMb2dpblFSQ29kZQ==',
+  P52100055009: 'https://maharera.maharashtra.gov.in/project-document?id=42989&type=DocProjectCert',
   P52100050975: 'https://maharera.maharashtra.gov.in/project-document?id=40010&type=DocProjectCert',
   P52100053378: 'https://maharera.maharashtra.gov.in/project-document?id=38504&type=DocProjectCert',
   P52100080184: 'https://maharera.maharashtra.gov.in/project-document?id=55475&type=DocProjectCert',
   PR1261012501959: 'https://maharera.maharashtra.gov.in/project-document?id=60667&type=DocProjectCert',
-  P52100051339: 'https://maharerait.mahaonline.gov.in/ProjectSummaryView/ProjectSummaryQRCodeView?id=Q2VydGlmaWNhdGVObz1QNTIxMDAwNTEzMzkmU2NhbnR5cGU9UmVnaXN0cmF0aW9uQ2VydGlmaWNhdGVRUlNjYW4=',
-  P52100031120: 'https://maharerait.mahaonline.gov.in/ProjectSummaryView/ProjectSummaryQRCodeView?id=Q2VydGlmaWNhdGVObz1QNTIxMDAwMzExMjAmU2NhbnR5cGU9UmVnaXN0cmF0aW9uQ2VydGlmaWNhdGVRUlNjYW4=',
-  P52100033605: 'https://maharerait.mahaonline.gov.in/ProjectSummaryView/ProjectSummaryQRCodeView?id=Q2VydGlmaWNhdGVObz1QNTIxMDAwMzM2MDUmU2NhbnR5cGU9UmVnaXN0cmF0aW9uQ2VydGlmaWNhdGVRUlNjYW4=',
+  P52100051339: 'https://maharera.maharashtra.gov.in/project-document?id=39993&type=DocProjectCert',
+  P52100031120: 'https://maharera.maharashtra.gov.in/project-document?id=30415&type=DocProjectCert',
+  P52100033605: 'https://maharera.maharashtra.gov.in/project-document?id=31505&type=DocProjectCert',
 };
 
 function SingleReraCard({ number, label }) {
