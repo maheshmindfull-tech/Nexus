@@ -4641,3 +4641,75 @@ footer .bot {
     bottom: 12px;
   }
 }
+
+.route-loader {
+  flex: 1;
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: #fff;
+}
+
+.route-loader-mark {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+}
+
+.route-loader-mark img {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  animation: route-loader-breathe 1.6s ease-in-out infinite;
+}
+
+.route-loader-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 157, 189, 0.14);
+  border-top-color: #009dbd;
+  border-right-color: #c5a059;
+  animation: route-loader-spin 0.9s linear infinite;
+}
+
+.route-loader-label {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--teal-d);
+}
+
+@keyframes route-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes route-loader-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.92);
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-loader-ring,
+  .route-loader-mark img {
+    animation: none;
+  }
+}

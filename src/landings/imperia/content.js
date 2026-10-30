@@ -23,8 +23,6 @@ const imperia = {
   hero: image('hero-city.jpg'),
   logo,
   logoColor: true,
-  brochure: '/landings/imperia/nexus-imperia-brochure.pdf',
-  brochureName: 'Nexus Imperia Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Gat No. 79, Opposite Prasanna Goldfields Commercial Complex, Near MNGL CNG, Borhadewadi, Moshi, Pune 412 105.',
   rera: 'P52100053378',

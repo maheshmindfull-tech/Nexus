@@ -1,48 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+const SLIDES = [
+  '/assets/home/slide-01.webp',
+  '/assets/home/slide-02.webp',
+  '/assets/home/slide-03.jpg',
+  '/assets/home/slide-04.jpg',
+  '/assets/home/slide-05.jpg',
+  '/assets/home/slide-06.jpg',
+];
+
+const INTERVAL_MS = 5000;
+const PREFETCH_LEAD_MS = 1000;
 
 export default function SliderSection() {
-  const slides = [
-    '/assets/home/slide-01.png',
-    '/assets/home/slide-02.png',
-    '/assets/home/slide-03.jpg',
-    '/assets/home/slide-04.jpg',
-    '/assets/home/slide-05.jpg',
-    '/assets/home/slide-06.jpg',
-  ];
-
   const [current, setCurrent] = useState(0);
+  const [loaded, setLoaded] = useState(() => new Set([0]));
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  const handlePrev = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  const ensureLoaded = (index) => {
+    setLoaded((prev) => {
+      if (prev.has(index)) return prev;
+      const next = new Set(prev);
+      next.add(index);
+      return next;
+    });
   };
 
-  const handleNext = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
+  useEffect(() => {
+    const upcoming = (current + 1) % SLIDES.length;
+    const prefetch = window.setTimeout(() => ensureLoaded(upcoming), INTERVAL_MS - PREFETCH_LEAD_MS);
+    const advance = window.setTimeout(() => {
+      setCurrent(upcoming);
+    }, INTERVAL_MS);
+    return () => {
+      window.clearTimeout(prefetch);
+      window.clearTimeout(advance);
+    };
+  }, [current]);
+
+  const show = (index) => {
+    const next = (index + SLIDES.length) % SLIDES.length;
+    ensureLoaded(next);
+    setCurrent(next);
   };
 
   return (
     <section id="featured">
       <div className="slider-wrapper">
         <div className="slider">
-          {slides.map((img, idx) => (
+          {SLIDES.map((img, idx) => (
             <div
-              key={idx}
+              key={img}
               className={`s ${idx === current ? 'on' : ''}`}
-              style={{ backgroundImage: `url(${img})` }}
+              style={loaded.has(idx) ? { backgroundImage: `url(${img})` } : undefined}
             />
           ))}
 
           <button
             type="button"
             className="slider-arrow prev"
-            onClick={handlePrev}
+            onClick={() => show(current - 1)}
             aria-label="Previous slide"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -52,7 +68,7 @@ export default function SliderSection() {
           <button
             type="button"
             className="slider-arrow next"
-            onClick={handleNext}
+            onClick={() => show(current + 1)}
             aria-label="Next slide"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

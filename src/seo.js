@@ -1,25 +1,18 @@
-import { BLOG_POSTS } from './data/blogPosts.js';
-
 const ORIGIN = 'https://nexuspune.in';
-const DEFAULT_OG_IMAGE = `${ORIGIN}/assets/home/slide-01.png`;
+const DEFAULT_OG_IMAGE = `${ORIGIN}/assets/home/slide-01.webp`;
 
 export function currentBlogSlug(loc) {
   if (typeof window === 'undefined' && !loc) return null;
   const source = loc || window.location;
   const path = source.pathname.replace(/\/+$/, '') || '/';
   const fromPath = path.match(/^\/blog\/([^/]+)$/);
-  if (fromPath) {
-    const slug = decodeURIComponent(fromPath[1]);
-    return BLOG_POSTS.some((post) => post.id === slug) ? slug : null;
-  }
-  if (path === '/blogs') {
-    const slug = new URLSearchParams(source.search).get('post');
-    return slug && BLOG_POSTS.some((post) => post.id === slug) ? slug : null;
-  }
+  if (fromPath) return decodeURIComponent(fromPath[1]);
+  if (path === '/blogs') return new URLSearchParams(source.search).get('post');
   return null;
 }
 
-export function blogStaticPages() {
+export async function blogStaticPages() {
+  const { BLOG_POSTS } = await import('./data/blogPosts.js');
   return BLOG_POSTS.map((post) => {
     const path = `/blog/${post.id}`;
     const image = post.image.startsWith('http') ? post.image : `${ORIGIN}${post.image}`;
@@ -183,7 +176,7 @@ export const PAGE_SEO = {
     path: '/kinara',
     title: 'Nexus Kinaara Chikhali | 3 BHK Riverside Homes in Pune',
     description:
-      'Nexus Kinaara in Chikhali, Pune offers 3 BHK riverside homes with landscaped amenities. View highlights, floor plans and download the brochure. MahaRERA P52100051339, P52100031120, P52100033605.',
+      'Nexus Kinaara in Chikhali, Pune offers 3 BHK riverside homes with landscaped amenities. View highlights and floor plans. MahaRERA P52100051339, P52100031120, P52100033605.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ApartmentComplex',
@@ -292,7 +285,7 @@ export const PAGE_SEO = {
     path: '/westia',
     title: 'Nexus Westia Punawale | 2 & 3 BHK Homes in Pune',
     description:
-      'Nexus Westia in Punawale, Pune offers 2 and 3 BHK homes close to top work destinations. View highlights, floor plans and download the brochure.',
+      'Nexus Westia in Punawale, Pune offers 2 and 3 BHK homes close to top work destinations. View highlights and floor plans.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'ApartmentComplex',
@@ -371,8 +364,9 @@ function applyArticleSeo(post) {
   script.textContent = JSON.stringify(schema);
 }
 
-export function applyPageSeo(page) {
+export async function applyPageSeo(page) {
   if (page === 'blog') {
+    const { BLOG_POSTS } = await import('./data/blogPosts.js');
     const post = BLOG_POSTS.find((item) => item.id === currentBlogSlug());
     if (post) {
       applyArticleSeo(post);

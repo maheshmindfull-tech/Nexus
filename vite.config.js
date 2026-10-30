@@ -39,13 +39,14 @@ function routeHtmlPlugin() {
   return {
     name: 'route-html',
     apply: 'build',
-    closeBundle() {
+    async closeBundle() {
       const outDir = path.resolve('dist')
       const template = fs.readFileSync(path.join(outDir, 'index.html'), 'utf8')
+      const blogPages = await blogStaticPages()
 
       const routes = [
         ...Object.entries(PAGE_SEO),
-        ...blogStaticPages().map((seo) => [seo.path, seo]),
+        ...blogPages.map((seo) => [seo.path, seo]),
       ]
 
       for (const [page, seo] of routes) {
@@ -66,7 +67,7 @@ function routeHtmlPlugin() {
           .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${description}$2`)
           .replace(
             /(<meta property="og:image" content=")[^"]*(")/,
-            `$1${escapeAttr(seo.image || `${ORIGIN}/assets/home/slide-01.png`)}$2`
+            `$1${escapeAttr(seo.image || `${ORIGIN}/assets/home/slide-01.webp`)}$2`
           )
           .replace(
             '</head>',

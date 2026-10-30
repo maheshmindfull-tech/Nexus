@@ -2,7 +2,6 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ArrowLeft, CheckCircle2, X } from 'lucide-react';
 import AmenityBoard from './AmenityBoard';
 import ReraBadge from './ReraBadge';
-import { LANDING_CONTENT } from './index';
 import { submitLeadToGoogleSheet } from '../services/leadService';
 import './landing.css';
 
@@ -172,8 +171,7 @@ function GalleryCarousel({ items }) {
   );
 }
 
-export default function LandingView({ id, onNavigateHome }) {
-  const p = LANDING_CONTENT[id];
+export default function LandingView({ id, content: p, onNavigateHome }) {
   const isKinara = p?.theme === 'kinara';
   const breakShots = p?.breakShots?.length
     ? p.breakShots

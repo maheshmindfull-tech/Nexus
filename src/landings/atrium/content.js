@@ -23,8 +23,6 @@ const atrium = {
   hero: image('hero-emerald.jpg'),
   logo,
   logoColor: true,
-  brochure: '/landings/atrium/nexus-atrium-brochure.pdf',
-  brochureName: 'Nexus Atrium Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Gat No. 79, Opposite Prasanna Goldfields Commercial Complex, Near MNGL CNG Pump, Borhadewadi, Moshi, Pune 412 105.',
   rera: 'P52100032575',

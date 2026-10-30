@@ -21,8 +21,6 @@ const kinara = {
   lede: 'One Final Chance to Wake Up by the River.',
   hero: image('hero-final-chapter.png'),
   logo,
-  brochure: '/landings/kinara/nexus-kinara-brochure.pdf',
-  brochureName: 'Nexus Kinaara Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Gat No. 79, Behind River Residency, Chikhali, Pimpri Chinchwad, Pune, Maharashtra 412 114.',
   rera: [

@@ -25,8 +25,6 @@ const westia = {
   hero: image('hero-studio.jpg'),
   logo,
   logoColor: true,
-  brochure: '/landings/westia/nexus-westia-brochure.pdf',
-  brochureName: 'Nexus Westia Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Sr. No. 41/48, Near Savata Mali Mandir, Malwadi, Punawale, Pimpri Chinchwad, Pune, Maharashtra 411 033.',
   rera: 'P52100080184',

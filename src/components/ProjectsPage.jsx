@@ -22,7 +22,6 @@ const PROJECTS = [
     image: '/assets/projects/profile/kinara.jpg',
     page: 'kinara',
     href: '/kinara',
-    pdf: '/landings/kinara/nexus-kinara-brochure.pdf',
   },
   {
     id: 'skydale',
@@ -34,7 +33,6 @@ const PROJECTS = [
     image: '/assets/projects/profile/skydale.jpg',
     page: 'skydale',
     href: '/skydale',
-    pdf: '/landings/skydale/skydale-brouchure.pdf',
   },
   {
     id: 'westia',
@@ -46,7 +44,6 @@ const PROJECTS = [
     image: '/assets/projects/profile/westia.jpg',
     page: 'westia',
     href: '/westia',
-    pdf: '/landings/westia/nexus-westia-brochure.pdf',
   },
   {
     id: 'square',
@@ -367,9 +364,9 @@ function FilterGroup({ options, value, onChange }) {
 }
 
 const HERO_BACKGROUNDS = {
-  'Ongoing': '/assets/projects/Ongoing.png',
-  'Completed': '/assets/projects/Completed.png',
-  'Coming Soon': '/assets/projects/Comming-Soon.png',
+  'Ongoing': '/assets/projects/Ongoing.webp',
+  'Completed': '/assets/projects/Completed.webp',
+  'Coming Soon': '/assets/projects/Comming-Soon.webp',
 };
 
 export default function ProjectsPage({
@@ -386,10 +383,20 @@ export default function ProjectsPage({
   initialStatus = 'Ongoing',
 }) {
   const [status, setStatus] = useState(initialStatus);
+  const [loadedHeroes, setLoadedHeroes] = useState(() => new Set([initialStatus]));
 
   useEffect(() => {
     setStatus(initialStatus || 'Ongoing');
   }, [initialStatus]);
+
+  useEffect(() => {
+    setLoadedHeroes((prev) => {
+      if (prev.has(status)) return prev;
+      const next = new Set(prev);
+      next.add(status);
+      return next;
+    });
+  }, [status]);
 
   const filtered = useMemo(
     () =>
@@ -410,7 +417,7 @@ export default function ProjectsPage({
           <div
             key={key}
             className={`pj-hero-bg-layer ${status === key ? 'active' : ''}`}
-            style={{ backgroundImage: `url(${bg})` }}
+            style={loadedHeroes.has(key) ? { backgroundImage: `url(${bg})` } : undefined}
           />
         ))}
       </header>

@@ -26,8 +26,6 @@ const skydale = {
   logo,
   logoColor: true,
   logoMark: true,
-  brochure: '/landings/skydale/skydale-brouchure.pdf',
-  brochureName: 'Nexus Skydale Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Survey No. 14, 10, Pandhare Wasti Road, Kate Wasti, Punawale, Pimpri Chinchwad, Pune, Maharashtra 411 033.',
   rera: [

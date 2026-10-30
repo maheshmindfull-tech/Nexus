@@ -23,8 +23,6 @@ const genesis = {
   hero: image('home.jpg'),
   logo,
   logoColor: true,
-  brochure: '/landings/genesis/nexus-genesis-brochure.pdf',
-  brochureName: 'Nexus Genesis Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Survey No. 42A/7, Vikas Nagar, Kiwale, Pune, Maharashtra.',
   rera: 'PR1261012501959',

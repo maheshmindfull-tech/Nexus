@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutStats from './components/AboutStats';
@@ -9,19 +9,21 @@ import Testimonials from './components/Testimonials';
 import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import EnquiryModal from './components/EnquiryModal';
-import AboutPage from './components/AboutPage';
-import ProjectsPage from './components/ProjectsPage';
-import CareersPage from './components/CareersPage';
-import CPInquiryPage from './components/CPInquiryPage';
-import KinaraPage from './landings/kinara/page';
-import WestiaPage from './landings/westia/page';
-import SkydalePage from './landings/skydale/page';
-import AtriumPage from './landings/atrium/page';
-import GenesisPage from './landings/genesis/page';
-import PrimePage from './landings/prime/page';
-import ImperiaPage from './landings/imperia/page';
-import BlogsPage from './components/BlogsPage';
 import { applyPageSeo, currentBlogSlug, pageFromLocation, pathForPage } from './seo';
+import { canGoBack, markRestoring, pushAppState, rememberScroll, stampHistory } from './historyState';
+
+const AboutPage = lazy(() => import('./components/AboutPage'));
+const ProjectsPage = lazy(() => import('./components/ProjectsPage'));
+const CareersPage = lazy(() => import('./components/CareersPage'));
+const CPInquiryPage = lazy(() => import('./components/CPInquiryPage'));
+const BlogsPage = lazy(() => import('./components/BlogsPage'));
+const KinaraPage = lazy(() => import('./landings/kinara/page'));
+const WestiaPage = lazy(() => import('./landings/westia/page'));
+const SkydalePage = lazy(() => import('./landings/skydale/page'));
+const AtriumPage = lazy(() => import('./landings/atrium/page'));
+const GenesisPage = lazy(() => import('./landings/genesis/page'));
+const PrimePage = lazy(() => import('./landings/prime/page'));
+const ImperiaPage = lazy(() => import('./landings/imperia/page'));
 
 const LANDING_PAGES = {
   kinara: KinaraPage,
@@ -32,7 +34,18 @@ const LANDING_PAGES = {
   square: PrimePage,
   imperia: ImperiaPage,
 };
-import { canGoBack, markRestoring, pushAppState, rememberScroll, stampHistory } from './historyState';
+
+function RouteFallback() {
+  return (
+    <div className="route-loader" role="status" aria-live="polite" aria-label="Loading page">
+      <div className="route-loader-mark">
+        <span className="route-loader-ring" aria-hidden="true" />
+        <img src="/assets/logo/nexus-icon.png" alt="" />
+      </div>
+      <p className="route-loader-label">Loading</p>
+    </div>
+  );
+}
 
 export default function App() {
   const [enquireOpen, setEnquireOpen] = useState(false);
@@ -187,6 +200,7 @@ export default function App() {
         />
       )}
 
+      <Suspense fallback={<RouteFallback />}>
       {LandingPage ? (
         <LandingPage key={currentPage} onNavigateHome={handleBack} />
       ) : currentPage === 'projects' ? (
@@ -301,6 +315,7 @@ export default function App() {
           />
         </>
       )}
+      </Suspense>
 
       {/* Interactive Enquiry Modal */}
       <EnquiryModal

@@ -22,8 +22,6 @@ const square = {
   hero: image('hero-rooftop.jpg'),
   logo,
   logoColor: true,
-  brochure: '/landings/prime/nexus-prime-square-brochure.pdf',
-  brochureName: 'Nexus Prime Square Brochure.pdf',
   email: 'info@nexuspune.in',
   address: 'Sr. No. 643/44, Laxman Sadashiv Alhar Marg, Borhadewadi, Moshi, Pune 412 105.',
   rera: 'P52100050975',
