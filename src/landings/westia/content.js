@@ -74,7 +74,7 @@ const westia = {
     { src: image('gallery/aerial.jpg'), label: 'Aerial view' },
     { src: image('gallery/evening.jpg'), label: 'Evening elevation' },
     { src: image('gallery/masterplan.jpg'), label: 'Project aerial view' },
-    { src: image('gallery/site.jpg'), label: 'Building elevation' },
+    { src: image('gallery/site.jpg'), label: 'Front elevation' },
   ],
   team: TEAM,
 };
