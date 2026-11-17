@@ -152,6 +152,20 @@ export const PAGE_SEO = {
       mainEntity: { '@id': `${ORIGIN}/#organization` },
     },
   },
+  privacy: {
+    path: '/privacy-policy',
+    title: 'Privacy Policy | Nexus Pune',
+    description:
+      'How Nexus Group collects, uses, and stores information submitted through nexuspune.in.',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Nexus Privacy Policy',
+      url: `${ORIGIN}/privacy-policy`,
+      isPartOf: { '@id': `${ORIGIN}/#website` },
+      about: { '@id': `${ORIGIN}/#organization` },
+    },
+  },
   skydale: {
     path: '/skydale',
     title: 'Nexus Skydale Punawale | 2, 3 & 4 BHK Homes & Commercial Spaces in Pune',

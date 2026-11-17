@@ -17,6 +17,7 @@ const ProjectsPage = lazy(() => import('./components/ProjectsPage'));
 const CareersPage = lazy(() => import('./components/CareersPage'));
 const CPInquiryPage = lazy(() => import('./components/CPInquiryPage'));
 const BlogsPage = lazy(() => import('./components/BlogsPage'));
+const PrivacyPolicyPage = lazy(() => import('./components/PrivacyPolicyPage'));
 const KinaraPage = lazy(() => import('./landings/kinara/page'));
 const WestiaPage = lazy(() => import('./landings/westia/page'));
 const SkydalePage = lazy(() => import('./landings/skydale/page'));
@@ -266,6 +267,18 @@ export default function App() {
           onNavigateAbout={() => handleNavigate('about')}
           onNavigateProjects={(section) => handleNavigate('projects', section)}
           onNavigateCareers={() => handleNavigate('careers')}
+          onNavigateSkydale={() => handleNavigate('skydale')}
+          onNavigateContact={() => handleOpenEnquire('')}
+          onNavigateBlogs={() => handleNavigate('blogs')}
+          onOpenEnquire={handleOpenEnquire}
+        />
+      ) : currentPage === 'privacy' ? (
+        <PrivacyPolicyPage
+          onNavigateHome={(sec) => handleNavigate('home', sec)}
+          onNavigateAbout={() => handleNavigate('about')}
+          onNavigateProjects={(section) => handleNavigate('projects', section)}
+          onNavigateCareers={() => handleNavigate('careers')}
+          onNavigateCPInquiry={() => handleNavigate('cp-inquiry')}
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
