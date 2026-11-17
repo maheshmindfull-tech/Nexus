@@ -239,7 +239,7 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   <br />
                   Pimpri Industrial Area, Near Wonder Cars Showroom, KSB Chowk, 
                   <br />
-                  Chinchwad, Pune, Maharashtra 411019
+                  Pimpri Chinchwad, Pune, Maharashtra 411019
                 </li>
               </ul>
             </div>
