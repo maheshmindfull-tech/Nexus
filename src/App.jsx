@@ -218,6 +218,7 @@ export default function App() {
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
+          onNavigatePage={handleNavigate}
           onOpenEnquire={handleOpenEnquire}
           onOpenProject={(page) => handleNavigate(page)}
         />
@@ -233,6 +234,7 @@ export default function App() {
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
+          onNavigatePage={handleNavigate}
           onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'about' ? (
@@ -245,6 +247,7 @@ export default function App() {
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
+          onNavigatePage={handleNavigate}
           onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'careers' ? (
@@ -258,6 +261,7 @@ export default function App() {
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
+          onNavigatePage={handleNavigate}
           onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'cp-inquiry' ? (
@@ -270,6 +274,7 @@ export default function App() {
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
+          onNavigatePage={handleNavigate}
           onOpenEnquire={handleOpenEnquire}
         />
       ) : currentPage === 'privacy' ? (
@@ -282,6 +287,7 @@ export default function App() {
           onNavigateSkydale={() => handleNavigate('skydale')}
           onNavigateContact={() => handleOpenEnquire('')}
           onNavigateBlogs={() => handleNavigate('blogs')}
+          onNavigatePage={handleNavigate}
           onOpenEnquire={handleOpenEnquire}
         />
       ) : (
@@ -326,6 +332,7 @@ export default function App() {
             onNavigateContact={() => handleOpenEnquire('')}
             onNavigateBlogs={() => handleNavigate('blogs')}
             onNavigateHome={(sec) => handleNavigate('home', sec)}
+            onNavigatePage={handleNavigate}
             onOpenEnquire={handleOpenEnquire}
           />
         </>

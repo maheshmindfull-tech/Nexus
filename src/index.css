@@ -4341,15 +4341,19 @@ footer .bot {
   }
 
   footer .top {
+    flex-direction: column;
+    align-items: stretch;
     gap: 36px;
   }
 
   footer .brand {
-    max-width: 360px;
+    max-width: none;
   }
 
   footer .cols {
+    flex: 1 0 auto;
     width: 100%;
+    min-width: 100%;
     grid-template-columns: 1fr;
     gap: 28px;
   }

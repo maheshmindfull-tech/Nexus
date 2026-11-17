@@ -378,6 +378,7 @@ export default function ProjectsPage({
   onNavigateSkydale,
   onNavigateContact,
   onNavigateBlogs,
+  onNavigatePage,
   onOpenEnquire,
   onOpenProject,
   initialStatus = 'Ongoing',
@@ -533,6 +534,7 @@ export default function ProjectsPage({
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
         onNavigateBlogs={onNavigateBlogs}
+        onNavigatePage={onNavigatePage}
         onOpenEnquire={onOpenEnquire}
       />
     </>

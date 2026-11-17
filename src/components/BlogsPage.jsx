@@ -160,6 +160,7 @@ export default function BlogsPage({
   onNavigateSkydale,
   onNavigateContact,
   onNavigateBlogs,
+  onNavigatePage,
   onOpenEnquire,
   postId = null,
   onOpenPost,
@@ -403,6 +404,7 @@ export default function BlogsPage({
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
         onNavigateBlogs={onNavigateBlogs}
+        onNavigatePage={onNavigatePage}
         onOpenEnquire={onOpenEnquire}
       />
     </div>

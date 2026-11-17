@@ -20,6 +20,7 @@ export default function CPInquiryPage({
   onNavigateSkydale,
   onNavigateContact,
   onNavigateBlogs,
+  onNavigatePage,
   onOpenEnquire,
 }) {
   const [formData, setFormData] = useState({
@@ -321,6 +322,7 @@ export default function CPInquiryPage({
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
         onNavigateBlogs={onNavigateBlogs}
+        onNavigatePage={onNavigatePage}
         onOpenEnquire={onOpenEnquire}
       />
     </div>

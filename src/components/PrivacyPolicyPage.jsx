@@ -11,6 +11,7 @@ export default function PrivacyPolicyPage({
   onNavigateSkydale,
   onNavigateContact,
   onNavigateBlogs,
+  onNavigatePage,
   onOpenEnquire,
 }) {
   return (
@@ -112,6 +113,7 @@ export default function PrivacyPolicyPage({
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
         onNavigateBlogs={onNavigateBlogs}
+        onNavigatePage={onNavigatePage}
         onOpenEnquire={onOpenEnquire}
       />
     </div>

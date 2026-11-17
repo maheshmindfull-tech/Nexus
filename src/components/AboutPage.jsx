@@ -190,6 +190,7 @@ export default function AboutPage({
   onNavigateSkydale,
   onNavigateContact,
   onNavigateBlogs,
+  onNavigatePage,
   onOpenEnquire,
 }) {
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -811,6 +812,7 @@ export default function AboutPage({
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
         onNavigateBlogs={onNavigateBlogs}
+        onNavigatePage={onNavigatePage}
         onOpenEnquire={onOpenEnquire}
       />
     </>

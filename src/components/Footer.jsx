@@ -1,7 +1,22 @@
 import React from 'react';
 
-export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProjects, onNavigateCareers, onNavigateCPInquiry, onNavigateSkydale, onNavigateContact, onNavigateBlogs, onOpenEnquire }) {
+const PROJECT_PAGES = {
+  kinara: 'kinara',
+  atrium: 'atrium',
+  genesis: 'genesis',
+  square: 'square',
+  imperia: 'imperia',
+  westia: 'westia',
+};
+
+export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProjects, onNavigateCareers, onNavigateCPInquiry, onNavigateSkydale, onNavigateContact, onNavigateBlogs, onOpenEnquire, onNavigatePage }) {
   const handleLinkClick = (e, target) => {
+    if (PROJECT_PAGES[target]) {
+      if (!onNavigatePage) return;
+      e.preventDefault();
+      onNavigatePage(PROJECT_PAGES[target]);
+      return;
+    }
     e.preventDefault();
     if (target === 'about' && onNavigateAbout) {
       onNavigateAbout();
@@ -178,17 +193,17 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                   </a>
                 </li>
                 <li>
-                  <a href="/kinara">
+                  <a href="/kinara" onClick={(e) => handleLinkClick(e, 'kinara')}>
                     Nexus Kinaara, Chikhali
                   </a>
                 </li>
                 <li>
-                  <a href="/atrium">
+                  <a href="/atrium" onClick={(e) => handleLinkClick(e, 'atrium')}>
                     Nexus Atrium, Moshi
                   </a>
                 </li>
                 <li>
-                  <a href="/genesis">
+                  <a href="/genesis" onClick={(e) => handleLinkClick(e, 'genesis')}>
                     Nexus Genesis, Kiwale
                   </a>
                 </li>

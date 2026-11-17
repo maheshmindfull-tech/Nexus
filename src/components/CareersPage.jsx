@@ -40,6 +40,7 @@ export default function CareersPage({
   onNavigateSkydale,
   onNavigateContact,
   onNavigateBlogs,
+  onNavigatePage,
   onOpenEnquire,
 }) {
   const [formOpen, setFormOpen] = useState(false);
@@ -504,6 +505,7 @@ export default function CareersPage({
         onNavigateSkydale={onNavigateSkydale}
         onNavigateContact={onNavigateContact}
         onNavigateBlogs={onNavigateBlogs}
+        onNavigatePage={onNavigatePage}
         onOpenEnquire={onOpenEnquire}
       />
     </div>
