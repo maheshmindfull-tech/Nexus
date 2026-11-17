@@ -5,6 +5,7 @@
 
 export const SALES_NOTIFY_EMAIL = 'info@nexuspune.in';
 export const CAREERS_NOTIFY_EMAIL = 'hr@nexuspune.in';
+export const CP_NOTIFY_EMAIL = 'samarth@nexuspune.in';
 
 // Target Google Sheet for all Nexus website contact & enquiry forms
 export const GOOGLE_SHEET_ID =
@@ -19,6 +20,19 @@ export const GOOGLE_SHEET_URL =
 export const GOOGLE_SHEETS_SCRIPT_URL =
   import.meta.env.VITE_GOOGLE_SHEETS_URL ||
   'https://script.google.com/macros/s/AKfycby1xU_WPDIbbSfMmTBlMtIXB99oLmDL_yYgCz3wOE64fekBlV0Zx76CyJ5P5igAdxEh/exec';
+
+function isChannelPartnerInquiry(data = {}) {
+  const category = String(data.category || data.formCategory || '').toLowerCase();
+  const formType = String(data.formType || '');
+  return (
+    category === 'channel-partner' ||
+    category === 'cp' ||
+    data?.isCP === true ||
+    String(data?.isCP || '').toLowerCase() === 'yes' ||
+    String(data?.cp || '').toLowerCase() === 'yes' ||
+    /channel partner/i.test(formType)
+  );
+}
 
 function resolveNotifyTarget(data = {}) {
   const category = String(data.category || data.formCategory || '').toLowerCase();
@@ -39,6 +53,14 @@ function resolveNotifyTarget(data = {}) {
     };
   }
 
+  if (isChannelPartnerInquiry(data)) {
+    return {
+      category: 'channel-partner',
+      notifyEmail: CP_NOTIFY_EMAIL,
+      notifyLabel: 'Channel Partner',
+    };
+  }
+
   return {
     category: 'sales',
     notifyEmail: SALES_NOTIFY_EMAIL,
@@ -53,13 +75,7 @@ function resolveNotifyTarget(data = {}) {
  */
 export async function submitLeadToGoogleSheet(data) {
   try {
-    const isCpInquiry =
-      data?.isCP === true ||
-      String(data?.isCP || '').toLowerCase() === 'yes' ||
-      String(data?.cp || '').toLowerCase() === 'yes' ||
-      /channel partner|\bcp\b/i.test(String(data?.formType || ''));
-
-    const cpStatus = isCpInquiry ? 'Yes' : 'No';
+    const cpStatus = isChannelPartnerInquiry(data) ? 'Yes' : 'No';
     const notify = resolveNotifyTarget(data);
 
     const payload = {

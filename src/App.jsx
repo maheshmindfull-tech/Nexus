@@ -50,6 +50,7 @@ function RouteFallback() {
 export default function App() {
   const [enquireOpen, setEnquireOpen] = useState(false);
   const [enquireProject, setEnquireProject] = useState('');
+  const [enquireMode, setEnquireMode] = useState('sales');
   const [historyTick, setHistoryTick] = useState(0);
   const restoreY = useRef(null);
   const [currentPage, setCurrentPage] = useState(() => {
@@ -67,8 +68,9 @@ export default function App() {
       : 'Ongoing'
   ));
 
-  const handleOpenEnquire = (projectName) => {
+  const handleOpenEnquire = (projectName, options = {}) => {
     setEnquireProject(typeof projectName === 'string' ? projectName : '');
+    setEnquireMode(options?.mode === 'vendor' ? 'vendor' : 'sales');
     setEnquireOpen(true);
   };
 
@@ -320,10 +322,12 @@ export default function App() {
       {/* Interactive Enquiry Modal */}
       <EnquiryModal
         isOpen={enquireOpen}
+        mode={enquireMode}
         initialProject={enquireProject}
         onClose={() => {
           setEnquireOpen(false);
           setEnquireProject('');
+          setEnquireMode('sales');
         }}
       />
     </div>

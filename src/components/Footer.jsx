@@ -36,7 +36,7 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
       return;
     }
     if (target === 'enquire' && onOpenEnquire) {
-      onOpenEnquire();
+      onOpenEnquire('', { mode: 'vendor' });
       return;
     }
     if (target === '#projects' && onNavigateProjects) {
@@ -129,7 +129,7 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
 
           <div className="cols">
             <div>
-              <h2>Company</h2>
+              <h2>Explore</h2>
               <ul>
                 <li>
                   <a href="/about" onClick={(e) => handleLinkClick(e, 'about')}>
@@ -163,7 +163,7 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
                 </li>
                 <li>
                   <a href="/contact" onClick={(e) => handleLinkClick(e, 'contact')}>
-                    Contact
+                    Contact Us
                   </a>
                 </li>
               </ul>
@@ -211,7 +211,7 @@ export default function Footer({ onNavigateAbout, onNavigateHome, onNavigateProj
             </div>
 
             <div>
-              <h2>Contact</h2>
+              <h2>Contact Us</h2>
               <ul>
                 <li>
                   <a href="mailto:info@nexuspune.in">info@nexuspune.in</a>

@@ -2238,11 +2238,17 @@
   color: #243f6b;
 }
 
+.lp-carousel-frame {
+  position: relative;
+  width: min(1180px, calc(100% - 108px));
+  margin: 42px auto 0;
+}
+
 .lp-carousel-stage {
   position: relative;
-  width: min(1180px, 92%);
+  width: 100%;
   aspect-ratio: 2.75 / 1;
-  margin: 42px auto 0;
+  margin: 0;
   overflow: hidden;
 }
 
@@ -2342,6 +2348,45 @@
 .lp-carousel-dots button.is-on {
   width: 34px;
   background: var(--lp-accent, #1d3f73);
+}
+
+.lp-slide-arrow {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(28, 43, 69, 0.12);
+  border-radius: 50%;
+  background: #ffffff;
+  color: #1c2b45;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(28, 43, 69, 0.12);
+  flex-shrink: 0;
+}
+
+.lp-slide-arrow:hover:not(:disabled) {
+  background: #1c2b45;
+  color: #ffffff;
+}
+
+.lp-slide-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.lp-carousel-frame .lp-slide-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 6;
+  transform: translateY(-50%);
+}
+
+.lp-carousel-prev {
+  left: -54px;
+}
+
+.lp-carousel-next {
+  right: -54px;
 }
 
 .lp-theme-kinara {
@@ -3170,9 +3215,22 @@
     text-indent: 0.22em;
   }
 
-  .lp-carousel-stage {
-    width: min(1180px, 96%);
+  .lp-carousel-frame {
+    width: min(1180px, calc(100% - 88px));
     margin-top: 28px;
+  }
+
+  .lp-carousel-stage {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .lp-carousel-prev {
+    left: -46px;
+  }
+
+  .lp-carousel-next {
+    right: -46px;
   }
 
   .lp-theme-kinara .lp-hero-light {
@@ -4013,12 +4071,34 @@
   white-space: normal;
 }
 
-.lp-page.lp-theme-kinara .lp-plans.is-marquee {
-  display: block;
+.lp-page.lp-theme-kinara .lp-plans-rail {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
   width: 100%;
-  max-width: 100%;
+}
+
+.lp-page.lp-theme-kinara .lp-plans.is-rail {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100%;
   min-width: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.lp-page.lp-theme-kinara .lp-plans.is-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.lp-page.lp-theme-kinara .lp-plans.is-rail .lp-plan {
+  margin-right: 0;
+  width: min(72vw, 320px);
+  flex: 0 0 min(72vw, 320px);
 }
 
 .lp-page.lp-theme-kinara .lp-plans-track {
@@ -4254,6 +4334,82 @@
     height: auto;
     object-fit: contain;
     object-position: center center;
+  }
+
+  .lp-carousel {
+    position: relative;
+  }
+
+  .lp-carousel h2 {
+    padding-inline: 92px;
+    box-sizing: border-box;
+  }
+
+  .lp-carousel-frame {
+    position: static;
+    width: min(100% - 28px, 720px);
+  }
+
+  .lp-carousel-stage {
+    width: 100%;
+  }
+
+  .lp-carousel-frame .lp-slide-arrow {
+    top: 34px;
+    width: 36px;
+    height: 36px;
+    transform: none;
+  }
+
+  .lp-carousel-prev {
+    left: auto;
+    right: 62px;
+  }
+
+  .lp-carousel-next {
+    right: 16px;
+  }
+
+  .lp-plans-sec .lp-wrap {
+    position: relative;
+  }
+
+  .lp-plans-sec .lp-section-head {
+    width: 100%;
+    max-width: none;
+    padding-inline: 96px;
+    box-sizing: border-box;
+  }
+
+  .lp-plans-rail,
+  .lp-page.lp-theme-kinara .lp-plans-rail {
+    display: block;
+  }
+
+  .lp-plans-rail > .lp-slide-arrow {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    width: 36px;
+    height: 36px;
+  }
+
+  .lp-plans-rail > .lp-slide-arrow:first-of-type {
+    right: 64px;
+    left: auto;
+  }
+
+  .lp-plans-rail > .lp-slide-arrow:last-of-type {
+    right: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .lp-theme-kinara .lp-highlights,
+  .lp-page.lp-brand-genesis .lp-highlights,
+  .lp-page.lp-brand-imperia .lp-highlights {
+    max-width: 300px;
+    gap: 14px;
   }
 }
 

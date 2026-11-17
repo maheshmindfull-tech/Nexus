@@ -45,7 +45,8 @@ export default function CPInquiryPage({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const cleanPhone = formData.mobile.replace(/\D/g, '').slice(0, 10);
-    if (cleanPhone.length !== 10) return;
+    const reraNumber = formData.reraNumber.trim();
+    if (cleanPhone.length !== 10 || !reraNumber) return;
     setIsSubmitting(true);
     const info = {
       fullName: formData.fullName.trim(),
@@ -53,7 +54,7 @@ export default function CPInquiryPage({
       mobile: cleanPhone,
     };
     await submitLeadToGoogleSheet({
-      category: 'sales',
+      category: 'channel-partner',
       formType: 'Channel Partner Registration & Inquiry',
       cp: 'Yes',
       isCP: 'Yes',
@@ -61,7 +62,7 @@ export default function CPInquiryPage({
       company: info.companyName,
       phone: info.mobile,
       email: formData.email.trim(),
-      reraNumber: formData.reraNumber.trim() || 'N/A',
+      reraNumber,
       project: formData.projectInterest || 'All Projects',
       message: formData.message.trim(),
     });
@@ -224,17 +225,19 @@ export default function CPInquiryPage({
                   {/* MahaRERA Number */}
                   <div className="cp-field">
                     <label className="cp-label">
-                      MahaRERA Registration No.
+                      MahaRERA Registration No. <span>*</span>
                     </label>
                     <input
                       type="text"
                       name="reraNumber"
+                      required
+                      pattern=".*\S.*"
+                      title="Please enter your MahaRERA registration number"
                       placeholder="A521000..."
                       value={formData.reraNumber}
                       onChange={handleChange}
                       className="cp-input"
                     />
-                    <small className="cp-note">Optional if under process</small>
                   </div>
 
                   {/* Project Interest */}

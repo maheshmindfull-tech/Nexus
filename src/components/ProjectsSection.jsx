@@ -6,7 +6,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       id: 'skydale',
       name: 'Nexus Skydale',
       loc: 'Pandhare Wasti, Punawale',
-      img: '/assets/projects/nexus-skydale.jpg',
+      img: '/assets/projects/profile/skydale.jpg',
       page: 'skydale',
       href: '/skydale',
     },
@@ -14,7 +14,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       id: 'kinara',
       name: 'Nexus Kinaara',
       loc: 'Jadhavwadi, Chikhali',
-      img: '/assets/projects/nexus-kinara.jpg',
+      img: '/assets/projects/profile/kinara.jpg',
       page: 'kinara',
       href: '/kinara',
     },
@@ -22,7 +22,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       id: 'square',
       name: 'Nexus Prime Square',
       loc: 'Borhadewadi, Moshi',
-      img: '/assets/projects/nexus-square.jpg',
+      img: '/assets/projects/profile/square.jpg',
       page: 'square',
       href: '/prime-square',
     },
@@ -30,7 +30,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       id: 'genesis',
       name: 'Nexus Genesis',
       loc: 'Kiwale, Pune',
-      img: '/assets/projects/nexus-genesis.jpg',
+      img: '/assets/projects/profile/genesis.jpg',
       page: 'genesis',
       href: '/genesis',
     },
@@ -38,7 +38,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       id: 'imperia',
       name: 'Nexus Imperia',
       loc: 'Borhadewadi, Moshi',
-      img: '/assets/projects/nexus-imperia.jpg',
+      img: '/assets/projects/profile/imperia.jpg',
       page: 'imperia',
       href: '/imperia',
     },
@@ -46,7 +46,7 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
       id: 'atrium',
       name: 'Nexus Atrium',
       loc: 'Borhadewadi, Moshi',
-      img: '/assets/projects/nexus-atrium.jpg',
+      img: '/assets/projects/profile/atrium.jpg',
       page: 'atrium',
       href: '/atrium',
     },
@@ -87,7 +87,9 @@ export default function ProjectsSection({ onViewAll, onOpenProject }) {
               title={`Learn more about ${p.name}`}
               onClick={(event) => openProject(event, p)}
             >
-              <img src={p.img} alt={p.name} loading="lazy" />
+              <div className="pcard-media">
+                <img src={p.img} alt={p.name} loading="lazy" />
+              </div>
               <div className="pcard-info">
                 <div className="pcard-info-main">
                   <strong className="pcard-title">

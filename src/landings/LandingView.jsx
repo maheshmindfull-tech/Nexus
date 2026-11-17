@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ArrowLeft, CheckCircle2, X } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import AmenityBoard from './AmenityBoard';
 import ReraBadge from './ReraBadge';
 import { submitLeadToGoogleSheet } from '../services/leadService';
@@ -50,6 +50,78 @@ function ProjectBreak({ sources }) {
   );
 }
 
+function PlansRail({ plans, renderCard }) {
+  const railRef = useRef(null);
+  const paused = useRef(false);
+  const resumeAt = useRef(0);
+
+  useEffect(() => {
+    const el = railRef.current;
+    if (!el || plans.length < 2) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    let frame = 0;
+    let last = 0;
+    const tick = (now) => {
+      if (!last) last = now;
+      const dt = Math.min(now - last, 50);
+      last = now;
+      const half = el.scrollWidth / 2;
+      const speed = half / (plans.length * 6);
+      if (!paused.current && Date.now() >= resumeAt.current && half > 0) {
+        el.scrollLeft += (speed * dt) / 1000;
+        if (el.scrollLeft >= half) el.scrollLeft -= half;
+      }
+      frame = window.requestAnimationFrame(tick);
+    };
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [plans.length]);
+
+  const scrollByCard = (dir) => {
+    const el = railRef.current;
+    if (!el) return;
+    resumeAt.current = Date.now() + 8000;
+    const cards = [...el.querySelectorAll('.lp-plan')];
+    const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 340;
+    if (!step) return;
+    const half = el.scrollWidth / 2;
+    let next = el.scrollLeft + dir * step;
+    if (next >= half) next -= half;
+    if (next < 0) next += half;
+    el.scrollTo({ left: next, behavior: 'smooth' });
+  };
+
+  return (
+    <div
+      className="lp-plans-rail"
+      onMouseEnter={() => { paused.current = true; }}
+      onMouseLeave={() => { paused.current = false; }}
+    >
+      <button
+        type="button"
+        className="lp-slide-arrow"
+        aria-label="Previous floor plans"
+        onClick={() => scrollByCard(-1)}
+      >
+        <ChevronLeft size={20} />
+      </button>
+      <div className="lp-plans is-rail" ref={railRef}>
+        {plans.map((plan, i) => renderCard(plan, `a-${i}`, false))}
+        {plans.map((plan, i) => renderCard(plan, `b-${i}`, true))}
+      </div>
+      <button
+        type="button"
+        className="lp-slide-arrow"
+        aria-label="Next floor plans"
+        onClick={() => scrollByCard(1)}
+      >
+        <ChevronRight size={20} />
+      </button>
+    </div>
+  );
+}
+
 function scrollToId(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -74,6 +146,7 @@ function GalleryCarousel({ items }) {
   const animating = useRef(false);
   const pendingWrap = useRef(null);
   const chainTimer = useRef(0);
+  const pauseUntil = useRef(0);
   const goRef = useRef(() => { });
 
   const stepOnce = (dir) => {
@@ -122,6 +195,7 @@ function GalleryCarousel({ items }) {
   useEffect(() => {
     if (count < 2) return undefined;
     const timer = window.setInterval(() => {
+      if (Date.now() < pauseUntil.current) return;
       goRef.current(mod(indexRef.current + 1, count));
     }, 4500);
     return () => {
@@ -130,12 +204,35 @@ function GalleryCarousel({ items }) {
     };
   }, [count]);
 
+  const hold = () => {
+    pauseUntil.current = Date.now() + 12000;
+  };
+
+  const nudge = (dir) => {
+    hold();
+    goRef.current(mod(indexRef.current + dir, count));
+  };
+
   if (!count) return null;
 
   return (
-    <section className="lp-carousel" aria-label="Gallery" aria-roledescription="carousel">
+    <section
+      className="lp-carousel"
+      aria-label="Gallery"
+      aria-roledescription="carousel"
+      onMouseEnter={hold}
+      onMouseLeave={() => { pauseUntil.current = 0; }}
+      onFocus={hold}
+      onBlur={() => { pauseUntil.current = 0; }}
+    >
       <h2>Gallery</h2>
-      <div className="lp-carousel-stage">
+      <div className="lp-carousel-frame">
+        {count > 1 && (
+          <button type="button" className="lp-slide-arrow lp-carousel-prev" onClick={() => nudge(-1)} aria-label="Previous gallery image">
+            <ChevronLeft size={20} />
+          </button>
+        )}
+        <div className="lp-carousel-stage">
         {items.map((item, i) => {
           const offset = circularOffset(i, index, count);
           const isMain = offset === 0;
@@ -148,12 +245,18 @@ function GalleryCarousel({ items }) {
               data-slot={offset}
               aria-label={isMain ? item.label : `Show ${item.label}`}
               aria-current={isMain ? 'true' : undefined}
-              onClick={() => { if (!isMain) goRef.current(i); }}
+              onClick={() => { if (!isMain) { hold(); goRef.current(i); } }}
             >
               <img src={item.src} alt={isMain ? item.label : ''} />
             </button>
           );
         })}
+        </div>
+        {count > 1 && (
+          <button type="button" className="lp-slide-arrow lp-carousel-next" onClick={() => nudge(1)} aria-label="Next gallery image">
+            <ChevronRight size={20} />
+          </button>
+        )}
       </div>
       <div className="lp-carousel-dots">
         {items.map((item, i) => (
@@ -163,7 +266,7 @@ function GalleryCarousel({ items }) {
             className={i === index ? 'is-on' : ''}
             aria-label={item.label}
             aria-current={i === index ? 'true' : undefined}
-            onClick={() => goRef.current(i)}
+            onClick={() => { hold(); goRef.current(i); }}
           />
         ))}
       </div>
@@ -529,16 +632,13 @@ export default function LandingView({ id, content: p, onNavigateHome }) {
                 </p>
               )}
             </div>
-            <div className={`lp-plans${slidingPlans ? ' is-marquee' : ''}`}>
-              {slidingPlans ? (
-                <div className="lp-plans-track" style={{ animationDuration: `${p.plans.length * 6}s` }}>
-                  {p.plans.map((plan, i) => planCard(plan, `a-${i}`, false))}
-                  {p.plans.map((plan, i) => planCard(plan, `b-${i}`, true))}
-                </div>
-              ) : (
-                p.plans.map((plan, i) => planCard(plan, `a-${i}`, false))
-              )}
-            </div>
+            {slidingPlans ? (
+              <PlansRail plans={p.plans} renderCard={planCard} />
+            ) : (
+              <div className="lp-plans">
+                {p.plans.map((plan, i) => planCard(plan, `a-${i}`, false))}
+              </div>
+            )}
           </div>
         </section>
       )}

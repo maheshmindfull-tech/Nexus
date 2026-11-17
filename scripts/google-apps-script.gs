@@ -5,6 +5,7 @@
  * 1. Saves every website form to the Google Sheet
  * 2. Emails sales leads to info@nexuspune.in
  * 3. Emails career resume submissions to hr@nexuspune.in
+ * 4. Emails Channel Partner inquiries to samarth@nexuspune.in
  *
  * Deploy / update:
  * 1. Open the Google Sheet used by the website
@@ -17,6 +18,7 @@
 
 var SALES_EMAIL = 'info@nexuspune.in';
 var CAREERS_EMAIL = 'hr@nexuspune.in';
+var CP_EMAIL = 'samarth@nexuspune.in';
 var SHEET_NAME = 'Sheet1';
 
 function doGet() {
@@ -106,6 +108,7 @@ function resolveNotify_(data) {
   var category = String(data.category || data.formCategory || '').toLowerCase();
   var formType = String(data.formType || '').toLowerCase();
   var explicit = String(data.notifyEmail || data.mailTo || '').trim().toLowerCase();
+  var cpFlag = String(data.cp || data.isCP || '').toLowerCase();
 
   var isCareer =
     category === 'careers' ||
@@ -120,13 +123,26 @@ function resolveNotify_(data) {
     return { category: 'careers', email: CAREERS_EMAIL, label: 'Careers / HR' };
   }
 
+  var isCp =
+    category === 'channel-partner' ||
+    category === 'cp' ||
+    cpFlag === 'yes' ||
+    formType.indexOf('channel partner') !== -1 ||
+    explicit === CP_EMAIL;
+
+  if (isCp) {
+    return { category: 'channel-partner', email: CP_EMAIL, label: 'Channel Partner' };
+  }
+
   return { category: 'sales', email: SALES_EMAIL, label: 'Sales Enquiries' };
 }
 
 function sendLeadEmail_(data, notify) {
   var subject = notify.category === 'careers'
     ? 'New resume submission — Nexus Careers'
-    : 'New sales enquiry — Nexus Website';
+    : notify.category === 'channel-partner'
+      ? 'New Channel Partner inquiry — Nexus Website'
+      : 'New sales enquiry — Nexus Website';
 
   if (data.project || data.role) {
     subject += ' | ' + (data.project || data.role);

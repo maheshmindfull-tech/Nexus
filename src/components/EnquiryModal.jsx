@@ -43,12 +43,13 @@ export function resolveProjectOption(input, options = DEFAULT_PROJECT_OPTIONS) {
   return str;
 }
 
-export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
+export default function EnquiryModal({ isOpen, onClose, initialProject = '', mode = 'sales' }) {
+  const isVendor = mode === 'vendor';
   const getEmptyForm = (proj) => ({
     name: '',
     phone: '',
     email: '',
-    project: proj ? resolveProjectOption(proj) : 'General Enquiry',
+    project: isVendor ? 'Vendor Enquiry' : (proj ? resolveProjectOption(proj) : 'General Enquiry'),
     message: '',
   });
 
@@ -64,7 +65,7 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
       setSubmittedInfo({ name: '', project: '' });
       setFormData(getEmptyForm(initialProject));
     }
-  }, [isOpen, initialProject]);
+  }, [isOpen, initialProject, mode]);
 
   const projectOptions = useMemo(() => {
     if (formData.project && !DEFAULT_PROJECT_OPTIONS.includes(formData.project)) {
@@ -82,10 +83,10 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
 
     setIsSubmitting(true);
     const currentName = formData.name.trim();
-    const currentProject = formData.project || 'General Enquiry';
+    const currentProject = isVendor ? 'Vendor Enquiry' : (formData.project || 'General Enquiry');
     await submitLeadToGoogleSheet({
       category: 'sales',
-      formType: 'Website Contact / Enquiry Modal',
+      formType: isVendor ? 'Vendor Enquiry' : 'Website Contact / Enquiry Modal',
       cp: 'No',
       isCP: 'No',
       name: currentName,
@@ -113,9 +114,11 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
           >
             <X className="w-4 h-4" />
           </button>
-          <h3 className="modal-title">Contact Us</h3>
+          <h3 className="modal-title">{isVendor ? 'Vendor Enquiry' : 'Contact Us'}</h3>
           <p className="modal-subtitle">
-            Fill in your details and our team will get in touch shortly.
+            {isVendor
+              ? 'Share your vendor details and our team will get in touch shortly.'
+              : 'Fill in your details and our team will get in touch shortly.'}
           </p>
         </div>
 
@@ -197,21 +200,23 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
                 </div>
               </div>
 
-              {/* Project Selection */}
-              <div className="form-group">
-                <label className="form-label">Select Project</label>
-                <select
-                  value={formData.project}
-                  onChange={(e) => setFormData({ ...formData, project: e.target.value })}
-                  className="form-select"
-                >
-                  {projectOptions.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* Project Selection — hidden for vendor enquiry */}
+              {!isVendor && (
+                <div className="form-group">
+                  <label className="form-label">Select Project</label>
+                  <select
+                    value={formData.project}
+                    onChange={(e) => setFormData({ ...formData, project: e.target.value })}
+                    className="form-select"
+                  >
+                    {projectOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               {/* Message */}
               <div className="form-group">
