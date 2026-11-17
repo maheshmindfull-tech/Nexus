@@ -53,6 +53,7 @@ export default function CPInquiryPage({
       mobile: cleanPhone,
     };
     await submitLeadToGoogleSheet({
+      category: 'sales',
       formType: 'Channel Partner Registration & Inquiry',
       cp: 'Yes',
       isCP: 'Yes',

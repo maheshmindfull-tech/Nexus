@@ -84,6 +84,7 @@ export default function EnquiryModal({ isOpen, onClose, initialProject = '' }) {
     const currentName = formData.name.trim();
     const currentProject = formData.project || 'General Enquiry';
     await submitLeadToGoogleSheet({
+      category: 'sales',
       formType: 'Website Contact / Enquiry Modal',
       cp: 'No',
       isCP: 'No',

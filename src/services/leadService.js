@@ -1,7 +1,10 @@
 /**
  * Lead capture service for Nexus Pune
- * Connects directly to Google Sheets via Google Apps Script Web App
+ * Saves every form to Google Sheets and asks the Apps Script to email the right inbox.
  */
+
+export const SALES_NOTIFY_EMAIL = 'info@nexuspune.in';
+export const CAREERS_NOTIFY_EMAIL = 'hr@nexuspune.in';
 
 // Target Google Sheet for all Nexus website contact & enquiry forms
 export const GOOGLE_SHEET_ID =
@@ -17,8 +20,34 @@ export const GOOGLE_SHEETS_SCRIPT_URL =
   import.meta.env.VITE_GOOGLE_SHEETS_URL ||
   'https://script.google.com/macros/s/AKfycby1xU_WPDIbbSfMmTBlMtIXB99oLmDL_yYgCz3wOE64fekBlV0Zx76CyJ5P5igAdxEh/exec';
 
+function resolveNotifyTarget(data = {}) {
+  const category = String(data.category || data.formCategory || '').toLowerCase();
+  const formType = String(data.formType || '').toLowerCase();
+  const isCareer =
+    category === 'careers' ||
+    category === 'career' ||
+    category === 'hr' ||
+    formType.includes('career') ||
+    formType.includes('resume') ||
+    formType.includes('cv');
+
+  if (isCareer) {
+    return {
+      category: 'careers',
+      notifyEmail: CAREERS_NOTIFY_EMAIL,
+      notifyLabel: 'Careers / HR',
+    };
+  }
+
+  return {
+    category: 'sales',
+    notifyEmail: SALES_NOTIFY_EMAIL,
+    notifyLabel: 'Sales Enquiries',
+  };
+}
+
 /**
- * Submits form data to Google Sheet
+ * Submits form data to Google Sheet and triggers email notification
  * @param {Object} data - Form data with fields (name, phone, email, project, message, etc.)
  * @returns {Promise<{success: boolean, error?: string, simulated?: boolean}>}
  */
@@ -31,6 +60,7 @@ export async function submitLeadToGoogleSheet(data) {
       /channel partner|\bcp\b/i.test(String(data?.formType || ''));
 
     const cpStatus = isCpInquiry ? 'Yes' : 'No';
+    const notify = resolveNotifyTarget(data);
 
     const payload = {
       timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
@@ -39,6 +69,12 @@ export async function submitLeadToGoogleSheet(data) {
       spreadsheetId: GOOGLE_SHEET_ID,
       sheetUrl: GOOGLE_SHEET_URL,
       ...data,
+      category: notify.category,
+      formCategory: notify.category,
+      notifyEmail: notify.notifyEmail,
+      mailTo: notify.notifyEmail,
+      notifyLabel: notify.notifyLabel,
+      sendEmail: true,
       cp: cpStatus,
       isCP: cpStatus,
     };

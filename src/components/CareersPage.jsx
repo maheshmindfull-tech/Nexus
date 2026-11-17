@@ -73,6 +73,7 @@ export default function CareersPage({
     if (cleanPhone.length !== 10) return;
     setSubmitting(true);
     await submitLeadToGoogleSheet({
+      category: 'careers',
       formType: 'Careers Resume Submission',
       cp: 'No',
       isCP: 'No',

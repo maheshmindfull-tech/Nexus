@@ -245,6 +245,7 @@ export default function LandingView({ id, content: p, onNavigateHome }) {
     if (p.phoneRequired && !formData.phone) return;
     setIsSubmitting(true);
     await submitLeadToGoogleSheet({
+      category: 'sales',
       formType: `${p.name} Landing Page Lead`,
       project: `${p.name} (${p.location})`,
       name: formData.name,

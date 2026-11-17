@@ -56,6 +56,7 @@ export default function ContactPage({
 
     const info = { name: formData.name.trim(), phone: cleanPhone };
     const result = await submitLeadToGoogleSheet({
+      category: 'sales',
       formType: 'Website Contact Page',
       cp: 'No',
       isCP: 'No',
