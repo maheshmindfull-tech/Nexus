@@ -38,7 +38,7 @@ export default function Hero({ onOpenEnquire, onViewProjects }) {
         poster="/assets/home/hero-poster.jpg"
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
       >
-        <source src="/assets/home/hero-video.mp4?v=3" type="video/mp4" />
+        <source src="/assets/home/hero-video.mp4?v=4" type="video/mp4" />
         {/* Fallback image */}
         <img
           src="/assets/home/hero-poster.jpg"
