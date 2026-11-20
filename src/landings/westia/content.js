@@ -73,7 +73,7 @@ const westia = {
     { src: image('cuts/g-garden.jpg'), label: 'Landscape garden' },
     { src: image('gallery/aerial.jpg'), label: 'Aerial view' },
     { src: image('gallery/evening.jpg'), label: 'Evening elevation' },
-    { src: image('gallery/masterplan.jpg'), label: 'Project aerial view' },
+    { src: image('gallery/masterplan.jpg'), label: 'Kids play area' },
     { src: image('gallery/site.jpg'), label: 'Front elevation' },
   ],
   team: TEAM,
