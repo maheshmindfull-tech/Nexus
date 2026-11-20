@@ -1,6 +1,32 @@
 const ORIGIN = 'https://nexuspune.in';
 const DEFAULT_OG_IMAGE = `${ORIGIN}/assets/home/slide-01.webp`;
 
+const ROUTE_KEYWORDS = {
+  '/': 'Premium Residential and Commercial Property Developers in Pune, Real estate developers in Pune, Builders in Pune, Property developers in Pune, Residential builders in Pune, Commercial builders in Pune, Premium builders in Pune, Real estate companies in Pune, Property development company Pune, Residential and commercial properties Pune, Premium real estate developers in Pune, Residential and commercial builders in Pune, Luxury residential property developers in Pune, Premium residential projects in Pune, Luxury apartments in Pune, Premium flats in Pune, Premium homes in Pune, Premium commercial spaces in Pune, Commercial property developers in Pune, Commercial spaces in Pune, Shops for sale in Pune, Retail spaces in Pune, Residential projects in Pune, New residential projects in Pune, 2 BHK flats in Pune, 3 BHK flats in Pune, Premium apartments in Pune, Under construction projects in Pune, Residential projects in Punawale, Residential projects in Chikhali, Residential projects in Moshi, Residential projects in Kiwale, Nexus Group, Nexus Pune',
+  '/about': 'Trusted property developers in Pune, Experienced builders in Pune, Real estate developers in Pune, Quality construction builders in Pune, Property development company Pune, Nexus Group since 1996, Residential and commercial builders in Pune',
+  '/projects': 'Real estate projects in Pune, Residential projects in Pune, New residential projects in Pune, Upcoming residential projects in Pune, Under construction projects in Pune, Commercial projects in Pune, 2 BHK flats in Pune, 3 BHK flats in Pune, Projects in Punawale, Projects in Chikhali, Projects in Moshi, Projects in Kiwale',
+  '/careers': 'Careers at Nexus Group Pune, construction careers Pune, real estate careers Pune',
+  '/cp-inquiry': 'Channel partner Pune, real estate channel partner Pune, Nexus Group channel partner',
+  '/blogs': 'Property investment in Pune, Residential property investment in Pune, Commercial property investment in Pune, Homebuying in Pune, Pune locality guides, Nexus Journal',
+  '/contact': 'Real estate company in Pune, Contact Nexus Group, Property developers in Pune, Site visit Pune, Builders in Pune',
+  '/privacy-policy': 'Nexus Group privacy policy',
+  '/skydale': 'Nexus Skydale Punawale, Residential projects in Punawale, 2 BHK flats in Punawale, 3 BHK flats in Punawale, 4 BHK homes in Punawale, Commercial spaces in Punawale, Premium homes in Punawale',
+  '/kinara': 'Nexus Kinaara Chikhali, Residential projects in Chikhali, 2 BHK flats in Chikhali, 3 BHK homes in Chikhali, Builders in Chikhali',
+  '/genesis': 'Nexus Genesis Kiwale, Residential projects in Kiwale, 2 BHK flats in Kiwale, 3 BHK flats in Kiwale, 4 BHK homes in Kiwale',
+  '/prime-square': 'Nexus Prime Square Moshi, Residential projects in Moshi, 2 BHK flats in Moshi, 3 BHK flats in Moshi, Commercial spaces in Moshi',
+  '/imperia': 'Nexus Imperia Moshi, Residential projects in Moshi, 2 BHK flats in Moshi, 3 BHK homes in Moshi',
+  '/atrium': 'Nexus Atrium Moshi, 1 BHK flats in Moshi, 2 BHK flats in Moshi, 3 BHK flats in Moshi, Residential projects in Moshi',
+  '/westia': 'Nexus Westia Punawale, 2 BHK flats in Punawale, 3 BHK flats in Punawale, Residential projects in Punawale',
+};
+
+export function keywordsForSeo(seo) {
+  if (ROUTE_KEYWORDS[seo.path]) return ROUTE_KEYWORDS[seo.path];
+  if (seo.path && seo.path.startsWith('/blog/')) {
+    return `${seo.title}, property investment in Pune, homebuying in Pune, Nexus Group Pune`;
+  }
+  return ROUTE_KEYWORDS['/'];
+}
+
 export function currentBlogSlug(loc) {
   if (typeof window === 'undefined' && !loc) return null;
   const source = loc || window.location;
@@ -350,6 +376,7 @@ function applyArticleSeo(post) {
   document.title = title;
   upsertMeta('name', 'description', description);
   upsertMeta('name', 'title', title);
+  upsertMeta('name', 'keywords', keywordsForSeo({ path: `/blog/${post.id}`, title: post.title }));
   upsertMeta('property', 'og:title', title);
   upsertMeta('property', 'og:description', description);
   upsertMeta('property', 'og:url', url);
@@ -394,6 +421,7 @@ export async function applyPageSeo(page) {
   document.title = seo.title;
   upsertMeta('name', 'description', seo.description);
   upsertMeta('name', 'title', seo.title);
+  upsertMeta('name', 'keywords', keywordsForSeo(seo));
   upsertMeta('property', 'og:title', seo.title);
   upsertMeta('property', 'og:description', seo.description);
   upsertMeta('property', 'og:url', url);

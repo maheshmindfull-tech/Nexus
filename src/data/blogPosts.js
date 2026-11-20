@@ -8,7 +8,7 @@
  *   { table: { head: [...], rows: [[...]] } }
  *   { faq: [{ q, a: [...] }] }
  */
-import { NEXUS_ARTICLES } from './nexusArticles';
+import { NEXUS_ARTICLES } from './nexusArticles.js';
 
 const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 

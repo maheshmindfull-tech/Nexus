@@ -3,12 +3,21 @@ import path from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { PAGE_SEO, blogStaticPages } from './src/seo.js'
+import { PAGE_SEO, blogStaticPages, keywordsForSeo } from './src/seo.js'
 
 const ORIGIN = 'https://nexuspune.in'
 
 const escapeAttr = (value) =>
   value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+
+function replaceMeta(html, attr, key, value) {
+  const re = new RegExp(
+    `<meta\\s+${attr}=(["'])${key}\\1\\s+content=(["'])[\\s\\S]*?\\2\\s*/?>`,
+    'i'
+  )
+  const tag = `<meta ${attr}="${key}" content="${value}" />`
+  return html.replace(re, () => tag)
+}
 
 const NOSCRIPT = `
     <noscript>
@@ -52,26 +61,29 @@ function routeHtmlPlugin() {
       for (const [page, seo] of routes) {
         const url = `${ORIGIN}${seo.path}`
         const title = escapeAttr(seo.title)
-        const description = escapeAttr(seo.description)
+        const description = escapeAttr((seo.description || '').replace(/\s+/g, ' ').trim())
+        const keywords = escapeAttr(keywordsForSeo(seo))
+        const schemaJson = JSON.stringify({ ...seo.schema, keywords: keywordsForSeo(seo) }).replace(/</g, '\\u003c')
 
         let html = template
           .replace(/<title>[\s\S]*?<\/title>/, `<title>${seo.title.replace(/&/g, '&amp;')}</title>`)
-          .replace(/(<meta name="title" content=")[^"]*(")/, `$1${title}$2`)
-          .replace(/(<meta name="description" content=")[^"]*(")/, `$1${description}$2`)
+        html = replaceMeta(html, 'name', 'title', title)
+        html = replaceMeta(html, 'name', 'description', description)
+        html = replaceMeta(html, 'name', 'keywords', keywords)
+        html = replaceMeta(html, 'property', 'og:type', seo.ogType || 'website')
+        html = replaceMeta(html, 'property', 'og:url', url)
+        html = replaceMeta(html, 'property', 'og:title', title)
+        html = replaceMeta(html, 'property', 'og:description', description)
+        html = replaceMeta(html, 'name', 'twitter:url', url)
+        html = replaceMeta(html, 'name', 'twitter:title', title)
+        html = replaceMeta(html, 'name', 'twitter:description', description)
+        html = replaceMeta(html, 'property', 'og:image', escapeAttr(seo.image || `${ORIGIN}/assets/home/slide-01.webp`))
+        html = replaceMeta(html, 'name', 'twitter:image', escapeAttr(seo.image || `${ORIGIN}/assets/home/slide-01.webp`))
+        html = html
           .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
-          .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
-          .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${title}$2`)
-          .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${description}$2`)
-          .replace(/(<meta name="twitter:url" content=")[^"]*(")/, `$1${url}$2`)
-          .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${title}$2`)
-          .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${description}$2`)
-          .replace(
-            /(<meta property="og:image" content=")[^"]*(")/,
-            `$1${escapeAttr(seo.image || `${ORIGIN}/assets/home/slide-01.webp`)}$2`
-          )
           .replace(
             '</head>',
-            `  <script id="page-schema" type="application/ld+json">${JSON.stringify(seo.schema)}</script>\n  </head>`
+            `  <script id="page-schema" type="application/ld+json">${schemaJson}</script>\n  </head>`
           )
           .replace('<div id="root"></div>', `<div id="root"></div>${NOSCRIPT}`)
 
